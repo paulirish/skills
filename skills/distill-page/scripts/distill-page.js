@@ -1,21 +1,14 @@
 #!/usr/bin/env node
 import { chromium } from 'playwright';
+import { decodeAnnotatedPageContent } from './dec_annotated_content.js';
 
-const url = process.argv[2];
+export { decodeAnnotatedPageContent };
 
-if (!url) {
-  console.log(`
-Usage: ./distill-page.js <URL>
-Example: ./distill-page.js https://www.debugbear.com/blog/content-visibility-api
-  `);
-  process.exit(1);
-}
-
-async function distill() {
+export async function fetchDistilledBase64(url) {
   let browser;
   try {
     browser = await chromium.launch({
-      headless: true,
+      headless: false,
       args: [
         '--enable-features=OptimizationHints,PageContentAnnotation,OptimizationGuideModelDownloading',
         '--enable-dom-distiller',
@@ -41,14 +34,40 @@ async function distill() {
     // Page.getAnnotatedPageContent returns distilled/annotated HTML content
     const { content } = await client.send('Page.getAnnotatedPageContent');
     
-    process.stdout.write(content);
-    
     await browser.close();
+    return content;
   } catch (error) {
     if (browser) await browser.close();
-    console.error('Error:', error.message);
-    process.exit(1);
+    throw error;
   }
 }
 
-distill();
+export async function processPage(url) {
+  const base64Content = await fetchDistilledBase64(url);
+  return decodeAnnotatedPageContent(base64Content);
+}
+
+// Check if running as a standalone script
+import { fileURLToPath } from 'node:url';
+import { dirname } from 'node:path';
+
+if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+  const url = process.argv[2];
+
+  if (!url) {
+    console.log(`
+Usage: ./utils/distill-page.js <URL>
+Example: ./utils/distill-page.js https://www.debugbear.com/blog/content-visibility-api
+    `);
+    process.exit(1);
+  }
+
+  processPage(url)
+    .then(decodedProto => {
+      console.log(JSON.stringify(decodedProto, null, 2));
+    })
+    .catch(err => {
+      console.error('Error:', err.message);
+      process.exit(1);
+    });
+}
