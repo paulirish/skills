@@ -118,5 +118,20 @@ eg `await x.processPage('https://paulirish.com')` returns
   tabId: 0,
   popupWindow: null,
   profileInformation: { autofillInformation: { fillableData: [] } }
-}
+```
+
+## 📝 Extracting Markdown Text
+
+The true power of this CDP method comes from the embedded Optimization Hints! Chromium has already parsed the DOM and applied semantic `AnnotatedRoles` (such as `ANNOTATED_ROLE_ARTICLE`, `ANNOTATED_ROLE_NAV`, etc.) to the layout tree. 
+
+We can completely skip noisy DOM components like sidebars, headers, and nav items simply by writing a recursive script that:
+1. Locates the root tree node with `ANNOTATED_ROLE_ARTICLE` (or `ANNOTATED_ROLE_MAIN`).
+2. Traverses its children, skipping any `ANNOTATED_ROLE_NAV` or `ANNOTATED_ROLE_FOOTER` encountered.
+3. Examines the explicit `TextData` components. The model has already cleaned out DOM fragments and provided clean text, and it even gives us styling signals, meaning we don't need `turndown` or `pandoc`!
+
+A function is included in the toolset to build a markdown representation directly from the text and image components. 
+
+You can test this end-to-end via CLI using the `--markdown` flag:
+```bash
+./utils/distill-page.js --markdown https://web.dev/articles/animations-guide
 ```
