@@ -1,4 +1,4 @@
-import pb from './common_quality_data_pbjs.js';
+import pb from './proto/common_quality_data_pbjs.js';
 
 export function decodeAnnotatedPageContent(base64String) {
   const buffer = Buffer.from(base64String, 'base64');
