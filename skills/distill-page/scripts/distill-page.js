@@ -15,7 +15,11 @@ async function distill() {
   let browser;
   try {
     browser = await chromium.launch({
-      args: ['--enable-dom-distiller']
+      headless: false,
+      args: [
+        '--enable-features=OptimizationHints,PageContentAnnotation,OptimizationGuideModelDownloading',
+        '--enable-dom-distiller'
+      ]
     });
     const context = await browser.newContext();
     const page = await context.newPage();
@@ -27,6 +31,8 @@ async function distill() {
     await client.send('Page.enable');
     
     await page.goto(url, { waitUntil: 'load' });
+    
+    // Bring to front and wait for potential model processing
     await page.bringToFront();
     await page.waitForTimeout(2000); 
     
@@ -37,8 +43,8 @@ async function distill() {
     
     await browser.close();
   } catch (error) {
-    console.error('Error:', error.message);
     if (browser) await browser.close();
+    console.error('Error:', error.message);
     process.exit(1);
   }
 }
