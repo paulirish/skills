@@ -10,7 +10,7 @@ curl -o proto/common_quality_data.proto "https://raw.githubusercontent.com/chrom
 npx -y -p protobufjs-cli pbjs -t static-module -w es6 --es6 -o proto/common_quality_data_pbjs.js proto/common_quality_data.proto
 
 # Fixes the esoteric ES-module import error by ensuring it explicitly resolves a default export from the node module
-sed -i.bak 's/import \* as $protobuf from "protobufjs\/minimal.js";/import $protobuf from "protobufjs\/minimal.js";/g' proto/common_quality_data_pbjs.js
+sed -i.bak 's/import \* as $protobuf from "protobufjs\/minimal";/import $protobuf from "protobufjs\/minimal.js";/g' proto/common_quality_data_pbjs.js
 rm proto/common_quality_data_pbjs.js.bak
 
 # Generates the Typescript declarations

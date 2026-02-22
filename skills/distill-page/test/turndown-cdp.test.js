@@ -3,7 +3,7 @@ import assert from 'node:assert';
 import { chromium } from 'playwright';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
-import { decodeAnnotatedPageContent, convertToMarkdown } from '../utils/decode_annotations.js';
+import { decodeAnnotatedPageContent, convertToMarkdown } from '../../utils/distiller/decode_annotations.js';
 
 test('Run Turndown cases against CDP getAnnotatedPageContent', async () => {
   const browser = await chromium.launch({

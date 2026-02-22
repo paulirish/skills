@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert';
-import { fetchDistilledBase64, processPage, convertToMarkdown } from '../utils/distiller/distill-page.js';
+import { fetchDistilledBase64, processPage, convertToMarkdown } from '../../utils/distiller/distill-page.js';
 
 test('Evaluate CDP markdown against real-world URLs', async () => {
     const urls = [
