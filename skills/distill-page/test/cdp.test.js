@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert';
-import { fetchDistilledBase64 } from '../../utils/distiller/distill-page.js';
+import { fetchDistilledBase64 } from '../../../lib/distiller/distill-page.js';
 
 test('CDP Page.getAnnotatedPageContent returns base64 content', async () => {
   const content = await fetchDistilledBase64('https://example.com');
