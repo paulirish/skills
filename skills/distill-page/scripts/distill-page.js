@@ -15,10 +15,12 @@ async function distill() {
   let browser;
   try {
     browser = await chromium.launch({
-      headless: false,
+      headless: true,
       args: [
         '--enable-features=OptimizationHints,PageContentAnnotation,OptimizationGuideModelDownloading',
-        '--enable-dom-distiller'
+        '--enable-dom-distiller',
+        '--no-sandbox',
+        '--disable-setuid-sandbox'
       ]
     });
     const context = await browser.newContext();
