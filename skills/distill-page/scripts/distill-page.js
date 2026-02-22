@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 import { chromium } from 'playwright';
-import { decodeAnnotatedPageContent } from './dec_annotated_content.js';
+import { decodeAnnotatedPageContent, convertToMarkdown } from './dec_annotated_content.js';
 
-export { decodeAnnotatedPageContent };
+export { decodeAnnotatedPageContent, convertToMarkdown };
 
 export async function fetchDistilledBase64(url) {
   let browser;
@@ -49,22 +49,26 @@ export async function processPage(url) {
 
 // Check if running as a standalone script
 import { fileURLToPath } from 'node:url';
-import { dirname } from 'node:path';
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
-  const url = process.argv[2];
+  const isMarkdown = process.argv.includes('--markdown');
+  const url = process.argv.find(arg => arg.startsWith('http'));
 
   if (!url) {
     console.log(`
-Usage: ./utils/distill-page.js <URL>
-Example: ./utils/distill-page.js https://www.debugbear.com/blog/content-visibility-api
+Usage: ./utils/distill-page.js [--markdown] <URL>
+Example: ./utils/distill-page.js --markdown https://www.debugbear.com/blog/content-visibility-api
     `);
     process.exit(1);
   }
 
   processPage(url)
     .then(decodedProto => {
-      console.log(JSON.stringify(decodedProto, null, 2));
+      if (isMarkdown) {
+         console.log(convertToMarkdown(decodedProto));
+      } else {
+         console.log(JSON.stringify(decodedProto, null, 2));
+      }
     })
     .catch(err => {
       console.error('Error:', err.message);
