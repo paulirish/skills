@@ -77,3 +77,46 @@ export function decodeAnnotatedPageContent(base64String) {
 ```
 
 The resulting object contains properties mapped from the original protobuf definitions (such as `rootNode`).
+
+eg `await x.processPage('https://paulirish.com')` returns
+
+```js
+{
+  version: 'ANNOTATED_PAGE_CONTENT_VERSION_ONLY_ACTIONABLE_ELEMENTS_1_0',
+  rootNode: {
+    childrenNodes: [ [Object] ],
+    contentAttributes: {
+      annotatedRoles: [],
+      commonAncestorDomNodeId: 2,
+      attributeType: 'CONTENT_ATTRIBUTE_ROOT',
+      geometry: [Object],
+      label: '',
+      interactionInfo: [Object],
+      labelForDomNodeId: 0,
+      ariaRole: 'AX_ROLE_UNKNOWN',
+      isAdRelated: false
+    }
+  },
+  mainFrameData: {
+    scriptTools: [],
+    scriptToolResults: [],
+    securityOrigin: { opaque: false, value: 'https://www.paulirish.com' },
+    frameInteractionInfo: { selection: null },
+    documentIdentifier: { serializedToken: '5A582683008E11FA5EC351708D1E8DA2' },
+    url: 'https://www.paulirish.com/',
+    title: 'Paul Irish',
+    paidContentMetadata: null,
+    mediaData: null
+  },
+  pageInteractionInfo: {
+    focusedNodeId: 0,
+    accessibilityFocusedNodeId: 0,
+    mousePosition: { x: 1181, y: 1273 }
+  },
+  viewportGeometry: { x: 0, y: 0, width: 1282, height: 713 },
+  mode: 'ANNOTATED_PAGE_CONTENT_MODE_ACTIONABLE_ELEMENTS',
+  tabId: 0,
+  popupWindow: null,
+  profileInformation: { autofillInformation: { fillableData: [] } }
+}
+```
