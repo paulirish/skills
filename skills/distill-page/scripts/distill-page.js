@@ -28,6 +28,26 @@ export async function fetchDistilledBase64(url) {
     
     await page.goto(url, { waitUntil: 'load' });
     
+    // Bridge the visual gap: Inject text markers to preserve semantic HTML bounds
+    // that the visual extraction model would otherwise toss out
+    await page.evaluate(() => {
+      document.querySelectorAll('code').forEach(el => {
+        if (!el.closest('pre')) {
+          el.insertAdjacentText('afterbegin', '`');
+          el.insertAdjacentText('beforeend', '`');
+        }
+      });
+      document.querySelectorAll('pre').forEach(el => {
+        el.insertAdjacentText('afterbegin', '\n```\n');
+        el.insertAdjacentText('beforeend', '\n```\n');
+      });
+      document.querySelectorAll('blockquote').forEach(el => {
+        const p = document.createElement('span');
+        p.textContent = '> ';
+        el.prepend(p);
+      });
+    });
+
     // Bring to front and wait for potential model processing
     await page.bringToFront();
     await page.waitForTimeout(2000); 
