@@ -26,7 +26,10 @@ export async function fetchDistilledBase64(url) {
     // Enable the Page domain for experimental commands
     await client.send('Page.enable');
     
-    await page.goto(url, { waitUntil: 'load' });
+    const response = await page.goto(url, { waitUntil: 'load' });
+    if (!response || !response.ok()) {
+      throw new Error(`HTTP error! status: ${response ? response.status() : 'unknown'} when fetching ${url}`);
+    }
     
     // Bridge the visual gap: Inject text markers to preserve semantic HTML bounds
     // that the visual extraction model would otherwise toss out
