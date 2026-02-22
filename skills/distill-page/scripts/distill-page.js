@@ -10,6 +10,7 @@ export async function fetchDistilledBase64(url) {
     browser = await chromium.launch({
       headless: false,
       args: [
+        '--headless=new',
         '--enable-features=OptimizationHints,PageContentAnnotation,OptimizationGuideModelDownloading',
         '--enable-dom-distiller',
         '--no-sandbox',
