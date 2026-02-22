@@ -122,12 +122,15 @@ eg `await x.processPage('https://paulirish.com')` returns
 
 ## 📝 Extracting Markdown Text
 
-The true power of this CDP method comes from the embedded Optimization Hints! Chromium has already parsed the DOM and applied semantic `AnnotatedRoles` (such as `ANNOTATED_ROLE_ARTICLE`, `ANNOTATED_ROLE_NAV`, etc.) to the layout tree. 
+The true power of this CDP method comes from the embedded **Optimization Hints**! Chromium runs an on-device Machine Learning model across the layout tree before returning this data to determine the semantic structures of the page.
 
-We can completely skip noisy DOM components like sidebars, headers, and nav items simply by writing a recursive script that:
+Because Chromium has fully executed its ML suite on the DOM, it has assigned semantic `AnnotatedRoles` (such as `ANNOTATED_ROLE_ARTICLE`, `ANNOTATED_ROLE_NAV`, etc.) to the layout tree. This means we bypass the messy heuristics used by libraries like `turndown`, `<article>` tag guessing, or raw HTML regexing.
+
+We can completely skip noisy DOM components like sidebars, headers, and nav items simply by writing a recursive recursive parser that:
 1. Locates the root tree node with `ANNOTATED_ROLE_ARTICLE` (or `ANNOTATED_ROLE_MAIN`).
 2. Traverses its children, skipping any `ANNOTATED_ROLE_NAV` or `ANNOTATED_ROLE_FOOTER` encountered.
-3. Examines the explicit `TextData` components. The model has already cleaned out DOM fragments and provided clean text, and it even gives us styling signals, meaning we don't need `turndown` or `pandoc`!
+3. Examines the explicit `TextData` components. The ML model has already cleaned out script fragments, `<style>` tags, and hidden elements to provide clean text. It even offers styling signals, meaning we don't need `turndown` or `pandoc`!
+4. **Tables:** It even detects tables natively (as `CONTENT_ATTRIBUTE_TABLE`) and delineates rows and cells, allowing our parser to seamlessly reconstruct markdown pipes (`|`)!
 
 A function is included in the toolset to build a markdown representation directly from the text and image components. 
 
