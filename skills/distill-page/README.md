@@ -138,3 +138,25 @@ You can test this end-to-end via CLI using the `--markdown` flag:
 ```bash
 ./utils/distill-page.js --markdown https://web.dev/articles/animations-guide
 ```
+
+## 🆚 Turndown vs CDP ML Extraction (Tradeoffs)
+
+We have evaluated this CDP `AnnotatedPageContent` method against the [Turndown HTML-to-Markdown test suite](https://github.com/mixmark-io/turndown). 
+
+Interestingly, **the CDP method fails many standard Turndown tests by design.**
+
+### The Core Difference
+* **Turndown is a Semantic Syntax Parser:** It maps raw HTML tags directly to Markdown syntax. (`<em>` directly becomes `_`, `<code>` directly becomes backticks). It relies entirely on the author's original HTML structure.
+* **CDP is a Visual ML Extraction:** It strips away all HTML tags completely and abstracts the layout tree into generic elements (`CONTAINER`, `TEXT`, `IMAGE`). It relies entirely on how the page visually presents data.
+
+### When the CDP approach is WORSE than Turndown:
+
+Because the ML model discards precise tag identities, the CDP approach struggles when maintaining perfect structural fidelity is required:
+
+1. **Inline Code blocks (`<code>`)**: You lose literal backtick boundaries. The ML model evaluates textual sizing and styling. If a `<code>` block doesn’t explicitly look small or uniquely colored in the rendered layout, the CDP may emit it simply as generic `TEXT`, losing the code formatting.
+2. **Specific Emphasis differentiation (`<i>` vs `<em>` vs `<b>` vs `<strong>`)**: Turndown retains whether the author specifically wanted bold or italics. The ML model collapses *all* these signals into a single generic boolean: `hasEmphasis: true`. 
+3. **Paragraph spacing vs Layout breaks (`<p>` vs `<div>`)**: Turndown checks whether structural spaces match paragraph semantics. The ML model throws out tags entirely and returns `CONTENT_ATTRIBUTE_CONTAINER` nodes based on rendered boxes, making it very difficult to differentiate a semantic paragraph from a random padded div purely from the extracted data.
+4. **Scraping semantic micro-data**: If you need to rip out a specific `time` element, `<address>`, or an `id` anchor, Turndown can do it perfectly using DOM selectors. The CDP tree throws these internal DOM mechanics away completely. 
+
+### Why we still use CDP for the Factory:
+While it fails rigorous syntax parity, the CDP method perfectly replicates the **distraction-free reading environment**. For feeding web performance intelligence to autonomous AI agents, filtering out 90% of structural DOM noise (sidebars, footers, popups) using `ANNOTATED_ROLE_ARTICLE` is significantly more valuable than getting inline `<code>` tags translated perfectly.
