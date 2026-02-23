@@ -1,15 +1,16 @@
 import fs from 'node:fs';
+import type { AnyNode } from '../../types/index.js';
 
 const data = JSON.parse(fs.readFileSync('../../test/fixtures/annotatedpagecontent_payload.json', 'utf8'));
 
-export function findArticleRoot(node) {
+export function findArticleRoot(node: AnyNode): AnyNode | null {
   const attrs = node.contentAttributes || {};
   if (attrs.annotatedRoles && attrs.annotatedRoles.includes('ANNOTATED_ROLE_ARTICLE')) {
     return node;
   }
   
   if (node.childrenNodes) {
-    for (const child of node.childrenNodes) {
+    for (const child of node.childrenNodes || []) {
       const found = findArticleRoot(child);
       if (found) return found;
     }
@@ -17,14 +18,14 @@ export function findArticleRoot(node) {
   return null;
 }
 
-export function findMainRoot(node) {
+export function findMainRoot(node: AnyNode): AnyNode | null {
   const attrs = node.contentAttributes || {};
   if (attrs.annotatedRoles && attrs.annotatedRoles.includes('ANNOTATED_ROLE_MAIN')) {
     return node;
   }
   
   if (node.childrenNodes) {
-    for (const child of node.childrenNodes) {
+    for (const child of node.childrenNodes || []) {
       const found = findMainRoot(child);
       if (found) return found;
     }
@@ -32,7 +33,9 @@ export function findMainRoot(node) {
   return null;
 }
 
-export function toMarkdown(node) {
+let imageIndex = 1;
+
+export function toMarkdown(node: AnyNode): string {
   let md = '';
   const attrs = node.contentAttributes || {};
   
@@ -54,11 +57,9 @@ export function toMarkdown(node) {
   }
 
   else if (attrs.attributeType === 'CONTENT_ATTRIBUTE_IMAGE' && attrs.imageData) {
-     const src = attrs.imageData.src || '';
-     const alt = attrs.imageData.altText || '';
-     if (src) {
-        md += `\n![${alt}](${src})\n`;
-     }
+     const caption = attrs.imageData.imageCaption || 'image';
+     const ref = `image${String(imageIndex++).padStart(2, '0')}`;
+     md += `\n![${caption}][${ref}]\n`;
   }
   
   else if (attrs.attributeType === 'CONTENT_ATTRIBUTE_ANCHOR' && attrs.anchorData) {
@@ -97,7 +98,7 @@ export function toMarkdown(node) {
 }
 
 // Clean up newlines
-export function cleanupMarkdown(md) {
+export function cleanupMarkdown(md: string): string {
   return md
     .replace(/\n{3,}/g, '\n\n')
     .replace(/ \n/g, '\n')
