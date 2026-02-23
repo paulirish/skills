@@ -1,34 +1,31 @@
-import test from "node:test";
-import { chromium } from "playwright";
-import path from "node:path";
-import {
-  decodeAnnotatedPageContent,
-  convertToMarkdown,
-} from "../../lib/distiller/decode_annotations.ts";
+import test from 'node:test';
+import {chromium} from 'playwright';
+import path from 'node:path';
+import {decodeAnnotatedPageContent, convertToMarkdown} from '../../lib/distiller/decode_annotations.ts';
 
-test("Run Turndown cases against CDP getAnnotatedPageContent", async () => {
+test('Run Turndown cases against CDP getAnnotatedPageContent', async () => {
   const browser = await chromium.launch({
     headless: false,
     args: [
-      "--headless=new",
-      "--enable-features=OptimizationHints,PageContentAnnotation,OptimizationGuideModelDownloading",
-      "--enable-dom-distiller",
-      "--no-sandbox",
-      "--disable-setuid-sandbox",
+      '--headless=new',
+      '--enable-features=OptimizationHints,PageContentAnnotation,OptimizationGuideModelDownloading',
+      '--enable-dom-distiller',
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
     ],
   });
 
   const context = await browser.newContext();
   const indexPage = await context.newPage();
 
-  const indexPath = path.resolve("./utils/distiller/turndown_tmp/test/index.html");
-  await indexPage.goto("file://" + indexPath);
+  const indexPath = path.resolve('./utils/distiller/turndown_tmp/test/index.html');
+  await indexPage.goto('file://' + indexPath);
 
   const testCases = await indexPage.evaluate(() => {
-    return Array.from(document.querySelectorAll(".case")).map((node) => ({
-      name: node.getAttribute("data-name"),
-      inputHtml: node.querySelector(".input")?.innerHTML || "",
-      expected: node.querySelector(".expected")?.textContent || "",
+    return Array.from(document.querySelectorAll('.case')).map(node => ({
+      name: node.getAttribute('data-name'),
+      inputHtml: node.querySelector('.input')?.innerHTML || '',
+      expected: node.querySelector('.expected')?.textContent || '',
     }));
   });
 
@@ -43,31 +40,29 @@ test("Run Turndown cases against CDP getAnnotatedPageContent", async () => {
 
   const page = await context.newPage();
   const client = await page.context().newCDPSession(page);
-  await client.send("Page.enable");
+  await client.send('Page.enable');
 
   for (const tc of testCases.slice(0, 10)) {
     // Navigate to a data URL with the input HTML
-    const dataUrl =
-      "data:text/html;charset=utf-8," +
-      encodeURIComponent(`<!DOCTYPE html><html><body>${tc.inputHtml}</body></html>`);
-    await page.goto(dataUrl, { waitUntil: "load" });
+    const dataUrl = 'data:text/html;charset=utf-8,' + encodeURIComponent(`<!DOCTYPE html><html><body>${tc.inputHtml}</body></html>`);
+    await page.goto(dataUrl, {waitUntil: 'load'});
     await page.bringToFront();
 
     // Inject semantic markers
     await page.evaluate(() => {
-      document.querySelectorAll("code").forEach((el) => {
-        if (!el.closest("pre")) {
-          el.insertAdjacentText("afterbegin", "`");
-          el.insertAdjacentText("beforeend", "`");
+      document.querySelectorAll('code').forEach(el => {
+        if (!el.closest('pre')) {
+          el.insertAdjacentText('afterbegin', '`');
+          el.insertAdjacentText('beforeend', '`');
         }
       });
-      document.querySelectorAll("pre").forEach((el) => {
-        el.insertAdjacentText("afterbegin", "\n```\n");
-        el.insertAdjacentText("beforeend", "\n```\n");
+      document.querySelectorAll('pre').forEach(el => {
+        el.insertAdjacentText('afterbegin', '\n```\n');
+        el.insertAdjacentText('beforeend', '\n```\n');
       });
-      document.querySelectorAll("blockquote").forEach((el) => {
-        const p = document.createElement("span");
-        p.textContent = "> ";
+      document.querySelectorAll('blockquote').forEach(el => {
+        const p = document.createElement('span');
+        p.textContent = '> ';
         el.prepend(p);
       });
     });
@@ -75,11 +70,11 @@ test("Run Turndown cases against CDP getAnnotatedPageContent", async () => {
     // wait a small bit for CDP to digest
     await page.waitForTimeout(500);
 
-    let actualMd = "";
+    let actualMd = '';
     try {
-      const { content } = await client.send("Page.getAnnotatedPageContent");
+      const {content} = await client.send('Page.getAnnotatedPageContent');
       const decoded = decodeAnnotatedPageContent(content);
-      actualMd = convertToMarkdown(decoded) || "";
+      actualMd = convertToMarkdown(decoded) || '';
     } catch (e) {
       console.error(`Failed on ${tc.name}`, e);
     }

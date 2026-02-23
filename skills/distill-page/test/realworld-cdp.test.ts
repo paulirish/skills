@@ -1,12 +1,12 @@
-import test from "node:test";
-import assert from "node:assert";
-import { processPage, convertToMarkdown } from "../../lib/distiller/distill-page.ts";
+import test from 'node:test';
+import assert from 'node:assert';
+import {processPage, convertToMarkdown} from '../../lib/distiller/distill-page.ts';
 
-test("Evaluate CDP markdown against real-world URLs", async () => {
+test('Evaluate CDP markdown against real-world URLs', async () => {
   const urls = [
-    "https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver",
-    "https://web.dev/articles/lcp",
-    "https://nextjs.org/docs/app/building-your-application/optimizing/fonts",
+    'https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver',
+    'https://web.dev/articles/lcp',
+    'https://nextjs.org/docs/app/building-your-application/optimizing/fonts',
   ];
 
   for (const url of urls) {
@@ -16,15 +16,12 @@ test("Evaluate CDP markdown against real-world URLs", async () => {
       const markdown = convertToMarkdown(decodedProto);
 
       // Basic assertions
-      assert.ok(
-        markdown.length > 500,
-        `Markdown should have substantial content (got ${markdown.length} bytes)`,
-      );
+      assert.ok(markdown.length > 500, `Markdown should have substantial content (got ${markdown.length} bytes)`);
 
       // Check if code blocks or critical semantics survived
       // We injected \`\`\` into pre blocks and \` into code blocks
-      const hasCode = markdown.includes("`");
-      assert.ok(hasCode, "Markdown should show evidence of code block extraction");
+      const hasCode = markdown.includes('`');
+      assert.ok(hasCode, 'Markdown should show evidence of code block extraction');
 
       console.log(`✅ Passed. Extracted ${markdown.length} bytes of markdown.`);
       // console.log(markdown.slice(0, 300) + '...');
