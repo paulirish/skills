@@ -1,6 +1,6 @@
 import * as pb from './proto/common_quality_data_pbjs.js';
 
-const { ContentAttributeType, TextSize, TableRowType, AnnotatedRole } = pb.optimization_guide.proto;
+const {ContentAttributeType, TextSize, TableRowType, AnnotatedRole} = pb.optimization_guide.proto;
 type AnyNode = pb.optimization_guide.proto.IContentNode;
 type IAnnotatedPageContent = pb.optimization_guide.proto.IAnnotatedPageContent;
 
@@ -30,102 +30,108 @@ function findNodeByRoles(node: AnyNode, roles: string[]): AnyNode | null {
   return null;
 }
 
-function recursiveToMarkdown(node: AnyNode, state: { imageIndex: number }): string {
+function recursiveToMarkdown(node: AnyNode, state: {imageIndex: number}): string {
   let md = '';
   const attrs = node.contentAttributes || {};
 
   if (attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_TEXT && attrs.textData) {
-     let text = attrs.textData.textContent || '';
-     text = text.trim();
-     if (text) {
-         if (attrs.textData.textStyle?.hasEmphasis) {
-             text = `**${text}**`;
-         }
-         if (attrs.textData.textStyle?.textSize) {
-             const size = attrs.textData.textStyle.textSize;
-             if (size === TextSize.TEXT_SIZE_XL || size === TextSize.TEXT_SIZE_L) {
-                 text = `\n## ${text}\n`;
-             }
-         }
-         md += text + ' ';
-     }
+    let text = attrs.textData.textContent || '';
+    text = text.trim();
+    if (text) {
+      if (attrs.textData.textStyle?.hasEmphasis) {
+        text = `**${text}**`;
+      }
+      if (attrs.textData.textStyle?.textSize) {
+        const size = attrs.textData.textStyle.textSize;
+        if (size === TextSize.TEXT_SIZE_XL || size === TextSize.TEXT_SIZE_L) {
+          text = `\n## ${text}\n`;
+        }
+      }
+      md += text + ' ';
+    }
   } else if (attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_IMAGE && attrs.imageData) {
-     const caption = attrs.imageData.imageCaption || 'image';
-     const ref = `image${String(state.imageIndex++).padStart(2, '0')}`;
-     md += `\n![${caption}][${ref}]\n`;
+    const caption = attrs.imageData.imageCaption || 'image';
+    const ref = `image${String(state.imageIndex++).padStart(2, '0')}`;
+    md += `\n![${caption}][${ref}]\n`;
   } else if (attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_ANCHOR && attrs.anchorData) {
-     const url = attrs.anchorData.url || '';
-     let childText = '';
-     if (node.childrenNodes) {
-         for (const child of node.childrenNodes) {
-             childText += recursiveToMarkdown(child, state);
-         }
-     }
-     childText = childText.trim();
-     if (childText && url) {
-         md += `[${childText}](${url}) `; // we've processed children manually
-     }
-     return md;
-  } else if (attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_ORDERED_LIST || attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_UNORDERED_LIST) {
-      let listMd = '\n\n';
-      const isOrdered = attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_ORDERED_LIST;
-      let index = 1;
-
-      if (node.childrenNodes) {
-          for (const item of node.childrenNodes) {
-              // Even if it isn't strictly CONTENT_ATTRIBUTE_LIST_ITEM, process it as a list child
-              let itemText = '';
-              if (item.childrenNodes) {
-                  for (const content of item.childrenNodes) {
-                      itemText += recursiveToMarkdown(content, state);
-                  }
-              }
-              itemText = itemText.replace(/\s+/g, ' ').trim();
-              if (itemText) {
-                  const prefix = isOrdered ? `${index}. ` : '* ';
-                  listMd += `${prefix}${itemText}\n`;
-                  index++;
-              }
-          }
+    const url = attrs.anchorData.url || '';
+    let childText = '';
+    if (node.childrenNodes) {
+      for (const child of node.childrenNodes) {
+        childText += recursiveToMarkdown(child, state);
       }
-      return listMd + '\n';
+    }
+    childText = childText.trim();
+    if (childText && url) {
+      md += `[${childText}](${url}) `; // we've processed children manually
+    }
+    return md;
+  } else if (
+    attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_ORDERED_LIST ||
+    attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_UNORDERED_LIST
+  ) {
+    let listMd = '\n\n';
+    const isOrdered = attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_ORDERED_LIST;
+    let index = 1;
+
+    if (node.childrenNodes) {
+      for (const item of node.childrenNodes) {
+        // Even if it isn't strictly CONTENT_ATTRIBUTE_LIST_ITEM, process it as a list child
+        let itemText = '';
+        if (item.childrenNodes) {
+          for (const content of item.childrenNodes) {
+            itemText += recursiveToMarkdown(content, state);
+          }
+        }
+        itemText = itemText.replace(/\s+/g, ' ').trim();
+        if (itemText) {
+          const prefix = isOrdered ? `${index}. ` : '* ';
+          listMd += `${prefix}${itemText}\n`;
+          index++;
+        }
+      }
+    }
+    return listMd + '\n';
   } else if (attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_TABLE) {
-      let tableMd = '\n\n';
-      let isFirstRow = true;
-      if (node.childrenNodes) {
-          for (const row of node.childrenNodes) {
-              const rowAttrs = row.contentAttributes || {};
-              if (rowAttrs.attributeType !== ContentAttributeType.CONTENT_ATTRIBUTE_TABLE_ROW) continue;
+    let tableMd = '\n\n';
+    let isFirstRow = true;
+    if (node.childrenNodes) {
+      for (const row of node.childrenNodes) {
+        const rowAttrs = row.contentAttributes || {};
+        if (rowAttrs.attributeType !== ContentAttributeType.CONTENT_ATTRIBUTE_TABLE_ROW) continue;
 
-              let rowText = '|';
-              let sepText = '|';
-              if (row.childrenNodes) {
-                  for (const cell of row.childrenNodes) {
-                      let cellText = '';
-                      if (cell.childrenNodes) {
-                          for (const content of cell.childrenNodes) {
-                              cellText += recursiveToMarkdown(content, state);
-                          }
-                      }
-                      cellText = cellText.replace(/\s+/g, ' ').trim();
-                      rowText += ` ${cellText} |`;
-                      sepText += `---|`;
-                  }
+        let rowText = '|';
+        let sepText = '|';
+        if (row.childrenNodes) {
+          for (const cell of row.childrenNodes) {
+            let cellText = '';
+            if (cell.childrenNodes) {
+              for (const content of cell.childrenNodes) {
+                cellText += recursiveToMarkdown(content, state);
               }
-              tableMd += rowText + '\n';
-              if (isFirstRow || (rowAttrs.tableRowData && rowAttrs.tableRowData.type === TableRowType.TABLE_ROW_TYPE_HEADER)) {
-                  if (isFirstRow) {
-                      tableMd += sepText + '\n';
-                  }
-              }
-              isFirstRow = false;
+            }
+            cellText = cellText.replace(/\s+/g, ' ').trim();
+            rowText += ` ${cellText} |`;
+            sepText += `---|`;
           }
+        }
+        tableMd += rowText + '\n';
+        if (isFirstRow || (rowAttrs.tableRowData && rowAttrs.tableRowData.type === TableRowType.TABLE_ROW_TYPE_HEADER)) {
+          if (isFirstRow) {
+            tableMd += sepText + '\n';
+          }
+        }
+        isFirstRow = false;
       }
-      return tableMd + '\n';
+    }
+    return tableMd + '\n';
   }
 
-  if (attrs.annotatedRoles && ((attrs.annotatedRoles || []).includes(AnnotatedRole.ANNOTATED_ROLE_NAV) || (attrs.annotatedRoles || []).includes(AnnotatedRole.ANNOTATED_ROLE_FOOTER))) {
-     return ''; // Skip rendering kids of nav/footer
+  if (
+    attrs.annotatedRoles &&
+    ((attrs.annotatedRoles || []).includes(AnnotatedRole.ANNOTATED_ROLE_NAV) || (attrs.annotatedRoles || []).includes(AnnotatedRole.ANNOTATED_ROLE_FOOTER))
+  ) {
+    return ''; // Skip rendering kids of nav/footer
   }
 
   if (node.childrenNodes) {
@@ -135,7 +141,7 @@ function recursiveToMarkdown(node: AnyNode, state: { imageIndex: number }): stri
   }
 
   if (attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_CONTAINER) {
-      md += '\n\n';
+    md += '\n\n';
   }
 
   return md;
@@ -146,12 +152,10 @@ export function convertToMarkdown(decodedProto: IAnnotatedPageContent): string {
   if (!root) return '';
 
   // Try to find the narrowest main content area to avoid outer shells
-  const contentRoot = findNodeByRoles(root, [
-      AnnotatedRole.ANNOTATED_ROLE_ARTICLE as unknown as string,
-      AnnotatedRole.ANNOTATED_ROLE_MAIN as unknown as string
-   ]) || root;
+  const contentRoot =
+    findNodeByRoles(root, [AnnotatedRole.ANNOTATED_ROLE_ARTICLE as unknown as string, AnnotatedRole.ANNOTATED_ROLE_MAIN as unknown as string]) || root;
 
-  let rawMd = recursiveToMarkdown(contentRoot, { imageIndex: 1 });
+  let rawMd = recursiveToMarkdown(contentRoot, {imageIndex: 1});
 
   // Clean up formatting
   rawMd = rawMd

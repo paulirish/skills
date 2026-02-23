@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-import { chromium } from 'playwright';
-import { decodeAnnotatedPageContent, convertToMarkdown } from './decode_annotations.ts';
+import {chromium} from 'playwright';
+import {decodeAnnotatedPageContent, convertToMarkdown} from './decode_annotations.ts';
 
-export { decodeAnnotatedPageContent, convertToMarkdown };
+export {decodeAnnotatedPageContent, convertToMarkdown};
 
 export async function fetchDistilledBase64(url: string) {
   let browser;
@@ -14,23 +14,23 @@ export async function fetchDistilledBase64(url: string) {
         '--enable-features=OptimizationHints,PageContentAnnotation,OptimizationGuideModelDownloading',
         '--enable-dom-distiller',
         '--no-sandbox',
-        '--disable-setuid-sandbox'
-      ]
+        '--disable-setuid-sandbox',
+      ],
     });
     const context = await browser.newContext();
     const page = await context.newPage();
-    
+
     // Create a CDP session to the page
     const client = await page.context().newCDPSession(page);
-    
+
     // Enable the Page domain for experimental commands
     await client.send('Page.enable');
-    
-    const response = await page.goto(url, { waitUntil: 'load' });
+
+    const response = await page.goto(url, {waitUntil: 'load'});
     if (!response || !response.ok()) {
       throw new Error(`HTTP error! status: ${response ? response.status() : 'unknown'} when fetching ${url}`);
     }
-    
+
     // Bridge the visual gap: Inject text markers to preserve semantic HTML bounds
     // that the visual extraction model would otherwise toss out
     await page.evaluate(() => {
@@ -53,11 +53,11 @@ export async function fetchDistilledBase64(url: string) {
 
     // Bring to front and wait for potential model processing
     await page.bringToFront();
-    await page.waitForTimeout(2000); 
-    
+    await page.waitForTimeout(2000);
+
     // Page.getAnnotatedPageContent returns distilled/annotated HTML content
-    const { content } = await client.send('Page.getAnnotatedPageContent');
-    
+    const {content} = await client.send('Page.getAnnotatedPageContent');
+
     await browser.close();
     return content;
   } catch (error) {
@@ -72,7 +72,7 @@ export async function processPage(url: string) {
 }
 
 // Check if running as a standalone script
-import { fileURLToPath } from 'node:url';
+import {fileURLToPath} from 'node:url';
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const isMarkdown = process.argv.includes('--markdown');
@@ -89,9 +89,9 @@ Example: ./utils/distill-page.js --markdown https://www.debugbear.com/blog/conte
   processPage(url)
     .then(decodedProto => {
       if (isMarkdown) {
-         console.log(convertToMarkdown(decodedProto));
+        console.log(convertToMarkdown(decodedProto));
       } else {
-         console.log(JSON.stringify(decodedProto, null, 2));
+        console.log(JSON.stringify(decodedProto, null, 2));
       }
     })
     .catch(err => {
