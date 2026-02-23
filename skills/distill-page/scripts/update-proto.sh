@@ -19,4 +19,7 @@ echo "Fixing ESM import for Node.js..."
 sed -i.bak 's/from "protobufjs\/minimal"/from "protobufjs\/minimal.js"/g' proto/common_quality_data_pbjs.js
 rm proto/common_quality_data_pbjs.js.bak
 
+echo "Adding // @ts-nocheck to top of pbjs file..."
+echo "// @ts-nocheck" | cat - proto/common_quality_data_pbjs.js > temp.js && mv temp.js proto/common_quality_data_pbjs.js
+
 echo "Successfully updated and compiled proto!"
