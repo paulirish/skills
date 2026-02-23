@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 
-const data = JSON.parse(fs.readFileSync('./test_payload.json', 'utf8'));
+const data = JSON.parse(fs.readFileSync('../../test/fixtures/annotatedpagecontent_payload.json', 'utf8'));
 
 export function findArticleRoot(node) {
   const attrs = node.contentAttributes || {};

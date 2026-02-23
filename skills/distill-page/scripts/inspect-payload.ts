@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 
-const data = JSON.parse(fs.readFileSync('./test_payload.json', 'utf8'));
+const data = JSON.parse(fs.readFileSync('../../test/fixtures/annotatedpagecontent_payload.json', 'utf8'));
 
 function findNodeWithRole(node, targetRole) {
   const attrs = node.contentAttributes || {};
