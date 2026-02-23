@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { chromium } from 'playwright';
-import { decodeAnnotatedPageContent, convertToMarkdown } from './decode_annotations.js';
+import { decodeAnnotatedPageContent, convertToMarkdown } from './decode_annotations.ts';
 
 export { decodeAnnotatedPageContent, convertToMarkdown };
 
