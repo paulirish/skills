@@ -2,9 +2,9 @@ import * as pb from './proto/common_quality_data_pbjs.js';
 
 const { ContentAttributeType, TextSize, TableRowType, AnnotatedRole } = pb.optimization_guide.proto;
 type AnyNode = pb.optimization_guide.proto.IContentNode;
-type AnnotatedPageContent = pb.optimization_guide.proto.IAnnotatedPageContent;
+type IAnnotatedPageContent = pb.optimization_guide.proto.IAnnotatedPageContent;
 
-export function decodeAnnotatedPageContent(base64String: string): AnnotatedPageContent {
+export function decodeAnnotatedPageContent(base64String: string): IAnnotatedPageContent {
   const buffer = Buffer.from(base64String, 'base64');
   const message = pb.optimization_guide.proto.AnnotatedPageContent.decode(buffer);
   return pb.optimization_guide.proto.AnnotatedPageContent.toObject(message, {
@@ -30,7 +30,7 @@ function findNodeByRoles(node: AnyNode, roles: string[]): AnyNode | null {
   return null;
 }
 
-function recursiveToMarkdown(node: AnyNode): string {
+function recursiveToMarkdown(node: AnyNode, state: { imageIndex: number }): string {
   let md = '';
   const attrs = node.contentAttributes || {};
 
@@ -38,10 +38,10 @@ function recursiveToMarkdown(node: AnyNode): string {
      let text = attrs.textData.textContent || '';
      text = text.trim();
      if (text) {
-         if (attrs.textData.textStyle && attrs.textData.textStyle.hasEmphasis) {
+         if (attrs.textData.textStyle?.hasEmphasis) {
              text = `**${text}**`;
          }
-         if (attrs.textData.textStyle && attrs.textData.textStyle.textSize) {
+         if (attrs.textData.textStyle?.textSize) {
              const size = attrs.textData.textStyle.textSize;
              if (size === TextSize.TEXT_SIZE_XL || size === TextSize.TEXT_SIZE_L) {
                  text = `\n## ${text}\n`;
@@ -50,24 +50,22 @@ function recursiveToMarkdown(node: AnyNode): string {
          md += text + ' ';
      }
   } else if (attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_IMAGE && attrs.imageData) {
-     const id = attrs.imageData as unknown as { src?: string, altText?: string };
-     const src = id.src || '';
-     const alt = id.altText || '';
-     if (src) {
-        md += `\n![${alt}](${src})\n`;
-     }
+     const caption = attrs.imageData.imageCaption || 'image';
+     const ref = `image${String(state.imageIndex++).padStart(2, '0')}`;
+     md += `\n![${caption}][${ref}]\n`;
   } else if (attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_ANCHOR && attrs.anchorData) {
      const url = attrs.anchorData.url || '';
      let childText = '';
      if (node.childrenNodes) {
          for (const child of node.childrenNodes) {
-             childText += recursiveToMarkdown(child);
+             childText += recursiveToMarkdown(child, state);
          }
      }
      childText = childText.trim();
      if (childText && url) {
-         return `[${childText}](${url}) `; // we've processed children manually
+         md += `[${childText}](${url}) `; // we've processed children manually
      }
+     return md;
   } else if (attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_ORDERED_LIST || attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_UNORDERED_LIST) {
       let listMd = '\n\n';
       const isOrdered = attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_ORDERED_LIST;
@@ -80,7 +78,7 @@ function recursiveToMarkdown(node: AnyNode): string {
               let itemText = '';
               if (item.childrenNodes) {
                   for (const content of item.childrenNodes) {
-                      itemText += recursiveToMarkdown(content);
+                      itemText += recursiveToMarkdown(content, state);
                   }
               }
               itemText = itemText.replace(/\s+/g, ' ').trim();
@@ -107,7 +105,7 @@ function recursiveToMarkdown(node: AnyNode): string {
                       let cellText = '';
                       if (cell.childrenNodes) {
                           for (const content of cell.childrenNodes) {
-                              cellText += recursiveToMarkdown(content);
+                              cellText += recursiveToMarkdown(content, state);
                           }
                       }
                       cellText = cellText.replace(/\s+/g, ' ').trim();
@@ -133,7 +131,7 @@ function recursiveToMarkdown(node: AnyNode): string {
 
   if (node.childrenNodes) {
     for (const child of node.childrenNodes) {
-      md += recursiveToMarkdown(child);
+      md += recursiveToMarkdown(child, state);
     }
   }
 
@@ -144,7 +142,7 @@ function recursiveToMarkdown(node: AnyNode): string {
   return md;
 }
 
-export function convertToMarkdown(decodedProto: AnnotatedPageContent): string {
+export function convertToMarkdown(decodedProto: IAnnotatedPageContent): string {
   const root = decodedProto.rootNode;
   if (!root) return '';
 
@@ -154,7 +152,7 @@ export function convertToMarkdown(decodedProto: AnnotatedPageContent): string {
       AnnotatedRole.ANNOTATED_ROLE_MAIN as unknown as string
    ]) || root;
 
-  let rawMd = recursiveToMarkdown(contentRoot);
+  let rawMd = recursiveToMarkdown(contentRoot, { imageIndex: 1 });
 
   // Clean up formatting
   rawMd = rawMd
