@@ -26,8 +26,8 @@ test('Run Turndown cases against CDP getAnnotatedPageContent', async () => {
   const testCases = await indexPage.evaluate(() => {
     return Array.from(document.querySelectorAll('.case')).map(node => ({
       name: node.getAttribute('data-name'),
-      inputHtml: node.querySelector('.input').innerHTML,
-      expected: node.querySelector('.expected').textContent
+      inputHtml: node.querySelector('.input')?.innerHTML || '',
+      expected: node.querySelector('.expected')?.textContent || ''
     }));
   });
   

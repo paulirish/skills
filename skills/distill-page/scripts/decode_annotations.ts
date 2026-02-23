@@ -1,6 +1,8 @@
 import * as pb from './proto/common_quality_data_pbjs.js';
+type AnyNode = pb.optimization_guide.proto.IContentNode;
+type AnnotatedPageContent = pb.optimization_guide.proto.IAnnotatedPageContent;
 
-export function decodeAnnotatedPageContent(base64String) {
+export function decodeAnnotatedPageContent(base64String: string): AnnotatedPageContent {
   const buffer = Buffer.from(base64String, 'base64');
   const message = pb.optimization_guide.proto.AnnotatedPageContent.decode(buffer);
   return pb.optimization_guide.proto.AnnotatedPageContent.toObject(message, {
@@ -12,9 +14,9 @@ export function decodeAnnotatedPageContent(base64String) {
   });
 }
 
-function findNodeByRoles(node, roles) {
+function findNodeByRoles(node: AnyNode, roles: string[]): AnyNode | null {
   const attrs = node.contentAttributes || {};
-  if (attrs.annotatedRoles && roles.some(r => attrs.annotatedRoles.includes(r))) {
+  if (attrs.annotatedRoles && roles.some(r => (attrs.annotatedRoles as unknown as string[]).includes(r))) {
     return node;
   }
   
@@ -27,11 +29,11 @@ function findNodeByRoles(node, roles) {
   return null;
 }
 
-function recursiveToMarkdown(node) {
+function recursiveToMarkdown(node: AnyNode): string {
   let md = '';
   const attrs = node.contentAttributes || {};
   
-  if (attrs.attributeType === 'CONTENT_ATTRIBUTE_TEXT' && attrs.textData) {
+  if ((attrs.attributeType as unknown as string) === 'CONTENT_ATTRIBUTE_TEXT' && attrs.textData) {
      let text = attrs.textData.textContent || '';
      text = text.trim();
      if (text) {
@@ -39,20 +41,21 @@ function recursiveToMarkdown(node) {
              text = `**${text}**`;
          }
          if (attrs.textData.textStyle && attrs.textData.textStyle.textSize) {
-             const size = attrs.textData.textStyle.textSize;
+             const size = attrs.textData.textStyle.textSize as unknown as string;
              if (size === 'TEXT_SIZE_XL' || size === 'TEXT_SIZE_L') {
                  text = `\n## ${text}\n`;
              }
          }
          md += text + ' ';
      }
-  } else if (attrs.attributeType === 'CONTENT_ATTRIBUTE_IMAGE' && attrs.imageData) {
-     const src = attrs.imageData.src || '';
-     const alt = attrs.imageData.altText || '';
+  } else if ((attrs.attributeType as unknown as string) === 'CONTENT_ATTRIBUTE_IMAGE' && attrs.imageData) {
+     const id = attrs.imageData as unknown as { src?: string, altText?: string };
+     const src = id.src || '';
+     const alt = id.altText || '';
      if (src) {
         md += `\n![${alt}](${src})\n`;
      }
-  } else if (attrs.attributeType === 'CONTENT_ATTRIBUTE_ANCHOR' && attrs.anchorData) {
+  } else if ((attrs.attributeType as unknown as string) === 'CONTENT_ATTRIBUTE_ANCHOR' && attrs.anchorData) {
      const url = attrs.anchorData.url || '';
      let childText = '';
      if (node.childrenNodes) {
@@ -64,9 +67,9 @@ function recursiveToMarkdown(node) {
      if (childText && url) {
          return `[${childText}](${url}) `; // we've processed children manually
      }
-  } else if (attrs.attributeType === 'CONTENT_ATTRIBUTE_ORDERED_LIST' || attrs.attributeType === 'CONTENT_ATTRIBUTE_UNORDERED_LIST') {
+  } else if ((attrs.attributeType as unknown as string) === 'CONTENT_ATTRIBUTE_ORDERED_LIST' || (attrs.attributeType as unknown as string) === 'CONTENT_ATTRIBUTE_UNORDERED_LIST') {
       let listMd = '\n\n';
-      const isOrdered = attrs.attributeType === 'CONTENT_ATTRIBUTE_ORDERED_LIST';
+      const isOrdered = (attrs.attributeType as unknown as string) === 'CONTENT_ATTRIBUTE_ORDERED_LIST';
       let index = 1;
       
       if (node.childrenNodes) {
@@ -88,13 +91,13 @@ function recursiveToMarkdown(node) {
           }
       }
       return listMd + '\n';
-  } else if (attrs.attributeType === 'CONTENT_ATTRIBUTE_TABLE') {
+  } else if ((attrs.attributeType as unknown as string) === 'CONTENT_ATTRIBUTE_TABLE') {
       let tableMd = '\n\n';
       let isFirstRow = true;
       if (node.childrenNodes) {
           for (const row of node.childrenNodes) {
               const rowAttrs = row.contentAttributes || {};
-              if (rowAttrs.attributeType !== 'CONTENT_ATTRIBUTE_TABLE_ROW') continue;
+              if ((rowAttrs.attributeType as unknown as string) !== 'CONTENT_ATTRIBUTE_TABLE_ROW') continue;
               
               let rowText = '|';
               let sepText = '|';
@@ -112,7 +115,7 @@ function recursiveToMarkdown(node) {
                   }
               }
               tableMd += rowText + '\n';
-              if (isFirstRow || (rowAttrs.tableRowData && rowAttrs.tableRowData.type === 'TABLE_ROW_TYPE_HEADER')) {
+              if (isFirstRow || (rowAttrs.tableRowData && (rowAttrs.tableRowData.type as unknown as string) === 'TABLE_ROW_TYPE_HEADER')) {
                   if (isFirstRow) {
                       tableMd += sepText + '\n';
                   }
@@ -124,7 +127,7 @@ function recursiveToMarkdown(node) {
   }
   
   // ignore unwanted sections if we hit them in the tree stream
-  if (attrs.annotatedRoles && (attrs.annotatedRoles.includes('ANNOTATED_ROLE_NAV') || attrs.annotatedRoles.includes('ANNOTATED_ROLE_FOOTER'))) {
+  if (attrs.annotatedRoles && ((attrs.annotatedRoles as unknown as string[]).includes('ANNOTATED_ROLE_NAV') || (attrs.annotatedRoles as unknown as string[]).includes('ANNOTATED_ROLE_FOOTER'))) {
      return ''; // Skip rendering kids of nav/footer
   }
   
@@ -135,14 +138,14 @@ function recursiveToMarkdown(node) {
   }
 
   // add basic block spacing for container
-  if (attrs.attributeType === 'CONTENT_ATTRIBUTE_CONTAINER') {
+  if ((attrs.attributeType as unknown as string) === 'CONTENT_ATTRIBUTE_CONTAINER') {
       md += '\n\n';
   }
 
   return md;
 }
 
-export function convertToMarkdown(decodedProto) {
+export function convertToMarkdown(decodedProto: AnnotatedPageContent): string {
   const root = decodedProto.rootNode;
   if (!root) return '';
   

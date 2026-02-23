@@ -27,7 +27,7 @@ test('Evaluate CDP markdown against real-world URLs', async () => {
             // console.log(markdown.slice(0, 300) + '...');
         } catch (e) {
             console.error(`❌ Failed on ${url}:`, e);
-            assert.fail(e);
+            assert.fail(String(e));
         }
     }
 });

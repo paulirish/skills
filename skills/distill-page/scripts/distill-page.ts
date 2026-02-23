@@ -4,7 +4,7 @@ import { decodeAnnotatedPageContent, convertToMarkdown } from './decode_annotati
 
 export { decodeAnnotatedPageContent, convertToMarkdown };
 
-export async function fetchDistilledBase64(url) {
+export async function fetchDistilledBase64(url: string) {
   let browser;
   try {
     browser = await chromium.launch({
@@ -66,7 +66,7 @@ export async function fetchDistilledBase64(url) {
   }
 }
 
-export async function processPage(url) {
+export async function processPage(url: string) {
   const base64Content = await fetchDistilledBase64(url);
   return decodeAnnotatedPageContent(base64Content);
 }

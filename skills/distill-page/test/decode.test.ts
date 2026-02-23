@@ -14,7 +14,7 @@ test('Decoding base64 string into AnnotatedPageContent object', () => {
   
   const message = pb.optimization_guide.proto.AnnotatedPageContent.create(payload);
   const buffer = pb.optimization_guide.proto.AnnotatedPageContent.encode(message).finish();
-  const base64 = buffer.toString('base64');
+  const base64 = Buffer.from(buffer).toString('base64');
   
   const decoded = decodeAnnotatedPageContent(base64);
   

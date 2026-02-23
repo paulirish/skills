@@ -1,11 +1,13 @@
 import fs from 'node:fs';
-import type { AnyNode } from '../../types/index.js';
+import * as pb from './proto/common_quality_data_pbjs.js';
+
+type AnyNode = pb.optimization_guide.proto.IContentNode;
 
 const data = JSON.parse(fs.readFileSync('../../test/fixtures/annotatedpagecontent_payload.json', 'utf8'));
 
 export function findArticleRoot(node: AnyNode): AnyNode | null {
   const attrs = node.contentAttributes || {};
-  if (attrs.annotatedRoles && attrs.annotatedRoles.includes('ANNOTATED_ROLE_ARTICLE')) {
+  if (attrs.annotatedRoles && (attrs.annotatedRoles as unknown as string[]).includes('ANNOTATED_ROLE_ARTICLE')) {
     return node;
   }
   
@@ -20,7 +22,7 @@ export function findArticleRoot(node: AnyNode): AnyNode | null {
 
 export function findMainRoot(node: AnyNode): AnyNode | null {
   const attrs = node.contentAttributes || {};
-  if (attrs.annotatedRoles && attrs.annotatedRoles.includes('ANNOTATED_ROLE_MAIN')) {
+  if (attrs.annotatedRoles && (attrs.annotatedRoles as unknown as string[]).includes('ANNOTATED_ROLE_MAIN')) {
     return node;
   }
   
@@ -39,7 +41,7 @@ export function toMarkdown(node: AnyNode): string {
   let md = '';
   const attrs = node.contentAttributes || {};
   
-  if (attrs.attributeType === 'CONTENT_ATTRIBUTE_TEXT' && attrs.textData) {
+  if ((attrs.attributeType as unknown as string) === 'CONTENT_ATTRIBUTE_TEXT' && attrs.textData) {
      let text = attrs.textData.textContent || '';
      text = text.trim();
      if (text) {
@@ -47,7 +49,7 @@ export function toMarkdown(node: AnyNode): string {
              text = `**${text}**`;
          }
          if (attrs.textData.textStyle && attrs.textData.textStyle.textSize) {
-             const size = attrs.textData.textStyle.textSize;
+             const size = attrs.textData.textStyle.textSize as unknown as string;
              if (size === 'TEXT_SIZE_XL' || size === 'TEXT_SIZE_L') {
                  text = `\n## ${text}\n`;
              }
@@ -56,13 +58,13 @@ export function toMarkdown(node: AnyNode): string {
      }
   }
 
-  else if (attrs.attributeType === 'CONTENT_ATTRIBUTE_IMAGE' && attrs.imageData) {
+  else if ((attrs.attributeType as unknown as string) === 'CONTENT_ATTRIBUTE_IMAGE' && attrs.imageData) {
      const caption = attrs.imageData.imageCaption || 'image';
      const ref = `image${String(imageIndex++).padStart(2, '0')}`;
      md += `\n![${caption}][${ref}]\n`;
   }
   
-  else if (attrs.attributeType === 'CONTENT_ATTRIBUTE_ANCHOR' && attrs.anchorData) {
+  else if ((attrs.attributeType as unknown as string) === 'CONTENT_ATTRIBUTE_ANCHOR' && attrs.anchorData) {
      const url = attrs.anchorData.url || '';
      let childText = '';
      if (node.childrenNodes) {
@@ -79,7 +81,7 @@ export function toMarkdown(node: AnyNode): string {
   }
   
   // ignore unwanted sections if we hit them mid-stream (though hopefully not in ARTICLE)
-  if (attrs.annotatedRoles && (attrs.annotatedRoles.includes('ANNOTATED_ROLE_NAV') || attrs.annotatedRoles.includes('ANNOTATED_ROLE_FOOTER'))) {
+  if (attrs.annotatedRoles && ((attrs.annotatedRoles as unknown as string[]).includes('ANNOTATED_ROLE_NAV') || (attrs.annotatedRoles as unknown as string[]).includes('ANNOTATED_ROLE_FOOTER'))) {
      return md; // Skip rendering kids of nav/footer
   }
   
@@ -90,7 +92,7 @@ export function toMarkdown(node: AnyNode): string {
   }
 
   // add basic block spacing for container
-  if (attrs.attributeType === 'CONTENT_ATTRIBUTE_CONTAINER') {
+  if ((attrs.attributeType as unknown as string) === 'CONTENT_ATTRIBUTE_CONTAINER') {
       md += '\n\n';
   }
 
