@@ -73,7 +73,6 @@ function recursiveToMarkdown(node: AnyNode, state: { imageIndex: number }): stri
 
       if (node.childrenNodes) {
           for (const item of node.childrenNodes) {
-              const itemAttrs = item.contentAttributes || {};
               // Even if it isn't strictly CONTENT_ATTRIBUTE_LIST_ITEM, process it as a list child
               let itemText = '';
               if (item.childrenNodes) {
