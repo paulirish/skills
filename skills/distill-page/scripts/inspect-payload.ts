@@ -7,7 +7,7 @@ const data = JSON.parse(fs.readFileSync('../../test/fixtures/annotatedpageconten
 
 function findNodeWithRole(node: AnyNode, targetRole: string): AnyNode | null {
   const attrs = node.contentAttributes || {};
-  if (attrs.annotatedRoles && (attrs.annotatedRoles as unknown as string[]).includes(targetRole)) {
+  if (attrs.annotatedRoles && (attrs.annotatedRoles || []).includes(targetRole as any)) {
     return node;
   }
   
@@ -20,7 +20,7 @@ function findNodeWithRole(node: AnyNode, targetRole: string): AnyNode | null {
   return null;
 }
 
-const articleNode = findNodeWithRole(data.rootNode, 'ANNOTATED_ROLE_ARTICLE') || findNodeWithRole(data.rootNode, 'ANNOTATED_ROLE_MAIN');
+const articleNode = findNodeWithRole(data.rootNode, pb.optimization_guide.proto.AnnotatedRole.ANNOTATED_ROLE_ARTICLE as unknown as string) || findNodeWithRole(data.rootNode, pb.optimization_guide.proto.AnnotatedRole.ANNOTATED_ROLE_MAIN as unknown as string);
 
 function printContent(node: AnyNode, depth = 0) {
   const attrs = node.contentAttributes || {};
