@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import * as pb from './proto/common_quality_data_pbjs.js';
 
+const { AnnotatedRole } = pb.optimization_guide.proto;
 type AnyNode = pb.optimization_guide.proto.IContentNode;
 
 const data = JSON.parse(fs.readFileSync('../../test/fixtures/annotatedpagecontent_payload.json', 'utf8'));
@@ -20,7 +21,7 @@ function findNodeWithRole(node: AnyNode, targetRole: string): AnyNode | null {
   return null;
 }
 
-const articleNode = findNodeWithRole(data.rootNode, pb.optimization_guide.proto.AnnotatedRole.ANNOTATED_ROLE_ARTICLE as unknown as string) || findNodeWithRole(data.rootNode, pb.optimization_guide.proto.AnnotatedRole.ANNOTATED_ROLE_MAIN as unknown as string);
+const articleNode = findNodeWithRole(data.rootNode, AnnotatedRole.ANNOTATED_ROLE_ARTICLE as unknown as string) || findNodeWithRole(data.rootNode, AnnotatedRole.ANNOTATED_ROLE_MAIN as unknown as string);
 
 function printContent(node: AnyNode, depth = 0) {
   const attrs = node.contentAttributes || {};

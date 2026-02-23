@@ -1,4 +1,6 @@
 import * as pb from './proto/common_quality_data_pbjs.js';
+
+const { ContentAttributeType, TextSize, TableRowType, AnnotatedRole } = pb.optimization_guide.proto;
 type AnyNode = pb.optimization_guide.proto.IContentNode;
 type AnnotatedPageContent = pb.optimization_guide.proto.IAnnotatedPageContent;
 
@@ -18,7 +20,7 @@ function findNodeByRoles(node: AnyNode, roles: string[]): AnyNode | null {
   if (attrs.annotatedRoles && roles.some(r => (attrs.annotatedRoles || []).includes(r as any))) {
     return node;
   }
-  
+
   if (node.childrenNodes) {
     for (const child of node.childrenNodes) {
       const found = findNodeByRoles(child, roles);
@@ -31,8 +33,8 @@ function findNodeByRoles(node: AnyNode, roles: string[]): AnyNode | null {
 function recursiveToMarkdown(node: AnyNode): string {
   let md = '';
   const attrs = node.contentAttributes || {};
-  
-  if (attrs.attributeType === pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT && attrs.textData) {
+
+  if (attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_TEXT && attrs.textData) {
      let text = attrs.textData.textContent || '';
      text = text.trim();
      if (text) {
@@ -41,20 +43,20 @@ function recursiveToMarkdown(node: AnyNode): string {
          }
          if (attrs.textData.textStyle && attrs.textData.textStyle.textSize) {
              const size = attrs.textData.textStyle.textSize;
-             if (size === pb.optimization_guide.proto.TextSize.TEXT_SIZE_XL || size === pb.optimization_guide.proto.TextSize.TEXT_SIZE_L) {
+             if (size === TextSize.TEXT_SIZE_XL || size === TextSize.TEXT_SIZE_L) {
                  text = `\n## ${text}\n`;
              }
          }
          md += text + ' ';
      }
-  } else if (attrs.attributeType === pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_IMAGE && attrs.imageData) {
+  } else if (attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_IMAGE && attrs.imageData) {
      const id = attrs.imageData as unknown as { src?: string, altText?: string };
      const src = id.src || '';
      const alt = id.altText || '';
      if (src) {
         md += `\n![${alt}](${src})\n`;
      }
-  } else if (attrs.attributeType === pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_ANCHOR && attrs.anchorData) {
+  } else if (attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_ANCHOR && attrs.anchorData) {
      const url = attrs.anchorData.url || '';
      let childText = '';
      if (node.childrenNodes) {
@@ -66,11 +68,11 @@ function recursiveToMarkdown(node: AnyNode): string {
      if (childText && url) {
          return `[${childText}](${url}) `; // we've processed children manually
      }
-  } else if (attrs.attributeType === pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_ORDERED_LIST || attrs.attributeType === pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_UNORDERED_LIST) {
+  } else if (attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_ORDERED_LIST || attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_UNORDERED_LIST) {
       let listMd = '\n\n';
-      const isOrdered = attrs.attributeType === pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_ORDERED_LIST;
+      const isOrdered = attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_ORDERED_LIST;
       let index = 1;
-      
+
       if (node.childrenNodes) {
           for (const item of node.childrenNodes) {
               const itemAttrs = item.contentAttributes || {};
@@ -90,14 +92,14 @@ function recursiveToMarkdown(node: AnyNode): string {
           }
       }
       return listMd + '\n';
-  } else if (attrs.attributeType === pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TABLE) {
+  } else if (attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_TABLE) {
       let tableMd = '\n\n';
       let isFirstRow = true;
       if (node.childrenNodes) {
           for (const row of node.childrenNodes) {
               const rowAttrs = row.contentAttributes || {};
-              if (rowAttrs.attributeType !== pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TABLE_ROW) continue;
-              
+              if (rowAttrs.attributeType !== ContentAttributeType.CONTENT_ATTRIBUTE_TABLE_ROW) continue;
+
               let rowText = '|';
               let sepText = '|';
               if (row.childrenNodes) {
@@ -114,7 +116,7 @@ function recursiveToMarkdown(node: AnyNode): string {
                   }
               }
               tableMd += rowText + '\n';
-              if (isFirstRow || (rowAttrs.tableRowData && rowAttrs.tableRowData.type === pb.optimization_guide.proto.TableRowType.TABLE_ROW_TYPE_HEADER)) {
+              if (isFirstRow || (rowAttrs.tableRowData && rowAttrs.tableRowData.type === TableRowType.TABLE_ROW_TYPE_HEADER)) {
                   if (isFirstRow) {
                       tableMd += sepText + '\n';
                   }
@@ -124,18 +126,18 @@ function recursiveToMarkdown(node: AnyNode): string {
       }
       return tableMd + '\n';
   }
-  
-  if (attrs.annotatedRoles && ((attrs.annotatedRoles || []).includes(pb.optimization_guide.proto.AnnotatedRole.ANNOTATED_ROLE_NAV) || (attrs.annotatedRoles || []).includes(pb.optimization_guide.proto.AnnotatedRole.ANNOTATED_ROLE_FOOTER))) {
+
+  if (attrs.annotatedRoles && ((attrs.annotatedRoles || []).includes(AnnotatedRole.ANNOTATED_ROLE_NAV) || (attrs.annotatedRoles || []).includes(AnnotatedRole.ANNOTATED_ROLE_FOOTER))) {
      return ''; // Skip rendering kids of nav/footer
   }
-  
+
   if (node.childrenNodes) {
     for (const child of node.childrenNodes) {
       md += recursiveToMarkdown(child);
     }
   }
 
-  if (attrs.attributeType === pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_CONTAINER) {
+  if (attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_CONTAINER) {
       md += '\n\n';
   }
 
@@ -145,20 +147,20 @@ function recursiveToMarkdown(node: AnyNode): string {
 export function convertToMarkdown(decodedProto: AnnotatedPageContent): string {
   const root = decodedProto.rootNode;
   if (!root) return '';
-  
+
   // Try to find the narrowest main content area to avoid outer shells
   const contentRoot = findNodeByRoles(root, [
-      pb.optimization_guide.proto.AnnotatedRole.ANNOTATED_ROLE_ARTICLE as unknown as string,
-      pb.optimization_guide.proto.AnnotatedRole.ANNOTATED_ROLE_MAIN as unknown as string
+      AnnotatedRole.ANNOTATED_ROLE_ARTICLE as unknown as string,
+      AnnotatedRole.ANNOTATED_ROLE_MAIN as unknown as string
    ]) || root;
-                   
+
   let rawMd = recursiveToMarkdown(contentRoot);
-  
+
   // Clean up formatting
   rawMd = rawMd
     .replace(/\n{3,}/g, '\n\n')
     .replace(/ \n/g, '\n')
     .replace(/^\s+|\s+$/g, '');
-    
+
   return rawMd;
 }
