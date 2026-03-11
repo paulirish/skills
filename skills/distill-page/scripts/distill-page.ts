@@ -76,26 +76,51 @@ import {fileURLToPath} from 'node:url';
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const isMarkdown = process.argv.includes('--markdown');
-  const url = process.argv.find(arg => arg.startsWith('http'));
+  const isBase64Stdin = process.argv.includes('--base64-stdin');
 
-  if (!url) {
-    console.log(`
-Usage: ./utils/distill-page.js [--markdown] <URL>
-Example: ./utils/distill-page.js --markdown https://www.debugbear.com/blog/content-visibility-api
-    `);
-    process.exit(1);
-  }
-
-  processPage(url)
-    .then(decodedProto => {
-      if (isMarkdown) {
-        console.log(convertToMarkdown(decodedProto));
-      } else {
-        console.log(JSON.stringify(decodedProto, null, 2));
-      }
-    })
-    .catch(err => {
-      console.error('Error:', err.message);
-      process.exit(1);
+  if (isBase64Stdin) {
+    let base64Data = '';
+    process.stdin.setEncoding('utf8');
+    process.stdin.on('data', chunk => {
+      base64Data += chunk;
     });
+    process.stdin.on('end', () => {
+      try {
+        const decodedProto = decodeAnnotatedPageContent(base64Data.trim());
+        if (isMarkdown) {
+          console.log(convertToMarkdown(decodedProto));
+        } else {
+          console.log(JSON.stringify(decodedProto, null, 2));
+        }
+      } catch (err: any) {
+        console.error('Error decoding base64:', err.message);
+        process.exit(1);
+      }
+    });
+  } else {
+    const url = process.argv.find(arg => arg.startsWith('http'));
+
+    if (!url) {
+      console.log(`
+Usage (URL fetches via Playwright): ./utils/distill-page.js [--markdown] <URL>
+Usage (Base64 stdin bypasses Playwright): ./utils/distill-page.js --base64-stdin [--markdown] < base64.txt
+
+Example: ./utils/distill-page.js --markdown https://www.debugbear.com/blog/content-visibility-api
+      `);
+      process.exit(1);
+    }
+
+    processPage(url)
+      .then(decodedProto => {
+        if (isMarkdown) {
+          console.log(convertToMarkdown(decodedProto));
+        } else {
+          console.log(JSON.stringify(decodedProto, null, 2));
+        }
+      })
+      .catch(err => {
+        console.error('Error:', err.message);
+        process.exit(1);
+      });
+  }
 }
