@@ -68,7 +68,9 @@ export async function fetchDistilledBase64(url: string) {
 
 export async function processPage(url: string) {
   const base64Content = await fetchDistilledBase64(url);
-  return decodeAnnotatedPageContent(base64Content);
+  const decodedProto = decodeAnnotatedPageContent(base64Content);
+  debugger;
+  return decodedProto;
 }
 
 // Check if running as a standalone script
