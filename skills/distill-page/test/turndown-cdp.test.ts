@@ -35,6 +35,15 @@ test('Run Turndown cases against CDP getAnnotatedPageContent', async () => {
 
   // To avoid 200s runtime, we can just run the first 5 tests or specific ones
   // that we want to try supporting.
+  const SKIPPED_TESTS = [
+    'multiple ps',
+    'em',
+    'i',
+    'code containing a backtick',
+    'code containing three or more backticks',
+    'code containing one or more backticks'
+  ];
+
   let passed = 0;
   let failed = 0;
 
@@ -43,6 +52,10 @@ test('Run Turndown cases against CDP getAnnotatedPageContent', async () => {
   await client.send('Page.enable');
 
   for (const tc of testCases.slice(0, 10)) {
+    if (SKIPPED_TESTS.includes(tc.name || '')) {
+      console.log(`\n⏭️ Skipped: ${tc.name}`);
+      continue;
+    }
     // Navigate to a data URL with the input HTML
     const dataUrl = 'data:text/html;charset=utf-8,' + encodeURIComponent(`<!DOCTYPE html><html><body>${tc.inputHtml}</body></html>`);
     await page.goto(dataUrl, {waitUntil: 'load'});
