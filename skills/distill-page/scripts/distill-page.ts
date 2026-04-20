@@ -10,7 +10,7 @@ export async function fetchDistilledBase64(url: string) {
     browser = await chromium.launch({
       headless: false,
       args: [
-        '--headless=new',
+
         '--enable-features=OptimizationHints,PageContentAnnotation,OptimizationGuideModelDownloading',
         '--enable-dom-distiller',
         '--no-sandbox',
@@ -71,6 +71,14 @@ export async function processPage(url: string) {
   return decodeAnnotatedPageContent(base64Content);
 }
 
+function outputResult(decodedProto: any, isMarkdown: boolean) {
+  if (isMarkdown) {
+    console.log(convertToMarkdown(decodedProto));
+  } else {
+    console.log(JSON.stringify(decodedProto, null, 2));
+  }
+}
+
 // Check if running as a standalone script
 import {fileURLToPath} from 'node:url';
 
@@ -87,13 +95,9 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
     process.stdin.on('end', () => {
       try {
         const decodedProto = decodeAnnotatedPageContent(base64Data.trim());
-        if (isMarkdown) {
-          console.log(convertToMarkdown(decodedProto));
-        } else {
-          console.log(JSON.stringify(decodedProto, null, 2));
-        }
-      } catch (err: any) {
-        console.error('Error decoding base64:', err.message);
+        outputResult(decodedProto, isMarkdown);
+      } catch (err) {
+        console.error('Error decoding base64:', (err as Error).message);
         process.exit(1);
       }
     });
@@ -102,21 +106,17 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
 
     if (!url) {
       console.log(`
-Usage (URL fetches via Playwright): ./utils/distill-page.js [--markdown] <URL>
-Usage (Base64 stdin bypasses Playwright): ./utils/distill-page.js --base64-stdin [--markdown] < base64.txt
+Usage (URL fetches via Playwright): ./lib/distiller/distill-page.ts [--markdown] <URL>
+Usage (Base64 stdin bypasses Playwright): ./lib/distiller/distill-page.ts --base64-stdin [--markdown] < base64.txt
 
-Example: ./utils/distill-page.js --markdown https://www.debugbear.com/blog/content-visibility-api
+Example: ./lib/distiller/distill-page.ts --markdown https://www.debugbear.com/blog/content-visibility-api
       `);
       process.exit(1);
     }
 
     processPage(url)
       .then(decodedProto => {
-        if (isMarkdown) {
-          console.log(convertToMarkdown(decodedProto));
-        } else {
-          console.log(JSON.stringify(decodedProto, null, 2));
-        }
+        outputResult(decodedProto, isMarkdown);
       })
       .catch(err => {
         console.error('Error:', err.message);
