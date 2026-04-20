@@ -30,7 +30,7 @@ function findNodeByRoles(node: AnyNode, roles: string[]): AnyNode | null {
   return null;
 }
 
-function recursiveToMarkdown(node: AnyNode, state: {imageIndex: number, insideHeading?: boolean}): string {
+function recursiveToMarkdown(node: AnyNode, state: {imageIndex: number, insideHeading?: boolean, currentUrl?: string | null}): string {
   let md = '';
   const attrs = node.contentAttributes || {};
 
@@ -61,6 +61,10 @@ function recursiveToMarkdown(node: AnyNode, state: {imageIndex: number, insideHe
     md += `\n![${caption}][${ref}]\n`;
   } else if (attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_ANCHOR && attrs.anchorData) {
     const url = attrs.anchorData.url || '';
+    let resolvedUrl = url;
+    if (state.currentUrl && url.startsWith(state.currentUrl + '#')) {
+      resolvedUrl = url.substring(state.currentUrl.length);
+    }
     let childText = '';
     if (node.childrenNodes) {
       for (const child of node.childrenNodes) {
@@ -68,8 +72,8 @@ function recursiveToMarkdown(node: AnyNode, state: {imageIndex: number, insideHe
       }
     }
     childText = childText.trim();
-    if (childText && url) {
-      md += `[${childText}](${url}) `; // we've processed children manually
+    if (childText && resolvedUrl) {
+      md += `[${childText}](${resolvedUrl}) `; // we've processed children manually
     }
     return md;
   } else if (
@@ -191,7 +195,7 @@ export function convertToMarkdown(decodedProto: IAnnotatedPageContent): string {
   const contentRoot =
     findNodeByRoles(root, [AnnotatedRole.ANNOTATED_ROLE_ARTICLE as unknown as string, AnnotatedRole.ANNOTATED_ROLE_MAIN as unknown as string]) || root;
 
-  let rawMd = recursiveToMarkdown(contentRoot, {imageIndex: 1});
+  let rawMd = recursiveToMarkdown(contentRoot, {imageIndex: 1, currentUrl: decodedProto.mainFrameData?.url});
 
   // Clean up formatting
   rawMd = rawMd

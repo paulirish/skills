@@ -84,3 +84,41 @@ test('convertToMarkdown cleans up spaces before punctuation', () => {
   const expected = 'Text followed by space.';
   assert.strictEqual(md.trim(), expected);
 });
+
+test('convertToMarkdown converts same-page links to fragments', () => {
+  const payload = {
+    mainFrameData: {
+      url: 'https://example.com/page',
+    },
+    rootNode: {
+      childrenNodes: [
+        {
+          contentAttributes: {
+            attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_ANCHOR,
+            anchorData: {
+              url: 'https://example.com/page#section',
+            },
+          },
+          childrenNodes: [
+            {
+              contentAttributes: {
+                attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+                textData: {textContent: 'Link Text'},
+              },
+            },
+          ],
+        },
+      ],
+    },
+  };
+
+  const message = pb.optimization_guide.proto.AnnotatedPageContent.create(payload);
+  const buffer = pb.optimization_guide.proto.AnnotatedPageContent.encode(message).finish();
+  const base64 = Buffer.from(buffer).toString('base64');
+
+  const decoded = decodeAnnotatedPageContent(base64);
+  const md = convertToMarkdown(decoded);
+
+  const expected = '[Link Text](#section)';
+  assert.strictEqual(md.trim(), expected);
+});
