@@ -1,12 +1,12 @@
 // @ts-nocheck
 /*eslint-disable block-scoped-var, id-length, no-control-regex, no-magic-numbers, no-prototype-builtins, no-redeclare, no-shadow, no-var, sort-vars*/
-import * as $protobuf from "protobufjs/minimal.js";
+import $protobuf from "protobufjs";
 
 // Common aliases
-const $Reader = $protobuf.Reader, $util = $protobuf.util;
+const $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
 
 // Exported root namespace
-const $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
+const $root = {};
 
 export const optimization_guide = $root.optimization_guide = (() => {
 
@@ -60,6 +60,52 @@ export const optimization_guide = $root.optimization_guide = (() => {
             FloatArray.prototype.values = $util.emptyArray;
 
             /**
+             * Creates a new FloatArray instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.FloatArray
+             * @static
+             * @param {optimization_guide.proto.IFloatArray=} [properties] Properties to set
+             * @returns {optimization_guide.proto.FloatArray} FloatArray instance
+             */
+            FloatArray.create = function create(properties) {
+                return new FloatArray(properties);
+            };
+
+            /**
+             * Encodes the specified FloatArray message. Does not implicitly {@link optimization_guide.proto.FloatArray.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.FloatArray
+             * @static
+             * @param {optimization_guide.proto.IFloatArray} message FloatArray message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            FloatArray.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.values != null && message.values.length) {
+                    writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                    for (let i = 0; i < message.values.length; ++i)
+                        writer.float(message.values[i]);
+                    writer.ldelim();
+                }
+                return writer;
+            };
+
+            /**
+             * Encodes the specified FloatArray message, length delimited. Does not implicitly {@link optimization_guide.proto.FloatArray.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.FloatArray
+             * @static
+             * @param {optimization_guide.proto.IFloatArray} message FloatArray message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            FloatArray.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a FloatArray message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.FloatArray
@@ -96,6 +142,114 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a FloatArray message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.FloatArray
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.FloatArray} FloatArray
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            FloatArray.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a FloatArray message.
+             * @function verify
+             * @memberof optimization_guide.proto.FloatArray
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            FloatArray.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.values != null && message.hasOwnProperty("values")) {
+                    if (!Array.isArray(message.values))
+                        return "values: array expected";
+                    for (let i = 0; i < message.values.length; ++i)
+                        if (typeof message.values[i] !== "number")
+                            return "values: number[] expected";
+                }
+                return null;
+            };
+
+            /**
+             * Creates a FloatArray message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.FloatArray
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.FloatArray} FloatArray
+             */
+            FloatArray.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.FloatArray)
+                    return object;
+                let message = new $root.optimization_guide.proto.FloatArray();
+                if (object.values) {
+                    if (!Array.isArray(object.values))
+                        throw TypeError(".optimization_guide.proto.FloatArray.values: array expected");
+                    message.values = [];
+                    for (let i = 0; i < object.values.length; ++i)
+                        message.values[i] = Number(object.values[i]);
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a FloatArray message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.FloatArray
+             * @static
+             * @param {optimization_guide.proto.FloatArray} message FloatArray
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            FloatArray.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.arrays || options.defaults)
+                    object.values = [];
+                if (message.values && message.values.length) {
+                    object.values = [];
+                    for (let j = 0; j < message.values.length; ++j)
+                        object.values[j] = options.json && !isFinite(message.values[j]) ? String(message.values[j]) : message.values[j];
+                }
+                return object;
+            };
+
+            /**
+             * Converts this FloatArray to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.FloatArray
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            FloatArray.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for FloatArray
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.FloatArray
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            FloatArray.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.FloatArray";
             };
 
             return FloatArray;
@@ -136,6 +290,48 @@ export const optimization_guide = $root.optimization_guide = (() => {
             Embedding.prototype.floats = null;
 
             /**
+             * Creates a new Embedding instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.Embedding
+             * @static
+             * @param {optimization_guide.proto.IEmbedding=} [properties] Properties to set
+             * @returns {optimization_guide.proto.Embedding} Embedding instance
+             */
+            Embedding.create = function create(properties) {
+                return new Embedding(properties);
+            };
+
+            /**
+             * Encodes the specified Embedding message. Does not implicitly {@link optimization_guide.proto.Embedding.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.Embedding
+             * @static
+             * @param {optimization_guide.proto.IEmbedding} message Embedding message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Embedding.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.floats != null && Object.hasOwnProperty.call(message, "floats"))
+                    $root.optimization_guide.proto.FloatArray.encode(message.floats, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified Embedding message, length delimited. Does not implicitly {@link optimization_guide.proto.Embedding.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.Embedding
+             * @static
+             * @param {optimization_guide.proto.IEmbedding} message Embedding message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Embedding.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes an Embedding message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.Embedding
@@ -165,6 +361,107 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes an Embedding message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.Embedding
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.Embedding} Embedding
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Embedding.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies an Embedding message.
+             * @function verify
+             * @memberof optimization_guide.proto.Embedding
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            Embedding.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.floats != null && message.hasOwnProperty("floats")) {
+                    let error = $root.optimization_guide.proto.FloatArray.verify(message.floats);
+                    if (error)
+                        return "floats." + error;
+                }
+                return null;
+            };
+
+            /**
+             * Creates an Embedding message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.Embedding
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.Embedding} Embedding
+             */
+            Embedding.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.Embedding)
+                    return object;
+                let message = new $root.optimization_guide.proto.Embedding();
+                if (object.floats != null) {
+                    if (typeof object.floats !== "object")
+                        throw TypeError(".optimization_guide.proto.Embedding.floats: object expected");
+                    message.floats = $root.optimization_guide.proto.FloatArray.fromObject(object.floats);
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from an Embedding message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.Embedding
+             * @static
+             * @param {optimization_guide.proto.Embedding} message Embedding
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Embedding.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults)
+                    object.floats = null;
+                if (message.floats != null && message.hasOwnProperty("floats"))
+                    object.floats = $root.optimization_guide.proto.FloatArray.toObject(message.floats, options);
+                return object;
+            };
+
+            /**
+             * Converts this Embedding to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.Embedding
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            Embedding.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for Embedding
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.Embedding
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            Embedding.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.Embedding";
             };
 
             return Embedding;
@@ -227,6 +524,53 @@ export const optimization_guide = $root.optimization_guide = (() => {
             AXTreeUpdate.prototype.nodes = $util.emptyArray;
 
             /**
+             * Creates a new AXTreeUpdate instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.AXTreeUpdate
+             * @static
+             * @param {optimization_guide.proto.IAXTreeUpdate=} [properties] Properties to set
+             * @returns {optimization_guide.proto.AXTreeUpdate} AXTreeUpdate instance
+             */
+            AXTreeUpdate.create = function create(properties) {
+                return new AXTreeUpdate(properties);
+            };
+
+            /**
+             * Encodes the specified AXTreeUpdate message. Does not implicitly {@link optimization_guide.proto.AXTreeUpdate.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.AXTreeUpdate
+             * @static
+             * @param {optimization_guide.proto.IAXTreeUpdate} message AXTreeUpdate message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            AXTreeUpdate.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.treeData != null && Object.hasOwnProperty.call(message, "treeData"))
+                    $root.optimization_guide.proto.AXTreeData.encode(message.treeData, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                if (message.rootId != null && Object.hasOwnProperty.call(message, "rootId"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.rootId);
+                if (message.nodes != null && message.nodes.length)
+                    for (let i = 0; i < message.nodes.length; ++i)
+                        $root.optimization_guide.proto.AXNodeData.encode(message.nodes[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified AXTreeUpdate message, length delimited. Does not implicitly {@link optimization_guide.proto.AXTreeUpdate.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.AXTreeUpdate
+             * @static
+             * @param {optimization_guide.proto.IAXTreeUpdate} message AXTreeUpdate message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            AXTreeUpdate.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a AXTreeUpdate message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.AXTreeUpdate
@@ -266,6 +610,142 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a AXTreeUpdate message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.AXTreeUpdate
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.AXTreeUpdate} AXTreeUpdate
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            AXTreeUpdate.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a AXTreeUpdate message.
+             * @function verify
+             * @memberof optimization_guide.proto.AXTreeUpdate
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            AXTreeUpdate.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.treeData != null && message.hasOwnProperty("treeData")) {
+                    let error = $root.optimization_guide.proto.AXTreeData.verify(message.treeData);
+                    if (error)
+                        return "treeData." + error;
+                }
+                if (message.rootId != null && message.hasOwnProperty("rootId"))
+                    if (!$util.isInteger(message.rootId))
+                        return "rootId: integer expected";
+                if (message.nodes != null && message.hasOwnProperty("nodes")) {
+                    if (!Array.isArray(message.nodes))
+                        return "nodes: array expected";
+                    for (let i = 0; i < message.nodes.length; ++i) {
+                        let error = $root.optimization_guide.proto.AXNodeData.verify(message.nodes[i]);
+                        if (error)
+                            return "nodes." + error;
+                    }
+                }
+                return null;
+            };
+
+            /**
+             * Creates a AXTreeUpdate message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.AXTreeUpdate
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.AXTreeUpdate} AXTreeUpdate
+             */
+            AXTreeUpdate.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.AXTreeUpdate)
+                    return object;
+                let message = new $root.optimization_guide.proto.AXTreeUpdate();
+                if (object.treeData != null) {
+                    if (typeof object.treeData !== "object")
+                        throw TypeError(".optimization_guide.proto.AXTreeUpdate.treeData: object expected");
+                    message.treeData = $root.optimization_guide.proto.AXTreeData.fromObject(object.treeData);
+                }
+                if (object.rootId != null)
+                    message.rootId = object.rootId >>> 0;
+                if (object.nodes) {
+                    if (!Array.isArray(object.nodes))
+                        throw TypeError(".optimization_guide.proto.AXTreeUpdate.nodes: array expected");
+                    message.nodes = [];
+                    for (let i = 0; i < object.nodes.length; ++i) {
+                        if (typeof object.nodes[i] !== "object")
+                            throw TypeError(".optimization_guide.proto.AXTreeUpdate.nodes: object expected");
+                        message.nodes[i] = $root.optimization_guide.proto.AXNodeData.fromObject(object.nodes[i]);
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a AXTreeUpdate message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.AXTreeUpdate
+             * @static
+             * @param {optimization_guide.proto.AXTreeUpdate} message AXTreeUpdate
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            AXTreeUpdate.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.arrays || options.defaults)
+                    object.nodes = [];
+                if (options.defaults) {
+                    object.treeData = null;
+                    object.rootId = 0;
+                }
+                if (message.treeData != null && message.hasOwnProperty("treeData"))
+                    object.treeData = $root.optimization_guide.proto.AXTreeData.toObject(message.treeData, options);
+                if (message.rootId != null && message.hasOwnProperty("rootId"))
+                    object.rootId = message.rootId;
+                if (message.nodes && message.nodes.length) {
+                    object.nodes = [];
+                    for (let j = 0; j < message.nodes.length; ++j)
+                        object.nodes[j] = $root.optimization_guide.proto.AXNodeData.toObject(message.nodes[j], options);
+                }
+                return object;
+            };
+
+            /**
+             * Converts this AXTreeUpdate to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.AXTreeUpdate
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            AXTreeUpdate.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for AXTreeUpdate
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.AXTreeUpdate
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            AXTreeUpdate.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.AXTreeUpdate";
             };
 
             return AXTreeUpdate;
@@ -432,6 +912,77 @@ export const optimization_guide = $root.optimization_guide = (() => {
             AXTreeData.prototype.metadata = $util.emptyArray;
 
             /**
+             * Creates a new AXTreeData instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.AXTreeData
+             * @static
+             * @param {optimization_guide.proto.IAXTreeData=} [properties] Properties to set
+             * @returns {optimization_guide.proto.AXTreeData} AXTreeData instance
+             */
+            AXTreeData.create = function create(properties) {
+                return new AXTreeData(properties);
+            };
+
+            /**
+             * Encodes the specified AXTreeData message. Does not implicitly {@link optimization_guide.proto.AXTreeData.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.AXTreeData
+             * @static
+             * @param {optimization_guide.proto.IAXTreeData} message AXTreeData message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            AXTreeData.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.doctype != null && Object.hasOwnProperty.call(message, "doctype"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.doctype);
+                if (message.loaded != null && Object.hasOwnProperty.call(message, "loaded"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.loaded);
+                if (message.loadingProgress != null && Object.hasOwnProperty.call(message, "loadingProgress"))
+                    writer.uint32(/* id 3, wireType 5 =*/29).float(message.loadingProgress);
+                if (message.mimetype != null && Object.hasOwnProperty.call(message, "mimetype"))
+                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.mimetype);
+                if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.title);
+                if (message.focusId != null && Object.hasOwnProperty.call(message, "focusId"))
+                    writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.focusId);
+                if (message.selIsBackward != null && Object.hasOwnProperty.call(message, "selIsBackward"))
+                    writer.uint32(/* id 7, wireType 0 =*/56).bool(message.selIsBackward);
+                if (message.selAnchorObjectId != null && Object.hasOwnProperty.call(message, "selAnchorObjectId"))
+                    writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.selAnchorObjectId);
+                if (message.selAnchorOffset != null && Object.hasOwnProperty.call(message, "selAnchorOffset"))
+                    writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.selAnchorOffset);
+                if (message.selAnchorAffinity != null && Object.hasOwnProperty.call(message, "selAnchorAffinity"))
+                    writer.uint32(/* id 10, wireType 0 =*/80).int32(message.selAnchorAffinity);
+                if (message.selFocusObjectId != null && Object.hasOwnProperty.call(message, "selFocusObjectId"))
+                    writer.uint32(/* id 11, wireType 0 =*/88).uint32(message.selFocusObjectId);
+                if (message.selFocusOffset != null && Object.hasOwnProperty.call(message, "selFocusOffset"))
+                    writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.selFocusOffset);
+                if (message.selFocusAffinity != null && Object.hasOwnProperty.call(message, "selFocusAffinity"))
+                    writer.uint32(/* id 13, wireType 0 =*/104).int32(message.selFocusAffinity);
+                if (message.rootScrollerId != null && Object.hasOwnProperty.call(message, "rootScrollerId"))
+                    writer.uint32(/* id 14, wireType 0 =*/112).uint32(message.rootScrollerId);
+                if (message.metadata != null && message.metadata.length)
+                    for (let i = 0; i < message.metadata.length; ++i)
+                        writer.uint32(/* id 15, wireType 2 =*/122).string(message.metadata[i]);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified AXTreeData message, length delimited. Does not implicitly {@link optimization_guide.proto.AXTreeData.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.AXTreeData
+             * @static
+             * @param {optimization_guide.proto.IAXTreeData} message AXTreeData message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            AXTreeData.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a AXTreeData message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.AXTreeData
@@ -519,6 +1070,276 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a AXTreeData message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.AXTreeData
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.AXTreeData} AXTreeData
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            AXTreeData.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a AXTreeData message.
+             * @function verify
+             * @memberof optimization_guide.proto.AXTreeData
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            AXTreeData.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.doctype != null && message.hasOwnProperty("doctype"))
+                    if (!$util.isString(message.doctype))
+                        return "doctype: string expected";
+                if (message.loaded != null && message.hasOwnProperty("loaded"))
+                    if (typeof message.loaded !== "boolean")
+                        return "loaded: boolean expected";
+                if (message.loadingProgress != null && message.hasOwnProperty("loadingProgress"))
+                    if (typeof message.loadingProgress !== "number")
+                        return "loadingProgress: number expected";
+                if (message.mimetype != null && message.hasOwnProperty("mimetype"))
+                    if (!$util.isString(message.mimetype))
+                        return "mimetype: string expected";
+                if (message.title != null && message.hasOwnProperty("title"))
+                    if (!$util.isString(message.title))
+                        return "title: string expected";
+                if (message.focusId != null && message.hasOwnProperty("focusId"))
+                    if (!$util.isInteger(message.focusId))
+                        return "focusId: integer expected";
+                if (message.selIsBackward != null && message.hasOwnProperty("selIsBackward"))
+                    if (typeof message.selIsBackward !== "boolean")
+                        return "selIsBackward: boolean expected";
+                if (message.selAnchorObjectId != null && message.hasOwnProperty("selAnchorObjectId"))
+                    if (!$util.isInteger(message.selAnchorObjectId))
+                        return "selAnchorObjectId: integer expected";
+                if (message.selAnchorOffset != null && message.hasOwnProperty("selAnchorOffset"))
+                    if (!$util.isInteger(message.selAnchorOffset))
+                        return "selAnchorOffset: integer expected";
+                if (message.selAnchorAffinity != null && message.hasOwnProperty("selAnchorAffinity"))
+                    switch (message.selAnchorAffinity) {
+                    default:
+                        return "selAnchorAffinity: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                        break;
+                    }
+                if (message.selFocusObjectId != null && message.hasOwnProperty("selFocusObjectId"))
+                    if (!$util.isInteger(message.selFocusObjectId))
+                        return "selFocusObjectId: integer expected";
+                if (message.selFocusOffset != null && message.hasOwnProperty("selFocusOffset"))
+                    if (!$util.isInteger(message.selFocusOffset))
+                        return "selFocusOffset: integer expected";
+                if (message.selFocusAffinity != null && message.hasOwnProperty("selFocusAffinity"))
+                    switch (message.selFocusAffinity) {
+                    default:
+                        return "selFocusAffinity: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                        break;
+                    }
+                if (message.rootScrollerId != null && message.hasOwnProperty("rootScrollerId"))
+                    if (!$util.isInteger(message.rootScrollerId))
+                        return "rootScrollerId: integer expected";
+                if (message.metadata != null && message.hasOwnProperty("metadata")) {
+                    if (!Array.isArray(message.metadata))
+                        return "metadata: array expected";
+                    for (let i = 0; i < message.metadata.length; ++i)
+                        if (!$util.isString(message.metadata[i]))
+                            return "metadata: string[] expected";
+                }
+                return null;
+            };
+
+            /**
+             * Creates a AXTreeData message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.AXTreeData
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.AXTreeData} AXTreeData
+             */
+            AXTreeData.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.AXTreeData)
+                    return object;
+                let message = new $root.optimization_guide.proto.AXTreeData();
+                if (object.doctype != null)
+                    message.doctype = String(object.doctype);
+                if (object.loaded != null)
+                    message.loaded = Boolean(object.loaded);
+                if (object.loadingProgress != null)
+                    message.loadingProgress = Number(object.loadingProgress);
+                if (object.mimetype != null)
+                    message.mimetype = String(object.mimetype);
+                if (object.title != null)
+                    message.title = String(object.title);
+                if (object.focusId != null)
+                    message.focusId = object.focusId >>> 0;
+                if (object.selIsBackward != null)
+                    message.selIsBackward = Boolean(object.selIsBackward);
+                if (object.selAnchorObjectId != null)
+                    message.selAnchorObjectId = object.selAnchorObjectId >>> 0;
+                if (object.selAnchorOffset != null)
+                    message.selAnchorOffset = object.selAnchorOffset >>> 0;
+                switch (object.selAnchorAffinity) {
+                default:
+                    if (typeof object.selAnchorAffinity === "number") {
+                        message.selAnchorAffinity = object.selAnchorAffinity;
+                        break;
+                    }
+                    break;
+                case "AX_TEXT_AFFINITY_NONE":
+                case 0:
+                    message.selAnchorAffinity = 0;
+                    break;
+                case "AX_TEXT_AFFINITY_DOWNSTREAM":
+                case 1:
+                    message.selAnchorAffinity = 1;
+                    break;
+                case "AX_TEXT_AFFINITY_UPSTREAM":
+                case 2:
+                    message.selAnchorAffinity = 2;
+                    break;
+                }
+                if (object.selFocusObjectId != null)
+                    message.selFocusObjectId = object.selFocusObjectId >>> 0;
+                if (object.selFocusOffset != null)
+                    message.selFocusOffset = object.selFocusOffset >>> 0;
+                switch (object.selFocusAffinity) {
+                default:
+                    if (typeof object.selFocusAffinity === "number") {
+                        message.selFocusAffinity = object.selFocusAffinity;
+                        break;
+                    }
+                    break;
+                case "AX_TEXT_AFFINITY_NONE":
+                case 0:
+                    message.selFocusAffinity = 0;
+                    break;
+                case "AX_TEXT_AFFINITY_DOWNSTREAM":
+                case 1:
+                    message.selFocusAffinity = 1;
+                    break;
+                case "AX_TEXT_AFFINITY_UPSTREAM":
+                case 2:
+                    message.selFocusAffinity = 2;
+                    break;
+                }
+                if (object.rootScrollerId != null)
+                    message.rootScrollerId = object.rootScrollerId >>> 0;
+                if (object.metadata) {
+                    if (!Array.isArray(object.metadata))
+                        throw TypeError(".optimization_guide.proto.AXTreeData.metadata: array expected");
+                    message.metadata = [];
+                    for (let i = 0; i < object.metadata.length; ++i)
+                        message.metadata[i] = String(object.metadata[i]);
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a AXTreeData message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.AXTreeData
+             * @static
+             * @param {optimization_guide.proto.AXTreeData} message AXTreeData
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            AXTreeData.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.arrays || options.defaults)
+                    object.metadata = [];
+                if (options.defaults) {
+                    object.doctype = "";
+                    object.loaded = false;
+                    object.loadingProgress = 0;
+                    object.mimetype = "";
+                    object.title = "";
+                    object.focusId = 0;
+                    object.selIsBackward = false;
+                    object.selAnchorObjectId = 0;
+                    object.selAnchorOffset = 0;
+                    object.selAnchorAffinity = options.enums === String ? "AX_TEXT_AFFINITY_NONE" : 0;
+                    object.selFocusObjectId = 0;
+                    object.selFocusOffset = 0;
+                    object.selFocusAffinity = options.enums === String ? "AX_TEXT_AFFINITY_NONE" : 0;
+                    object.rootScrollerId = 0;
+                }
+                if (message.doctype != null && message.hasOwnProperty("doctype"))
+                    object.doctype = message.doctype;
+                if (message.loaded != null && message.hasOwnProperty("loaded"))
+                    object.loaded = message.loaded;
+                if (message.loadingProgress != null && message.hasOwnProperty("loadingProgress"))
+                    object.loadingProgress = options.json && !isFinite(message.loadingProgress) ? String(message.loadingProgress) : message.loadingProgress;
+                if (message.mimetype != null && message.hasOwnProperty("mimetype"))
+                    object.mimetype = message.mimetype;
+                if (message.title != null && message.hasOwnProperty("title"))
+                    object.title = message.title;
+                if (message.focusId != null && message.hasOwnProperty("focusId"))
+                    object.focusId = message.focusId;
+                if (message.selIsBackward != null && message.hasOwnProperty("selIsBackward"))
+                    object.selIsBackward = message.selIsBackward;
+                if (message.selAnchorObjectId != null && message.hasOwnProperty("selAnchorObjectId"))
+                    object.selAnchorObjectId = message.selAnchorObjectId;
+                if (message.selAnchorOffset != null && message.hasOwnProperty("selAnchorOffset"))
+                    object.selAnchorOffset = message.selAnchorOffset;
+                if (message.selAnchorAffinity != null && message.hasOwnProperty("selAnchorAffinity"))
+                    object.selAnchorAffinity = options.enums === String ? $root.optimization_guide.proto.AXTextAffinity[message.selAnchorAffinity] === undefined ? message.selAnchorAffinity : $root.optimization_guide.proto.AXTextAffinity[message.selAnchorAffinity] : message.selAnchorAffinity;
+                if (message.selFocusObjectId != null && message.hasOwnProperty("selFocusObjectId"))
+                    object.selFocusObjectId = message.selFocusObjectId;
+                if (message.selFocusOffset != null && message.hasOwnProperty("selFocusOffset"))
+                    object.selFocusOffset = message.selFocusOffset;
+                if (message.selFocusAffinity != null && message.hasOwnProperty("selFocusAffinity"))
+                    object.selFocusAffinity = options.enums === String ? $root.optimization_guide.proto.AXTextAffinity[message.selFocusAffinity] === undefined ? message.selFocusAffinity : $root.optimization_guide.proto.AXTextAffinity[message.selFocusAffinity] : message.selFocusAffinity;
+                if (message.rootScrollerId != null && message.hasOwnProperty("rootScrollerId"))
+                    object.rootScrollerId = message.rootScrollerId;
+                if (message.metadata && message.metadata.length) {
+                    object.metadata = [];
+                    for (let j = 0; j < message.metadata.length; ++j)
+                        object.metadata[j] = message.metadata[j];
+                }
+                return object;
+            };
+
+            /**
+             * Converts this AXTreeData to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.AXTreeData
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            AXTreeData.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for AXTreeData
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.AXTreeData
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            AXTreeData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.AXTreeData";
             };
 
             return AXTreeData;
@@ -614,6 +1435,65 @@ export const optimization_guide = $root.optimization_guide = (() => {
             AXNodeData.prototype.relativeBounds = null;
 
             /**
+             * Creates a new AXNodeData instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.AXNodeData
+             * @static
+             * @param {optimization_guide.proto.IAXNodeData=} [properties] Properties to set
+             * @returns {optimization_guide.proto.AXNodeData} AXNodeData instance
+             */
+            AXNodeData.create = function create(properties) {
+                return new AXNodeData(properties);
+            };
+
+            /**
+             * Encodes the specified AXNodeData message. Does not implicitly {@link optimization_guide.proto.AXNodeData.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.AXNodeData
+             * @static
+             * @param {optimization_guide.proto.IAXNodeData} message AXNodeData message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            AXNodeData.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.id);
+                if (message.role != null && Object.hasOwnProperty.call(message, "role"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.role);
+                if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.state);
+                if (message.actions != null && Object.hasOwnProperty.call(message, "actions"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).uint64(message.actions);
+                if (message.attributes != null && message.attributes.length)
+                    for (let i = 0; i < message.attributes.length; ++i)
+                        $root.optimization_guide.proto.AXAttribute.encode(message.attributes[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                if (message.childIds != null && message.childIds.length) {
+                    writer.uint32(/* id 6, wireType 2 =*/50).fork();
+                    for (let i = 0; i < message.childIds.length; ++i)
+                        writer.int32(message.childIds[i]);
+                    writer.ldelim();
+                }
+                if (message.relativeBounds != null && Object.hasOwnProperty.call(message, "relativeBounds"))
+                    $root.optimization_guide.proto.AXRelativeBounds.encode(message.relativeBounds, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified AXNodeData message, length delimited. Does not implicitly {@link optimization_guide.proto.AXNodeData.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.AXNodeData
+             * @static
+             * @param {optimization_guide.proto.IAXNodeData} message AXNodeData message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            AXNodeData.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a AXNodeData message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.AXNodeData
@@ -676,6 +1556,1280 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a AXNodeData message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.AXNodeData
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.AXNodeData} AXNodeData
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            AXNodeData.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a AXNodeData message.
+             * @function verify
+             * @memberof optimization_guide.proto.AXNodeData
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            AXNodeData.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.id != null && message.hasOwnProperty("id"))
+                    if (!$util.isInteger(message.id))
+                        return "id: integer expected";
+                if (message.role != null && message.hasOwnProperty("role"))
+                    switch (message.role) {
+                    default:
+                        return "role: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                    case 10:
+                    case 11:
+                    case 12:
+                    case 13:
+                    case 14:
+                    case 15:
+                    case 16:
+                    case 17:
+                    case 18:
+                    case 19:
+                    case 20:
+                    case 21:
+                    case 22:
+                    case 23:
+                    case 24:
+                    case 25:
+                    case 26:
+                    case 27:
+                    case 28:
+                    case 29:
+                    case 30:
+                    case 31:
+                    case 32:
+                    case 33:
+                    case 34:
+                    case 35:
+                    case 36:
+                    case 37:
+                    case 38:
+                    case 39:
+                    case 40:
+                    case 41:
+                    case 42:
+                    case 43:
+                    case 44:
+                    case 45:
+                    case 46:
+                    case 47:
+                    case 48:
+                    case 49:
+                    case 50:
+                    case 51:
+                    case 52:
+                    case 53:
+                    case 54:
+                    case 55:
+                    case 56:
+                    case 57:
+                    case 58:
+                    case 59:
+                    case 60:
+                    case 61:
+                    case 62:
+                    case 63:
+                    case 64:
+                    case 65:
+                    case 66:
+                    case 67:
+                    case 68:
+                    case 69:
+                    case 70:
+                    case 71:
+                    case 72:
+                    case 73:
+                    case 74:
+                    case 75:
+                    case 76:
+                    case 77:
+                    case 78:
+                    case 79:
+                    case 80:
+                    case 81:
+                    case 82:
+                    case 83:
+                    case 84:
+                    case 85:
+                    case 86:
+                    case 87:
+                    case 88:
+                    case 89:
+                    case 90:
+                    case 91:
+                    case 92:
+                    case 93:
+                    case 94:
+                    case 95:
+                    case 96:
+                    case 97:
+                    case 98:
+                    case 99:
+                    case 100:
+                    case 101:
+                    case 102:
+                    case 103:
+                    case 104:
+                    case 105:
+                    case 106:
+                    case 107:
+                    case 108:
+                    case 109:
+                    case 110:
+                    case 111:
+                    case 112:
+                    case 113:
+                    case 114:
+                    case 115:
+                    case 116:
+                    case 117:
+                    case 118:
+                    case 119:
+                    case 120:
+                    case 121:
+                    case 122:
+                    case 123:
+                    case 124:
+                    case 125:
+                    case 126:
+                    case 213:
+                    case 127:
+                    case 128:
+                    case 129:
+                    case 130:
+                    case 131:
+                    case 132:
+                    case 133:
+                    case 134:
+                    case 135:
+                    case 136:
+                    case 137:
+                    case 138:
+                    case 139:
+                    case 140:
+                    case 141:
+                    case 142:
+                    case 143:
+                    case 144:
+                    case 145:
+                    case 146:
+                    case 147:
+                    case 148:
+                    case 149:
+                    case 150:
+                    case 151:
+                    case 152:
+                    case 153:
+                    case 154:
+                    case 155:
+                    case 156:
+                    case 157:
+                    case 158:
+                    case 159:
+                    case 160:
+                    case 161:
+                    case 162:
+                    case 163:
+                    case 164:
+                    case 165:
+                    case 166:
+                    case 167:
+                    case 168:
+                    case 169:
+                    case 170:
+                    case 171:
+                    case 172:
+                    case 173:
+                    case 174:
+                    case 175:
+                    case 176:
+                    case 177:
+                    case 178:
+                    case 179:
+                    case 180:
+                    case 181:
+                    case 182:
+                    case 183:
+                    case 184:
+                    case 185:
+                    case 186:
+                    case 187:
+                    case 188:
+                    case 189:
+                    case 190:
+                    case 191:
+                    case 192:
+                    case 193:
+                    case 194:
+                    case 195:
+                    case 196:
+                    case 197:
+                    case 198:
+                    case 199:
+                    case 200:
+                    case 201:
+                    case 202:
+                    case 203:
+                    case 204:
+                    case 205:
+                    case 206:
+                    case 207:
+                    case 208:
+                    case 209:
+                    case 210:
+                    case 211:
+                    case 212:
+                        break;
+                    }
+                if (message.state != null && message.hasOwnProperty("state"))
+                    if (!$util.isInteger(message.state))
+                        return "state: integer expected";
+                if (message.actions != null && message.hasOwnProperty("actions"))
+                    if (!$util.isInteger(message.actions) && !(message.actions && $util.isInteger(message.actions.low) && $util.isInteger(message.actions.high)))
+                        return "actions: integer|Long expected";
+                if (message.attributes != null && message.hasOwnProperty("attributes")) {
+                    if (!Array.isArray(message.attributes))
+                        return "attributes: array expected";
+                    for (let i = 0; i < message.attributes.length; ++i) {
+                        let error = $root.optimization_guide.proto.AXAttribute.verify(message.attributes[i]);
+                        if (error)
+                            return "attributes." + error;
+                    }
+                }
+                if (message.childIds != null && message.hasOwnProperty("childIds")) {
+                    if (!Array.isArray(message.childIds))
+                        return "childIds: array expected";
+                    for (let i = 0; i < message.childIds.length; ++i)
+                        if (!$util.isInteger(message.childIds[i]))
+                            return "childIds: integer[] expected";
+                }
+                if (message.relativeBounds != null && message.hasOwnProperty("relativeBounds")) {
+                    let error = $root.optimization_guide.proto.AXRelativeBounds.verify(message.relativeBounds);
+                    if (error)
+                        return "relativeBounds." + error;
+                }
+                return null;
+            };
+
+            /**
+             * Creates a AXNodeData message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.AXNodeData
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.AXNodeData} AXNodeData
+             */
+            AXNodeData.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.AXNodeData)
+                    return object;
+                let message = new $root.optimization_guide.proto.AXNodeData();
+                if (object.id != null)
+                    message.id = object.id >>> 0;
+                switch (object.role) {
+                default:
+                    if (typeof object.role === "number") {
+                        message.role = object.role;
+                        break;
+                    }
+                    break;
+                case "AX_ROLE_NONE":
+                case 0:
+                    message.role = 0;
+                    break;
+                case "AX_ROLE_ABBR":
+                case 1:
+                    message.role = 1;
+                    break;
+                case "AX_ROLE_ALERT":
+                case 2:
+                    message.role = 2;
+                    break;
+                case "AX_ROLE_ALERTDIALOG":
+                case 3:
+                    message.role = 3;
+                    break;
+                case "AX_ROLE_APPLICATION":
+                case 4:
+                    message.role = 4;
+                    break;
+                case "AX_ROLE_ARTICLE":
+                case 5:
+                    message.role = 5;
+                    break;
+                case "AX_ROLE_AUDIO":
+                case 6:
+                    message.role = 6;
+                    break;
+                case "AX_ROLE_BANNER":
+                case 7:
+                    message.role = 7;
+                    break;
+                case "AX_ROLE_BLOCKQUOTE":
+                case 8:
+                    message.role = 8;
+                    break;
+                case "AX_ROLE_BUTTON":
+                case 9:
+                    message.role = 9;
+                    break;
+                case "AX_ROLE_CANVAS":
+                case 10:
+                    message.role = 10;
+                    break;
+                case "AX_ROLE_CAPTION":
+                case 11:
+                    message.role = 11;
+                    break;
+                case "AX_ROLE_CARET":
+                case 12:
+                    message.role = 12;
+                    break;
+                case "AX_ROLE_CELL":
+                case 13:
+                    message.role = 13;
+                    break;
+                case "AX_ROLE_CHECKBOX":
+                case 14:
+                    message.role = 14;
+                    break;
+                case "AX_ROLE_CLIENT":
+                case 15:
+                    message.role = 15;
+                    break;
+                case "AX_ROLE_CODE":
+                case 16:
+                    message.role = 16;
+                    break;
+                case "AX_ROLE_COLORWELL":
+                case 17:
+                    message.role = 17;
+                    break;
+                case "AX_ROLE_COLUMN":
+                case 18:
+                    message.role = 18;
+                    break;
+                case "AX_ROLE_COLUMNHEADER":
+                case 19:
+                    message.role = 19;
+                    break;
+                case "AX_ROLE_COMBOBOXGROUPING":
+                case 20:
+                    message.role = 20;
+                    break;
+                case "AX_ROLE_COMBOBOXMENUBUTTON":
+                case 21:
+                    message.role = 21;
+                    break;
+                case "AX_ROLE_COMPLEMENTARY":
+                case 22:
+                    message.role = 22;
+                    break;
+                case "AX_ROLE_COMMENT":
+                case 23:
+                    message.role = 23;
+                    break;
+                case "AX_ROLE_CONTENTDELETION":
+                case 24:
+                    message.role = 24;
+                    break;
+                case "AX_ROLE_CONTENTINSERTION":
+                case 25:
+                    message.role = 25;
+                    break;
+                case "AX_ROLE_CONTENTINFO":
+                case 26:
+                    message.role = 26;
+                    break;
+                case "AX_ROLE_DATE":
+                case 27:
+                    message.role = 27;
+                    break;
+                case "AX_ROLE_DATETIME":
+                case 28:
+                    message.role = 28;
+                    break;
+                case "AX_ROLE_DEFINITION":
+                case 29:
+                    message.role = 29;
+                    break;
+                case "AX_ROLE_DESCRIPTIONLIST":
+                case 30:
+                    message.role = 30;
+                    break;
+                case "AX_ROLE_DESCRIPTIONLISTDETAILDEPRECATED":
+                case 31:
+                    message.role = 31;
+                    break;
+                case "AX_ROLE_DESCRIPTIONLISTTERMDEPRECATED":
+                case 32:
+                    message.role = 32;
+                    break;
+                case "AX_ROLE_DESKTOP":
+                case 33:
+                    message.role = 33;
+                    break;
+                case "AX_ROLE_DETAILS":
+                case 34:
+                    message.role = 34;
+                    break;
+                case "AX_ROLE_DIALOG":
+                case 35:
+                    message.role = 35;
+                    break;
+                case "AX_ROLE_DIRECTORYDEPRECATED":
+                case 36:
+                    message.role = 36;
+                    break;
+                case "AX_ROLE_DISCLOSURETRIANGLE":
+                case 37:
+                    message.role = 37;
+                    break;
+                case "AX_ROLE_DOCABSTRACT":
+                case 38:
+                    message.role = 38;
+                    break;
+                case "AX_ROLE_DOCACKNOWLEDGMENTS":
+                case 39:
+                    message.role = 39;
+                    break;
+                case "AX_ROLE_DOCAFTERWORD":
+                case 40:
+                    message.role = 40;
+                    break;
+                case "AX_ROLE_DOCAPPENDIX":
+                case 41:
+                    message.role = 41;
+                    break;
+                case "AX_ROLE_DOCBACKLINK":
+                case 42:
+                    message.role = 42;
+                    break;
+                case "AX_ROLE_DOCBIBLIOENTRY":
+                case 43:
+                    message.role = 43;
+                    break;
+                case "AX_ROLE_DOCBIBLIOGRAPHY":
+                case 44:
+                    message.role = 44;
+                    break;
+                case "AX_ROLE_DOCBIBLIOREF":
+                case 45:
+                    message.role = 45;
+                    break;
+                case "AX_ROLE_DOCCHAPTER":
+                case 46:
+                    message.role = 46;
+                    break;
+                case "AX_ROLE_DOCCOLOPHON":
+                case 47:
+                    message.role = 47;
+                    break;
+                case "AX_ROLE_DOCCONCLUSION":
+                case 48:
+                    message.role = 48;
+                    break;
+                case "AX_ROLE_DOCCOVER":
+                case 49:
+                    message.role = 49;
+                    break;
+                case "AX_ROLE_DOCCREDIT":
+                case 50:
+                    message.role = 50;
+                    break;
+                case "AX_ROLE_DOCCREDITS":
+                case 51:
+                    message.role = 51;
+                    break;
+                case "AX_ROLE_DOCDEDICATION":
+                case 52:
+                    message.role = 52;
+                    break;
+                case "AX_ROLE_DOCENDNOTE":
+                case 53:
+                    message.role = 53;
+                    break;
+                case "AX_ROLE_DOCENDNOTES":
+                case 54:
+                    message.role = 54;
+                    break;
+                case "AX_ROLE_DOCEPIGRAPH":
+                case 55:
+                    message.role = 55;
+                    break;
+                case "AX_ROLE_DOCEPILOGUE":
+                case 56:
+                    message.role = 56;
+                    break;
+                case "AX_ROLE_DOCERRATA":
+                case 57:
+                    message.role = 57;
+                    break;
+                case "AX_ROLE_DOCEXAMPLE":
+                case 58:
+                    message.role = 58;
+                    break;
+                case "AX_ROLE_DOCFOOTNOTE":
+                case 59:
+                    message.role = 59;
+                    break;
+                case "AX_ROLE_DOCFOREWORD":
+                case 60:
+                    message.role = 60;
+                    break;
+                case "AX_ROLE_DOCGLOSSARY":
+                case 61:
+                    message.role = 61;
+                    break;
+                case "AX_ROLE_DOCGLOSSREF":
+                case 62:
+                    message.role = 62;
+                    break;
+                case "AX_ROLE_DOCINDEX":
+                case 63:
+                    message.role = 63;
+                    break;
+                case "AX_ROLE_DOCINTRODUCTION":
+                case 64:
+                    message.role = 64;
+                    break;
+                case "AX_ROLE_DOCNOTEREF":
+                case 65:
+                    message.role = 65;
+                    break;
+                case "AX_ROLE_DOCNOTICE":
+                case 66:
+                    message.role = 66;
+                    break;
+                case "AX_ROLE_DOCPAGEBREAK":
+                case 67:
+                    message.role = 67;
+                    break;
+                case "AX_ROLE_DOCPAGEFOOTER":
+                case 68:
+                    message.role = 68;
+                    break;
+                case "AX_ROLE_DOCPAGEHEADER":
+                case 69:
+                    message.role = 69;
+                    break;
+                case "AX_ROLE_DOCPAGELIST":
+                case 70:
+                    message.role = 70;
+                    break;
+                case "AX_ROLE_DOCPART":
+                case 71:
+                    message.role = 71;
+                    break;
+                case "AX_ROLE_DOCPREFACE":
+                case 72:
+                    message.role = 72;
+                    break;
+                case "AX_ROLE_DOCPROLOGUE":
+                case 73:
+                    message.role = 73;
+                    break;
+                case "AX_ROLE_DOCPULLQUOTE":
+                case 74:
+                    message.role = 74;
+                    break;
+                case "AX_ROLE_DOCQNA":
+                case 75:
+                    message.role = 75;
+                    break;
+                case "AX_ROLE_DOCSUBTITLE":
+                case 76:
+                    message.role = 76;
+                    break;
+                case "AX_ROLE_DOCTIP":
+                case 77:
+                    message.role = 77;
+                    break;
+                case "AX_ROLE_DOCTOC":
+                case 78:
+                    message.role = 78;
+                    break;
+                case "AX_ROLE_DOCUMENT":
+                case 79:
+                    message.role = 79;
+                    break;
+                case "AX_ROLE_EMBEDDEDOBJECT":
+                case 80:
+                    message.role = 80;
+                    break;
+                case "AX_ROLE_EMPHASIS":
+                case 81:
+                    message.role = 81;
+                    break;
+                case "AX_ROLE_FEED":
+                case 82:
+                    message.role = 82;
+                    break;
+                case "AX_ROLE_FIGCAPTION":
+                case 83:
+                    message.role = 83;
+                    break;
+                case "AX_ROLE_FIGURE":
+                case 84:
+                    message.role = 84;
+                    break;
+                case "AX_ROLE_FOOTER":
+                case 85:
+                    message.role = 85;
+                    break;
+                case "AX_ROLE_SECTIONFOOTER":
+                case 86:
+                    message.role = 86;
+                    break;
+                case "AX_ROLE_FORM":
+                case 87:
+                    message.role = 87;
+                    break;
+                case "AX_ROLE_GENERICCONTAINER":
+                case 88:
+                    message.role = 88;
+                    break;
+                case "AX_ROLE_GRAPHICSDOCUMENT":
+                case 89:
+                    message.role = 89;
+                    break;
+                case "AX_ROLE_GRAPHICSOBJECT":
+                case 90:
+                    message.role = 90;
+                    break;
+                case "AX_ROLE_GRAPHICSSYMBOL":
+                case 91:
+                    message.role = 91;
+                    break;
+                case "AX_ROLE_GRID":
+                case 92:
+                    message.role = 92;
+                    break;
+                case "AX_ROLE_GROUP":
+                case 93:
+                    message.role = 93;
+                    break;
+                case "AX_ROLE_HEADER":
+                case 94:
+                    message.role = 94;
+                    break;
+                case "AX_ROLE_SECTIONHEADER":
+                case 95:
+                    message.role = 95;
+                    break;
+                case "AX_ROLE_HEADING":
+                case 96:
+                    message.role = 96;
+                    break;
+                case "AX_ROLE_IFRAME":
+                case 97:
+                    message.role = 97;
+                    break;
+                case "AX_ROLE_IFRAMEPRESENTATIONAL":
+                case 98:
+                    message.role = 98;
+                    break;
+                case "AX_ROLE_IMAGE":
+                case 99:
+                    message.role = 99;
+                    break;
+                case "AX_ROLE_IMECANDIDATE":
+                case 100:
+                    message.role = 100;
+                    break;
+                case "AX_ROLE_INLINETEXTBOX":
+                case 101:
+                    message.role = 101;
+                    break;
+                case "AX_ROLE_INPUTTIME":
+                case 102:
+                    message.role = 102;
+                    break;
+                case "AX_ROLE_KEYBOARD":
+                case 103:
+                    message.role = 103;
+                    break;
+                case "AX_ROLE_LABELTEXT":
+                case 104:
+                    message.role = 104;
+                    break;
+                case "AX_ROLE_LAYOUTTABLE":
+                case 105:
+                    message.role = 105;
+                    break;
+                case "AX_ROLE_LAYOUTTABLECELL":
+                case 106:
+                    message.role = 106;
+                    break;
+                case "AX_ROLE_LAYOUTTABLEROW":
+                case 107:
+                    message.role = 107;
+                    break;
+                case "AX_ROLE_LEGEND":
+                case 108:
+                    message.role = 108;
+                    break;
+                case "AX_ROLE_LINEBREAK":
+                case 109:
+                    message.role = 109;
+                    break;
+                case "AX_ROLE_LINK":
+                case 110:
+                    message.role = 110;
+                    break;
+                case "AX_ROLE_LIST":
+                case 111:
+                    message.role = 111;
+                    break;
+                case "AX_ROLE_LISTBOX":
+                case 112:
+                    message.role = 112;
+                    break;
+                case "AX_ROLE_LISTBOXOPTION":
+                case 113:
+                    message.role = 113;
+                    break;
+                case "AX_ROLE_LISTGRID":
+                case 114:
+                    message.role = 114;
+                    break;
+                case "AX_ROLE_LISTITEM":
+                case 115:
+                    message.role = 115;
+                    break;
+                case "AX_ROLE_LISTMARKER":
+                case 116:
+                    message.role = 116;
+                    break;
+                case "AX_ROLE_LOG":
+                case 117:
+                    message.role = 117;
+                    break;
+                case "AX_ROLE_MAIN":
+                case 118:
+                    message.role = 118;
+                    break;
+                case "AX_ROLE_MARK":
+                case 119:
+                    message.role = 119;
+                    break;
+                case "AX_ROLE_MARQUEE":
+                case 120:
+                    message.role = 120;
+                    break;
+                case "AX_ROLE_MATH":
+                case 121:
+                    message.role = 121;
+                    break;
+                case "AX_ROLE_MENU":
+                case 122:
+                    message.role = 122;
+                    break;
+                case "AX_ROLE_MENUBAR":
+                case 123:
+                    message.role = 123;
+                    break;
+                case "AX_ROLE_MENUITEM":
+                case 124:
+                    message.role = 124;
+                    break;
+                case "AX_ROLE_MENUITEMCHECKBOX":
+                case 125:
+                    message.role = 125;
+                    break;
+                case "AX_ROLE_MENUITEMRADIO":
+                case 126:
+                    message.role = 126;
+                    break;
+                case "AX_ROLE_MENUITEMSEPARATOR":
+                case 213:
+                    message.role = 213;
+                    break;
+                case "AX_ROLE_MENULISTOPTION":
+                case 127:
+                    message.role = 127;
+                    break;
+                case "AX_ROLE_MENULISTPOPUP":
+                case 128:
+                    message.role = 128;
+                    break;
+                case "AX_ROLE_METER":
+                case 129:
+                    message.role = 129;
+                    break;
+                case "AX_ROLE_NAVIGATION":
+                case 130:
+                    message.role = 130;
+                    break;
+                case "AX_ROLE_NOTE":
+                case 131:
+                    message.role = 131;
+                    break;
+                case "AX_ROLE_PANE":
+                case 132:
+                    message.role = 132;
+                    break;
+                case "AX_ROLE_PARAGRAPH":
+                case 133:
+                    message.role = 133;
+                    break;
+                case "AX_ROLE_PDFACTIONABLEHIGHLIGHT":
+                case 134:
+                    message.role = 134;
+                    break;
+                case "AX_ROLE_PDFROOT":
+                case 135:
+                    message.role = 135;
+                    break;
+                case "AX_ROLE_PLUGINOBJECT":
+                case 136:
+                    message.role = 136;
+                    break;
+                case "AX_ROLE_POPUPBUTTON":
+                case 137:
+                    message.role = 137;
+                    break;
+                case "AX_ROLE_PORTALDEPRECATED":
+                case 138:
+                    message.role = 138;
+                    break;
+                case "AX_ROLE_PREDEPRECATED":
+                case 139:
+                    message.role = 139;
+                    break;
+                case "AX_ROLE_PROGRESSINDICATOR":
+                case 140:
+                    message.role = 140;
+                    break;
+                case "AX_ROLE_RADIOBUTTON":
+                case 141:
+                    message.role = 141;
+                    break;
+                case "AX_ROLE_RADIOGROUP":
+                case 142:
+                    message.role = 142;
+                    break;
+                case "AX_ROLE_REGION":
+                case 143:
+                    message.role = 143;
+                    break;
+                case "AX_ROLE_ROOTWEBAREA":
+                case 144:
+                    message.role = 144;
+                    break;
+                case "AX_ROLE_ROW":
+                case 145:
+                    message.role = 145;
+                    break;
+                case "AX_ROLE_ROWGROUP":
+                case 146:
+                    message.role = 146;
+                    break;
+                case "AX_ROLE_ROWHEADER":
+                case 147:
+                    message.role = 147;
+                    break;
+                case "AX_ROLE_RUBY":
+                case 148:
+                    message.role = 148;
+                    break;
+                case "AX_ROLE_RUBYANNOTATION":
+                case 149:
+                    message.role = 149;
+                    break;
+                case "AX_ROLE_SCROLLBAR":
+                case 150:
+                    message.role = 150;
+                    break;
+                case "AX_ROLE_SCROLLVIEW":
+                case 151:
+                    message.role = 151;
+                    break;
+                case "AX_ROLE_SEARCH":
+                case 152:
+                    message.role = 152;
+                    break;
+                case "AX_ROLE_SEARCHBOX":
+                case 153:
+                    message.role = 153;
+                    break;
+                case "AX_ROLE_SECTION":
+                case 154:
+                    message.role = 154;
+                    break;
+                case "AX_ROLE_SLIDER":
+                case 155:
+                    message.role = 155;
+                    break;
+                case "AX_ROLE_SPINBUTTON":
+                case 156:
+                    message.role = 156;
+                    break;
+                case "AX_ROLE_SPLITTER":
+                case 157:
+                    message.role = 157;
+                    break;
+                case "AX_ROLE_STATICTEXT":
+                case 158:
+                    message.role = 158;
+                    break;
+                case "AX_ROLE_STATUS":
+                case 159:
+                    message.role = 159;
+                    break;
+                case "AX_ROLE_STRONG":
+                case 160:
+                    message.role = 160;
+                    break;
+                case "AX_ROLE_SUGGESTION":
+                case 161:
+                    message.role = 161;
+                    break;
+                case "AX_ROLE_SVGROOT":
+                case 162:
+                    message.role = 162;
+                    break;
+                case "AX_ROLE_SWITCH":
+                case 163:
+                    message.role = 163;
+                    break;
+                case "AX_ROLE_TAB":
+                case 164:
+                    message.role = 164;
+                    break;
+                case "AX_ROLE_TABLIST":
+                case 165:
+                    message.role = 165;
+                    break;
+                case "AX_ROLE_TABPANEL":
+                case 166:
+                    message.role = 166;
+                    break;
+                case "AX_ROLE_TABLE":
+                case 167:
+                    message.role = 167;
+                    break;
+                case "AX_ROLE_TABLEHEADERCONTAINER":
+                case 168:
+                    message.role = 168;
+                    break;
+                case "AX_ROLE_TERM":
+                case 169:
+                    message.role = 169;
+                    break;
+                case "AX_ROLE_TEXTFIELD":
+                case 170:
+                    message.role = 170;
+                    break;
+                case "AX_ROLE_TEXTFIELDWITHCOMBOBOX":
+                case 171:
+                    message.role = 171;
+                    break;
+                case "AX_ROLE_TIME":
+                case 172:
+                    message.role = 172;
+                    break;
+                case "AX_ROLE_TIMER":
+                case 173:
+                    message.role = 173;
+                    break;
+                case "AX_ROLE_TITLEBAR":
+                case 174:
+                    message.role = 174;
+                    break;
+                case "AX_ROLE_TOGGLEBUTTON":
+                case 175:
+                    message.role = 175;
+                    break;
+                case "AX_ROLE_TOOLBAR":
+                case 176:
+                    message.role = 176;
+                    break;
+                case "AX_ROLE_TOOLTIP":
+                case 177:
+                    message.role = 177;
+                    break;
+                case "AX_ROLE_TREE":
+                case 178:
+                    message.role = 178;
+                    break;
+                case "AX_ROLE_TREEGRID":
+                case 179:
+                    message.role = 179;
+                    break;
+                case "AX_ROLE_TREEITEM":
+                case 180:
+                    message.role = 180;
+                    break;
+                case "AX_ROLE_UNKNOWN":
+                case 181:
+                    message.role = 181;
+                    break;
+                case "AX_ROLE_VIDEO":
+                case 182:
+                    message.role = 182;
+                    break;
+                case "AX_ROLE_WEBVIEW":
+                case 183:
+                    message.role = 183;
+                    break;
+                case "AX_ROLE_WINDOW":
+                case 184:
+                    message.role = 184;
+                    break;
+                case "AX_ROLE_SUBSCRIPT":
+                case 185:
+                    message.role = 185;
+                    break;
+                case "AX_ROLE_SUPERSCRIPT":
+                case 186:
+                    message.role = 186;
+                    break;
+                case "AX_ROLE_MATHMLMATH":
+                case 187:
+                    message.role = 187;
+                    break;
+                case "AX_ROLE_MATHMLFRACTION":
+                case 188:
+                    message.role = 188;
+                    break;
+                case "AX_ROLE_MATHMLIDENTIFIER":
+                case 189:
+                    message.role = 189;
+                    break;
+                case "AX_ROLE_MATHMLMULTISCRIPTS":
+                case 190:
+                    message.role = 190;
+                    break;
+                case "AX_ROLE_MATHMLNONESCRIPT":
+                case 191:
+                    message.role = 191;
+                    break;
+                case "AX_ROLE_MATHMLNUMBER":
+                case 192:
+                    message.role = 192;
+                    break;
+                case "AX_ROLE_MATHMLOPERATOR":
+                case 193:
+                    message.role = 193;
+                    break;
+                case "AX_ROLE_MATHMLOVER":
+                case 194:
+                    message.role = 194;
+                    break;
+                case "AX_ROLE_MATHMLPRESCRIPTDELIMITER":
+                case 195:
+                    message.role = 195;
+                    break;
+                case "AX_ROLE_MATHMLROOT":
+                case 196:
+                    message.role = 196;
+                    break;
+                case "AX_ROLE_MATHMLROW":
+                case 197:
+                    message.role = 197;
+                    break;
+                case "AX_ROLE_MATHMLSQUAREROOT":
+                case 198:
+                    message.role = 198;
+                    break;
+                case "AX_ROLE_MATHMLSTRINGLITERAL":
+                case 199:
+                    message.role = 199;
+                    break;
+                case "AX_ROLE_MATHMLSUB":
+                case 200:
+                    message.role = 200;
+                    break;
+                case "AX_ROLE_MATHMLSUBSUP":
+                case 201:
+                    message.role = 201;
+                    break;
+                case "AX_ROLE_MATHMLSUP":
+                case 202:
+                    message.role = 202;
+                    break;
+                case "AX_ROLE_MATHMLTABLE":
+                case 203:
+                    message.role = 203;
+                    break;
+                case "AX_ROLE_MATHMLTABLECELL":
+                case 204:
+                    message.role = 204;
+                    break;
+                case "AX_ROLE_MATHMLTABLEROW":
+                case 205:
+                    message.role = 205;
+                    break;
+                case "AX_ROLE_MATHMLTEXT":
+                case 206:
+                    message.role = 206;
+                    break;
+                case "AX_ROLE_MATHMLUNDER":
+                case 207:
+                    message.role = 207;
+                    break;
+                case "AX_ROLE_MATHMLUNDEROVER":
+                case 208:
+                    message.role = 208;
+                    break;
+                case "AX_ROLE_COMBOBOXSELECT":
+                case 209:
+                    message.role = 209;
+                    break;
+                case "AX_ROLE_DISCLOSURETRIANGLEGROUPED":
+                case 210:
+                    message.role = 210;
+                    break;
+                case "AX_ROLE_SECTIONWITHOUTNAME":
+                case 211:
+                    message.role = 211;
+                    break;
+                case "AX_ROLE_GRIDCELL":
+                case 212:
+                    message.role = 212;
+                    break;
+                }
+                if (object.state != null)
+                    message.state = object.state >>> 0;
+                if (object.actions != null)
+                    if ($util.Long)
+                        (message.actions = $util.Long.fromValue(object.actions)).unsigned = true;
+                    else if (typeof object.actions === "string")
+                        message.actions = parseInt(object.actions, 10);
+                    else if (typeof object.actions === "number")
+                        message.actions = object.actions;
+                    else if (typeof object.actions === "object")
+                        message.actions = new $util.LongBits(object.actions.low >>> 0, object.actions.high >>> 0).toNumber(true);
+                if (object.attributes) {
+                    if (!Array.isArray(object.attributes))
+                        throw TypeError(".optimization_guide.proto.AXNodeData.attributes: array expected");
+                    message.attributes = [];
+                    for (let i = 0; i < object.attributes.length; ++i) {
+                        if (typeof object.attributes[i] !== "object")
+                            throw TypeError(".optimization_guide.proto.AXNodeData.attributes: object expected");
+                        message.attributes[i] = $root.optimization_guide.proto.AXAttribute.fromObject(object.attributes[i]);
+                    }
+                }
+                if (object.childIds) {
+                    if (!Array.isArray(object.childIds))
+                        throw TypeError(".optimization_guide.proto.AXNodeData.childIds: array expected");
+                    message.childIds = [];
+                    for (let i = 0; i < object.childIds.length; ++i)
+                        message.childIds[i] = object.childIds[i] | 0;
+                }
+                if (object.relativeBounds != null) {
+                    if (typeof object.relativeBounds !== "object")
+                        throw TypeError(".optimization_guide.proto.AXNodeData.relativeBounds: object expected");
+                    message.relativeBounds = $root.optimization_guide.proto.AXRelativeBounds.fromObject(object.relativeBounds);
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a AXNodeData message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.AXNodeData
+             * @static
+             * @param {optimization_guide.proto.AXNodeData} message AXNodeData
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            AXNodeData.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.arrays || options.defaults) {
+                    object.attributes = [];
+                    object.childIds = [];
+                }
+                if (options.defaults) {
+                    object.id = 0;
+                    object.role = options.enums === String ? "AX_ROLE_NONE" : 0;
+                    object.state = 0;
+                    if ($util.Long) {
+                        let long = new $util.Long(0, 0, true);
+                        object.actions = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.actions = options.longs === String ? "0" : 0;
+                    object.relativeBounds = null;
+                }
+                if (message.id != null && message.hasOwnProperty("id"))
+                    object.id = message.id;
+                if (message.role != null && message.hasOwnProperty("role"))
+                    object.role = options.enums === String ? $root.optimization_guide.proto.AXRole[message.role] === undefined ? message.role : $root.optimization_guide.proto.AXRole[message.role] : message.role;
+                if (message.state != null && message.hasOwnProperty("state"))
+                    object.state = message.state;
+                if (message.actions != null && message.hasOwnProperty("actions"))
+                    if (typeof message.actions === "number")
+                        object.actions = options.longs === String ? String(message.actions) : message.actions;
+                    else
+                        object.actions = options.longs === String ? $util.Long.prototype.toString.call(message.actions) : options.longs === Number ? new $util.LongBits(message.actions.low >>> 0, message.actions.high >>> 0).toNumber(true) : message.actions;
+                if (message.attributes && message.attributes.length) {
+                    object.attributes = [];
+                    for (let j = 0; j < message.attributes.length; ++j)
+                        object.attributes[j] = $root.optimization_guide.proto.AXAttribute.toObject(message.attributes[j], options);
+                }
+                if (message.childIds && message.childIds.length) {
+                    object.childIds = [];
+                    for (let j = 0; j < message.childIds.length; ++j)
+                        object.childIds[j] = message.childIds[j];
+                }
+                if (message.relativeBounds != null && message.hasOwnProperty("relativeBounds"))
+                    object.relativeBounds = $root.optimization_guide.proto.AXRelativeBounds.toObject(message.relativeBounds, options);
+                return object;
+            };
+
+            /**
+             * Converts this AXNodeData to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.AXNodeData
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            AXNodeData.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for AXNodeData
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.AXNodeData
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            AXNodeData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.AXNodeData";
             };
 
             return AXNodeData;
@@ -857,6 +3011,74 @@ export const optimization_guide = $root.optimization_guide = (() => {
             });
 
             /**
+             * Creates a new AXAttribute instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.AXAttribute
+             * @static
+             * @param {optimization_guide.proto.IAXAttribute=} [properties] Properties to set
+             * @returns {optimization_guide.proto.AXAttribute} AXAttribute instance
+             */
+            AXAttribute.create = function create(properties) {
+                return new AXAttribute(properties);
+            };
+
+            /**
+             * Encodes the specified AXAttribute message. Does not implicitly {@link optimization_guide.proto.AXAttribute.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.AXAttribute
+             * @static
+             * @param {optimization_guide.proto.IAXAttribute} message AXAttribute message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            AXAttribute.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.stringType != null && Object.hasOwnProperty.call(message, "stringType"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.stringType);
+                if (message.intType != null && Object.hasOwnProperty.call(message, "intType"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.intType);
+                if (message.floatType != null && Object.hasOwnProperty.call(message, "floatType"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.floatType);
+                if (message.boolType != null && Object.hasOwnProperty.call(message, "boolType"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.boolType);
+                if (message.intlistType != null && Object.hasOwnProperty.call(message, "intlistType"))
+                    writer.uint32(/* id 5, wireType 0 =*/40).int32(message.intlistType);
+                if (message.stringlistType != null && Object.hasOwnProperty.call(message, "stringlistType"))
+                    writer.uint32(/* id 6, wireType 0 =*/48).int32(message.stringlistType);
+                if (message.htmlAttributeName != null && Object.hasOwnProperty.call(message, "htmlAttributeName"))
+                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.htmlAttributeName);
+                if (message.stringValue != null && Object.hasOwnProperty.call(message, "stringValue"))
+                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.stringValue);
+                if (message.intValue != null && Object.hasOwnProperty.call(message, "intValue"))
+                    writer.uint32(/* id 9, wireType 0 =*/72).int32(message.intValue);
+                if (message.floatValue != null && Object.hasOwnProperty.call(message, "floatValue"))
+                    writer.uint32(/* id 10, wireType 5 =*/85).float(message.floatValue);
+                if (message.boolValue != null && Object.hasOwnProperty.call(message, "boolValue"))
+                    writer.uint32(/* id 11, wireType 0 =*/88).bool(message.boolValue);
+                if (message.intListValue != null && Object.hasOwnProperty.call(message, "intListValue"))
+                    $root.optimization_guide.proto.AXIntList.encode(message.intListValue, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                if (message.stringListValue != null && Object.hasOwnProperty.call(message, "stringListValue"))
+                    $root.optimization_guide.proto.AXStringList.encode(message.stringListValue, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                if (message.htmlAttributeValue != null && Object.hasOwnProperty.call(message, "htmlAttributeValue"))
+                    writer.uint32(/* id 14, wireType 2 =*/114).string(message.htmlAttributeValue);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified AXAttribute message, length delimited. Does not implicitly {@link optimization_guide.proto.AXAttribute.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.AXAttribute
+             * @static
+             * @param {optimization_guide.proto.IAXAttribute} message AXAttribute message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            AXAttribute.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a AXAttribute message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.AXAttribute
@@ -940,6 +3162,1267 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 return message;
             };
 
+            /**
+             * Decodes a AXAttribute message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.AXAttribute
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.AXAttribute} AXAttribute
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            AXAttribute.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a AXAttribute message.
+             * @function verify
+             * @memberof optimization_guide.proto.AXAttribute
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            AXAttribute.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                let properties = {};
+                if (message.stringType != null && message.hasOwnProperty("stringType")) {
+                    properties.attributeKey = 1;
+                    switch (message.stringType) {
+                    default:
+                        return "stringType: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                    case 10:
+                    case 11:
+                    case 12:
+                    case 13:
+                    case 14:
+                    case 15:
+                    case 16:
+                    case 17:
+                    case 18:
+                    case 19:
+                    case 20:
+                    case 21:
+                    case 22:
+                    case 23:
+                    case 24:
+                    case 25:
+                    case 26:
+                    case 27:
+                    case 28:
+                    case 29:
+                    case 30:
+                    case 31:
+                    case 32:
+                    case 33:
+                    case 34:
+                    case 35:
+                    case 36:
+                    case 37:
+                    case 38:
+                    case 39:
+                    case 40:
+                    case 41:
+                    case 42:
+                        break;
+                    }
+                }
+                if (message.intType != null && message.hasOwnProperty("intType")) {
+                    if (properties.attributeKey === 1)
+                        return "attributeKey: multiple values";
+                    properties.attributeKey = 1;
+                    switch (message.intType) {
+                    default:
+                        return "intType: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                    case 10:
+                    case 11:
+                    case 12:
+                    case 13:
+                    case 14:
+                    case 15:
+                    case 16:
+                    case 17:
+                    case 18:
+                    case 19:
+                    case 20:
+                    case 21:
+                    case 22:
+                    case 23:
+                    case 24:
+                    case 25:
+                    case 26:
+                    case 27:
+                    case 28:
+                    case 29:
+                    case 30:
+                    case 31:
+                    case 32:
+                    case 33:
+                    case 34:
+                    case 35:
+                    case 36:
+                    case 37:
+                    case 38:
+                    case 39:
+                    case 40:
+                    case 41:
+                    case 42:
+                    case 43:
+                    case 44:
+                    case 45:
+                    case 46:
+                    case 47:
+                    case 48:
+                    case 49:
+                    case 50:
+                    case 51:
+                    case 52:
+                    case 53:
+                    case 54:
+                    case 55:
+                    case 56:
+                    case 57:
+                    case 58:
+                    case 59:
+                    case 60:
+                    case 61:
+                    case 62:
+                    case 63:
+                    case 64:
+                    case 65:
+                    case 66:
+                    case 67:
+                    case 68:
+                    case 69:
+                        break;
+                    }
+                }
+                if (message.floatType != null && message.hasOwnProperty("floatType")) {
+                    if (properties.attributeKey === 1)
+                        return "attributeKey: multiple values";
+                    properties.attributeKey = 1;
+                    switch (message.floatType) {
+                    default:
+                        return "floatType: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                        break;
+                    }
+                }
+                if (message.boolType != null && message.hasOwnProperty("boolType")) {
+                    if (properties.attributeKey === 1)
+                        return "attributeKey: multiple values";
+                    properties.attributeKey = 1;
+                    switch (message.boolType) {
+                    default:
+                        return "boolType: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                    case 10:
+                    case 11:
+                    case 12:
+                    case 13:
+                    case 14:
+                    case 15:
+                    case 16:
+                    case 17:
+                    case 18:
+                    case 19:
+                    case 20:
+                    case 21:
+                    case 22:
+                    case 23:
+                    case 24:
+                    case 25:
+                        break;
+                    }
+                }
+                if (message.intlistType != null && message.hasOwnProperty("intlistType")) {
+                    if (properties.attributeKey === 1)
+                        return "attributeKey: multiple values";
+                    properties.attributeKey = 1;
+                    switch (message.intlistType) {
+                    default:
+                        return "intlistType: enum value expected";
+                    case 0:
+                    case 1:
+                    case 29:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                    case 10:
+                    case 11:
+                    case 12:
+                    case 13:
+                    case 14:
+                    case 15:
+                    case 16:
+                    case 17:
+                    case 18:
+                    case 19:
+                    case 20:
+                    case 21:
+                    case 22:
+                    case 23:
+                    case 24:
+                    case 25:
+                    case 26:
+                    case 27:
+                    case 28:
+                        break;
+                    }
+                }
+                if (message.stringlistType != null && message.hasOwnProperty("stringlistType")) {
+                    if (properties.attributeKey === 1)
+                        return "attributeKey: multiple values";
+                    properties.attributeKey = 1;
+                    switch (message.stringlistType) {
+                    default:
+                        return "stringlistType: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                        break;
+                    }
+                }
+                if (message.htmlAttributeName != null && message.hasOwnProperty("htmlAttributeName")) {
+                    if (properties.attributeKey === 1)
+                        return "attributeKey: multiple values";
+                    properties.attributeKey = 1;
+                    if (!$util.isString(message.htmlAttributeName))
+                        return "htmlAttributeName: string expected";
+                }
+                if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
+                    properties.attributeValue = 1;
+                    if (!$util.isString(message.stringValue))
+                        return "stringValue: string expected";
+                }
+                if (message.intValue != null && message.hasOwnProperty("intValue")) {
+                    if (properties.attributeValue === 1)
+                        return "attributeValue: multiple values";
+                    properties.attributeValue = 1;
+                    if (!$util.isInteger(message.intValue))
+                        return "intValue: integer expected";
+                }
+                if (message.floatValue != null && message.hasOwnProperty("floatValue")) {
+                    if (properties.attributeValue === 1)
+                        return "attributeValue: multiple values";
+                    properties.attributeValue = 1;
+                    if (typeof message.floatValue !== "number")
+                        return "floatValue: number expected";
+                }
+                if (message.boolValue != null && message.hasOwnProperty("boolValue")) {
+                    if (properties.attributeValue === 1)
+                        return "attributeValue: multiple values";
+                    properties.attributeValue = 1;
+                    if (typeof message.boolValue !== "boolean")
+                        return "boolValue: boolean expected";
+                }
+                if (message.intListValue != null && message.hasOwnProperty("intListValue")) {
+                    if (properties.attributeValue === 1)
+                        return "attributeValue: multiple values";
+                    properties.attributeValue = 1;
+                    {
+                        let error = $root.optimization_guide.proto.AXIntList.verify(message.intListValue);
+                        if (error)
+                            return "intListValue." + error;
+                    }
+                }
+                if (message.stringListValue != null && message.hasOwnProperty("stringListValue")) {
+                    if (properties.attributeValue === 1)
+                        return "attributeValue: multiple values";
+                    properties.attributeValue = 1;
+                    {
+                        let error = $root.optimization_guide.proto.AXStringList.verify(message.stringListValue);
+                        if (error)
+                            return "stringListValue." + error;
+                    }
+                }
+                if (message.htmlAttributeValue != null && message.hasOwnProperty("htmlAttributeValue")) {
+                    if (properties.attributeValue === 1)
+                        return "attributeValue: multiple values";
+                    properties.attributeValue = 1;
+                    if (!$util.isString(message.htmlAttributeValue))
+                        return "htmlAttributeValue: string expected";
+                }
+                return null;
+            };
+
+            /**
+             * Creates a AXAttribute message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.AXAttribute
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.AXAttribute} AXAttribute
+             */
+            AXAttribute.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.AXAttribute)
+                    return object;
+                let message = new $root.optimization_guide.proto.AXAttribute();
+                switch (object.stringType) {
+                default:
+                    if (typeof object.stringType === "number") {
+                        message.stringType = object.stringType;
+                        break;
+                    }
+                    break;
+                case "AX_SA_NONE":
+                case 0:
+                    message.stringType = 0;
+                    break;
+                case "AX_SA_ACCESSKEY":
+                case 1:
+                    message.stringType = 1;
+                    break;
+                case "AX_SA_APPID":
+                case 2:
+                    message.stringType = 2;
+                    break;
+                case "AX_SA_ARIAINVALIDVALUEDEPRECATED":
+                case 3:
+                    message.stringType = 3;
+                    break;
+                case "AX_SA_AUTOCOMPLETE":
+                case 4:
+                    message.stringType = 4;
+                    break;
+                case "AX_SA_CHECKEDSTATEDESCRIPTION":
+                case 5:
+                    message.stringType = 5;
+                    break;
+                case "AX_SA_CHILDTREEID":
+                case 6:
+                    message.stringType = 6;
+                    break;
+                case "AX_SA_CHILDTREENODEAPPID":
+                case 7:
+                    message.stringType = 7;
+                    break;
+                case "AX_SA_CLASSNAME":
+                case 8:
+                    message.stringType = 8;
+                    break;
+                case "AX_SA_CONTAINERLIVERELEVANT":
+                case 9:
+                    message.stringType = 9;
+                    break;
+                case "AX_SA_CONTAINERLIVESTATUS":
+                case 10:
+                    message.stringType = 10;
+                    break;
+                case "AX_SA_DESCRIPTION":
+                case 11:
+                    message.stringType = 11;
+                    break;
+                case "AX_SA_DISPLAY":
+                case 12:
+                    message.stringType = 12;
+                    break;
+                case "AX_SA_FONTFAMILY":
+                case 13:
+                    message.stringType = 13;
+                    break;
+                case "AX_SA_HTMLTAG":
+                case 14:
+                    message.stringType = 14;
+                    break;
+                case "AX_SA_IMAGEANNOTATION":
+                case 15:
+                    message.stringType = 15;
+                    break;
+                case "AX_SA_IMAGEDATAURL":
+                case 16:
+                    message.stringType = 16;
+                    break;
+                case "AX_SA_MATHCONTENT":
+                case 17:
+                    message.stringType = 17;
+                    break;
+                case "AX_SA_INPUTTYPE":
+                case 18:
+                    message.stringType = 18;
+                    break;
+                case "AX_SA_KEYSHORTCUTS":
+                case 19:
+                    message.stringType = 19;
+                    break;
+                case "AX_SA_LANGUAGE":
+                case 20:
+                    message.stringType = 20;
+                    break;
+                case "AX_SA_NAME":
+                case 21:
+                    message.stringType = 21;
+                    break;
+                case "AX_SA_LIVERELEVANT":
+                case 22:
+                    message.stringType = 22;
+                    break;
+                case "AX_SA_LIVESTATUS":
+                case 23:
+                    message.stringType = 23;
+                    break;
+                case "AX_SA_PLACEHOLDER":
+                case 24:
+                    message.stringType = 24;
+                    break;
+                case "AX_SA_ROLE":
+                case 25:
+                    message.stringType = 25;
+                    break;
+                case "AX_SA_ROLEDESCRIPTION":
+                case 26:
+                    message.stringType = 26;
+                    break;
+                case "AX_SA_TOOLTIP":
+                case 27:
+                    message.stringType = 27;
+                    break;
+                case "AX_SA_URL":
+                case 28:
+                    message.stringType = 28;
+                    break;
+                case "AX_SA_VALUE":
+                case 29:
+                    message.stringType = 29;
+                    break;
+                case "AX_SA_VIRTUALCONTENT":
+                case 30:
+                    message.stringType = 30;
+                    break;
+                case "AX_SA_DODEFAULTLABEL":
+                case 31:
+                    message.stringType = 31;
+                    break;
+                case "AX_SA_LONGCLICKLABEL":
+                case 32:
+                    message.stringType = 32;
+                    break;
+                case "AX_SA_ARIABRAILLELABEL":
+                case 33:
+                    message.stringType = 33;
+                    break;
+                case "AX_SA_ARIABRAILLEROLEDESCRIPTION":
+                case 34:
+                    message.stringType = 34;
+                    break;
+                case "AX_SA_LINKTARGET":
+                case 35:
+                    message.stringType = 35;
+                    break;
+                case "AX_SA_ARIANOTIFICATIONANNOUNCEMENTDEPRECATED":
+                case 36:
+                    message.stringType = 36;
+                    break;
+                case "AX_SA_ARIANOTIFICATIONIDDEPRECATED":
+                case 37:
+                    message.stringType = 37;
+                    break;
+                case "AX_SA_HTMLID":
+                case 38:
+                    message.stringType = 38;
+                    break;
+                case "AX_SA_ARIACELLCOLUMNINDEXTEXT":
+                case 39:
+                    message.stringType = 39;
+                    break;
+                case "AX_SA_ARIACELLROWINDEXTEXT":
+                case 40:
+                    message.stringType = 40;
+                    break;
+                case "AX_SA_DATETIME":
+                case 41:
+                    message.stringType = 41;
+                    break;
+                case "AX_SA_HTMLINPUTNAME":
+                case 42:
+                    message.stringType = 42;
+                    break;
+                }
+                switch (object.intType) {
+                default:
+                    if (typeof object.intType === "number") {
+                        message.intType = object.intType;
+                        break;
+                    }
+                    break;
+                case "AX_IA_NONE":
+                case 0:
+                    message.intType = 0;
+                    break;
+                case "AX_IA_DEFAULTACTIONVERB":
+                case 1:
+                    message.intType = 1;
+                    break;
+                case "AX_IA_SCROLLX":
+                case 2:
+                    message.intType = 2;
+                    break;
+                case "AX_IA_SCROLLXMIN":
+                case 3:
+                    message.intType = 3;
+                    break;
+                case "AX_IA_SCROLLXMAX":
+                case 4:
+                    message.intType = 4;
+                    break;
+                case "AX_IA_SCROLLY":
+                case 5:
+                    message.intType = 5;
+                    break;
+                case "AX_IA_SCROLLYMIN":
+                case 6:
+                    message.intType = 6;
+                    break;
+                case "AX_IA_SCROLLYMAX":
+                case 7:
+                    message.intType = 7;
+                    break;
+                case "AX_IA_TEXTSELSTART":
+                case 8:
+                    message.intType = 8;
+                    break;
+                case "AX_IA_TEXTSELEND":
+                case 9:
+                    message.intType = 9;
+                    break;
+                case "AX_IA_ARIACOLUMNCOUNT":
+                case 10:
+                    message.intType = 10;
+                    break;
+                case "AX_IA_ARIACELLCOLUMNINDEX":
+                case 11:
+                    message.intType = 11;
+                    break;
+                case "AX_IA_ARIACELLCOLUMNSPAN":
+                case 12:
+                    message.intType = 12;
+                    break;
+                case "AX_IA_ARIAROWCOUNT":
+                case 13:
+                    message.intType = 13;
+                    break;
+                case "AX_IA_ARIACELLROWINDEX":
+                case 14:
+                    message.intType = 14;
+                    break;
+                case "AX_IA_ARIACELLROWSPAN":
+                case 15:
+                    message.intType = 15;
+                    break;
+                case "AX_IA_TABLEROWCOUNT":
+                case 16:
+                    message.intType = 16;
+                    break;
+                case "AX_IA_TABLECOLUMNCOUNT":
+                case 17:
+                    message.intType = 17;
+                    break;
+                case "AX_IA_TABLEHEADERID":
+                case 18:
+                    message.intType = 18;
+                    break;
+                case "AX_IA_TABLEROWINDEX":
+                case 19:
+                    message.intType = 19;
+                    break;
+                case "AX_IA_TABLEROWHEADERID":
+                case 20:
+                    message.intType = 20;
+                    break;
+                case "AX_IA_TABLECOLUMNINDEX":
+                case 21:
+                    message.intType = 21;
+                    break;
+                case "AX_IA_TABLECOLUMNHEADERID":
+                case 22:
+                    message.intType = 22;
+                    break;
+                case "AX_IA_TABLECELLCOLUMNINDEX":
+                case 23:
+                    message.intType = 23;
+                    break;
+                case "AX_IA_TABLECELLCOLUMNSPAN":
+                case 24:
+                    message.intType = 24;
+                    break;
+                case "AX_IA_TABLECELLROWINDEX":
+                case 25:
+                    message.intType = 25;
+                    break;
+                case "AX_IA_TABLECELLROWSPAN":
+                case 26:
+                    message.intType = 26;
+                    break;
+                case "AX_IA_SORTDIRECTION":
+                case 27:
+                    message.intType = 27;
+                    break;
+                case "AX_IA_HIERARCHICALLEVEL":
+                case 28:
+                    message.intType = 28;
+                    break;
+                case "AX_IA_NAMEFROM":
+                case 29:
+                    message.intType = 29;
+                    break;
+                case "AX_IA_DESCRIPTIONFROM":
+                case 30:
+                    message.intType = 30;
+                    break;
+                case "AX_IA_ACTIVEDESCENDANTID":
+                case 31:
+                    message.intType = 31;
+                    break;
+                case "AX_IA_ERRORMESSAGEIDDEPRECATED":
+                case 32:
+                    message.intType = 32;
+                    break;
+                case "AX_IA_INPAGELINKTARGETID":
+                case 33:
+                    message.intType = 33;
+                    break;
+                case "AX_IA_MEMBEROFID":
+                case 34:
+                    message.intType = 34;
+                    break;
+                case "AX_IA_NEXTONLINEID":
+                case 35:
+                    message.intType = 35;
+                    break;
+                case "AX_IA_POPUPFORID":
+                case 36:
+                    message.intType = 36;
+                    break;
+                case "AX_IA_PREVIOUSONLINEID":
+                case 37:
+                    message.intType = 37;
+                    break;
+                case "AX_IA_RESTRICTION":
+                case 38:
+                    message.intType = 38;
+                    break;
+                case "AX_IA_SETSIZE":
+                case 39:
+                    message.intType = 39;
+                    break;
+                case "AX_IA_POSINSET":
+                case 40:
+                    message.intType = 40;
+                    break;
+                case "AX_IA_COLORVALUE":
+                case 41:
+                    message.intType = 41;
+                    break;
+                case "AX_IA_ARIACURRENTSTATE":
+                case 42:
+                    message.intType = 42;
+                    break;
+                case "AX_IA_BACKGROUNDCOLOR":
+                case 43:
+                    message.intType = 43;
+                    break;
+                case "AX_IA_COLOR":
+                case 44:
+                    message.intType = 44;
+                    break;
+                case "AX_IA_HASPOPUP":
+                case 45:
+                    message.intType = 45;
+                    break;
+                case "AX_IA_IMAGEANNOTATIONSTATUS":
+                case 46:
+                    message.intType = 46;
+                    break;
+                case "AX_IA_INVALIDSTATE":
+                case 47:
+                    message.intType = 47;
+                    break;
+                case "AX_IA_CHECKEDSTATE":
+                case 48:
+                    message.intType = 48;
+                    break;
+                case "AX_IA_LISTSTYLE":
+                case 49:
+                    message.intType = 49;
+                    break;
+                case "AX_IA_TEXTALIGN":
+                case 50:
+                    message.intType = 50;
+                    break;
+                case "AX_IA_TEXTDIRECTION":
+                case 51:
+                    message.intType = 51;
+                    break;
+                case "AX_IA_TEXTPOSITION":
+                case 52:
+                    message.intType = 52;
+                    break;
+                case "AX_IA_TEXTSTYLE":
+                case 53:
+                    message.intType = 53;
+                    break;
+                case "AX_IA_TEXTOVERLINESTYLE":
+                case 54:
+                    message.intType = 54;
+                    break;
+                case "AX_IA_TEXTSTRIKETHROUGHSTYLE":
+                case 55:
+                    message.intType = 55;
+                    break;
+                case "AX_IA_TEXTUNDERLINESTYLE":
+                case 56:
+                    message.intType = 56;
+                    break;
+                case "AX_IA_PREVIOUSFOCUSID":
+                case 57:
+                    message.intType = 57;
+                    break;
+                case "AX_IA_NEXTFOCUSID":
+                case 58:
+                    message.intType = 58;
+                    break;
+                case "AX_IA_DROPEFFECTDEPRECATED":
+                case 59:
+                    message.intType = 59;
+                    break;
+                case "AX_IA_DOMNODEIDDEPRECATED":
+                case 60:
+                    message.intType = 60;
+                    break;
+                case "AX_IA_ISPOPUP":
+                case 61:
+                    message.intType = 61;
+                    break;
+                case "AX_IA_NEXTWINDOWFOCUSID":
+                case 62:
+                    message.intType = 62;
+                    break;
+                case "AX_IA_PREVIOUSWINDOWFOCUSID":
+                case 63:
+                    message.intType = 63;
+                    break;
+                case "AX_IA_ARIANOTIFICATIONINTERRUPTDEPRECATED":
+                case 64:
+                    message.intType = 64;
+                    break;
+                case "AX_IA_ARIANOTIFICATIONPRIORITYDEPRECATED":
+                case 65:
+                    message.intType = 65;
+                    break;
+                case "AX_IA_DETAILSFROM":
+                case 66:
+                    message.intType = 66;
+                    break;
+                case "AX_IA_MAXLENGTH":
+                case 67:
+                    message.intType = 67;
+                    break;
+                case "AX_IA_PAINTORDER":
+                case 68:
+                    message.intType = 68;
+                    break;
+                case "AX_IA_COMMITTEDTEXTLENGTH":
+                case 69:
+                    message.intType = 69;
+                    break;
+                }
+                switch (object.floatType) {
+                default:
+                    if (typeof object.floatType === "number") {
+                        message.floatType = object.floatType;
+                        break;
+                    }
+                    break;
+                case "AX_FA_NONE":
+                case 0:
+                    message.floatType = 0;
+                    break;
+                case "AX_FA_VALUEFORRANGE":
+                case 1:
+                    message.floatType = 1;
+                    break;
+                case "AX_FA_MINVALUEFORRANGE":
+                case 2:
+                    message.floatType = 2;
+                    break;
+                case "AX_FA_MAXVALUEFORRANGE":
+                case 3:
+                    message.floatType = 3;
+                    break;
+                case "AX_FA_STEPVALUEFORRANGE":
+                case 4:
+                    message.floatType = 4;
+                    break;
+                case "AX_FA_FONTSIZE":
+                case 5:
+                    message.floatType = 5;
+                    break;
+                case "AX_FA_FONTWEIGHT":
+                case 6:
+                    message.floatType = 6;
+                    break;
+                case "AX_FA_TEXTINDENT":
+                case 7:
+                    message.floatType = 7;
+                    break;
+                case "AX_FA_CHILDTREESCALE":
+                case 8:
+                    message.floatType = 8;
+                    break;
+                }
+                switch (object.boolType) {
+                default:
+                    if (typeof object.boolType === "number") {
+                        message.boolType = object.boolType;
+                        break;
+                    }
+                    break;
+                case "AX_BA_NONE":
+                case 0:
+                    message.boolType = 0;
+                    break;
+                case "AX_BA_BUSY":
+                case 1:
+                    message.boolType = 1;
+                    break;
+                case "AX_BA_NONATOMICTEXTFIELDROOT":
+                case 2:
+                    message.boolType = 2;
+                    break;
+                case "AX_BA_CONTAINERLIVEATOMIC":
+                case 3:
+                    message.boolType = 3;
+                    break;
+                case "AX_BA_CONTAINERLIVEBUSY":
+                case 4:
+                    message.boolType = 4;
+                    break;
+                case "AX_BA_LIVEATOMIC":
+                case 5:
+                    message.boolType = 5;
+                    break;
+                case "AX_BA_MODAL":
+                case 6:
+                    message.boolType = 6;
+                    break;
+                case "AX_BA_UPDATELOCATIONONLY":
+                case 7:
+                    message.boolType = 7;
+                    break;
+                case "AX_BA_CANVASHASFALLBACK":
+                case 8:
+                    message.boolType = 8;
+                    break;
+                case "AX_BA_SCROLLABLE":
+                case 9:
+                    message.boolType = 9;
+                    break;
+                case "AX_BA_CLICKABLE":
+                case 10:
+                    message.boolType = 10;
+                    break;
+                case "AX_BA_CLIPSCHILDREN":
+                case 11:
+                    message.boolType = 11;
+                    break;
+                case "AX_BA_NOTUSERSELECTABLESTYLE":
+                case 12:
+                    message.boolType = 12;
+                    break;
+                case "AX_BA_SELECTED":
+                case 13:
+                    message.boolType = 13;
+                    break;
+                case "AX_BA_SELECTEDFROMFOCUS":
+                case 14:
+                    message.boolType = 14;
+                    break;
+                case "AX_BA_SUPPORTSTEXTLOCATION":
+                case 15:
+                    message.boolType = 15;
+                    break;
+                case "AX_BA_GRABBEDDEPRECATED":
+                case 16:
+                    message.boolType = 16;
+                    break;
+                case "AX_BA_ISLINEBREAKINGOBJECT":
+                case 17:
+                    message.boolType = 17;
+                    break;
+                case "AX_BA_ISPAGEBREAKINGOBJECT":
+                case 18:
+                    message.boolType = 18;
+                    break;
+                case "AX_BA_HASARIAATTRIBUTE":
+                case 19:
+                    message.boolType = 19;
+                    break;
+                case "AX_BA_TOUCHPASSTHROUGHDEPRECATED":
+                case 20:
+                    message.boolType = 20;
+                    break;
+                case "AX_BA_LONGCLICKABLE":
+                case 21:
+                    message.boolType = 21;
+                    break;
+                case "AX_BA_HASHIDDENOFFSCREENNODES":
+                case 22:
+                    message.boolType = 22;
+                    break;
+                case "AX_BA_HASCOMPOSITION":
+                case 23:
+                    message.boolType = 23;
+                    break;
+                case "AX_BA_COMMITTEDBYIME":
+                case 24:
+                    message.boolType = 24;
+                    break;
+                case "AX_BA_TEXTSUGGESTIONSELECTEDBYIME":
+                case 25:
+                    message.boolType = 25;
+                    break;
+                }
+                switch (object.intlistType) {
+                default:
+                    if (typeof object.intlistType === "number") {
+                        message.intlistType = object.intlistType;
+                        break;
+                    }
+                    break;
+                case "AX_ILA_NONE":
+                case 0:
+                    message.intlistType = 0;
+                    break;
+                case "AX_ILA_INDIRECTCHILDIDS":
+                case 1:
+                    message.intlistType = 1;
+                    break;
+                case "AX_ILA_ACTIONSIDS":
+                case 29:
+                    message.intlistType = 29;
+                    break;
+                case "AX_ILA_CONTROLSIDS":
+                case 2:
+                    message.intlistType = 2;
+                    break;
+                case "AX_ILA_DETAILSIDS":
+                case 3:
+                    message.intlistType = 3;
+                    break;
+                case "AX_ILA_DESCRIBEDBYIDS":
+                case 4:
+                    message.intlistType = 4;
+                    break;
+                case "AX_ILA_FLOWTOIDS":
+                case 5:
+                    message.intlistType = 5;
+                    break;
+                case "AX_ILA_LABELLEDBYIDS":
+                case 6:
+                    message.intlistType = 6;
+                    break;
+                case "AX_ILA_RADIOGROUPIDS":
+                case 7:
+                    message.intlistType = 7;
+                    break;
+                case "AX_ILA_MARKERTYPES":
+                case 8:
+                    message.intlistType = 8;
+                    break;
+                case "AX_ILA_MARKERSTARTS":
+                case 9:
+                    message.intlistType = 9;
+                    break;
+                case "AX_ILA_MARKERENDS":
+                case 10:
+                    message.intlistType = 10;
+                    break;
+                case "AX_ILA_CHARACTEROFFSETS":
+                case 11:
+                    message.intlistType = 11;
+                    break;
+                case "AX_ILA_LINESTARTS":
+                case 12:
+                    message.intlistType = 12;
+                    break;
+                case "AX_ILA_WORDSTARTS":
+                case 13:
+                    message.intlistType = 13;
+                    break;
+                case "AX_ILA_WORDENDS":
+                case 14:
+                    message.intlistType = 14;
+                    break;
+                case "AX_ILA_CUSTOMACTIONIDS":
+                case 15:
+                    message.intlistType = 15;
+                    break;
+                case "AX_ILA_CARETBOUNDS":
+                case 16:
+                    message.intlistType = 16;
+                    break;
+                case "AX_ILA_LINEENDS":
+                case 17:
+                    message.intlistType = 17;
+                    break;
+                case "AX_ILA_SENTENCESTARTS":
+                case 18:
+                    message.intlistType = 18;
+                    break;
+                case "AX_ILA_SENTENCEENDS":
+                case 19:
+                    message.intlistType = 19;
+                    break;
+                case "AX_ILA_HIGHLIGHTTYPES":
+                case 20:
+                    message.intlistType = 20;
+                    break;
+                case "AX_ILA_TEXTOPERATIONSTARTANCHORIDS":
+                case 21:
+                    message.intlistType = 21;
+                    break;
+                case "AX_ILA_TEXTOPERATIONSTARTOFFSETS":
+                case 22:
+                    message.intlistType = 22;
+                    break;
+                case "AX_ILA_TEXTOPERATIONENDANCHORIDS":
+                case 23:
+                    message.intlistType = 23;
+                    break;
+                case "AX_ILA_TEXTOPERATIONENDOFFSETS":
+                case 24:
+                    message.intlistType = 24;
+                    break;
+                case "AX_ILA_TEXTOPERATIONS":
+                case 25:
+                    message.intlistType = 25;
+                    break;
+                case "AX_ILA_ERRORMESSAGEIDS":
+                case 26:
+                    message.intlistType = 26;
+                    break;
+                case "AX_ILA_ARIANOTIFICATIONINTERRUPTPROPERTIES":
+                case 27:
+                    message.intlistType = 27;
+                    break;
+                case "AX_ILA_ARIANOTIFICATIONPRIORITYPROPERTIES":
+                case 28:
+                    message.intlistType = 28;
+                    break;
+                }
+                switch (object.stringlistType) {
+                default:
+                    if (typeof object.stringlistType === "number") {
+                        message.stringlistType = object.stringlistType;
+                        break;
+                    }
+                    break;
+                case "AX_SLA_NONE":
+                case 0:
+                    message.stringlistType = 0;
+                    break;
+                case "AX_SLA_CUSTOMACTIONDESCRIPTIONS":
+                case 1:
+                    message.stringlistType = 1;
+                    break;
+                case "AX_SLA_ARIANOTIFICATIONANNOUNCEMENTS":
+                case 2:
+                    message.stringlistType = 2;
+                    break;
+                case "AX_SLA_ARIANOTIFICATIONTYPES":
+                case 3:
+                    message.stringlistType = 3;
+                    break;
+                case "AX_SLA_TEXTOPERATIONREPLACEMENTSTRINGS":
+                case 4:
+                    message.stringlistType = 4;
+                    break;
+                }
+                if (object.htmlAttributeName != null)
+                    message.htmlAttributeName = String(object.htmlAttributeName);
+                if (object.stringValue != null)
+                    message.stringValue = String(object.stringValue);
+                if (object.intValue != null)
+                    message.intValue = object.intValue | 0;
+                if (object.floatValue != null)
+                    message.floatValue = Number(object.floatValue);
+                if (object.boolValue != null)
+                    message.boolValue = Boolean(object.boolValue);
+                if (object.intListValue != null) {
+                    if (typeof object.intListValue !== "object")
+                        throw TypeError(".optimization_guide.proto.AXAttribute.intListValue: object expected");
+                    message.intListValue = $root.optimization_guide.proto.AXIntList.fromObject(object.intListValue);
+                }
+                if (object.stringListValue != null) {
+                    if (typeof object.stringListValue !== "object")
+                        throw TypeError(".optimization_guide.proto.AXAttribute.stringListValue: object expected");
+                    message.stringListValue = $root.optimization_guide.proto.AXStringList.fromObject(object.stringListValue);
+                }
+                if (object.htmlAttributeValue != null)
+                    message.htmlAttributeValue = String(object.htmlAttributeValue);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a AXAttribute message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.AXAttribute
+             * @static
+             * @param {optimization_guide.proto.AXAttribute} message AXAttribute
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            AXAttribute.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (message.stringType != null && message.hasOwnProperty("stringType")) {
+                    object.stringType = options.enums === String ? $root.optimization_guide.proto.AXStringAttribute[message.stringType] === undefined ? message.stringType : $root.optimization_guide.proto.AXStringAttribute[message.stringType] : message.stringType;
+                    if (options.oneofs)
+                        object.attributeKey = "stringType";
+                }
+                if (message.intType != null && message.hasOwnProperty("intType")) {
+                    object.intType = options.enums === String ? $root.optimization_guide.proto.AXIntAttribute[message.intType] === undefined ? message.intType : $root.optimization_guide.proto.AXIntAttribute[message.intType] : message.intType;
+                    if (options.oneofs)
+                        object.attributeKey = "intType";
+                }
+                if (message.floatType != null && message.hasOwnProperty("floatType")) {
+                    object.floatType = options.enums === String ? $root.optimization_guide.proto.AXFloatAttribute[message.floatType] === undefined ? message.floatType : $root.optimization_guide.proto.AXFloatAttribute[message.floatType] : message.floatType;
+                    if (options.oneofs)
+                        object.attributeKey = "floatType";
+                }
+                if (message.boolType != null && message.hasOwnProperty("boolType")) {
+                    object.boolType = options.enums === String ? $root.optimization_guide.proto.AXBoolAttribute[message.boolType] === undefined ? message.boolType : $root.optimization_guide.proto.AXBoolAttribute[message.boolType] : message.boolType;
+                    if (options.oneofs)
+                        object.attributeKey = "boolType";
+                }
+                if (message.intlistType != null && message.hasOwnProperty("intlistType")) {
+                    object.intlistType = options.enums === String ? $root.optimization_guide.proto.AXIntListAttribute[message.intlistType] === undefined ? message.intlistType : $root.optimization_guide.proto.AXIntListAttribute[message.intlistType] : message.intlistType;
+                    if (options.oneofs)
+                        object.attributeKey = "intlistType";
+                }
+                if (message.stringlistType != null && message.hasOwnProperty("stringlistType")) {
+                    object.stringlistType = options.enums === String ? $root.optimization_guide.proto.AXStringListAttribute[message.stringlistType] === undefined ? message.stringlistType : $root.optimization_guide.proto.AXStringListAttribute[message.stringlistType] : message.stringlistType;
+                    if (options.oneofs)
+                        object.attributeKey = "stringlistType";
+                }
+                if (message.htmlAttributeName != null && message.hasOwnProperty("htmlAttributeName")) {
+                    object.htmlAttributeName = message.htmlAttributeName;
+                    if (options.oneofs)
+                        object.attributeKey = "htmlAttributeName";
+                }
+                if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
+                    object.stringValue = message.stringValue;
+                    if (options.oneofs)
+                        object.attributeValue = "stringValue";
+                }
+                if (message.intValue != null && message.hasOwnProperty("intValue")) {
+                    object.intValue = message.intValue;
+                    if (options.oneofs)
+                        object.attributeValue = "intValue";
+                }
+                if (message.floatValue != null && message.hasOwnProperty("floatValue")) {
+                    object.floatValue = options.json && !isFinite(message.floatValue) ? String(message.floatValue) : message.floatValue;
+                    if (options.oneofs)
+                        object.attributeValue = "floatValue";
+                }
+                if (message.boolValue != null && message.hasOwnProperty("boolValue")) {
+                    object.boolValue = message.boolValue;
+                    if (options.oneofs)
+                        object.attributeValue = "boolValue";
+                }
+                if (message.intListValue != null && message.hasOwnProperty("intListValue")) {
+                    object.intListValue = $root.optimization_guide.proto.AXIntList.toObject(message.intListValue, options);
+                    if (options.oneofs)
+                        object.attributeValue = "intListValue";
+                }
+                if (message.stringListValue != null && message.hasOwnProperty("stringListValue")) {
+                    object.stringListValue = $root.optimization_guide.proto.AXStringList.toObject(message.stringListValue, options);
+                    if (options.oneofs)
+                        object.attributeValue = "stringListValue";
+                }
+                if (message.htmlAttributeValue != null && message.hasOwnProperty("htmlAttributeValue")) {
+                    object.htmlAttributeValue = message.htmlAttributeValue;
+                    if (options.oneofs)
+                        object.attributeValue = "htmlAttributeValue";
+                }
+                return object;
+            };
+
+            /**
+             * Converts this AXAttribute to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.AXAttribute
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            AXAttribute.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for AXAttribute
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.AXAttribute
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            AXAttribute.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.AXAttribute";
+            };
+
             return AXAttribute;
         })();
 
@@ -975,6 +4458,52 @@ export const optimization_guide = $root.optimization_guide = (() => {
              * @instance
              */
             AXIntList.prototype.value = $util.emptyArray;
+
+            /**
+             * Creates a new AXIntList instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.AXIntList
+             * @static
+             * @param {optimization_guide.proto.IAXIntList=} [properties] Properties to set
+             * @returns {optimization_guide.proto.AXIntList} AXIntList instance
+             */
+            AXIntList.create = function create(properties) {
+                return new AXIntList(properties);
+            };
+
+            /**
+             * Encodes the specified AXIntList message. Does not implicitly {@link optimization_guide.proto.AXIntList.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.AXIntList
+             * @static
+             * @param {optimization_guide.proto.IAXIntList} message AXIntList message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            AXIntList.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.value != null && message.value.length) {
+                    writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                    for (let i = 0; i < message.value.length; ++i)
+                        writer.int32(message.value[i]);
+                    writer.ldelim();
+                }
+                return writer;
+            };
+
+            /**
+             * Encodes the specified AXIntList message, length delimited. Does not implicitly {@link optimization_guide.proto.AXIntList.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.AXIntList
+             * @static
+             * @param {optimization_guide.proto.IAXIntList} message AXIntList message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            AXIntList.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
 
             /**
              * Decodes a AXIntList message from the specified reader or buffer.
@@ -1015,6 +4544,114 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 return message;
             };
 
+            /**
+             * Decodes a AXIntList message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.AXIntList
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.AXIntList} AXIntList
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            AXIntList.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a AXIntList message.
+             * @function verify
+             * @memberof optimization_guide.proto.AXIntList
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            AXIntList.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.value != null && message.hasOwnProperty("value")) {
+                    if (!Array.isArray(message.value))
+                        return "value: array expected";
+                    for (let i = 0; i < message.value.length; ++i)
+                        if (!$util.isInteger(message.value[i]))
+                            return "value: integer[] expected";
+                }
+                return null;
+            };
+
+            /**
+             * Creates a AXIntList message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.AXIntList
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.AXIntList} AXIntList
+             */
+            AXIntList.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.AXIntList)
+                    return object;
+                let message = new $root.optimization_guide.proto.AXIntList();
+                if (object.value) {
+                    if (!Array.isArray(object.value))
+                        throw TypeError(".optimization_guide.proto.AXIntList.value: array expected");
+                    message.value = [];
+                    for (let i = 0; i < object.value.length; ++i)
+                        message.value[i] = object.value[i] | 0;
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a AXIntList message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.AXIntList
+             * @static
+             * @param {optimization_guide.proto.AXIntList} message AXIntList
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            AXIntList.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.arrays || options.defaults)
+                    object.value = [];
+                if (message.value && message.value.length) {
+                    object.value = [];
+                    for (let j = 0; j < message.value.length; ++j)
+                        object.value[j] = message.value[j];
+                }
+                return object;
+            };
+
+            /**
+             * Converts this AXIntList to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.AXIntList
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            AXIntList.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for AXIntList
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.AXIntList
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            AXIntList.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.AXIntList";
+            };
+
             return AXIntList;
         })();
 
@@ -1052,6 +4689,49 @@ export const optimization_guide = $root.optimization_guide = (() => {
             AXStringList.prototype.value = $util.emptyArray;
 
             /**
+             * Creates a new AXStringList instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.AXStringList
+             * @static
+             * @param {optimization_guide.proto.IAXStringList=} [properties] Properties to set
+             * @returns {optimization_guide.proto.AXStringList} AXStringList instance
+             */
+            AXStringList.create = function create(properties) {
+                return new AXStringList(properties);
+            };
+
+            /**
+             * Encodes the specified AXStringList message. Does not implicitly {@link optimization_guide.proto.AXStringList.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.AXStringList
+             * @static
+             * @param {optimization_guide.proto.IAXStringList} message AXStringList message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            AXStringList.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.value != null && message.value.length)
+                    for (let i = 0; i < message.value.length; ++i)
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.value[i]);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified AXStringList message, length delimited. Does not implicitly {@link optimization_guide.proto.AXStringList.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.AXStringList
+             * @static
+             * @param {optimization_guide.proto.IAXStringList} message AXStringList message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            AXStringList.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a AXStringList message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.AXStringList
@@ -1083,6 +4763,114 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a AXStringList message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.AXStringList
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.AXStringList} AXStringList
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            AXStringList.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a AXStringList message.
+             * @function verify
+             * @memberof optimization_guide.proto.AXStringList
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            AXStringList.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.value != null && message.hasOwnProperty("value")) {
+                    if (!Array.isArray(message.value))
+                        return "value: array expected";
+                    for (let i = 0; i < message.value.length; ++i)
+                        if (!$util.isString(message.value[i]))
+                            return "value: string[] expected";
+                }
+                return null;
+            };
+
+            /**
+             * Creates a AXStringList message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.AXStringList
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.AXStringList} AXStringList
+             */
+            AXStringList.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.AXStringList)
+                    return object;
+                let message = new $root.optimization_guide.proto.AXStringList();
+                if (object.value) {
+                    if (!Array.isArray(object.value))
+                        throw TypeError(".optimization_guide.proto.AXStringList.value: array expected");
+                    message.value = [];
+                    for (let i = 0; i < object.value.length; ++i)
+                        message.value[i] = String(object.value[i]);
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a AXStringList message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.AXStringList
+             * @static
+             * @param {optimization_guide.proto.AXStringList} message AXStringList
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            AXStringList.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.arrays || options.defaults)
+                    object.value = [];
+                if (message.value && message.value.length) {
+                    object.value = [];
+                    for (let j = 0; j < message.value.length; ++j)
+                        object.value[j] = message.value[j];
+                }
+                return object;
+            };
+
+            /**
+             * Converts this AXStringList to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.AXStringList
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            AXStringList.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for AXStringList
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.AXStringList
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            AXStringList.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.AXStringList";
             };
 
             return AXStringList;
@@ -1168,6 +4956,62 @@ export const optimization_guide = $root.optimization_guide = (() => {
             AXRelativeBounds.prototype.transform = $util.emptyArray;
 
             /**
+             * Creates a new AXRelativeBounds instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.AXRelativeBounds
+             * @static
+             * @param {optimization_guide.proto.IAXRelativeBounds=} [properties] Properties to set
+             * @returns {optimization_guide.proto.AXRelativeBounds} AXRelativeBounds instance
+             */
+            AXRelativeBounds.create = function create(properties) {
+                return new AXRelativeBounds(properties);
+            };
+
+            /**
+             * Encodes the specified AXRelativeBounds message. Does not implicitly {@link optimization_guide.proto.AXRelativeBounds.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.AXRelativeBounds
+             * @static
+             * @param {optimization_guide.proto.IAXRelativeBounds} message AXRelativeBounds message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            AXRelativeBounds.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.offsetContainerId != null && Object.hasOwnProperty.call(message, "offsetContainerId"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.offsetContainerId);
+                if (message.x != null && Object.hasOwnProperty.call(message, "x"))
+                    writer.uint32(/* id 2, wireType 5 =*/21).float(message.x);
+                if (message.y != null && Object.hasOwnProperty.call(message, "y"))
+                    writer.uint32(/* id 3, wireType 5 =*/29).float(message.y);
+                if (message.width != null && Object.hasOwnProperty.call(message, "width"))
+                    writer.uint32(/* id 4, wireType 5 =*/37).float(message.width);
+                if (message.height != null && Object.hasOwnProperty.call(message, "height"))
+                    writer.uint32(/* id 5, wireType 5 =*/45).float(message.height);
+                if (message.transform != null && message.transform.length) {
+                    writer.uint32(/* id 6, wireType 2 =*/50).fork();
+                    for (let i = 0; i < message.transform.length; ++i)
+                        writer.float(message.transform[i]);
+                    writer.ldelim();
+                }
+                return writer;
+            };
+
+            /**
+             * Encodes the specified AXRelativeBounds message, length delimited. Does not implicitly {@link optimization_guide.proto.AXRelativeBounds.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.AXRelativeBounds
+             * @static
+             * @param {optimization_guide.proto.IAXRelativeBounds} message AXRelativeBounds message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            AXRelativeBounds.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a AXRelativeBounds message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.AXRelativeBounds
@@ -1224,6 +5068,156 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a AXRelativeBounds message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.AXRelativeBounds
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.AXRelativeBounds} AXRelativeBounds
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            AXRelativeBounds.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a AXRelativeBounds message.
+             * @function verify
+             * @memberof optimization_guide.proto.AXRelativeBounds
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            AXRelativeBounds.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.offsetContainerId != null && message.hasOwnProperty("offsetContainerId"))
+                    if (!$util.isInteger(message.offsetContainerId))
+                        return "offsetContainerId: integer expected";
+                if (message.x != null && message.hasOwnProperty("x"))
+                    if (typeof message.x !== "number")
+                        return "x: number expected";
+                if (message.y != null && message.hasOwnProperty("y"))
+                    if (typeof message.y !== "number")
+                        return "y: number expected";
+                if (message.width != null && message.hasOwnProperty("width"))
+                    if (typeof message.width !== "number")
+                        return "width: number expected";
+                if (message.height != null && message.hasOwnProperty("height"))
+                    if (typeof message.height !== "number")
+                        return "height: number expected";
+                if (message.transform != null && message.hasOwnProperty("transform")) {
+                    if (!Array.isArray(message.transform))
+                        return "transform: array expected";
+                    for (let i = 0; i < message.transform.length; ++i)
+                        if (typeof message.transform[i] !== "number")
+                            return "transform: number[] expected";
+                }
+                return null;
+            };
+
+            /**
+             * Creates a AXRelativeBounds message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.AXRelativeBounds
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.AXRelativeBounds} AXRelativeBounds
+             */
+            AXRelativeBounds.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.AXRelativeBounds)
+                    return object;
+                let message = new $root.optimization_guide.proto.AXRelativeBounds();
+                if (object.offsetContainerId != null)
+                    message.offsetContainerId = object.offsetContainerId | 0;
+                if (object.x != null)
+                    message.x = Number(object.x);
+                if (object.y != null)
+                    message.y = Number(object.y);
+                if (object.width != null)
+                    message.width = Number(object.width);
+                if (object.height != null)
+                    message.height = Number(object.height);
+                if (object.transform) {
+                    if (!Array.isArray(object.transform))
+                        throw TypeError(".optimization_guide.proto.AXRelativeBounds.transform: array expected");
+                    message.transform = [];
+                    for (let i = 0; i < object.transform.length; ++i)
+                        message.transform[i] = Number(object.transform[i]);
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a AXRelativeBounds message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.AXRelativeBounds
+             * @static
+             * @param {optimization_guide.proto.AXRelativeBounds} message AXRelativeBounds
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            AXRelativeBounds.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.arrays || options.defaults)
+                    object.transform = [];
+                if (options.defaults) {
+                    object.offsetContainerId = 0;
+                    object.x = 0;
+                    object.y = 0;
+                    object.width = 0;
+                    object.height = 0;
+                }
+                if (message.offsetContainerId != null && message.hasOwnProperty("offsetContainerId"))
+                    object.offsetContainerId = message.offsetContainerId;
+                if (message.x != null && message.hasOwnProperty("x"))
+                    object.x = options.json && !isFinite(message.x) ? String(message.x) : message.x;
+                if (message.y != null && message.hasOwnProperty("y"))
+                    object.y = options.json && !isFinite(message.y) ? String(message.y) : message.y;
+                if (message.width != null && message.hasOwnProperty("width"))
+                    object.width = options.json && !isFinite(message.width) ? String(message.width) : message.width;
+                if (message.height != null && message.hasOwnProperty("height"))
+                    object.height = options.json && !isFinite(message.height) ? String(message.height) : message.height;
+                if (message.transform && message.transform.length) {
+                    object.transform = [];
+                    for (let j = 0; j < message.transform.length; ++j)
+                        object.transform[j] = options.json && !isFinite(message.transform[j]) ? String(message.transform[j]) : message.transform[j];
+                }
+                return object;
+            };
+
+            /**
+             * Converts this AXRelativeBounds to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.AXRelativeBounds
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            AXRelativeBounds.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for AXRelativeBounds
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.AXRelativeBounds
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            AXRelativeBounds.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.AXRelativeBounds";
             };
 
             return AXRelativeBounds;
@@ -1345,6 +5339,65 @@ export const optimization_guide = $root.optimization_guide = (() => {
             PageContext.prototype.annotatedPageContent = null;
 
             /**
+             * Creates a new PageContext instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.PageContext
+             * @static
+             * @param {optimization_guide.proto.IPageContext=} [properties] Properties to set
+             * @returns {optimization_guide.proto.PageContext} PageContext instance
+             */
+            PageContext.create = function create(properties) {
+                return new PageContext(properties);
+            };
+
+            /**
+             * Encodes the specified PageContext message. Does not implicitly {@link optimization_guide.proto.PageContext.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.PageContext
+             * @static
+             * @param {optimization_guide.proto.IPageContext} message PageContext message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            PageContext.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.url);
+                if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
+                if (message.axTreeData != null && Object.hasOwnProperty.call(message, "axTreeData"))
+                    $root.optimization_guide.proto.AXTreeUpdate.encode(message.axTreeData, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                if (message.innerText != null && Object.hasOwnProperty.call(message, "innerText"))
+                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.innerText);
+                if (message.innerTextOffset != null && Object.hasOwnProperty.call(message, "innerTextOffset"))
+                    writer.uint32(/* id 5, wireType 0 =*/40).uint64(message.innerTextOffset);
+                if (message.tabScreenshot != null && Object.hasOwnProperty.call(message, "tabScreenshot"))
+                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.tabScreenshot);
+                if (message.pdfData != null && Object.hasOwnProperty.call(message, "pdfData"))
+                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.pdfData);
+                if (message.annotatedPageContent != null && Object.hasOwnProperty.call(message, "annotatedPageContent"))
+                    $root.optimization_guide.proto.AnnotatedPageContent.encode(message.annotatedPageContent, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                if (message.pagePassages != null && message.pagePassages.length)
+                    for (let i = 0; i < message.pagePassages.length; ++i)
+                        writer.uint32(/* id 9, wireType 2 =*/74).string(message.pagePassages[i]);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified PageContext message, length delimited. Does not implicitly {@link optimization_guide.proto.PageContext.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.PageContext
+             * @static
+             * @param {optimization_guide.proto.IPageContext} message PageContext message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            PageContext.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a PageContext message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.PageContext
@@ -1408,6 +5461,204 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a PageContext message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.PageContext
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.PageContext} PageContext
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            PageContext.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a PageContext message.
+             * @function verify
+             * @memberof optimization_guide.proto.PageContext
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            PageContext.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.url != null && message.hasOwnProperty("url"))
+                    if (!$util.isString(message.url))
+                        return "url: string expected";
+                if (message.title != null && message.hasOwnProperty("title"))
+                    if (!$util.isString(message.title))
+                        return "title: string expected";
+                if (message.axTreeData != null && message.hasOwnProperty("axTreeData")) {
+                    let error = $root.optimization_guide.proto.AXTreeUpdate.verify(message.axTreeData);
+                    if (error)
+                        return "axTreeData." + error;
+                }
+                if (message.innerText != null && message.hasOwnProperty("innerText"))
+                    if (!$util.isString(message.innerText))
+                        return "innerText: string expected";
+                if (message.innerTextOffset != null && message.hasOwnProperty("innerTextOffset"))
+                    if (!$util.isInteger(message.innerTextOffset) && !(message.innerTextOffset && $util.isInteger(message.innerTextOffset.low) && $util.isInteger(message.innerTextOffset.high)))
+                        return "innerTextOffset: integer|Long expected";
+                if (message.pagePassages != null && message.hasOwnProperty("pagePassages")) {
+                    if (!Array.isArray(message.pagePassages))
+                        return "pagePassages: array expected";
+                    for (let i = 0; i < message.pagePassages.length; ++i)
+                        if (!$util.isString(message.pagePassages[i]))
+                            return "pagePassages: string[] expected";
+                }
+                if (message.tabScreenshot != null && message.hasOwnProperty("tabScreenshot"))
+                    if (!$util.isString(message.tabScreenshot))
+                        return "tabScreenshot: string expected";
+                if (message.pdfData != null && message.hasOwnProperty("pdfData"))
+                    if (!$util.isString(message.pdfData))
+                        return "pdfData: string expected";
+                if (message.annotatedPageContent != null && message.hasOwnProperty("annotatedPageContent")) {
+                    let error = $root.optimization_guide.proto.AnnotatedPageContent.verify(message.annotatedPageContent);
+                    if (error)
+                        return "annotatedPageContent." + error;
+                }
+                return null;
+            };
+
+            /**
+             * Creates a PageContext message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.PageContext
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.PageContext} PageContext
+             */
+            PageContext.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.PageContext)
+                    return object;
+                let message = new $root.optimization_guide.proto.PageContext();
+                if (object.url != null)
+                    message.url = String(object.url);
+                if (object.title != null)
+                    message.title = String(object.title);
+                if (object.axTreeData != null) {
+                    if (typeof object.axTreeData !== "object")
+                        throw TypeError(".optimization_guide.proto.PageContext.axTreeData: object expected");
+                    message.axTreeData = $root.optimization_guide.proto.AXTreeUpdate.fromObject(object.axTreeData);
+                }
+                if (object.innerText != null)
+                    message.innerText = String(object.innerText);
+                if (object.innerTextOffset != null)
+                    if ($util.Long)
+                        (message.innerTextOffset = $util.Long.fromValue(object.innerTextOffset)).unsigned = true;
+                    else if (typeof object.innerTextOffset === "string")
+                        message.innerTextOffset = parseInt(object.innerTextOffset, 10);
+                    else if (typeof object.innerTextOffset === "number")
+                        message.innerTextOffset = object.innerTextOffset;
+                    else if (typeof object.innerTextOffset === "object")
+                        message.innerTextOffset = new $util.LongBits(object.innerTextOffset.low >>> 0, object.innerTextOffset.high >>> 0).toNumber(true);
+                if (object.pagePassages) {
+                    if (!Array.isArray(object.pagePassages))
+                        throw TypeError(".optimization_guide.proto.PageContext.pagePassages: array expected");
+                    message.pagePassages = [];
+                    for (let i = 0; i < object.pagePassages.length; ++i)
+                        message.pagePassages[i] = String(object.pagePassages[i]);
+                }
+                if (object.tabScreenshot != null)
+                    message.tabScreenshot = String(object.tabScreenshot);
+                if (object.pdfData != null)
+                    message.pdfData = String(object.pdfData);
+                if (object.annotatedPageContent != null) {
+                    if (typeof object.annotatedPageContent !== "object")
+                        throw TypeError(".optimization_guide.proto.PageContext.annotatedPageContent: object expected");
+                    message.annotatedPageContent = $root.optimization_guide.proto.AnnotatedPageContent.fromObject(object.annotatedPageContent);
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a PageContext message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.PageContext
+             * @static
+             * @param {optimization_guide.proto.PageContext} message PageContext
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            PageContext.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.arrays || options.defaults)
+                    object.pagePassages = [];
+                if (options.defaults) {
+                    object.url = "";
+                    object.title = "";
+                    object.axTreeData = null;
+                    object.innerText = "";
+                    if ($util.Long) {
+                        let long = new $util.Long(0, 0, true);
+                        object.innerTextOffset = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.innerTextOffset = options.longs === String ? "0" : 0;
+                    object.tabScreenshot = "";
+                    object.pdfData = "";
+                    object.annotatedPageContent = null;
+                }
+                if (message.url != null && message.hasOwnProperty("url"))
+                    object.url = message.url;
+                if (message.title != null && message.hasOwnProperty("title"))
+                    object.title = message.title;
+                if (message.axTreeData != null && message.hasOwnProperty("axTreeData"))
+                    object.axTreeData = $root.optimization_guide.proto.AXTreeUpdate.toObject(message.axTreeData, options);
+                if (message.innerText != null && message.hasOwnProperty("innerText"))
+                    object.innerText = message.innerText;
+                if (message.innerTextOffset != null && message.hasOwnProperty("innerTextOffset"))
+                    if (typeof message.innerTextOffset === "number")
+                        object.innerTextOffset = options.longs === String ? String(message.innerTextOffset) : message.innerTextOffset;
+                    else
+                        object.innerTextOffset = options.longs === String ? $util.Long.prototype.toString.call(message.innerTextOffset) : options.longs === Number ? new $util.LongBits(message.innerTextOffset.low >>> 0, message.innerTextOffset.high >>> 0).toNumber(true) : message.innerTextOffset;
+                if (message.tabScreenshot != null && message.hasOwnProperty("tabScreenshot"))
+                    object.tabScreenshot = message.tabScreenshot;
+                if (message.pdfData != null && message.hasOwnProperty("pdfData"))
+                    object.pdfData = message.pdfData;
+                if (message.annotatedPageContent != null && message.hasOwnProperty("annotatedPageContent"))
+                    object.annotatedPageContent = $root.optimization_guide.proto.AnnotatedPageContent.toObject(message.annotatedPageContent, options);
+                if (message.pagePassages && message.pagePassages.length) {
+                    object.pagePassages = [];
+                    for (let j = 0; j < message.pagePassages.length; ++j)
+                        object.pagePassages[j] = message.pagePassages[j];
+                }
+                return object;
+            };
+
+            /**
+             * Converts this PageContext to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.PageContext
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            PageContext.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for PageContext
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.PageContext
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            PageContext.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.PageContext";
             };
 
             return PageContext;
@@ -1571,6 +5822,66 @@ export const optimization_guide = $root.optimization_guide = (() => {
             AnnotatedPageContent.prototype.geminiInChromePageMetadata = null;
 
             /**
+             * Creates a new AnnotatedPageContent instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.AnnotatedPageContent
+             * @static
+             * @param {optimization_guide.proto.IAnnotatedPageContent=} [properties] Properties to set
+             * @returns {optimization_guide.proto.AnnotatedPageContent} AnnotatedPageContent instance
+             */
+            AnnotatedPageContent.create = function create(properties) {
+                return new AnnotatedPageContent(properties);
+            };
+
+            /**
+             * Encodes the specified AnnotatedPageContent message. Does not implicitly {@link optimization_guide.proto.AnnotatedPageContent.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.AnnotatedPageContent
+             * @static
+             * @param {optimization_guide.proto.IAnnotatedPageContent} message AnnotatedPageContent message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            AnnotatedPageContent.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.version);
+                if (message.rootNode != null && Object.hasOwnProperty.call(message, "rootNode"))
+                    $root.optimization_guide.proto.ContentNode.encode(message.rootNode, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                if (message.mainFrameData != null && Object.hasOwnProperty.call(message, "mainFrameData"))
+                    $root.optimization_guide.proto.FrameData.encode(message.mainFrameData, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                if (message.pageInteractionInfo != null && Object.hasOwnProperty.call(message, "pageInteractionInfo"))
+                    $root.optimization_guide.proto.PageInteractionInfo.encode(message.pageInteractionInfo, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                if (message.viewportGeometry != null && Object.hasOwnProperty.call(message, "viewportGeometry"))
+                    $root.optimization_guide.proto.BoundingRect.encode(message.viewportGeometry, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                if (message.mode != null && Object.hasOwnProperty.call(message, "mode"))
+                    writer.uint32(/* id 6, wireType 0 =*/48).int32(message.mode);
+                if (message.tabId != null && Object.hasOwnProperty.call(message, "tabId"))
+                    writer.uint32(/* id 7, wireType 0 =*/56).int32(message.tabId);
+                if (message.popupWindow != null && Object.hasOwnProperty.call(message, "popupWindow"))
+                    $root.optimization_guide.proto.PopupWindow.encode(message.popupWindow, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                if (message.profileInformation != null && Object.hasOwnProperty.call(message, "profileInformation"))
+                    $root.optimization_guide.proto.ProfileInformation.encode(message.profileInformation, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                if (message.geminiInChromePageMetadata != null && Object.hasOwnProperty.call(message, "geminiInChromePageMetadata"))
+                    $root.optimization_guide.proto.GeminiInChromePageMetadata.encode(message.geminiInChromePageMetadata, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified AnnotatedPageContent message, length delimited. Does not implicitly {@link optimization_guide.proto.AnnotatedPageContent.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.AnnotatedPageContent
+             * @static
+             * @param {optimization_guide.proto.IAnnotatedPageContent} message AnnotatedPageContent message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            AnnotatedPageContent.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes an AnnotatedPageContent message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.AnnotatedPageContent
@@ -1638,6 +5949,253 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 return message;
             };
 
+            /**
+             * Decodes an AnnotatedPageContent message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.AnnotatedPageContent
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.AnnotatedPageContent} AnnotatedPageContent
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            AnnotatedPageContent.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies an AnnotatedPageContent message.
+             * @function verify
+             * @memberof optimization_guide.proto.AnnotatedPageContent
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            AnnotatedPageContent.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.version != null && message.hasOwnProperty("version"))
+                    switch (message.version) {
+                    default:
+                        return "version: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                        break;
+                    }
+                if (message.mode != null && message.hasOwnProperty("mode"))
+                    switch (message.mode) {
+                    default:
+                        return "mode: enum value expected";
+                    case 0:
+                    case 1:
+                        break;
+                    }
+                if (message.rootNode != null && message.hasOwnProperty("rootNode")) {
+                    let error = $root.optimization_guide.proto.ContentNode.verify(message.rootNode);
+                    if (error)
+                        return "rootNode." + error;
+                }
+                if (message.mainFrameData != null && message.hasOwnProperty("mainFrameData")) {
+                    let error = $root.optimization_guide.proto.FrameData.verify(message.mainFrameData);
+                    if (error)
+                        return "mainFrameData." + error;
+                }
+                if (message.pageInteractionInfo != null && message.hasOwnProperty("pageInteractionInfo")) {
+                    let error = $root.optimization_guide.proto.PageInteractionInfo.verify(message.pageInteractionInfo);
+                    if (error)
+                        return "pageInteractionInfo." + error;
+                }
+                if (message.viewportGeometry != null && message.hasOwnProperty("viewportGeometry")) {
+                    let error = $root.optimization_guide.proto.BoundingRect.verify(message.viewportGeometry);
+                    if (error)
+                        return "viewportGeometry." + error;
+                }
+                if (message.tabId != null && message.hasOwnProperty("tabId"))
+                    if (!$util.isInteger(message.tabId))
+                        return "tabId: integer expected";
+                if (message.popupWindow != null && message.hasOwnProperty("popupWindow")) {
+                    let error = $root.optimization_guide.proto.PopupWindow.verify(message.popupWindow);
+                    if (error)
+                        return "popupWindow." + error;
+                }
+                if (message.profileInformation != null && message.hasOwnProperty("profileInformation")) {
+                    let error = $root.optimization_guide.proto.ProfileInformation.verify(message.profileInformation);
+                    if (error)
+                        return "profileInformation." + error;
+                }
+                if (message.geminiInChromePageMetadata != null && message.hasOwnProperty("geminiInChromePageMetadata")) {
+                    let error = $root.optimization_guide.proto.GeminiInChromePageMetadata.verify(message.geminiInChromePageMetadata);
+                    if (error)
+                        return "geminiInChromePageMetadata." + error;
+                }
+                return null;
+            };
+
+            /**
+             * Creates an AnnotatedPageContent message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.AnnotatedPageContent
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.AnnotatedPageContent} AnnotatedPageContent
+             */
+            AnnotatedPageContent.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.AnnotatedPageContent)
+                    return object;
+                let message = new $root.optimization_guide.proto.AnnotatedPageContent();
+                switch (object.version) {
+                default:
+                    if (typeof object.version === "number") {
+                        message.version = object.version;
+                        break;
+                    }
+                    break;
+                case "ANNOTATED_PAGE_CONTENT_VERSION_UNKNOWN":
+                case 0:
+                    message.version = 0;
+                    break;
+                case "ANNOTATED_PAGE_CONTENT_VERSION_1_0":
+                case 1:
+                    message.version = 1;
+                    break;
+                case "ANNOTATED_PAGE_CONTENT_VERSION_ONLY_ACTIONABLE_ELEMENTS_1_0":
+                case 2:
+                    message.version = 2;
+                    break;
+                }
+                switch (object.mode) {
+                default:
+                    if (typeof object.mode === "number") {
+                        message.mode = object.mode;
+                        break;
+                    }
+                    break;
+                case "ANNOTATED_PAGE_CONTENT_MODE_DEFAULT":
+                case 0:
+                    message.mode = 0;
+                    break;
+                case "ANNOTATED_PAGE_CONTENT_MODE_ACTIONABLE_ELEMENTS":
+                case 1:
+                    message.mode = 1;
+                    break;
+                }
+                if (object.rootNode != null) {
+                    if (typeof object.rootNode !== "object")
+                        throw TypeError(".optimization_guide.proto.AnnotatedPageContent.rootNode: object expected");
+                    message.rootNode = $root.optimization_guide.proto.ContentNode.fromObject(object.rootNode);
+                }
+                if (object.mainFrameData != null) {
+                    if (typeof object.mainFrameData !== "object")
+                        throw TypeError(".optimization_guide.proto.AnnotatedPageContent.mainFrameData: object expected");
+                    message.mainFrameData = $root.optimization_guide.proto.FrameData.fromObject(object.mainFrameData);
+                }
+                if (object.pageInteractionInfo != null) {
+                    if (typeof object.pageInteractionInfo !== "object")
+                        throw TypeError(".optimization_guide.proto.AnnotatedPageContent.pageInteractionInfo: object expected");
+                    message.pageInteractionInfo = $root.optimization_guide.proto.PageInteractionInfo.fromObject(object.pageInteractionInfo);
+                }
+                if (object.viewportGeometry != null) {
+                    if (typeof object.viewportGeometry !== "object")
+                        throw TypeError(".optimization_guide.proto.AnnotatedPageContent.viewportGeometry: object expected");
+                    message.viewportGeometry = $root.optimization_guide.proto.BoundingRect.fromObject(object.viewportGeometry);
+                }
+                if (object.tabId != null)
+                    message.tabId = object.tabId | 0;
+                if (object.popupWindow != null) {
+                    if (typeof object.popupWindow !== "object")
+                        throw TypeError(".optimization_guide.proto.AnnotatedPageContent.popupWindow: object expected");
+                    message.popupWindow = $root.optimization_guide.proto.PopupWindow.fromObject(object.popupWindow);
+                }
+                if (object.profileInformation != null) {
+                    if (typeof object.profileInformation !== "object")
+                        throw TypeError(".optimization_guide.proto.AnnotatedPageContent.profileInformation: object expected");
+                    message.profileInformation = $root.optimization_guide.proto.ProfileInformation.fromObject(object.profileInformation);
+                }
+                if (object.geminiInChromePageMetadata != null) {
+                    if (typeof object.geminiInChromePageMetadata !== "object")
+                        throw TypeError(".optimization_guide.proto.AnnotatedPageContent.geminiInChromePageMetadata: object expected");
+                    message.geminiInChromePageMetadata = $root.optimization_guide.proto.GeminiInChromePageMetadata.fromObject(object.geminiInChromePageMetadata);
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from an AnnotatedPageContent message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.AnnotatedPageContent
+             * @static
+             * @param {optimization_guide.proto.AnnotatedPageContent} message AnnotatedPageContent
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            AnnotatedPageContent.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults) {
+                    object.version = options.enums === String ? "ANNOTATED_PAGE_CONTENT_VERSION_UNKNOWN" : 0;
+                    object.rootNode = null;
+                    object.mainFrameData = null;
+                    object.pageInteractionInfo = null;
+                    object.viewportGeometry = null;
+                    object.mode = options.enums === String ? "ANNOTATED_PAGE_CONTENT_MODE_DEFAULT" : 0;
+                    object.tabId = 0;
+                    object.popupWindow = null;
+                    object.profileInformation = null;
+                    object.geminiInChromePageMetadata = null;
+                }
+                if (message.version != null && message.hasOwnProperty("version"))
+                    object.version = options.enums === String ? $root.optimization_guide.proto.AnnotatedPageContentVersion[message.version] === undefined ? message.version : $root.optimization_guide.proto.AnnotatedPageContentVersion[message.version] : message.version;
+                if (message.rootNode != null && message.hasOwnProperty("rootNode"))
+                    object.rootNode = $root.optimization_guide.proto.ContentNode.toObject(message.rootNode, options);
+                if (message.mainFrameData != null && message.hasOwnProperty("mainFrameData"))
+                    object.mainFrameData = $root.optimization_guide.proto.FrameData.toObject(message.mainFrameData, options);
+                if (message.pageInteractionInfo != null && message.hasOwnProperty("pageInteractionInfo"))
+                    object.pageInteractionInfo = $root.optimization_guide.proto.PageInteractionInfo.toObject(message.pageInteractionInfo, options);
+                if (message.viewportGeometry != null && message.hasOwnProperty("viewportGeometry"))
+                    object.viewportGeometry = $root.optimization_guide.proto.BoundingRect.toObject(message.viewportGeometry, options);
+                if (message.mode != null && message.hasOwnProperty("mode"))
+                    object.mode = options.enums === String ? $root.optimization_guide.proto.AnnotatedPageContentMode[message.mode] === undefined ? message.mode : $root.optimization_guide.proto.AnnotatedPageContentMode[message.mode] : message.mode;
+                if (message.tabId != null && message.hasOwnProperty("tabId"))
+                    object.tabId = message.tabId;
+                if (message.popupWindow != null && message.hasOwnProperty("popupWindow"))
+                    object.popupWindow = $root.optimization_guide.proto.PopupWindow.toObject(message.popupWindow, options);
+                if (message.profileInformation != null && message.hasOwnProperty("profileInformation"))
+                    object.profileInformation = $root.optimization_guide.proto.ProfileInformation.toObject(message.profileInformation, options);
+                if (message.geminiInChromePageMetadata != null && message.hasOwnProperty("geminiInChromePageMetadata"))
+                    object.geminiInChromePageMetadata = $root.optimization_guide.proto.GeminiInChromePageMetadata.toObject(message.geminiInChromePageMetadata, options);
+                return object;
+            };
+
+            /**
+             * Converts this AnnotatedPageContent to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.AnnotatedPageContent
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            AnnotatedPageContent.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for AnnotatedPageContent
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.AnnotatedPageContent
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            AnnotatedPageContent.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.AnnotatedPageContent";
+            };
+
             return AnnotatedPageContent;
         })();
 
@@ -1703,6 +6261,51 @@ export const optimization_guide = $root.optimization_guide = (() => {
             ContentNode.prototype.contentAttributes = null;
 
             /**
+             * Creates a new ContentNode instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.ContentNode
+             * @static
+             * @param {optimization_guide.proto.IContentNode=} [properties] Properties to set
+             * @returns {optimization_guide.proto.ContentNode} ContentNode instance
+             */
+            ContentNode.create = function create(properties) {
+                return new ContentNode(properties);
+            };
+
+            /**
+             * Encodes the specified ContentNode message. Does not implicitly {@link optimization_guide.proto.ContentNode.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.ContentNode
+             * @static
+             * @param {optimization_guide.proto.IContentNode} message ContentNode message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ContentNode.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.childrenNodes != null && message.childrenNodes.length)
+                    for (let i = 0; i < message.childrenNodes.length; ++i)
+                        $root.optimization_guide.proto.ContentNode.encode(message.childrenNodes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                if (message.contentAttributes != null && Object.hasOwnProperty.call(message, "contentAttributes"))
+                    $root.optimization_guide.proto.ContentAttributes.encode(message.contentAttributes, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified ContentNode message, length delimited. Does not implicitly {@link optimization_guide.proto.ContentNode.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.ContentNode
+             * @static
+             * @param {optimization_guide.proto.IContentNode} message ContentNode message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ContentNode.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a ContentNode message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.ContentNode
@@ -1738,6 +6341,133 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a ContentNode message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.ContentNode
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.ContentNode} ContentNode
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ContentNode.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a ContentNode message.
+             * @function verify
+             * @memberof optimization_guide.proto.ContentNode
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            ContentNode.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.childrenNodes != null && message.hasOwnProperty("childrenNodes")) {
+                    if (!Array.isArray(message.childrenNodes))
+                        return "childrenNodes: array expected";
+                    for (let i = 0; i < message.childrenNodes.length; ++i) {
+                        let error = $root.optimization_guide.proto.ContentNode.verify(message.childrenNodes[i]);
+                        if (error)
+                            return "childrenNodes." + error;
+                    }
+                }
+                if (message.contentAttributes != null && message.hasOwnProperty("contentAttributes")) {
+                    let error = $root.optimization_guide.proto.ContentAttributes.verify(message.contentAttributes);
+                    if (error)
+                        return "contentAttributes." + error;
+                }
+                return null;
+            };
+
+            /**
+             * Creates a ContentNode message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.ContentNode
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.ContentNode} ContentNode
+             */
+            ContentNode.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.ContentNode)
+                    return object;
+                let message = new $root.optimization_guide.proto.ContentNode();
+                if (object.childrenNodes) {
+                    if (!Array.isArray(object.childrenNodes))
+                        throw TypeError(".optimization_guide.proto.ContentNode.childrenNodes: array expected");
+                    message.childrenNodes = [];
+                    for (let i = 0; i < object.childrenNodes.length; ++i) {
+                        if (typeof object.childrenNodes[i] !== "object")
+                            throw TypeError(".optimization_guide.proto.ContentNode.childrenNodes: object expected");
+                        message.childrenNodes[i] = $root.optimization_guide.proto.ContentNode.fromObject(object.childrenNodes[i]);
+                    }
+                }
+                if (object.contentAttributes != null) {
+                    if (typeof object.contentAttributes !== "object")
+                        throw TypeError(".optimization_guide.proto.ContentNode.contentAttributes: object expected");
+                    message.contentAttributes = $root.optimization_guide.proto.ContentAttributes.fromObject(object.contentAttributes);
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a ContentNode message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.ContentNode
+             * @static
+             * @param {optimization_guide.proto.ContentNode} message ContentNode
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            ContentNode.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.arrays || options.defaults)
+                    object.childrenNodes = [];
+                if (options.defaults)
+                    object.contentAttributes = null;
+                if (message.childrenNodes && message.childrenNodes.length) {
+                    object.childrenNodes = [];
+                    for (let j = 0; j < message.childrenNodes.length; ++j)
+                        object.childrenNodes[j] = $root.optimization_guide.proto.ContentNode.toObject(message.childrenNodes[j], options);
+                }
+                if (message.contentAttributes != null && message.hasOwnProperty("contentAttributes"))
+                    object.contentAttributes = $root.optimization_guide.proto.ContentAttributes.toObject(message.contentAttributes, options);
+                return object;
+            };
+
+            /**
+             * Converts this ContentNode to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.ContentNode
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            ContentNode.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for ContentNode
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.ContentNode
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            ContentNode.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.ContentNode";
             };
 
             return ContentNode;
@@ -2031,6 +6761,92 @@ export const optimization_guide = $root.optimization_guide = (() => {
             });
 
             /**
+             * Creates a new ContentAttributes instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.ContentAttributes
+             * @static
+             * @param {optimization_guide.proto.IContentAttributes=} [properties] Properties to set
+             * @returns {optimization_guide.proto.ContentAttributes} ContentAttributes instance
+             */
+            ContentAttributes.create = function create(properties) {
+                return new ContentAttributes(properties);
+            };
+
+            /**
+             * Encodes the specified ContentAttributes message. Does not implicitly {@link optimization_guide.proto.ContentAttributes.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.ContentAttributes
+             * @static
+             * @param {optimization_guide.proto.IContentAttributes} message ContentAttributes message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ContentAttributes.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.commonAncestorDomNodeId != null && Object.hasOwnProperty.call(message, "commonAncestorDomNodeId"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.commonAncestorDomNodeId);
+                if (message.attributeType != null && Object.hasOwnProperty.call(message, "attributeType"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.attributeType);
+                if (message.geometry != null && Object.hasOwnProperty.call(message, "geometry"))
+                    $root.optimization_guide.proto.Geometry.encode(message.geometry, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                if (message.tableData != null && Object.hasOwnProperty.call(message, "tableData"))
+                    $root.optimization_guide.proto.TableData.encode(message.tableData, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                if (message.iframeData != null && Object.hasOwnProperty.call(message, "iframeData"))
+                    $root.optimization_guide.proto.IframeData.encode(message.iframeData, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                if (message.textData != null && Object.hasOwnProperty.call(message, "textData"))
+                    $root.optimization_guide.proto.TextInfo.encode(message.textData, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                if (message.imageData != null && Object.hasOwnProperty.call(message, "imageData"))
+                    $root.optimization_guide.proto.ImageInfo.encode(message.imageData, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                if (message.tableRowData != null && Object.hasOwnProperty.call(message, "tableRowData"))
+                    $root.optimization_guide.proto.TableRowData.encode(message.tableRowData, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                if (message.anchorData != null && Object.hasOwnProperty.call(message, "anchorData"))
+                    $root.optimization_guide.proto.AnchorData.encode(message.anchorData, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                if (message.annotatedRoles != null && message.annotatedRoles.length) {
+                    writer.uint32(/* id 15, wireType 2 =*/122).fork();
+                    for (let i = 0; i < message.annotatedRoles.length; ++i)
+                        writer.int32(message.annotatedRoles[i]);
+                    writer.ldelim();
+                }
+                if (message.label != null && Object.hasOwnProperty.call(message, "label"))
+                    writer.uint32(/* id 16, wireType 2 =*/130).string(message.label);
+                if (message.formData != null && Object.hasOwnProperty.call(message, "formData"))
+                    $root.optimization_guide.proto.FormInfo.encode(message.formData, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
+                if (message.formControlData != null && Object.hasOwnProperty.call(message, "formControlData"))
+                    $root.optimization_guide.proto.FormControlData.encode(message.formControlData, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                if (message.interactionInfo != null && Object.hasOwnProperty.call(message, "interactionInfo"))
+                    $root.optimization_guide.proto.InteractionInfo.encode(message.interactionInfo, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                if (message.svgRootData != null && Object.hasOwnProperty.call(message, "svgRootData"))
+                    $root.optimization_guide.proto.SVGRootData.encode(message.svgRootData, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
+                if (message.canvasData != null && Object.hasOwnProperty.call(message, "canvasData"))
+                    $root.optimization_guide.proto.CanvasData.encode(message.canvasData, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
+                if (message.labelForDomNodeId != null && Object.hasOwnProperty.call(message, "labelForDomNodeId"))
+                    writer.uint32(/* id 25, wireType 0 =*/200).int32(message.labelForDomNodeId);
+                if (message.ariaRole != null && Object.hasOwnProperty.call(message, "ariaRole"))
+                    writer.uint32(/* id 26, wireType 0 =*/208).int32(message.ariaRole);
+                if (message.videoData != null && Object.hasOwnProperty.call(message, "videoData"))
+                    $root.optimization_guide.proto.VideoData.encode(message.videoData, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
+                if (message.isAdRelated != null && Object.hasOwnProperty.call(message, "isAdRelated"))
+                    writer.uint32(/* id 28, wireType 0 =*/224).bool(message.isAdRelated);
+                if (message.redactionDecision != null && Object.hasOwnProperty.call(message, "redactionDecision"))
+                    writer.uint32(/* id 29, wireType 0 =*/232).int32(message.redactionDecision);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified ContentAttributes message, length delimited. Does not implicitly {@link optimization_guide.proto.ContentAttributes.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.ContentAttributes
+             * @static
+             * @param {optimization_guide.proto.IContentAttributes} message ContentAttributes message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ContentAttributes.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a ContentAttributes message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.ContentAttributes
@@ -2147,6 +6963,1728 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a ContentAttributes message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.ContentAttributes
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.ContentAttributes} ContentAttributes
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ContentAttributes.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a ContentAttributes message.
+             * @function verify
+             * @memberof optimization_guide.proto.ContentAttributes
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            ContentAttributes.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                let properties = {};
+                if (message.textData != null && message.hasOwnProperty("textData")) {
+                    properties.contentData = 1;
+                    {
+                        let error = $root.optimization_guide.proto.TextInfo.verify(message.textData);
+                        if (error)
+                            return "textData." + error;
+                    }
+                }
+                if (message.imageData != null && message.hasOwnProperty("imageData")) {
+                    if (properties.contentData === 1)
+                        return "contentData: multiple values";
+                    properties.contentData = 1;
+                    {
+                        let error = $root.optimization_guide.proto.ImageInfo.verify(message.imageData);
+                        if (error)
+                            return "imageData." + error;
+                    }
+                }
+                if (message.svgRootData != null && message.hasOwnProperty("svgRootData")) {
+                    if (properties.contentData === 1)
+                        return "contentData: multiple values";
+                    properties.contentData = 1;
+                    {
+                        let error = $root.optimization_guide.proto.SVGRootData.verify(message.svgRootData);
+                        if (error)
+                            return "svgRootData." + error;
+                    }
+                }
+                if (message.canvasData != null && message.hasOwnProperty("canvasData")) {
+                    if (properties.contentData === 1)
+                        return "contentData: multiple values";
+                    properties.contentData = 1;
+                    {
+                        let error = $root.optimization_guide.proto.CanvasData.verify(message.canvasData);
+                        if (error)
+                            return "canvasData." + error;
+                    }
+                }
+                if (message.videoData != null && message.hasOwnProperty("videoData")) {
+                    if (properties.contentData === 1)
+                        return "contentData: multiple values";
+                    properties.contentData = 1;
+                    {
+                        let error = $root.optimization_guide.proto.VideoData.verify(message.videoData);
+                        if (error)
+                            return "videoData." + error;
+                    }
+                }
+                if (message.anchorData != null && message.hasOwnProperty("anchorData")) {
+                    if (properties.contentData === 1)
+                        return "contentData: multiple values";
+                    properties.contentData = 1;
+                    {
+                        let error = $root.optimization_guide.proto.AnchorData.verify(message.anchorData);
+                        if (error)
+                            return "anchorData." + error;
+                    }
+                }
+                if (message.formData != null && message.hasOwnProperty("formData")) {
+                    if (properties.contentData === 1)
+                        return "contentData: multiple values";
+                    properties.contentData = 1;
+                    {
+                        let error = $root.optimization_guide.proto.FormInfo.verify(message.formData);
+                        if (error)
+                            return "formData." + error;
+                    }
+                }
+                if (message.formControlData != null && message.hasOwnProperty("formControlData")) {
+                    if (properties.contentData === 1)
+                        return "contentData: multiple values";
+                    properties.contentData = 1;
+                    {
+                        let error = $root.optimization_guide.proto.FormControlData.verify(message.formControlData);
+                        if (error)
+                            return "formControlData." + error;
+                    }
+                }
+                if (message.tableData != null && message.hasOwnProperty("tableData")) {
+                    if (properties.contentData === 1)
+                        return "contentData: multiple values";
+                    properties.contentData = 1;
+                    {
+                        let error = $root.optimization_guide.proto.TableData.verify(message.tableData);
+                        if (error)
+                            return "tableData." + error;
+                    }
+                }
+                if (message.iframeData != null && message.hasOwnProperty("iframeData")) {
+                    if (properties.contentData === 1)
+                        return "contentData: multiple values";
+                    properties.contentData = 1;
+                    {
+                        let error = $root.optimization_guide.proto.IframeData.verify(message.iframeData);
+                        if (error)
+                            return "iframeData." + error;
+                    }
+                }
+                if (message.tableRowData != null && message.hasOwnProperty("tableRowData")) {
+                    if (properties.contentData === 1)
+                        return "contentData: multiple values";
+                    properties.contentData = 1;
+                    {
+                        let error = $root.optimization_guide.proto.TableRowData.verify(message.tableRowData);
+                        if (error)
+                            return "tableRowData." + error;
+                    }
+                }
+                if (message.commonAncestorDomNodeId != null && message.hasOwnProperty("commonAncestorDomNodeId"))
+                    if (!$util.isInteger(message.commonAncestorDomNodeId))
+                        return "commonAncestorDomNodeId: integer expected";
+                if (message.attributeType != null && message.hasOwnProperty("attributeType"))
+                    switch (message.attributeType) {
+                    default:
+                        return "attributeType: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 20:
+                    case 22:
+                    case 9:
+                    case 25:
+                    case 26:
+                    case 27:
+                    case 6:
+                    case 7:
+                    case 23:
+                    case 8:
+                    case 24:
+                    case 10:
+                    case 21:
+                    case 11:
+                        break;
+                    }
+                if (message.geometry != null && message.hasOwnProperty("geometry")) {
+                    let error = $root.optimization_guide.proto.Geometry.verify(message.geometry);
+                    if (error)
+                        return "geometry." + error;
+                }
+                if (message.interactionInfo != null && message.hasOwnProperty("interactionInfo")) {
+                    let error = $root.optimization_guide.proto.InteractionInfo.verify(message.interactionInfo);
+                    if (error)
+                        return "interactionInfo." + error;
+                }
+                if (message.annotatedRoles != null && message.hasOwnProperty("annotatedRoles")) {
+                    if (!Array.isArray(message.annotatedRoles))
+                        return "annotatedRoles: array expected";
+                    for (let i = 0; i < message.annotatedRoles.length; ++i)
+                        switch (message.annotatedRoles[i]) {
+                        default:
+                            return "annotatedRoles: enum value[] expected";
+                        case 0:
+                        case 5:
+                        case 6:
+                        case 7:
+                        case 8:
+                        case 9:
+                        case 10:
+                        case 11:
+                        case 12:
+                        case 13:
+                        case 14:
+                            break;
+                        }
+                }
+                if (message.label != null && message.hasOwnProperty("label"))
+                    if (!$util.isString(message.label))
+                        return "label: string expected";
+                if (message.labelForDomNodeId != null && message.hasOwnProperty("labelForDomNodeId"))
+                    if (!$util.isInteger(message.labelForDomNodeId))
+                        return "labelForDomNodeId: integer expected";
+                if (message.ariaRole != null && message.hasOwnProperty("ariaRole"))
+                    switch (message.ariaRole) {
+                    default:
+                        return "ariaRole: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                    case 10:
+                    case 11:
+                    case 12:
+                    case 13:
+                    case 14:
+                    case 15:
+                    case 16:
+                    case 17:
+                    case 18:
+                    case 19:
+                    case 20:
+                    case 21:
+                    case 22:
+                    case 23:
+                    case 24:
+                    case 25:
+                    case 26:
+                    case 27:
+                    case 28:
+                    case 29:
+                    case 30:
+                    case 31:
+                    case 32:
+                    case 33:
+                    case 34:
+                    case 35:
+                    case 36:
+                    case 37:
+                    case 38:
+                    case 39:
+                    case 40:
+                    case 41:
+                    case 42:
+                    case 43:
+                    case 44:
+                    case 45:
+                    case 46:
+                    case 47:
+                    case 48:
+                    case 49:
+                    case 50:
+                    case 51:
+                    case 52:
+                    case 53:
+                    case 54:
+                    case 55:
+                    case 56:
+                    case 57:
+                    case 58:
+                    case 59:
+                    case 60:
+                    case 61:
+                    case 62:
+                    case 63:
+                    case 64:
+                    case 65:
+                    case 66:
+                    case 67:
+                    case 68:
+                    case 69:
+                    case 70:
+                    case 71:
+                    case 72:
+                    case 73:
+                    case 74:
+                    case 75:
+                    case 76:
+                    case 77:
+                    case 78:
+                    case 79:
+                    case 80:
+                    case 81:
+                    case 82:
+                    case 83:
+                    case 84:
+                    case 85:
+                    case 86:
+                    case 87:
+                    case 88:
+                    case 89:
+                    case 90:
+                    case 91:
+                    case 92:
+                    case 93:
+                    case 94:
+                    case 95:
+                    case 96:
+                    case 97:
+                    case 98:
+                    case 99:
+                    case 100:
+                    case 101:
+                    case 102:
+                    case 103:
+                    case 104:
+                    case 105:
+                    case 106:
+                    case 107:
+                    case 108:
+                    case 109:
+                    case 110:
+                    case 111:
+                    case 112:
+                    case 113:
+                    case 114:
+                    case 115:
+                    case 116:
+                    case 117:
+                    case 118:
+                    case 119:
+                    case 120:
+                    case 121:
+                    case 122:
+                    case 123:
+                    case 124:
+                    case 125:
+                    case 126:
+                    case 213:
+                    case 127:
+                    case 128:
+                    case 129:
+                    case 130:
+                    case 131:
+                    case 132:
+                    case 133:
+                    case 134:
+                    case 135:
+                    case 136:
+                    case 137:
+                    case 138:
+                    case 139:
+                    case 140:
+                    case 141:
+                    case 142:
+                    case 143:
+                    case 144:
+                    case 145:
+                    case 146:
+                    case 147:
+                    case 148:
+                    case 149:
+                    case 150:
+                    case 151:
+                    case 152:
+                    case 153:
+                    case 154:
+                    case 155:
+                    case 156:
+                    case 157:
+                    case 158:
+                    case 159:
+                    case 160:
+                    case 161:
+                    case 162:
+                    case 163:
+                    case 164:
+                    case 165:
+                    case 166:
+                    case 167:
+                    case 168:
+                    case 169:
+                    case 170:
+                    case 171:
+                    case 172:
+                    case 173:
+                    case 174:
+                    case 175:
+                    case 176:
+                    case 177:
+                    case 178:
+                    case 179:
+                    case 180:
+                    case 181:
+                    case 182:
+                    case 183:
+                    case 184:
+                    case 185:
+                    case 186:
+                    case 187:
+                    case 188:
+                    case 189:
+                    case 190:
+                    case 191:
+                    case 192:
+                    case 193:
+                    case 194:
+                    case 195:
+                    case 196:
+                    case 197:
+                    case 198:
+                    case 199:
+                    case 200:
+                    case 201:
+                    case 202:
+                    case 203:
+                    case 204:
+                    case 205:
+                    case 206:
+                    case 207:
+                    case 208:
+                    case 209:
+                    case 210:
+                    case 211:
+                    case 212:
+                        break;
+                    }
+                if (message.isAdRelated != null && message.hasOwnProperty("isAdRelated"))
+                    if (typeof message.isAdRelated !== "boolean")
+                        return "isAdRelated: boolean expected";
+                if (message.redactionDecision != null && message.hasOwnProperty("redactionDecision"))
+                    switch (message.redactionDecision) {
+                    default:
+                        return "redactionDecision: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                        break;
+                    }
+                return null;
+            };
+
+            /**
+             * Creates a ContentAttributes message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.ContentAttributes
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.ContentAttributes} ContentAttributes
+             */
+            ContentAttributes.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.ContentAttributes)
+                    return object;
+                let message = new $root.optimization_guide.proto.ContentAttributes();
+                if (object.textData != null) {
+                    if (typeof object.textData !== "object")
+                        throw TypeError(".optimization_guide.proto.ContentAttributes.textData: object expected");
+                    message.textData = $root.optimization_guide.proto.TextInfo.fromObject(object.textData);
+                }
+                if (object.imageData != null) {
+                    if (typeof object.imageData !== "object")
+                        throw TypeError(".optimization_guide.proto.ContentAttributes.imageData: object expected");
+                    message.imageData = $root.optimization_guide.proto.ImageInfo.fromObject(object.imageData);
+                }
+                if (object.svgRootData != null) {
+                    if (typeof object.svgRootData !== "object")
+                        throw TypeError(".optimization_guide.proto.ContentAttributes.svgRootData: object expected");
+                    message.svgRootData = $root.optimization_guide.proto.SVGRootData.fromObject(object.svgRootData);
+                }
+                if (object.canvasData != null) {
+                    if (typeof object.canvasData !== "object")
+                        throw TypeError(".optimization_guide.proto.ContentAttributes.canvasData: object expected");
+                    message.canvasData = $root.optimization_guide.proto.CanvasData.fromObject(object.canvasData);
+                }
+                if (object.videoData != null) {
+                    if (typeof object.videoData !== "object")
+                        throw TypeError(".optimization_guide.proto.ContentAttributes.videoData: object expected");
+                    message.videoData = $root.optimization_guide.proto.VideoData.fromObject(object.videoData);
+                }
+                if (object.anchorData != null) {
+                    if (typeof object.anchorData !== "object")
+                        throw TypeError(".optimization_guide.proto.ContentAttributes.anchorData: object expected");
+                    message.anchorData = $root.optimization_guide.proto.AnchorData.fromObject(object.anchorData);
+                }
+                if (object.formData != null) {
+                    if (typeof object.formData !== "object")
+                        throw TypeError(".optimization_guide.proto.ContentAttributes.formData: object expected");
+                    message.formData = $root.optimization_guide.proto.FormInfo.fromObject(object.formData);
+                }
+                if (object.formControlData != null) {
+                    if (typeof object.formControlData !== "object")
+                        throw TypeError(".optimization_guide.proto.ContentAttributes.formControlData: object expected");
+                    message.formControlData = $root.optimization_guide.proto.FormControlData.fromObject(object.formControlData);
+                }
+                if (object.tableData != null) {
+                    if (typeof object.tableData !== "object")
+                        throw TypeError(".optimization_guide.proto.ContentAttributes.tableData: object expected");
+                    message.tableData = $root.optimization_guide.proto.TableData.fromObject(object.tableData);
+                }
+                if (object.iframeData != null) {
+                    if (typeof object.iframeData !== "object")
+                        throw TypeError(".optimization_guide.proto.ContentAttributes.iframeData: object expected");
+                    message.iframeData = $root.optimization_guide.proto.IframeData.fromObject(object.iframeData);
+                }
+                if (object.tableRowData != null) {
+                    if (typeof object.tableRowData !== "object")
+                        throw TypeError(".optimization_guide.proto.ContentAttributes.tableRowData: object expected");
+                    message.tableRowData = $root.optimization_guide.proto.TableRowData.fromObject(object.tableRowData);
+                }
+                if (object.commonAncestorDomNodeId != null)
+                    message.commonAncestorDomNodeId = object.commonAncestorDomNodeId | 0;
+                switch (object.attributeType) {
+                default:
+                    if (typeof object.attributeType === "number") {
+                        message.attributeType = object.attributeType;
+                        break;
+                    }
+                    break;
+                case "CONTENT_ATTRIBUTE_UNKNOWN":
+                case 0:
+                    message.attributeType = 0;
+                    break;
+                case "CONTENT_ATTRIBUTE_ROOT":
+                case 1:
+                    message.attributeType = 1;
+                    break;
+                case "CONTENT_ATTRIBUTE_CONTAINER":
+                case 2:
+                    message.attributeType = 2;
+                    break;
+                case "CONTENT_ATTRIBUTE_IFRAME":
+                case 3:
+                    message.attributeType = 3;
+                    break;
+                case "CONTENT_ATTRIBUTE_PARAGRAPH":
+                case 4:
+                    message.attributeType = 4;
+                    break;
+                case "CONTENT_ATTRIBUTE_HEADING":
+                case 5:
+                    message.attributeType = 5;
+                    break;
+                case "CONTENT_ATTRIBUTE_TEXT":
+                case 20:
+                    message.attributeType = 20;
+                    break;
+                case "CONTENT_ATTRIBUTE_ANCHOR":
+                case 22:
+                    message.attributeType = 22;
+                    break;
+                case "CONTENT_ATTRIBUTE_IMAGE":
+                case 9:
+                    message.attributeType = 9;
+                    break;
+                case "CONTENT_ATTRIBUTE_SVG_ROOT":
+                case 25:
+                    message.attributeType = 25;
+                    break;
+                case "CONTENT_ATTRIBUTE_CANVAS":
+                case 26:
+                    message.attributeType = 26;
+                    break;
+                case "CONTENT_ATTRIBUTE_VIDEO":
+                case 27:
+                    message.attributeType = 27;
+                    break;
+                case "CONTENT_ATTRIBUTE_ORDERED_LIST":
+                case 6:
+                    message.attributeType = 6;
+                    break;
+                case "CONTENT_ATTRIBUTE_UNORDERED_LIST":
+                case 7:
+                    message.attributeType = 7;
+                    break;
+                case "CONTENT_ATTRIBUTE_LIST_ITEM":
+                case 23:
+                    message.attributeType = 23;
+                    break;
+                case "CONTENT_ATTRIBUTE_FORM":
+                case 8:
+                    message.attributeType = 8;
+                    break;
+                case "CONTENT_ATTRIBUTE_FORM_CONTROL":
+                case 24:
+                    message.attributeType = 24;
+                    break;
+                case "CONTENT_ATTRIBUTE_TABLE":
+                case 10:
+                    message.attributeType = 10;
+                    break;
+                case "CONTENT_ATTRIBUTE_TABLE_ROW":
+                case 21:
+                    message.attributeType = 21;
+                    break;
+                case "CONTENT_ATTRIBUTE_TABLE_CELL":
+                case 11:
+                    message.attributeType = 11;
+                    break;
+                }
+                if (object.geometry != null) {
+                    if (typeof object.geometry !== "object")
+                        throw TypeError(".optimization_guide.proto.ContentAttributes.geometry: object expected");
+                    message.geometry = $root.optimization_guide.proto.Geometry.fromObject(object.geometry);
+                }
+                if (object.interactionInfo != null) {
+                    if (typeof object.interactionInfo !== "object")
+                        throw TypeError(".optimization_guide.proto.ContentAttributes.interactionInfo: object expected");
+                    message.interactionInfo = $root.optimization_guide.proto.InteractionInfo.fromObject(object.interactionInfo);
+                }
+                if (object.annotatedRoles) {
+                    if (!Array.isArray(object.annotatedRoles))
+                        throw TypeError(".optimization_guide.proto.ContentAttributes.annotatedRoles: array expected");
+                    message.annotatedRoles = [];
+                    for (let i = 0; i < object.annotatedRoles.length; ++i)
+                        switch (object.annotatedRoles[i]) {
+                        default:
+                            if (typeof object.annotatedRoles[i] === "number") {
+                                message.annotatedRoles[i] = object.annotatedRoles[i];
+                                break;
+                            }
+                        case "ANNOTATED_ROLE_UNKNOWN":
+                        case 0:
+                            message.annotatedRoles[i] = 0;
+                            break;
+                        case "ANNOTATED_ROLE_HEADER":
+                        case 5:
+                            message.annotatedRoles[i] = 5;
+                            break;
+                        case "ANNOTATED_ROLE_NAV":
+                        case 6:
+                            message.annotatedRoles[i] = 6;
+                            break;
+                        case "ANNOTATED_ROLE_SEARCH":
+                        case 7:
+                            message.annotatedRoles[i] = 7;
+                            break;
+                        case "ANNOTATED_ROLE_MAIN":
+                        case 8:
+                            message.annotatedRoles[i] = 8;
+                            break;
+                        case "ANNOTATED_ROLE_ARTICLE":
+                        case 9:
+                            message.annotatedRoles[i] = 9;
+                            break;
+                        case "ANNOTATED_ROLE_SECTION":
+                        case 10:
+                            message.annotatedRoles[i] = 10;
+                            break;
+                        case "ANNOTATED_ROLE_ASIDE":
+                        case 11:
+                            message.annotatedRoles[i] = 11;
+                            break;
+                        case "ANNOTATED_ROLE_FOOTER":
+                        case 12:
+                            message.annotatedRoles[i] = 12;
+                            break;
+                        case "ANNOTATED_ROLE_CONTENT_HIDDEN":
+                        case 13:
+                            message.annotatedRoles[i] = 13;
+                            break;
+                        case "ANNOTATED_ROLE_PAID_CONTENT":
+                        case 14:
+                            message.annotatedRoles[i] = 14;
+                            break;
+                        }
+                }
+                if (object.label != null)
+                    message.label = String(object.label);
+                if (object.labelForDomNodeId != null)
+                    message.labelForDomNodeId = object.labelForDomNodeId | 0;
+                switch (object.ariaRole) {
+                default:
+                    if (typeof object.ariaRole === "number") {
+                        message.ariaRole = object.ariaRole;
+                        break;
+                    }
+                    break;
+                case "AX_ROLE_NONE":
+                case 0:
+                    message.ariaRole = 0;
+                    break;
+                case "AX_ROLE_ABBR":
+                case 1:
+                    message.ariaRole = 1;
+                    break;
+                case "AX_ROLE_ALERT":
+                case 2:
+                    message.ariaRole = 2;
+                    break;
+                case "AX_ROLE_ALERTDIALOG":
+                case 3:
+                    message.ariaRole = 3;
+                    break;
+                case "AX_ROLE_APPLICATION":
+                case 4:
+                    message.ariaRole = 4;
+                    break;
+                case "AX_ROLE_ARTICLE":
+                case 5:
+                    message.ariaRole = 5;
+                    break;
+                case "AX_ROLE_AUDIO":
+                case 6:
+                    message.ariaRole = 6;
+                    break;
+                case "AX_ROLE_BANNER":
+                case 7:
+                    message.ariaRole = 7;
+                    break;
+                case "AX_ROLE_BLOCKQUOTE":
+                case 8:
+                    message.ariaRole = 8;
+                    break;
+                case "AX_ROLE_BUTTON":
+                case 9:
+                    message.ariaRole = 9;
+                    break;
+                case "AX_ROLE_CANVAS":
+                case 10:
+                    message.ariaRole = 10;
+                    break;
+                case "AX_ROLE_CAPTION":
+                case 11:
+                    message.ariaRole = 11;
+                    break;
+                case "AX_ROLE_CARET":
+                case 12:
+                    message.ariaRole = 12;
+                    break;
+                case "AX_ROLE_CELL":
+                case 13:
+                    message.ariaRole = 13;
+                    break;
+                case "AX_ROLE_CHECKBOX":
+                case 14:
+                    message.ariaRole = 14;
+                    break;
+                case "AX_ROLE_CLIENT":
+                case 15:
+                    message.ariaRole = 15;
+                    break;
+                case "AX_ROLE_CODE":
+                case 16:
+                    message.ariaRole = 16;
+                    break;
+                case "AX_ROLE_COLORWELL":
+                case 17:
+                    message.ariaRole = 17;
+                    break;
+                case "AX_ROLE_COLUMN":
+                case 18:
+                    message.ariaRole = 18;
+                    break;
+                case "AX_ROLE_COLUMNHEADER":
+                case 19:
+                    message.ariaRole = 19;
+                    break;
+                case "AX_ROLE_COMBOBOXGROUPING":
+                case 20:
+                    message.ariaRole = 20;
+                    break;
+                case "AX_ROLE_COMBOBOXMENUBUTTON":
+                case 21:
+                    message.ariaRole = 21;
+                    break;
+                case "AX_ROLE_COMPLEMENTARY":
+                case 22:
+                    message.ariaRole = 22;
+                    break;
+                case "AX_ROLE_COMMENT":
+                case 23:
+                    message.ariaRole = 23;
+                    break;
+                case "AX_ROLE_CONTENTDELETION":
+                case 24:
+                    message.ariaRole = 24;
+                    break;
+                case "AX_ROLE_CONTENTINSERTION":
+                case 25:
+                    message.ariaRole = 25;
+                    break;
+                case "AX_ROLE_CONTENTINFO":
+                case 26:
+                    message.ariaRole = 26;
+                    break;
+                case "AX_ROLE_DATE":
+                case 27:
+                    message.ariaRole = 27;
+                    break;
+                case "AX_ROLE_DATETIME":
+                case 28:
+                    message.ariaRole = 28;
+                    break;
+                case "AX_ROLE_DEFINITION":
+                case 29:
+                    message.ariaRole = 29;
+                    break;
+                case "AX_ROLE_DESCRIPTIONLIST":
+                case 30:
+                    message.ariaRole = 30;
+                    break;
+                case "AX_ROLE_DESCRIPTIONLISTDETAILDEPRECATED":
+                case 31:
+                    message.ariaRole = 31;
+                    break;
+                case "AX_ROLE_DESCRIPTIONLISTTERMDEPRECATED":
+                case 32:
+                    message.ariaRole = 32;
+                    break;
+                case "AX_ROLE_DESKTOP":
+                case 33:
+                    message.ariaRole = 33;
+                    break;
+                case "AX_ROLE_DETAILS":
+                case 34:
+                    message.ariaRole = 34;
+                    break;
+                case "AX_ROLE_DIALOG":
+                case 35:
+                    message.ariaRole = 35;
+                    break;
+                case "AX_ROLE_DIRECTORYDEPRECATED":
+                case 36:
+                    message.ariaRole = 36;
+                    break;
+                case "AX_ROLE_DISCLOSURETRIANGLE":
+                case 37:
+                    message.ariaRole = 37;
+                    break;
+                case "AX_ROLE_DOCABSTRACT":
+                case 38:
+                    message.ariaRole = 38;
+                    break;
+                case "AX_ROLE_DOCACKNOWLEDGMENTS":
+                case 39:
+                    message.ariaRole = 39;
+                    break;
+                case "AX_ROLE_DOCAFTERWORD":
+                case 40:
+                    message.ariaRole = 40;
+                    break;
+                case "AX_ROLE_DOCAPPENDIX":
+                case 41:
+                    message.ariaRole = 41;
+                    break;
+                case "AX_ROLE_DOCBACKLINK":
+                case 42:
+                    message.ariaRole = 42;
+                    break;
+                case "AX_ROLE_DOCBIBLIOENTRY":
+                case 43:
+                    message.ariaRole = 43;
+                    break;
+                case "AX_ROLE_DOCBIBLIOGRAPHY":
+                case 44:
+                    message.ariaRole = 44;
+                    break;
+                case "AX_ROLE_DOCBIBLIOREF":
+                case 45:
+                    message.ariaRole = 45;
+                    break;
+                case "AX_ROLE_DOCCHAPTER":
+                case 46:
+                    message.ariaRole = 46;
+                    break;
+                case "AX_ROLE_DOCCOLOPHON":
+                case 47:
+                    message.ariaRole = 47;
+                    break;
+                case "AX_ROLE_DOCCONCLUSION":
+                case 48:
+                    message.ariaRole = 48;
+                    break;
+                case "AX_ROLE_DOCCOVER":
+                case 49:
+                    message.ariaRole = 49;
+                    break;
+                case "AX_ROLE_DOCCREDIT":
+                case 50:
+                    message.ariaRole = 50;
+                    break;
+                case "AX_ROLE_DOCCREDITS":
+                case 51:
+                    message.ariaRole = 51;
+                    break;
+                case "AX_ROLE_DOCDEDICATION":
+                case 52:
+                    message.ariaRole = 52;
+                    break;
+                case "AX_ROLE_DOCENDNOTE":
+                case 53:
+                    message.ariaRole = 53;
+                    break;
+                case "AX_ROLE_DOCENDNOTES":
+                case 54:
+                    message.ariaRole = 54;
+                    break;
+                case "AX_ROLE_DOCEPIGRAPH":
+                case 55:
+                    message.ariaRole = 55;
+                    break;
+                case "AX_ROLE_DOCEPILOGUE":
+                case 56:
+                    message.ariaRole = 56;
+                    break;
+                case "AX_ROLE_DOCERRATA":
+                case 57:
+                    message.ariaRole = 57;
+                    break;
+                case "AX_ROLE_DOCEXAMPLE":
+                case 58:
+                    message.ariaRole = 58;
+                    break;
+                case "AX_ROLE_DOCFOOTNOTE":
+                case 59:
+                    message.ariaRole = 59;
+                    break;
+                case "AX_ROLE_DOCFOREWORD":
+                case 60:
+                    message.ariaRole = 60;
+                    break;
+                case "AX_ROLE_DOCGLOSSARY":
+                case 61:
+                    message.ariaRole = 61;
+                    break;
+                case "AX_ROLE_DOCGLOSSREF":
+                case 62:
+                    message.ariaRole = 62;
+                    break;
+                case "AX_ROLE_DOCINDEX":
+                case 63:
+                    message.ariaRole = 63;
+                    break;
+                case "AX_ROLE_DOCINTRODUCTION":
+                case 64:
+                    message.ariaRole = 64;
+                    break;
+                case "AX_ROLE_DOCNOTEREF":
+                case 65:
+                    message.ariaRole = 65;
+                    break;
+                case "AX_ROLE_DOCNOTICE":
+                case 66:
+                    message.ariaRole = 66;
+                    break;
+                case "AX_ROLE_DOCPAGEBREAK":
+                case 67:
+                    message.ariaRole = 67;
+                    break;
+                case "AX_ROLE_DOCPAGEFOOTER":
+                case 68:
+                    message.ariaRole = 68;
+                    break;
+                case "AX_ROLE_DOCPAGEHEADER":
+                case 69:
+                    message.ariaRole = 69;
+                    break;
+                case "AX_ROLE_DOCPAGELIST":
+                case 70:
+                    message.ariaRole = 70;
+                    break;
+                case "AX_ROLE_DOCPART":
+                case 71:
+                    message.ariaRole = 71;
+                    break;
+                case "AX_ROLE_DOCPREFACE":
+                case 72:
+                    message.ariaRole = 72;
+                    break;
+                case "AX_ROLE_DOCPROLOGUE":
+                case 73:
+                    message.ariaRole = 73;
+                    break;
+                case "AX_ROLE_DOCPULLQUOTE":
+                case 74:
+                    message.ariaRole = 74;
+                    break;
+                case "AX_ROLE_DOCQNA":
+                case 75:
+                    message.ariaRole = 75;
+                    break;
+                case "AX_ROLE_DOCSUBTITLE":
+                case 76:
+                    message.ariaRole = 76;
+                    break;
+                case "AX_ROLE_DOCTIP":
+                case 77:
+                    message.ariaRole = 77;
+                    break;
+                case "AX_ROLE_DOCTOC":
+                case 78:
+                    message.ariaRole = 78;
+                    break;
+                case "AX_ROLE_DOCUMENT":
+                case 79:
+                    message.ariaRole = 79;
+                    break;
+                case "AX_ROLE_EMBEDDEDOBJECT":
+                case 80:
+                    message.ariaRole = 80;
+                    break;
+                case "AX_ROLE_EMPHASIS":
+                case 81:
+                    message.ariaRole = 81;
+                    break;
+                case "AX_ROLE_FEED":
+                case 82:
+                    message.ariaRole = 82;
+                    break;
+                case "AX_ROLE_FIGCAPTION":
+                case 83:
+                    message.ariaRole = 83;
+                    break;
+                case "AX_ROLE_FIGURE":
+                case 84:
+                    message.ariaRole = 84;
+                    break;
+                case "AX_ROLE_FOOTER":
+                case 85:
+                    message.ariaRole = 85;
+                    break;
+                case "AX_ROLE_SECTIONFOOTER":
+                case 86:
+                    message.ariaRole = 86;
+                    break;
+                case "AX_ROLE_FORM":
+                case 87:
+                    message.ariaRole = 87;
+                    break;
+                case "AX_ROLE_GENERICCONTAINER":
+                case 88:
+                    message.ariaRole = 88;
+                    break;
+                case "AX_ROLE_GRAPHICSDOCUMENT":
+                case 89:
+                    message.ariaRole = 89;
+                    break;
+                case "AX_ROLE_GRAPHICSOBJECT":
+                case 90:
+                    message.ariaRole = 90;
+                    break;
+                case "AX_ROLE_GRAPHICSSYMBOL":
+                case 91:
+                    message.ariaRole = 91;
+                    break;
+                case "AX_ROLE_GRID":
+                case 92:
+                    message.ariaRole = 92;
+                    break;
+                case "AX_ROLE_GROUP":
+                case 93:
+                    message.ariaRole = 93;
+                    break;
+                case "AX_ROLE_HEADER":
+                case 94:
+                    message.ariaRole = 94;
+                    break;
+                case "AX_ROLE_SECTIONHEADER":
+                case 95:
+                    message.ariaRole = 95;
+                    break;
+                case "AX_ROLE_HEADING":
+                case 96:
+                    message.ariaRole = 96;
+                    break;
+                case "AX_ROLE_IFRAME":
+                case 97:
+                    message.ariaRole = 97;
+                    break;
+                case "AX_ROLE_IFRAMEPRESENTATIONAL":
+                case 98:
+                    message.ariaRole = 98;
+                    break;
+                case "AX_ROLE_IMAGE":
+                case 99:
+                    message.ariaRole = 99;
+                    break;
+                case "AX_ROLE_IMECANDIDATE":
+                case 100:
+                    message.ariaRole = 100;
+                    break;
+                case "AX_ROLE_INLINETEXTBOX":
+                case 101:
+                    message.ariaRole = 101;
+                    break;
+                case "AX_ROLE_INPUTTIME":
+                case 102:
+                    message.ariaRole = 102;
+                    break;
+                case "AX_ROLE_KEYBOARD":
+                case 103:
+                    message.ariaRole = 103;
+                    break;
+                case "AX_ROLE_LABELTEXT":
+                case 104:
+                    message.ariaRole = 104;
+                    break;
+                case "AX_ROLE_LAYOUTTABLE":
+                case 105:
+                    message.ariaRole = 105;
+                    break;
+                case "AX_ROLE_LAYOUTTABLECELL":
+                case 106:
+                    message.ariaRole = 106;
+                    break;
+                case "AX_ROLE_LAYOUTTABLEROW":
+                case 107:
+                    message.ariaRole = 107;
+                    break;
+                case "AX_ROLE_LEGEND":
+                case 108:
+                    message.ariaRole = 108;
+                    break;
+                case "AX_ROLE_LINEBREAK":
+                case 109:
+                    message.ariaRole = 109;
+                    break;
+                case "AX_ROLE_LINK":
+                case 110:
+                    message.ariaRole = 110;
+                    break;
+                case "AX_ROLE_LIST":
+                case 111:
+                    message.ariaRole = 111;
+                    break;
+                case "AX_ROLE_LISTBOX":
+                case 112:
+                    message.ariaRole = 112;
+                    break;
+                case "AX_ROLE_LISTBOXOPTION":
+                case 113:
+                    message.ariaRole = 113;
+                    break;
+                case "AX_ROLE_LISTGRID":
+                case 114:
+                    message.ariaRole = 114;
+                    break;
+                case "AX_ROLE_LISTITEM":
+                case 115:
+                    message.ariaRole = 115;
+                    break;
+                case "AX_ROLE_LISTMARKER":
+                case 116:
+                    message.ariaRole = 116;
+                    break;
+                case "AX_ROLE_LOG":
+                case 117:
+                    message.ariaRole = 117;
+                    break;
+                case "AX_ROLE_MAIN":
+                case 118:
+                    message.ariaRole = 118;
+                    break;
+                case "AX_ROLE_MARK":
+                case 119:
+                    message.ariaRole = 119;
+                    break;
+                case "AX_ROLE_MARQUEE":
+                case 120:
+                    message.ariaRole = 120;
+                    break;
+                case "AX_ROLE_MATH":
+                case 121:
+                    message.ariaRole = 121;
+                    break;
+                case "AX_ROLE_MENU":
+                case 122:
+                    message.ariaRole = 122;
+                    break;
+                case "AX_ROLE_MENUBAR":
+                case 123:
+                    message.ariaRole = 123;
+                    break;
+                case "AX_ROLE_MENUITEM":
+                case 124:
+                    message.ariaRole = 124;
+                    break;
+                case "AX_ROLE_MENUITEMCHECKBOX":
+                case 125:
+                    message.ariaRole = 125;
+                    break;
+                case "AX_ROLE_MENUITEMRADIO":
+                case 126:
+                    message.ariaRole = 126;
+                    break;
+                case "AX_ROLE_MENUITEMSEPARATOR":
+                case 213:
+                    message.ariaRole = 213;
+                    break;
+                case "AX_ROLE_MENULISTOPTION":
+                case 127:
+                    message.ariaRole = 127;
+                    break;
+                case "AX_ROLE_MENULISTPOPUP":
+                case 128:
+                    message.ariaRole = 128;
+                    break;
+                case "AX_ROLE_METER":
+                case 129:
+                    message.ariaRole = 129;
+                    break;
+                case "AX_ROLE_NAVIGATION":
+                case 130:
+                    message.ariaRole = 130;
+                    break;
+                case "AX_ROLE_NOTE":
+                case 131:
+                    message.ariaRole = 131;
+                    break;
+                case "AX_ROLE_PANE":
+                case 132:
+                    message.ariaRole = 132;
+                    break;
+                case "AX_ROLE_PARAGRAPH":
+                case 133:
+                    message.ariaRole = 133;
+                    break;
+                case "AX_ROLE_PDFACTIONABLEHIGHLIGHT":
+                case 134:
+                    message.ariaRole = 134;
+                    break;
+                case "AX_ROLE_PDFROOT":
+                case 135:
+                    message.ariaRole = 135;
+                    break;
+                case "AX_ROLE_PLUGINOBJECT":
+                case 136:
+                    message.ariaRole = 136;
+                    break;
+                case "AX_ROLE_POPUPBUTTON":
+                case 137:
+                    message.ariaRole = 137;
+                    break;
+                case "AX_ROLE_PORTALDEPRECATED":
+                case 138:
+                    message.ariaRole = 138;
+                    break;
+                case "AX_ROLE_PREDEPRECATED":
+                case 139:
+                    message.ariaRole = 139;
+                    break;
+                case "AX_ROLE_PROGRESSINDICATOR":
+                case 140:
+                    message.ariaRole = 140;
+                    break;
+                case "AX_ROLE_RADIOBUTTON":
+                case 141:
+                    message.ariaRole = 141;
+                    break;
+                case "AX_ROLE_RADIOGROUP":
+                case 142:
+                    message.ariaRole = 142;
+                    break;
+                case "AX_ROLE_REGION":
+                case 143:
+                    message.ariaRole = 143;
+                    break;
+                case "AX_ROLE_ROOTWEBAREA":
+                case 144:
+                    message.ariaRole = 144;
+                    break;
+                case "AX_ROLE_ROW":
+                case 145:
+                    message.ariaRole = 145;
+                    break;
+                case "AX_ROLE_ROWGROUP":
+                case 146:
+                    message.ariaRole = 146;
+                    break;
+                case "AX_ROLE_ROWHEADER":
+                case 147:
+                    message.ariaRole = 147;
+                    break;
+                case "AX_ROLE_RUBY":
+                case 148:
+                    message.ariaRole = 148;
+                    break;
+                case "AX_ROLE_RUBYANNOTATION":
+                case 149:
+                    message.ariaRole = 149;
+                    break;
+                case "AX_ROLE_SCROLLBAR":
+                case 150:
+                    message.ariaRole = 150;
+                    break;
+                case "AX_ROLE_SCROLLVIEW":
+                case 151:
+                    message.ariaRole = 151;
+                    break;
+                case "AX_ROLE_SEARCH":
+                case 152:
+                    message.ariaRole = 152;
+                    break;
+                case "AX_ROLE_SEARCHBOX":
+                case 153:
+                    message.ariaRole = 153;
+                    break;
+                case "AX_ROLE_SECTION":
+                case 154:
+                    message.ariaRole = 154;
+                    break;
+                case "AX_ROLE_SLIDER":
+                case 155:
+                    message.ariaRole = 155;
+                    break;
+                case "AX_ROLE_SPINBUTTON":
+                case 156:
+                    message.ariaRole = 156;
+                    break;
+                case "AX_ROLE_SPLITTER":
+                case 157:
+                    message.ariaRole = 157;
+                    break;
+                case "AX_ROLE_STATICTEXT":
+                case 158:
+                    message.ariaRole = 158;
+                    break;
+                case "AX_ROLE_STATUS":
+                case 159:
+                    message.ariaRole = 159;
+                    break;
+                case "AX_ROLE_STRONG":
+                case 160:
+                    message.ariaRole = 160;
+                    break;
+                case "AX_ROLE_SUGGESTION":
+                case 161:
+                    message.ariaRole = 161;
+                    break;
+                case "AX_ROLE_SVGROOT":
+                case 162:
+                    message.ariaRole = 162;
+                    break;
+                case "AX_ROLE_SWITCH":
+                case 163:
+                    message.ariaRole = 163;
+                    break;
+                case "AX_ROLE_TAB":
+                case 164:
+                    message.ariaRole = 164;
+                    break;
+                case "AX_ROLE_TABLIST":
+                case 165:
+                    message.ariaRole = 165;
+                    break;
+                case "AX_ROLE_TABPANEL":
+                case 166:
+                    message.ariaRole = 166;
+                    break;
+                case "AX_ROLE_TABLE":
+                case 167:
+                    message.ariaRole = 167;
+                    break;
+                case "AX_ROLE_TABLEHEADERCONTAINER":
+                case 168:
+                    message.ariaRole = 168;
+                    break;
+                case "AX_ROLE_TERM":
+                case 169:
+                    message.ariaRole = 169;
+                    break;
+                case "AX_ROLE_TEXTFIELD":
+                case 170:
+                    message.ariaRole = 170;
+                    break;
+                case "AX_ROLE_TEXTFIELDWITHCOMBOBOX":
+                case 171:
+                    message.ariaRole = 171;
+                    break;
+                case "AX_ROLE_TIME":
+                case 172:
+                    message.ariaRole = 172;
+                    break;
+                case "AX_ROLE_TIMER":
+                case 173:
+                    message.ariaRole = 173;
+                    break;
+                case "AX_ROLE_TITLEBAR":
+                case 174:
+                    message.ariaRole = 174;
+                    break;
+                case "AX_ROLE_TOGGLEBUTTON":
+                case 175:
+                    message.ariaRole = 175;
+                    break;
+                case "AX_ROLE_TOOLBAR":
+                case 176:
+                    message.ariaRole = 176;
+                    break;
+                case "AX_ROLE_TOOLTIP":
+                case 177:
+                    message.ariaRole = 177;
+                    break;
+                case "AX_ROLE_TREE":
+                case 178:
+                    message.ariaRole = 178;
+                    break;
+                case "AX_ROLE_TREEGRID":
+                case 179:
+                    message.ariaRole = 179;
+                    break;
+                case "AX_ROLE_TREEITEM":
+                case 180:
+                    message.ariaRole = 180;
+                    break;
+                case "AX_ROLE_UNKNOWN":
+                case 181:
+                    message.ariaRole = 181;
+                    break;
+                case "AX_ROLE_VIDEO":
+                case 182:
+                    message.ariaRole = 182;
+                    break;
+                case "AX_ROLE_WEBVIEW":
+                case 183:
+                    message.ariaRole = 183;
+                    break;
+                case "AX_ROLE_WINDOW":
+                case 184:
+                    message.ariaRole = 184;
+                    break;
+                case "AX_ROLE_SUBSCRIPT":
+                case 185:
+                    message.ariaRole = 185;
+                    break;
+                case "AX_ROLE_SUPERSCRIPT":
+                case 186:
+                    message.ariaRole = 186;
+                    break;
+                case "AX_ROLE_MATHMLMATH":
+                case 187:
+                    message.ariaRole = 187;
+                    break;
+                case "AX_ROLE_MATHMLFRACTION":
+                case 188:
+                    message.ariaRole = 188;
+                    break;
+                case "AX_ROLE_MATHMLIDENTIFIER":
+                case 189:
+                    message.ariaRole = 189;
+                    break;
+                case "AX_ROLE_MATHMLMULTISCRIPTS":
+                case 190:
+                    message.ariaRole = 190;
+                    break;
+                case "AX_ROLE_MATHMLNONESCRIPT":
+                case 191:
+                    message.ariaRole = 191;
+                    break;
+                case "AX_ROLE_MATHMLNUMBER":
+                case 192:
+                    message.ariaRole = 192;
+                    break;
+                case "AX_ROLE_MATHMLOPERATOR":
+                case 193:
+                    message.ariaRole = 193;
+                    break;
+                case "AX_ROLE_MATHMLOVER":
+                case 194:
+                    message.ariaRole = 194;
+                    break;
+                case "AX_ROLE_MATHMLPRESCRIPTDELIMITER":
+                case 195:
+                    message.ariaRole = 195;
+                    break;
+                case "AX_ROLE_MATHMLROOT":
+                case 196:
+                    message.ariaRole = 196;
+                    break;
+                case "AX_ROLE_MATHMLROW":
+                case 197:
+                    message.ariaRole = 197;
+                    break;
+                case "AX_ROLE_MATHMLSQUAREROOT":
+                case 198:
+                    message.ariaRole = 198;
+                    break;
+                case "AX_ROLE_MATHMLSTRINGLITERAL":
+                case 199:
+                    message.ariaRole = 199;
+                    break;
+                case "AX_ROLE_MATHMLSUB":
+                case 200:
+                    message.ariaRole = 200;
+                    break;
+                case "AX_ROLE_MATHMLSUBSUP":
+                case 201:
+                    message.ariaRole = 201;
+                    break;
+                case "AX_ROLE_MATHMLSUP":
+                case 202:
+                    message.ariaRole = 202;
+                    break;
+                case "AX_ROLE_MATHMLTABLE":
+                case 203:
+                    message.ariaRole = 203;
+                    break;
+                case "AX_ROLE_MATHMLTABLECELL":
+                case 204:
+                    message.ariaRole = 204;
+                    break;
+                case "AX_ROLE_MATHMLTABLEROW":
+                case 205:
+                    message.ariaRole = 205;
+                    break;
+                case "AX_ROLE_MATHMLTEXT":
+                case 206:
+                    message.ariaRole = 206;
+                    break;
+                case "AX_ROLE_MATHMLUNDER":
+                case 207:
+                    message.ariaRole = 207;
+                    break;
+                case "AX_ROLE_MATHMLUNDEROVER":
+                case 208:
+                    message.ariaRole = 208;
+                    break;
+                case "AX_ROLE_COMBOBOXSELECT":
+                case 209:
+                    message.ariaRole = 209;
+                    break;
+                case "AX_ROLE_DISCLOSURETRIANGLEGROUPED":
+                case 210:
+                    message.ariaRole = 210;
+                    break;
+                case "AX_ROLE_SECTIONWITHOUTNAME":
+                case 211:
+                    message.ariaRole = 211;
+                    break;
+                case "AX_ROLE_GRIDCELL":
+                case 212:
+                    message.ariaRole = 212;
+                    break;
+                }
+                if (object.isAdRelated != null)
+                    message.isAdRelated = Boolean(object.isAdRelated);
+                switch (object.redactionDecision) {
+                default:
+                    if (typeof object.redactionDecision === "number") {
+                        message.redactionDecision = object.redactionDecision;
+                        break;
+                    }
+                    break;
+                case "REDACTION_DECISION_NO_REDACTION_NECESSARY":
+                case 0:
+                    message.redactionDecision = 0;
+                    break;
+                case "REDACTION_DECISION_UNREDACTED_EMPTY_PASSWORD":
+                case 1:
+                    message.redactionDecision = 1;
+                    break;
+                case "REDACTION_DECISION_REDACTED_HAS_BEEN_PASSWORD":
+                case 2:
+                    message.redactionDecision = 2;
+                    break;
+                case "REDACTION_DECISION_UNREDACTED_EMPTY_PAYMENT_FIELD":
+                case 3:
+                    message.redactionDecision = 3;
+                    break;
+                case "REDACTION_DECISION_REDACTED_IS_SENSITIVE_PAYMENT_FIELD":
+                case 4:
+                    message.redactionDecision = 4;
+                    break;
+                case "REDACTION_DECISION_UNREDACTED_EMPTY_CUSTOM_PASSWORD":
+                case 5:
+                    message.redactionDecision = 5;
+                    break;
+                case "REDACTION_DECISION_REDACTED_CUSTOM_PASSWORD_CSS":
+                case 6:
+                    message.redactionDecision = 6;
+                    break;
+                case "REDACTION_DECISION_REDACTED_CUSTOM_PASSWORD_JS":
+                case 7:
+                    message.redactionDecision = 7;
+                    break;
+                case "REDACTION_DECISION_REDACTED_IS_OTP":
+                case 8:
+                    message.redactionDecision = 8;
+                    break;
+                case "REDACTION_DECISION_UNREDACTED_EMPTY_OTP_FIELD":
+                case 9:
+                    message.redactionDecision = 9;
+                    break;
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a ContentAttributes message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.ContentAttributes
+             * @static
+             * @param {optimization_guide.proto.ContentAttributes} message ContentAttributes
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            ContentAttributes.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.arrays || options.defaults)
+                    object.annotatedRoles = [];
+                if (options.defaults) {
+                    object.commonAncestorDomNodeId = 0;
+                    object.attributeType = options.enums === String ? "CONTENT_ATTRIBUTE_UNKNOWN" : 0;
+                    object.geometry = null;
+                    object.label = "";
+                    object.interactionInfo = null;
+                    object.labelForDomNodeId = 0;
+                    object.ariaRole = options.enums === String ? "AX_ROLE_NONE" : 0;
+                    object.isAdRelated = false;
+                    object.redactionDecision = options.enums === String ? "REDACTION_DECISION_NO_REDACTION_NECESSARY" : 0;
+                }
+                if (message.commonAncestorDomNodeId != null && message.hasOwnProperty("commonAncestorDomNodeId"))
+                    object.commonAncestorDomNodeId = message.commonAncestorDomNodeId;
+                if (message.attributeType != null && message.hasOwnProperty("attributeType"))
+                    object.attributeType = options.enums === String ? $root.optimization_guide.proto.ContentAttributeType[message.attributeType] === undefined ? message.attributeType : $root.optimization_guide.proto.ContentAttributeType[message.attributeType] : message.attributeType;
+                if (message.geometry != null && message.hasOwnProperty("geometry"))
+                    object.geometry = $root.optimization_guide.proto.Geometry.toObject(message.geometry, options);
+                if (message.tableData != null && message.hasOwnProperty("tableData")) {
+                    object.tableData = $root.optimization_guide.proto.TableData.toObject(message.tableData, options);
+                    if (options.oneofs)
+                        object.contentData = "tableData";
+                }
+                if (message.iframeData != null && message.hasOwnProperty("iframeData")) {
+                    object.iframeData = $root.optimization_guide.proto.IframeData.toObject(message.iframeData, options);
+                    if (options.oneofs)
+                        object.contentData = "iframeData";
+                }
+                if (message.textData != null && message.hasOwnProperty("textData")) {
+                    object.textData = $root.optimization_guide.proto.TextInfo.toObject(message.textData, options);
+                    if (options.oneofs)
+                        object.contentData = "textData";
+                }
+                if (message.imageData != null && message.hasOwnProperty("imageData")) {
+                    object.imageData = $root.optimization_guide.proto.ImageInfo.toObject(message.imageData, options);
+                    if (options.oneofs)
+                        object.contentData = "imageData";
+                }
+                if (message.tableRowData != null && message.hasOwnProperty("tableRowData")) {
+                    object.tableRowData = $root.optimization_guide.proto.TableRowData.toObject(message.tableRowData, options);
+                    if (options.oneofs)
+                        object.contentData = "tableRowData";
+                }
+                if (message.anchorData != null && message.hasOwnProperty("anchorData")) {
+                    object.anchorData = $root.optimization_guide.proto.AnchorData.toObject(message.anchorData, options);
+                    if (options.oneofs)
+                        object.contentData = "anchorData";
+                }
+                if (message.annotatedRoles && message.annotatedRoles.length) {
+                    object.annotatedRoles = [];
+                    for (let j = 0; j < message.annotatedRoles.length; ++j)
+                        object.annotatedRoles[j] = options.enums === String ? $root.optimization_guide.proto.AnnotatedRole[message.annotatedRoles[j]] === undefined ? message.annotatedRoles[j] : $root.optimization_guide.proto.AnnotatedRole[message.annotatedRoles[j]] : message.annotatedRoles[j];
+                }
+                if (message.label != null && message.hasOwnProperty("label"))
+                    object.label = message.label;
+                if (message.formData != null && message.hasOwnProperty("formData")) {
+                    object.formData = $root.optimization_guide.proto.FormInfo.toObject(message.formData, options);
+                    if (options.oneofs)
+                        object.contentData = "formData";
+                }
+                if (message.formControlData != null && message.hasOwnProperty("formControlData")) {
+                    object.formControlData = $root.optimization_guide.proto.FormControlData.toObject(message.formControlData, options);
+                    if (options.oneofs)
+                        object.contentData = "formControlData";
+                }
+                if (message.interactionInfo != null && message.hasOwnProperty("interactionInfo"))
+                    object.interactionInfo = $root.optimization_guide.proto.InteractionInfo.toObject(message.interactionInfo, options);
+                if (message.svgRootData != null && message.hasOwnProperty("svgRootData")) {
+                    object.svgRootData = $root.optimization_guide.proto.SVGRootData.toObject(message.svgRootData, options);
+                    if (options.oneofs)
+                        object.contentData = "svgRootData";
+                }
+                if (message.canvasData != null && message.hasOwnProperty("canvasData")) {
+                    object.canvasData = $root.optimization_guide.proto.CanvasData.toObject(message.canvasData, options);
+                    if (options.oneofs)
+                        object.contentData = "canvasData";
+                }
+                if (message.labelForDomNodeId != null && message.hasOwnProperty("labelForDomNodeId"))
+                    object.labelForDomNodeId = message.labelForDomNodeId;
+                if (message.ariaRole != null && message.hasOwnProperty("ariaRole"))
+                    object.ariaRole = options.enums === String ? $root.optimization_guide.proto.AXRole[message.ariaRole] === undefined ? message.ariaRole : $root.optimization_guide.proto.AXRole[message.ariaRole] : message.ariaRole;
+                if (message.videoData != null && message.hasOwnProperty("videoData")) {
+                    object.videoData = $root.optimization_guide.proto.VideoData.toObject(message.videoData, options);
+                    if (options.oneofs)
+                        object.contentData = "videoData";
+                }
+                if (message.isAdRelated != null && message.hasOwnProperty("isAdRelated"))
+                    object.isAdRelated = message.isAdRelated;
+                if (message.redactionDecision != null && message.hasOwnProperty("redactionDecision"))
+                    object.redactionDecision = options.enums === String ? $root.optimization_guide.proto.RedactionDecision[message.redactionDecision] === undefined ? message.redactionDecision : $root.optimization_guide.proto.RedactionDecision[message.redactionDecision] : message.redactionDecision;
+                return object;
+            };
+
+            /**
+             * Converts this ContentAttributes to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.ContentAttributes
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            ContentAttributes.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for ContentAttributes
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.ContentAttributes
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            ContentAttributes.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.ContentAttributes";
             };
 
             return ContentAttributes;
@@ -2276,6 +8814,57 @@ export const optimization_guide = $root.optimization_guide = (() => {
             Geometry.prototype.isFixedOrStickyPosition = null;
 
             /**
+             * Creates a new Geometry instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.Geometry
+             * @static
+             * @param {optimization_guide.proto.IGeometry=} [properties] Properties to set
+             * @returns {optimization_guide.proto.Geometry} Geometry instance
+             */
+            Geometry.create = function create(properties) {
+                return new Geometry(properties);
+            };
+
+            /**
+             * Encodes the specified Geometry message. Does not implicitly {@link optimization_guide.proto.Geometry.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.Geometry
+             * @static
+             * @param {optimization_guide.proto.IGeometry} message Geometry message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Geometry.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.outerBoundingBox != null && Object.hasOwnProperty.call(message, "outerBoundingBox"))
+                    $root.optimization_guide.proto.BoundingRect.encode(message.outerBoundingBox, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                if (message.visibleBoundingBox != null && Object.hasOwnProperty.call(message, "visibleBoundingBox"))
+                    $root.optimization_guide.proto.BoundingRect.encode(message.visibleBoundingBox, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                if (message.isFixedOrStickyPosition != null && Object.hasOwnProperty.call(message, "isFixedOrStickyPosition"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.isFixedOrStickyPosition);
+                if (message.fragmentVisibleBoundingBoxes != null && message.fragmentVisibleBoundingBoxes.length)
+                    for (let i = 0; i < message.fragmentVisibleBoundingBoxes.length; ++i)
+                        $root.optimization_guide.proto.BoundingRect.encode(message.fragmentVisibleBoundingBoxes[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                if (message.compositorBoundingBox != null && Object.hasOwnProperty.call(message, "compositorBoundingBox"))
+                    $root.optimization_guide.proto.BoundingRect.encode(message.compositorBoundingBox, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified Geometry message, length delimited. Does not implicitly {@link optimization_guide.proto.Geometry.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.Geometry
+             * @static
+             * @param {optimization_guide.proto.IGeometry} message Geometry message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Geometry.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a Geometry message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.Geometry
@@ -2323,6 +8912,168 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a Geometry message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.Geometry
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.Geometry} Geometry
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Geometry.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a Geometry message.
+             * @function verify
+             * @memberof optimization_guide.proto.Geometry
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            Geometry.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.outerBoundingBox != null && message.hasOwnProperty("outerBoundingBox")) {
+                    let error = $root.optimization_guide.proto.BoundingRect.verify(message.outerBoundingBox);
+                    if (error)
+                        return "outerBoundingBox." + error;
+                }
+                if (message.visibleBoundingBox != null && message.hasOwnProperty("visibleBoundingBox")) {
+                    let error = $root.optimization_guide.proto.BoundingRect.verify(message.visibleBoundingBox);
+                    if (error)
+                        return "visibleBoundingBox." + error;
+                }
+                if (message.compositorBoundingBox != null && message.hasOwnProperty("compositorBoundingBox")) {
+                    let error = $root.optimization_guide.proto.BoundingRect.verify(message.compositorBoundingBox);
+                    if (error)
+                        return "compositorBoundingBox." + error;
+                }
+                if (message.fragmentVisibleBoundingBoxes != null && message.hasOwnProperty("fragmentVisibleBoundingBoxes")) {
+                    if (!Array.isArray(message.fragmentVisibleBoundingBoxes))
+                        return "fragmentVisibleBoundingBoxes: array expected";
+                    for (let i = 0; i < message.fragmentVisibleBoundingBoxes.length; ++i) {
+                        let error = $root.optimization_guide.proto.BoundingRect.verify(message.fragmentVisibleBoundingBoxes[i]);
+                        if (error)
+                            return "fragmentVisibleBoundingBoxes." + error;
+                    }
+                }
+                if (message.isFixedOrStickyPosition != null && message.hasOwnProperty("isFixedOrStickyPosition"))
+                    if (typeof message.isFixedOrStickyPosition !== "boolean")
+                        return "isFixedOrStickyPosition: boolean expected";
+                return null;
+            };
+
+            /**
+             * Creates a Geometry message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.Geometry
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.Geometry} Geometry
+             */
+            Geometry.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.Geometry)
+                    return object;
+                let message = new $root.optimization_guide.proto.Geometry();
+                if (object.outerBoundingBox != null) {
+                    if (typeof object.outerBoundingBox !== "object")
+                        throw TypeError(".optimization_guide.proto.Geometry.outerBoundingBox: object expected");
+                    message.outerBoundingBox = $root.optimization_guide.proto.BoundingRect.fromObject(object.outerBoundingBox);
+                }
+                if (object.visibleBoundingBox != null) {
+                    if (typeof object.visibleBoundingBox !== "object")
+                        throw TypeError(".optimization_guide.proto.Geometry.visibleBoundingBox: object expected");
+                    message.visibleBoundingBox = $root.optimization_guide.proto.BoundingRect.fromObject(object.visibleBoundingBox);
+                }
+                if (object.compositorBoundingBox != null) {
+                    if (typeof object.compositorBoundingBox !== "object")
+                        throw TypeError(".optimization_guide.proto.Geometry.compositorBoundingBox: object expected");
+                    message.compositorBoundingBox = $root.optimization_guide.proto.BoundingRect.fromObject(object.compositorBoundingBox);
+                }
+                if (object.fragmentVisibleBoundingBoxes) {
+                    if (!Array.isArray(object.fragmentVisibleBoundingBoxes))
+                        throw TypeError(".optimization_guide.proto.Geometry.fragmentVisibleBoundingBoxes: array expected");
+                    message.fragmentVisibleBoundingBoxes = [];
+                    for (let i = 0; i < object.fragmentVisibleBoundingBoxes.length; ++i) {
+                        if (typeof object.fragmentVisibleBoundingBoxes[i] !== "object")
+                            throw TypeError(".optimization_guide.proto.Geometry.fragmentVisibleBoundingBoxes: object expected");
+                        message.fragmentVisibleBoundingBoxes[i] = $root.optimization_guide.proto.BoundingRect.fromObject(object.fragmentVisibleBoundingBoxes[i]);
+                    }
+                }
+                if (object.isFixedOrStickyPosition != null)
+                    message.isFixedOrStickyPosition = Boolean(object.isFixedOrStickyPosition);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a Geometry message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.Geometry
+             * @static
+             * @param {optimization_guide.proto.Geometry} message Geometry
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Geometry.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.arrays || options.defaults)
+                    object.fragmentVisibleBoundingBoxes = [];
+                if (options.defaults) {
+                    object.outerBoundingBox = null;
+                    object.visibleBoundingBox = null;
+                    object.isFixedOrStickyPosition = false;
+                    object.compositorBoundingBox = null;
+                }
+                if (message.outerBoundingBox != null && message.hasOwnProperty("outerBoundingBox"))
+                    object.outerBoundingBox = $root.optimization_guide.proto.BoundingRect.toObject(message.outerBoundingBox, options);
+                if (message.visibleBoundingBox != null && message.hasOwnProperty("visibleBoundingBox"))
+                    object.visibleBoundingBox = $root.optimization_guide.proto.BoundingRect.toObject(message.visibleBoundingBox, options);
+                if (message.isFixedOrStickyPosition != null && message.hasOwnProperty("isFixedOrStickyPosition"))
+                    object.isFixedOrStickyPosition = message.isFixedOrStickyPosition;
+                if (message.fragmentVisibleBoundingBoxes && message.fragmentVisibleBoundingBoxes.length) {
+                    object.fragmentVisibleBoundingBoxes = [];
+                    for (let j = 0; j < message.fragmentVisibleBoundingBoxes.length; ++j)
+                        object.fragmentVisibleBoundingBoxes[j] = $root.optimization_guide.proto.BoundingRect.toObject(message.fragmentVisibleBoundingBoxes[j], options);
+                }
+                if (message.compositorBoundingBox != null && message.hasOwnProperty("compositorBoundingBox"))
+                    object.compositorBoundingBox = $root.optimization_guide.proto.BoundingRect.toObject(message.compositorBoundingBox, options);
+                return object;
+            };
+
+            /**
+             * Converts this Geometry to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.Geometry
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            Geometry.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for Geometry
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.Geometry
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            Geometry.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.Geometry";
             };
 
             return Geometry;
@@ -2388,6 +9139,54 @@ export const optimization_guide = $root.optimization_guide = (() => {
             BoundingRect.prototype.height = null;
 
             /**
+             * Creates a new BoundingRect instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.BoundingRect
+             * @static
+             * @param {optimization_guide.proto.IBoundingRect=} [properties] Properties to set
+             * @returns {optimization_guide.proto.BoundingRect} BoundingRect instance
+             */
+            BoundingRect.create = function create(properties) {
+                return new BoundingRect(properties);
+            };
+
+            /**
+             * Encodes the specified BoundingRect message. Does not implicitly {@link optimization_guide.proto.BoundingRect.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.BoundingRect
+             * @static
+             * @param {optimization_guide.proto.IBoundingRect} message BoundingRect message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            BoundingRect.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.x != null && Object.hasOwnProperty.call(message, "x"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.x);
+                if (message.y != null && Object.hasOwnProperty.call(message, "y"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.y);
+                if (message.width != null && Object.hasOwnProperty.call(message, "width"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.width);
+                if (message.height != null && Object.hasOwnProperty.call(message, "height"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.height);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified BoundingRect message, length delimited. Does not implicitly {@link optimization_guide.proto.BoundingRect.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.BoundingRect
+             * @static
+             * @param {optimization_guide.proto.IBoundingRect} message BoundingRect message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            BoundingRect.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a BoundingRect message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.BoundingRect
@@ -2429,6 +9228,127 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a BoundingRect message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.BoundingRect
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.BoundingRect} BoundingRect
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            BoundingRect.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a BoundingRect message.
+             * @function verify
+             * @memberof optimization_guide.proto.BoundingRect
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            BoundingRect.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.x != null && message.hasOwnProperty("x"))
+                    if (!$util.isInteger(message.x))
+                        return "x: integer expected";
+                if (message.y != null && message.hasOwnProperty("y"))
+                    if (!$util.isInteger(message.y))
+                        return "y: integer expected";
+                if (message.width != null && message.hasOwnProperty("width"))
+                    if (!$util.isInteger(message.width))
+                        return "width: integer expected";
+                if (message.height != null && message.hasOwnProperty("height"))
+                    if (!$util.isInteger(message.height))
+                        return "height: integer expected";
+                return null;
+            };
+
+            /**
+             * Creates a BoundingRect message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.BoundingRect
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.BoundingRect} BoundingRect
+             */
+            BoundingRect.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.BoundingRect)
+                    return object;
+                let message = new $root.optimization_guide.proto.BoundingRect();
+                if (object.x != null)
+                    message.x = object.x | 0;
+                if (object.y != null)
+                    message.y = object.y | 0;
+                if (object.width != null)
+                    message.width = object.width | 0;
+                if (object.height != null)
+                    message.height = object.height | 0;
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a BoundingRect message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.BoundingRect
+             * @static
+             * @param {optimization_guide.proto.BoundingRect} message BoundingRect
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            BoundingRect.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults) {
+                    object.x = 0;
+                    object.y = 0;
+                    object.width = 0;
+                    object.height = 0;
+                }
+                if (message.x != null && message.hasOwnProperty("x"))
+                    object.x = message.x;
+                if (message.y != null && message.hasOwnProperty("y"))
+                    object.y = message.y;
+                if (message.width != null && message.hasOwnProperty("width"))
+                    object.width = message.width;
+                if (message.height != null && message.hasOwnProperty("height"))
+                    object.height = message.height;
+                return object;
+            };
+
+            /**
+             * Converts this BoundingRect to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.BoundingRect
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            BoundingRect.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for BoundingRect
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.BoundingRect
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            BoundingRect.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.BoundingRect";
             };
 
             return BoundingRect;
@@ -2688,6 +9608,94 @@ export const optimization_guide = $root.optimization_guide = (() => {
             InteractionInfo.prototype.ariaActionTargetNodeIds = $util.emptyArray;
 
             /**
+             * Creates a new InteractionInfo instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.InteractionInfo
+             * @static
+             * @param {optimization_guide.proto.IInteractionInfo=} [properties] Properties to set
+             * @returns {optimization_guide.proto.InteractionInfo} InteractionInfo instance
+             */
+            InteractionInfo.create = function create(properties) {
+                return new InteractionInfo(properties);
+            };
+
+            /**
+             * Encodes the specified InteractionInfo message. Does not implicitly {@link optimization_guide.proto.InteractionInfo.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.InteractionInfo
+             * @static
+             * @param {optimization_guide.proto.IInteractionInfo} message InteractionInfo message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            InteractionInfo.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.isSelectable != null && Object.hasOwnProperty.call(message, "isSelectable"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.isSelectable);
+                if (message.isEditable != null && Object.hasOwnProperty.call(message, "isEditable"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.isEditable);
+                if (message.canResizeHorizontal != null && Object.hasOwnProperty.call(message, "canResizeHorizontal"))
+                    writer.uint32(/* id 5, wireType 0 =*/40).bool(message.canResizeHorizontal);
+                if (message.canResizeVertical != null && Object.hasOwnProperty.call(message, "canResizeVertical"))
+                    writer.uint32(/* id 6, wireType 0 =*/48).bool(message.canResizeVertical);
+                if (message.isFocusable != null && Object.hasOwnProperty.call(message, "isFocusable"))
+                    writer.uint32(/* id 7, wireType 0 =*/56).bool(message.isFocusable);
+                if (message.isDraggable != null && Object.hasOwnProperty.call(message, "isDraggable"))
+                    writer.uint32(/* id 9, wireType 0 =*/72).bool(message.isDraggable);
+                if (message.isClickable != null && Object.hasOwnProperty.call(message, "isClickable"))
+                    writer.uint32(/* id 10, wireType 0 =*/80).bool(message.isClickable);
+                if (message.scrollerInfo != null && Object.hasOwnProperty.call(message, "scrollerInfo"))
+                    $root.optimization_guide.proto.ScrollerInfo.encode(message.scrollerInfo, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                if (message.documentScopedZOrder != null && Object.hasOwnProperty.call(message, "documentScopedZOrder"))
+                    writer.uint32(/* id 13, wireType 0 =*/104).int32(message.documentScopedZOrder);
+                if (message.debugClickabilityReasons != null && message.debugClickabilityReasons.length) {
+                    writer.uint32(/* id 14, wireType 2 =*/114).fork();
+                    for (let i = 0; i < message.debugClickabilityReasons.length; ++i)
+                        writer.int32(message.debugClickabilityReasons[i]);
+                    writer.ldelim();
+                }
+                if (message.clickabilityReasons != null && message.clickabilityReasons.length) {
+                    writer.uint32(/* id 15, wireType 2 =*/122).fork();
+                    for (let i = 0; i < message.clickabilityReasons.length; ++i)
+                        writer.int32(message.clickabilityReasons[i]);
+                    writer.ldelim();
+                }
+                if (message.isDisabled != null && Object.hasOwnProperty.call(message, "isDisabled"))
+                    writer.uint32(/* id 16, wireType 0 =*/128).bool(message.isDisabled);
+                if (message.interactionDisabledReasons != null && message.interactionDisabledReasons.length) {
+                    writer.uint32(/* id 17, wireType 2 =*/138).fork();
+                    for (let i = 0; i < message.interactionDisabledReasons.length; ++i)
+                        writer.int32(message.interactionDisabledReasons[i]);
+                    writer.ldelim();
+                }
+                if (message.isTabbable != null && Object.hasOwnProperty.call(message, "isTabbable"))
+                    writer.uint32(/* id 18, wireType 0 =*/144).bool(message.isTabbable);
+                if (message.hasAriaActivedescendant != null && Object.hasOwnProperty.call(message, "hasAriaActivedescendant"))
+                    writer.uint32(/* id 19, wireType 0 =*/152).bool(message.hasAriaActivedescendant);
+                if (message.ariaActionTargetNodeIds != null && message.ariaActionTargetNodeIds.length) {
+                    writer.uint32(/* id 20, wireType 2 =*/162).fork();
+                    for (let i = 0; i < message.ariaActionTargetNodeIds.length; ++i)
+                        writer.int32(message.ariaActionTargetNodeIds[i]);
+                    writer.ldelim();
+                }
+                return writer;
+            };
+
+            /**
+             * Encodes the specified InteractionInfo message, length delimited. Does not implicitly {@link optimization_guide.proto.InteractionInfo.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.InteractionInfo
+             * @static
+             * @param {optimization_guide.proto.IInteractionInfo} message InteractionInfo message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            InteractionInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes an InteractionInfo message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.InteractionInfo
@@ -2807,6 +9815,505 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 return message;
             };
 
+            /**
+             * Decodes an InteractionInfo message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.InteractionInfo
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.InteractionInfo} InteractionInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            InteractionInfo.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies an InteractionInfo message.
+             * @function verify
+             * @memberof optimization_guide.proto.InteractionInfo
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            InteractionInfo.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.scrollerInfo != null && message.hasOwnProperty("scrollerInfo")) {
+                    let error = $root.optimization_guide.proto.ScrollerInfo.verify(message.scrollerInfo);
+                    if (error)
+                        return "scrollerInfo." + error;
+                }
+                if (message.isSelectable != null && message.hasOwnProperty("isSelectable"))
+                    if (typeof message.isSelectable !== "boolean")
+                        return "isSelectable: boolean expected";
+                if (message.isEditable != null && message.hasOwnProperty("isEditable"))
+                    if (typeof message.isEditable !== "boolean")
+                        return "isEditable: boolean expected";
+                if (message.canResizeHorizontal != null && message.hasOwnProperty("canResizeHorizontal"))
+                    if (typeof message.canResizeHorizontal !== "boolean")
+                        return "canResizeHorizontal: boolean expected";
+                if (message.canResizeVertical != null && message.hasOwnProperty("canResizeVertical"))
+                    if (typeof message.canResizeVertical !== "boolean")
+                        return "canResizeVertical: boolean expected";
+                if (message.isFocusable != null && message.hasOwnProperty("isFocusable"))
+                    if (typeof message.isFocusable !== "boolean")
+                        return "isFocusable: boolean expected";
+                if (message.isDraggable != null && message.hasOwnProperty("isDraggable"))
+                    if (typeof message.isDraggable !== "boolean")
+                        return "isDraggable: boolean expected";
+                if (message.isClickable != null && message.hasOwnProperty("isClickable"))
+                    if (typeof message.isClickable !== "boolean")
+                        return "isClickable: boolean expected";
+                if (message.documentScopedZOrder != null && message.hasOwnProperty("documentScopedZOrder"))
+                    if (!$util.isInteger(message.documentScopedZOrder))
+                        return "documentScopedZOrder: integer expected";
+                if (message.debugClickabilityReasons != null && message.hasOwnProperty("debugClickabilityReasons")) {
+                    if (!Array.isArray(message.debugClickabilityReasons))
+                        return "debugClickabilityReasons: array expected";
+                    for (let i = 0; i < message.debugClickabilityReasons.length; ++i)
+                        switch (message.debugClickabilityReasons[i]) {
+                        default:
+                            return "debugClickabilityReasons: enum value[] expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                        case 5:
+                        case 6:
+                        case 7:
+                        case 8:
+                        case 9:
+                        case 10:
+                        case 11:
+                        case 12:
+                        case 13:
+                        case 14:
+                        case 15:
+                        case 16:
+                            break;
+                        }
+                }
+                if (message.clickabilityReasons != null && message.hasOwnProperty("clickabilityReasons")) {
+                    if (!Array.isArray(message.clickabilityReasons))
+                        return "clickabilityReasons: array expected";
+                    for (let i = 0; i < message.clickabilityReasons.length; ++i)
+                        switch (message.clickabilityReasons[i]) {
+                        default:
+                            return "clickabilityReasons: enum value[] expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                        case 5:
+                        case 6:
+                        case 7:
+                        case 8:
+                        case 9:
+                        case 10:
+                        case 11:
+                        case 12:
+                        case 13:
+                        case 14:
+                        case 15:
+                        case 16:
+                            break;
+                        }
+                }
+                if (message.isDisabled != null && message.hasOwnProperty("isDisabled"))
+                    if (typeof message.isDisabled !== "boolean")
+                        return "isDisabled: boolean expected";
+                if (message.interactionDisabledReasons != null && message.hasOwnProperty("interactionDisabledReasons")) {
+                    if (!Array.isArray(message.interactionDisabledReasons))
+                        return "interactionDisabledReasons: array expected";
+                    for (let i = 0; i < message.interactionDisabledReasons.length; ++i)
+                        switch (message.interactionDisabledReasons[i]) {
+                        default:
+                            return "interactionDisabledReasons: enum value[] expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                        case 5:
+                            break;
+                        }
+                }
+                if (message.isTabbable != null && message.hasOwnProperty("isTabbable"))
+                    if (typeof message.isTabbable !== "boolean")
+                        return "isTabbable: boolean expected";
+                if (message.hasAriaActivedescendant != null && message.hasOwnProperty("hasAriaActivedescendant"))
+                    if (typeof message.hasAriaActivedescendant !== "boolean")
+                        return "hasAriaActivedescendant: boolean expected";
+                if (message.ariaActionTargetNodeIds != null && message.hasOwnProperty("ariaActionTargetNodeIds")) {
+                    if (!Array.isArray(message.ariaActionTargetNodeIds))
+                        return "ariaActionTargetNodeIds: array expected";
+                    for (let i = 0; i < message.ariaActionTargetNodeIds.length; ++i)
+                        if (!$util.isInteger(message.ariaActionTargetNodeIds[i]))
+                            return "ariaActionTargetNodeIds: integer[] expected";
+                }
+                return null;
+            };
+
+            /**
+             * Creates an InteractionInfo message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.InteractionInfo
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.InteractionInfo} InteractionInfo
+             */
+            InteractionInfo.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.InteractionInfo)
+                    return object;
+                let message = new $root.optimization_guide.proto.InteractionInfo();
+                if (object.scrollerInfo != null) {
+                    if (typeof object.scrollerInfo !== "object")
+                        throw TypeError(".optimization_guide.proto.InteractionInfo.scrollerInfo: object expected");
+                    message.scrollerInfo = $root.optimization_guide.proto.ScrollerInfo.fromObject(object.scrollerInfo);
+                }
+                if (object.isSelectable != null)
+                    message.isSelectable = Boolean(object.isSelectable);
+                if (object.isEditable != null)
+                    message.isEditable = Boolean(object.isEditable);
+                if (object.canResizeHorizontal != null)
+                    message.canResizeHorizontal = Boolean(object.canResizeHorizontal);
+                if (object.canResizeVertical != null)
+                    message.canResizeVertical = Boolean(object.canResizeVertical);
+                if (object.isFocusable != null)
+                    message.isFocusable = Boolean(object.isFocusable);
+                if (object.isDraggable != null)
+                    message.isDraggable = Boolean(object.isDraggable);
+                if (object.isClickable != null)
+                    message.isClickable = Boolean(object.isClickable);
+                if (object.documentScopedZOrder != null)
+                    message.documentScopedZOrder = object.documentScopedZOrder | 0;
+                if (object.debugClickabilityReasons) {
+                    if (!Array.isArray(object.debugClickabilityReasons))
+                        throw TypeError(".optimization_guide.proto.InteractionInfo.debugClickabilityReasons: array expected");
+                    message.debugClickabilityReasons = [];
+                    for (let i = 0; i < object.debugClickabilityReasons.length; ++i)
+                        switch (object.debugClickabilityReasons[i]) {
+                        default:
+                            if (typeof object.debugClickabilityReasons[i] === "number") {
+                                message.debugClickabilityReasons[i] = object.debugClickabilityReasons[i];
+                                break;
+                            }
+                        case "CLICKABILITY_REASON_CLICKABLE_CONTROL":
+                        case 0:
+                            message.debugClickabilityReasons[i] = 0;
+                            break;
+                        case "CLICKABILITY_REASON_CLICK_HANDLER":
+                        case 1:
+                            message.debugClickabilityReasons[i] = 1;
+                            break;
+                        case "CLICKABILITY_REASON_MOUSE_EVENTS":
+                        case 2:
+                            message.debugClickabilityReasons[i] = 2;
+                            break;
+                        case "CLICKABILITY_REASON_KEY_EVENTS":
+                        case 3:
+                            message.debugClickabilityReasons[i] = 3;
+                            break;
+                        case "CLICKABILITY_REASON_EDITABLE":
+                        case 4:
+                            message.debugClickabilityReasons[i] = 4;
+                            break;
+                        case "CLICKABILITY_REASON_CURSOR_POINTER":
+                        case 5:
+                            message.debugClickabilityReasons[i] = 5;
+                            break;
+                        case "CLICKABILITY_REASON_ARIA_ROLE":
+                        case 6:
+                            message.debugClickabilityReasons[i] = 6;
+                            break;
+                        case "CLICKABILITY_REASON_ARIA_HAS_POPUP":
+                        case 7:
+                            message.debugClickabilityReasons[i] = 7;
+                            break;
+                        case "CLICKABILITY_REASON_ARIA_EXPANDED_TRUE":
+                        case 8:
+                            message.debugClickabilityReasons[i] = 8;
+                            break;
+                        case "CLICKABILITY_REASON_ARIA_EXPANDED_FALSE":
+                        case 9:
+                            message.debugClickabilityReasons[i] = 9;
+                            break;
+                        case "CLICKABILITY_REASON_TAB_INDEX":
+                        case 10:
+                            message.debugClickabilityReasons[i] = 10;
+                            break;
+                        case "CLICKABILITY_REASON_AUTOCOMPLETE":
+                        case 11:
+                            message.debugClickabilityReasons[i] = 11;
+                            break;
+                        case "CLICKABILITY_REASON_MOUSE_CLICK":
+                        case 12:
+                            message.debugClickabilityReasons[i] = 12;
+                            break;
+                        case "CLICKABILITY_REASON_MOUSE_HOVER":
+                        case 13:
+                            message.debugClickabilityReasons[i] = 13;
+                            break;
+                        case "CLICKABILITY_REASON_HOVER_PSEUDO_CLASS":
+                        case 14:
+                            message.debugClickabilityReasons[i] = 14;
+                            break;
+                        case "CLICKABILITY_REASON_ARIA_TOGGLE":
+                        case 15:
+                            message.debugClickabilityReasons[i] = 15;
+                            break;
+                        case "CLICKABILITY_REASON_ARIA_SELECTABLE":
+                        case 16:
+                            message.debugClickabilityReasons[i] = 16;
+                            break;
+                        }
+                }
+                if (object.clickabilityReasons) {
+                    if (!Array.isArray(object.clickabilityReasons))
+                        throw TypeError(".optimization_guide.proto.InteractionInfo.clickabilityReasons: array expected");
+                    message.clickabilityReasons = [];
+                    for (let i = 0; i < object.clickabilityReasons.length; ++i)
+                        switch (object.clickabilityReasons[i]) {
+                        default:
+                            if (typeof object.clickabilityReasons[i] === "number") {
+                                message.clickabilityReasons[i] = object.clickabilityReasons[i];
+                                break;
+                            }
+                        case "CLICKABILITY_REASON_CLICKABLE_CONTROL":
+                        case 0:
+                            message.clickabilityReasons[i] = 0;
+                            break;
+                        case "CLICKABILITY_REASON_CLICK_HANDLER":
+                        case 1:
+                            message.clickabilityReasons[i] = 1;
+                            break;
+                        case "CLICKABILITY_REASON_MOUSE_EVENTS":
+                        case 2:
+                            message.clickabilityReasons[i] = 2;
+                            break;
+                        case "CLICKABILITY_REASON_KEY_EVENTS":
+                        case 3:
+                            message.clickabilityReasons[i] = 3;
+                            break;
+                        case "CLICKABILITY_REASON_EDITABLE":
+                        case 4:
+                            message.clickabilityReasons[i] = 4;
+                            break;
+                        case "CLICKABILITY_REASON_CURSOR_POINTER":
+                        case 5:
+                            message.clickabilityReasons[i] = 5;
+                            break;
+                        case "CLICKABILITY_REASON_ARIA_ROLE":
+                        case 6:
+                            message.clickabilityReasons[i] = 6;
+                            break;
+                        case "CLICKABILITY_REASON_ARIA_HAS_POPUP":
+                        case 7:
+                            message.clickabilityReasons[i] = 7;
+                            break;
+                        case "CLICKABILITY_REASON_ARIA_EXPANDED_TRUE":
+                        case 8:
+                            message.clickabilityReasons[i] = 8;
+                            break;
+                        case "CLICKABILITY_REASON_ARIA_EXPANDED_FALSE":
+                        case 9:
+                            message.clickabilityReasons[i] = 9;
+                            break;
+                        case "CLICKABILITY_REASON_TAB_INDEX":
+                        case 10:
+                            message.clickabilityReasons[i] = 10;
+                            break;
+                        case "CLICKABILITY_REASON_AUTOCOMPLETE":
+                        case 11:
+                            message.clickabilityReasons[i] = 11;
+                            break;
+                        case "CLICKABILITY_REASON_MOUSE_CLICK":
+                        case 12:
+                            message.clickabilityReasons[i] = 12;
+                            break;
+                        case "CLICKABILITY_REASON_MOUSE_HOVER":
+                        case 13:
+                            message.clickabilityReasons[i] = 13;
+                            break;
+                        case "CLICKABILITY_REASON_HOVER_PSEUDO_CLASS":
+                        case 14:
+                            message.clickabilityReasons[i] = 14;
+                            break;
+                        case "CLICKABILITY_REASON_ARIA_TOGGLE":
+                        case 15:
+                            message.clickabilityReasons[i] = 15;
+                            break;
+                        case "CLICKABILITY_REASON_ARIA_SELECTABLE":
+                        case 16:
+                            message.clickabilityReasons[i] = 16;
+                            break;
+                        }
+                }
+                if (object.isDisabled != null)
+                    message.isDisabled = Boolean(object.isDisabled);
+                if (object.interactionDisabledReasons) {
+                    if (!Array.isArray(object.interactionDisabledReasons))
+                        throw TypeError(".optimization_guide.proto.InteractionInfo.interactionDisabledReasons: array expected");
+                    message.interactionDisabledReasons = [];
+                    for (let i = 0; i < object.interactionDisabledReasons.length; ++i)
+                        switch (object.interactionDisabledReasons[i]) {
+                        default:
+                            if (typeof object.interactionDisabledReasons[i] === "number") {
+                                message.interactionDisabledReasons[i] = object.interactionDisabledReasons[i];
+                                break;
+                            }
+                        case "INTERACTION_DISABLED_REASON_UNSPECIFIED":
+                        case 0:
+                            message.interactionDisabledReasons[i] = 0;
+                            break;
+                        case "INTERACTION_DISABLED_REASON_DISABLED":
+                        case 1:
+                            message.interactionDisabledReasons[i] = 1;
+                            break;
+                        case "INTERACTION_DISABLED_REASON_ARIA_DISABLED":
+                        case 2:
+                            message.interactionDisabledReasons[i] = 2;
+                            break;
+                        case "INTERACTION_DISABLED_REASON_CURSOR_NOT_ALLOWED":
+                        case 3:
+                            message.interactionDisabledReasons[i] = 3;
+                            break;
+                        case "INTERACTION_DISABLED_REASON_ARIA_HIDDEN":
+                        case 4:
+                            message.interactionDisabledReasons[i] = 4;
+                            break;
+                        case "INTERACTION_DISABLED_REASON_ARIA_ROLE_PRESENTATIONAL":
+                        case 5:
+                            message.interactionDisabledReasons[i] = 5;
+                            break;
+                        }
+                }
+                if (object.isTabbable != null)
+                    message.isTabbable = Boolean(object.isTabbable);
+                if (object.hasAriaActivedescendant != null)
+                    message.hasAriaActivedescendant = Boolean(object.hasAriaActivedescendant);
+                if (object.ariaActionTargetNodeIds) {
+                    if (!Array.isArray(object.ariaActionTargetNodeIds))
+                        throw TypeError(".optimization_guide.proto.InteractionInfo.ariaActionTargetNodeIds: array expected");
+                    message.ariaActionTargetNodeIds = [];
+                    for (let i = 0; i < object.ariaActionTargetNodeIds.length; ++i)
+                        message.ariaActionTargetNodeIds[i] = object.ariaActionTargetNodeIds[i] | 0;
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from an InteractionInfo message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.InteractionInfo
+             * @static
+             * @param {optimization_guide.proto.InteractionInfo} message InteractionInfo
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            InteractionInfo.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.arrays || options.defaults) {
+                    object.debugClickabilityReasons = [];
+                    object.clickabilityReasons = [];
+                    object.interactionDisabledReasons = [];
+                    object.ariaActionTargetNodeIds = [];
+                }
+                if (options.defaults) {
+                    object.isSelectable = false;
+                    object.isEditable = false;
+                    object.canResizeHorizontal = false;
+                    object.canResizeVertical = false;
+                    object.isFocusable = false;
+                    object.isDraggable = false;
+                    object.isClickable = false;
+                    object.scrollerInfo = null;
+                    object.documentScopedZOrder = 0;
+                    object.isDisabled = false;
+                    object.isTabbable = false;
+                    object.hasAriaActivedescendant = false;
+                }
+                if (message.isSelectable != null && message.hasOwnProperty("isSelectable"))
+                    object.isSelectable = message.isSelectable;
+                if (message.isEditable != null && message.hasOwnProperty("isEditable"))
+                    object.isEditable = message.isEditable;
+                if (message.canResizeHorizontal != null && message.hasOwnProperty("canResizeHorizontal"))
+                    object.canResizeHorizontal = message.canResizeHorizontal;
+                if (message.canResizeVertical != null && message.hasOwnProperty("canResizeVertical"))
+                    object.canResizeVertical = message.canResizeVertical;
+                if (message.isFocusable != null && message.hasOwnProperty("isFocusable"))
+                    object.isFocusable = message.isFocusable;
+                if (message.isDraggable != null && message.hasOwnProperty("isDraggable"))
+                    object.isDraggable = message.isDraggable;
+                if (message.isClickable != null && message.hasOwnProperty("isClickable"))
+                    object.isClickable = message.isClickable;
+                if (message.scrollerInfo != null && message.hasOwnProperty("scrollerInfo"))
+                    object.scrollerInfo = $root.optimization_guide.proto.ScrollerInfo.toObject(message.scrollerInfo, options);
+                if (message.documentScopedZOrder != null && message.hasOwnProperty("documentScopedZOrder"))
+                    object.documentScopedZOrder = message.documentScopedZOrder;
+                if (message.debugClickabilityReasons && message.debugClickabilityReasons.length) {
+                    object.debugClickabilityReasons = [];
+                    for (let j = 0; j < message.debugClickabilityReasons.length; ++j)
+                        object.debugClickabilityReasons[j] = options.enums === String ? $root.optimization_guide.proto.ClickabilityReason[message.debugClickabilityReasons[j]] === undefined ? message.debugClickabilityReasons[j] : $root.optimization_guide.proto.ClickabilityReason[message.debugClickabilityReasons[j]] : message.debugClickabilityReasons[j];
+                }
+                if (message.clickabilityReasons && message.clickabilityReasons.length) {
+                    object.clickabilityReasons = [];
+                    for (let j = 0; j < message.clickabilityReasons.length; ++j)
+                        object.clickabilityReasons[j] = options.enums === String ? $root.optimization_guide.proto.ClickabilityReason[message.clickabilityReasons[j]] === undefined ? message.clickabilityReasons[j] : $root.optimization_guide.proto.ClickabilityReason[message.clickabilityReasons[j]] : message.clickabilityReasons[j];
+                }
+                if (message.isDisabled != null && message.hasOwnProperty("isDisabled"))
+                    object.isDisabled = message.isDisabled;
+                if (message.interactionDisabledReasons && message.interactionDisabledReasons.length) {
+                    object.interactionDisabledReasons = [];
+                    for (let j = 0; j < message.interactionDisabledReasons.length; ++j)
+                        object.interactionDisabledReasons[j] = options.enums === String ? $root.optimization_guide.proto.InteractionDisabledReason[message.interactionDisabledReasons[j]] === undefined ? message.interactionDisabledReasons[j] : $root.optimization_guide.proto.InteractionDisabledReason[message.interactionDisabledReasons[j]] : message.interactionDisabledReasons[j];
+                }
+                if (message.isTabbable != null && message.hasOwnProperty("isTabbable"))
+                    object.isTabbable = message.isTabbable;
+                if (message.hasAriaActivedescendant != null && message.hasOwnProperty("hasAriaActivedescendant"))
+                    object.hasAriaActivedescendant = message.hasAriaActivedescendant;
+                if (message.ariaActionTargetNodeIds && message.ariaActionTargetNodeIds.length) {
+                    object.ariaActionTargetNodeIds = [];
+                    for (let j = 0; j < message.ariaActionTargetNodeIds.length; ++j)
+                        object.ariaActionTargetNodeIds[j] = message.ariaActionTargetNodeIds[j];
+                }
+                return object;
+            };
+
+            /**
+             * Converts this InteractionInfo to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.InteractionInfo
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            InteractionInfo.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for InteractionInfo
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.InteractionInfo
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            InteractionInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.InteractionInfo";
+            };
+
             return InteractionInfo;
         })();
 
@@ -2879,6 +10386,54 @@ export const optimization_guide = $root.optimization_guide = (() => {
             ScrollerInfo.prototype.userScrollableVertical = null;
 
             /**
+             * Creates a new ScrollerInfo instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.ScrollerInfo
+             * @static
+             * @param {optimization_guide.proto.IScrollerInfo=} [properties] Properties to set
+             * @returns {optimization_guide.proto.ScrollerInfo} ScrollerInfo instance
+             */
+            ScrollerInfo.create = function create(properties) {
+                return new ScrollerInfo(properties);
+            };
+
+            /**
+             * Encodes the specified ScrollerInfo message. Does not implicitly {@link optimization_guide.proto.ScrollerInfo.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.ScrollerInfo
+             * @static
+             * @param {optimization_guide.proto.IScrollerInfo} message ScrollerInfo message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ScrollerInfo.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.scrollingBounds != null && Object.hasOwnProperty.call(message, "scrollingBounds"))
+                    $root.optimization_guide.proto.BoundingSize.encode(message.scrollingBounds, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                if (message.visibleArea != null && Object.hasOwnProperty.call(message, "visibleArea"))
+                    $root.optimization_guide.proto.BoundingRect.encode(message.visibleArea, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                if (message.userScrollableHorizontal != null && Object.hasOwnProperty.call(message, "userScrollableHorizontal"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.userScrollableHorizontal);
+                if (message.userScrollableVertical != null && Object.hasOwnProperty.call(message, "userScrollableVertical"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.userScrollableVertical);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified ScrollerInfo message, length delimited. Does not implicitly {@link optimization_guide.proto.ScrollerInfo.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.ScrollerInfo
+             * @static
+             * @param {optimization_guide.proto.IScrollerInfo} message ScrollerInfo message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ScrollerInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a ScrollerInfo message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.ScrollerInfo
@@ -2920,6 +10475,137 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a ScrollerInfo message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.ScrollerInfo
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.ScrollerInfo} ScrollerInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ScrollerInfo.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a ScrollerInfo message.
+             * @function verify
+             * @memberof optimization_guide.proto.ScrollerInfo
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            ScrollerInfo.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.scrollingBounds != null && message.hasOwnProperty("scrollingBounds")) {
+                    let error = $root.optimization_guide.proto.BoundingSize.verify(message.scrollingBounds);
+                    if (error)
+                        return "scrollingBounds." + error;
+                }
+                if (message.visibleArea != null && message.hasOwnProperty("visibleArea")) {
+                    let error = $root.optimization_guide.proto.BoundingRect.verify(message.visibleArea);
+                    if (error)
+                        return "visibleArea." + error;
+                }
+                if (message.userScrollableHorizontal != null && message.hasOwnProperty("userScrollableHorizontal"))
+                    if (typeof message.userScrollableHorizontal !== "boolean")
+                        return "userScrollableHorizontal: boolean expected";
+                if (message.userScrollableVertical != null && message.hasOwnProperty("userScrollableVertical"))
+                    if (typeof message.userScrollableVertical !== "boolean")
+                        return "userScrollableVertical: boolean expected";
+                return null;
+            };
+
+            /**
+             * Creates a ScrollerInfo message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.ScrollerInfo
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.ScrollerInfo} ScrollerInfo
+             */
+            ScrollerInfo.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.ScrollerInfo)
+                    return object;
+                let message = new $root.optimization_guide.proto.ScrollerInfo();
+                if (object.scrollingBounds != null) {
+                    if (typeof object.scrollingBounds !== "object")
+                        throw TypeError(".optimization_guide.proto.ScrollerInfo.scrollingBounds: object expected");
+                    message.scrollingBounds = $root.optimization_guide.proto.BoundingSize.fromObject(object.scrollingBounds);
+                }
+                if (object.visibleArea != null) {
+                    if (typeof object.visibleArea !== "object")
+                        throw TypeError(".optimization_guide.proto.ScrollerInfo.visibleArea: object expected");
+                    message.visibleArea = $root.optimization_guide.proto.BoundingRect.fromObject(object.visibleArea);
+                }
+                if (object.userScrollableHorizontal != null)
+                    message.userScrollableHorizontal = Boolean(object.userScrollableHorizontal);
+                if (object.userScrollableVertical != null)
+                    message.userScrollableVertical = Boolean(object.userScrollableVertical);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a ScrollerInfo message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.ScrollerInfo
+             * @static
+             * @param {optimization_guide.proto.ScrollerInfo} message ScrollerInfo
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            ScrollerInfo.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults) {
+                    object.scrollingBounds = null;
+                    object.visibleArea = null;
+                    object.userScrollableHorizontal = false;
+                    object.userScrollableVertical = false;
+                }
+                if (message.scrollingBounds != null && message.hasOwnProperty("scrollingBounds"))
+                    object.scrollingBounds = $root.optimization_guide.proto.BoundingSize.toObject(message.scrollingBounds, options);
+                if (message.visibleArea != null && message.hasOwnProperty("visibleArea"))
+                    object.visibleArea = $root.optimization_guide.proto.BoundingRect.toObject(message.visibleArea, options);
+                if (message.userScrollableHorizontal != null && message.hasOwnProperty("userScrollableHorizontal"))
+                    object.userScrollableHorizontal = message.userScrollableHorizontal;
+                if (message.userScrollableVertical != null && message.hasOwnProperty("userScrollableVertical"))
+                    object.userScrollableVertical = message.userScrollableVertical;
+                return object;
+            };
+
+            /**
+             * Converts this ScrollerInfo to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.ScrollerInfo
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            ScrollerInfo.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for ScrollerInfo
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.ScrollerInfo
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            ScrollerInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.ScrollerInfo";
             };
 
             return ScrollerInfo;
@@ -2967,6 +10653,50 @@ export const optimization_guide = $root.optimization_guide = (() => {
             BoundingSize.prototype.height = null;
 
             /**
+             * Creates a new BoundingSize instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.BoundingSize
+             * @static
+             * @param {optimization_guide.proto.IBoundingSize=} [properties] Properties to set
+             * @returns {optimization_guide.proto.BoundingSize} BoundingSize instance
+             */
+            BoundingSize.create = function create(properties) {
+                return new BoundingSize(properties);
+            };
+
+            /**
+             * Encodes the specified BoundingSize message. Does not implicitly {@link optimization_guide.proto.BoundingSize.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.BoundingSize
+             * @static
+             * @param {optimization_guide.proto.IBoundingSize} message BoundingSize message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            BoundingSize.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.width != null && Object.hasOwnProperty.call(message, "width"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.width);
+                if (message.height != null && Object.hasOwnProperty.call(message, "height"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.height);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified BoundingSize message, length delimited. Does not implicitly {@link optimization_guide.proto.BoundingSize.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.BoundingSize
+             * @static
+             * @param {optimization_guide.proto.IBoundingSize} message BoundingSize message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            BoundingSize.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a BoundingSize message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.BoundingSize
@@ -3000,6 +10730,111 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a BoundingSize message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.BoundingSize
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.BoundingSize} BoundingSize
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            BoundingSize.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a BoundingSize message.
+             * @function verify
+             * @memberof optimization_guide.proto.BoundingSize
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            BoundingSize.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.width != null && message.hasOwnProperty("width"))
+                    if (!$util.isInteger(message.width))
+                        return "width: integer expected";
+                if (message.height != null && message.hasOwnProperty("height"))
+                    if (!$util.isInteger(message.height))
+                        return "height: integer expected";
+                return null;
+            };
+
+            /**
+             * Creates a BoundingSize message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.BoundingSize
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.BoundingSize} BoundingSize
+             */
+            BoundingSize.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.BoundingSize)
+                    return object;
+                let message = new $root.optimization_guide.proto.BoundingSize();
+                if (object.width != null)
+                    message.width = object.width | 0;
+                if (object.height != null)
+                    message.height = object.height | 0;
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a BoundingSize message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.BoundingSize
+             * @static
+             * @param {optimization_guide.proto.BoundingSize} message BoundingSize
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            BoundingSize.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults) {
+                    object.width = 0;
+                    object.height = 0;
+                }
+                if (message.width != null && message.hasOwnProperty("width"))
+                    object.width = message.width;
+                if (message.height != null && message.hasOwnProperty("height"))
+                    object.height = message.height;
+                return object;
+            };
+
+            /**
+             * Converts this BoundingSize to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.BoundingSize
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            BoundingSize.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for BoundingSize
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.BoundingSize
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            BoundingSize.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.BoundingSize";
             };
 
             return BoundingSize;
@@ -3047,6 +10882,50 @@ export const optimization_guide = $root.optimization_guide = (() => {
             TextInfo.prototype.textStyle = null;
 
             /**
+             * Creates a new TextInfo instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.TextInfo
+             * @static
+             * @param {optimization_guide.proto.ITextInfo=} [properties] Properties to set
+             * @returns {optimization_guide.proto.TextInfo} TextInfo instance
+             */
+            TextInfo.create = function create(properties) {
+                return new TextInfo(properties);
+            };
+
+            /**
+             * Encodes the specified TextInfo message. Does not implicitly {@link optimization_guide.proto.TextInfo.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.TextInfo
+             * @static
+             * @param {optimization_guide.proto.ITextInfo} message TextInfo message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            TextInfo.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.textContent != null && Object.hasOwnProperty.call(message, "textContent"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.textContent);
+                if (message.textStyle != null && Object.hasOwnProperty.call(message, "textStyle"))
+                    $root.optimization_guide.proto.TextStyle.encode(message.textStyle, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified TextInfo message, length delimited. Does not implicitly {@link optimization_guide.proto.TextInfo.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.TextInfo
+             * @static
+             * @param {optimization_guide.proto.ITextInfo} message TextInfo message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            TextInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a TextInfo message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.TextInfo
@@ -3080,6 +10959,116 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a TextInfo message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.TextInfo
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.TextInfo} TextInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            TextInfo.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a TextInfo message.
+             * @function verify
+             * @memberof optimization_guide.proto.TextInfo
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            TextInfo.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.textContent != null && message.hasOwnProperty("textContent"))
+                    if (!$util.isString(message.textContent))
+                        return "textContent: string expected";
+                if (message.textStyle != null && message.hasOwnProperty("textStyle")) {
+                    let error = $root.optimization_guide.proto.TextStyle.verify(message.textStyle);
+                    if (error)
+                        return "textStyle." + error;
+                }
+                return null;
+            };
+
+            /**
+             * Creates a TextInfo message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.TextInfo
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.TextInfo} TextInfo
+             */
+            TextInfo.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.TextInfo)
+                    return object;
+                let message = new $root.optimization_guide.proto.TextInfo();
+                if (object.textContent != null)
+                    message.textContent = String(object.textContent);
+                if (object.textStyle != null) {
+                    if (typeof object.textStyle !== "object")
+                        throw TypeError(".optimization_guide.proto.TextInfo.textStyle: object expected");
+                    message.textStyle = $root.optimization_guide.proto.TextStyle.fromObject(object.textStyle);
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a TextInfo message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.TextInfo
+             * @static
+             * @param {optimization_guide.proto.TextInfo} message TextInfo
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            TextInfo.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults) {
+                    object.textContent = "";
+                    object.textStyle = null;
+                }
+                if (message.textContent != null && message.hasOwnProperty("textContent"))
+                    object.textContent = message.textContent;
+                if (message.textStyle != null && message.hasOwnProperty("textStyle"))
+                    object.textStyle = $root.optimization_guide.proto.TextStyle.toObject(message.textStyle, options);
+                return object;
+            };
+
+            /**
+             * Converts this TextInfo to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.TextInfo
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            TextInfo.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for TextInfo
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.TextInfo
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            TextInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.TextInfo";
             };
 
             return TextInfo;
@@ -3146,6 +11135,52 @@ export const optimization_guide = $root.optimization_guide = (() => {
             TextStyle.prototype.color = null;
 
             /**
+             * Creates a new TextStyle instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.TextStyle
+             * @static
+             * @param {optimization_guide.proto.ITextStyle=} [properties] Properties to set
+             * @returns {optimization_guide.proto.TextStyle} TextStyle instance
+             */
+            TextStyle.create = function create(properties) {
+                return new TextStyle(properties);
+            };
+
+            /**
+             * Encodes the specified TextStyle message. Does not implicitly {@link optimization_guide.proto.TextStyle.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.TextStyle
+             * @static
+             * @param {optimization_guide.proto.ITextStyle} message TextStyle message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            TextStyle.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.textSize != null && Object.hasOwnProperty.call(message, "textSize"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.textSize);
+                if (message.hasEmphasis != null && Object.hasOwnProperty.call(message, "hasEmphasis"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.hasEmphasis);
+                if (message.color != null && Object.hasOwnProperty.call(message, "color"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.color);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified TextStyle message, length delimited. Does not implicitly {@link optimization_guide.proto.TextStyle.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.TextStyle
+             * @static
+             * @param {optimization_guide.proto.ITextStyle} message TextStyle message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            TextStyle.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a TextStyle message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.TextStyle
@@ -3183,6 +11218,153 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a TextStyle message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.TextStyle
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.TextStyle} TextStyle
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            TextStyle.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a TextStyle message.
+             * @function verify
+             * @memberof optimization_guide.proto.TextStyle
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            TextStyle.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.textSize != null && message.hasOwnProperty("textSize"))
+                    switch (message.textSize) {
+                    default:
+                        return "textSize: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                        break;
+                    }
+                if (message.hasEmphasis != null && message.hasOwnProperty("hasEmphasis"))
+                    if (typeof message.hasEmphasis !== "boolean")
+                        return "hasEmphasis: boolean expected";
+                if (message.color != null && message.hasOwnProperty("color"))
+                    if (!$util.isInteger(message.color))
+                        return "color: integer expected";
+                return null;
+            };
+
+            /**
+             * Creates a TextStyle message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.TextStyle
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.TextStyle} TextStyle
+             */
+            TextStyle.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.TextStyle)
+                    return object;
+                let message = new $root.optimization_guide.proto.TextStyle();
+                switch (object.textSize) {
+                default:
+                    if (typeof object.textSize === "number") {
+                        message.textSize = object.textSize;
+                        break;
+                    }
+                    break;
+                case "TEXT_SIZE_M_DEFAULT":
+                case 0:
+                    message.textSize = 0;
+                    break;
+                case "TEXT_SIZE_XS":
+                case 1:
+                    message.textSize = 1;
+                    break;
+                case "TEXT_SIZE_S":
+                case 2:
+                    message.textSize = 2;
+                    break;
+                case "TEXT_SIZE_L":
+                case 3:
+                    message.textSize = 3;
+                    break;
+                case "TEXT_SIZE_XL":
+                case 4:
+                    message.textSize = 4;
+                    break;
+                }
+                if (object.hasEmphasis != null)
+                    message.hasEmphasis = Boolean(object.hasEmphasis);
+                if (object.color != null)
+                    message.color = object.color >>> 0;
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a TextStyle message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.TextStyle
+             * @static
+             * @param {optimization_guide.proto.TextStyle} message TextStyle
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            TextStyle.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults) {
+                    object.textSize = options.enums === String ? "TEXT_SIZE_M_DEFAULT" : 0;
+                    object.hasEmphasis = false;
+                    object.color = 0;
+                }
+                if (message.textSize != null && message.hasOwnProperty("textSize"))
+                    object.textSize = options.enums === String ? $root.optimization_guide.proto.TextSize[message.textSize] === undefined ? message.textSize : $root.optimization_guide.proto.TextSize[message.textSize] : message.textSize;
+                if (message.hasEmphasis != null && message.hasOwnProperty("hasEmphasis"))
+                    object.hasEmphasis = message.hasEmphasis;
+                if (message.color != null && message.hasOwnProperty("color"))
+                    object.color = message.color;
+                return object;
+            };
+
+            /**
+             * Converts this TextStyle to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.TextStyle
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            TextStyle.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for TextStyle
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.TextStyle
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            TextStyle.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.TextStyle";
             };
 
             return TextStyle;
@@ -3231,6 +11413,50 @@ export const optimization_guide = $root.optimization_guide = (() => {
             ImageInfo.prototype.securityOrigin = null;
 
             /**
+             * Creates a new ImageInfo instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.ImageInfo
+             * @static
+             * @param {optimization_guide.proto.IImageInfo=} [properties] Properties to set
+             * @returns {optimization_guide.proto.ImageInfo} ImageInfo instance
+             */
+            ImageInfo.create = function create(properties) {
+                return new ImageInfo(properties);
+            };
+
+            /**
+             * Encodes the specified ImageInfo message. Does not implicitly {@link optimization_guide.proto.ImageInfo.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.ImageInfo
+             * @static
+             * @param {optimization_guide.proto.IImageInfo} message ImageInfo message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ImageInfo.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.imageCaption != null && Object.hasOwnProperty.call(message, "imageCaption"))
+                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.imageCaption);
+                if (message.securityOrigin != null && Object.hasOwnProperty.call(message, "securityOrigin"))
+                    $root.optimization_guide.proto.SecurityOrigin.encode(message.securityOrigin, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified ImageInfo message, length delimited. Does not implicitly {@link optimization_guide.proto.ImageInfo.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.ImageInfo
+             * @static
+             * @param {optimization_guide.proto.IImageInfo} message ImageInfo message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ImageInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes an ImageInfo message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.ImageInfo
@@ -3264,6 +11490,116 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes an ImageInfo message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.ImageInfo
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.ImageInfo} ImageInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ImageInfo.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies an ImageInfo message.
+             * @function verify
+             * @memberof optimization_guide.proto.ImageInfo
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            ImageInfo.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.imageCaption != null && message.hasOwnProperty("imageCaption"))
+                    if (!$util.isString(message.imageCaption))
+                        return "imageCaption: string expected";
+                if (message.securityOrigin != null && message.hasOwnProperty("securityOrigin")) {
+                    let error = $root.optimization_guide.proto.SecurityOrigin.verify(message.securityOrigin);
+                    if (error)
+                        return "securityOrigin." + error;
+                }
+                return null;
+            };
+
+            /**
+             * Creates an ImageInfo message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.ImageInfo
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.ImageInfo} ImageInfo
+             */
+            ImageInfo.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.ImageInfo)
+                    return object;
+                let message = new $root.optimization_guide.proto.ImageInfo();
+                if (object.imageCaption != null)
+                    message.imageCaption = String(object.imageCaption);
+                if (object.securityOrigin != null) {
+                    if (typeof object.securityOrigin !== "object")
+                        throw TypeError(".optimization_guide.proto.ImageInfo.securityOrigin: object expected");
+                    message.securityOrigin = $root.optimization_guide.proto.SecurityOrigin.fromObject(object.securityOrigin);
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from an ImageInfo message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.ImageInfo
+             * @static
+             * @param {optimization_guide.proto.ImageInfo} message ImageInfo
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            ImageInfo.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults) {
+                    object.imageCaption = "";
+                    object.securityOrigin = null;
+                }
+                if (message.imageCaption != null && message.hasOwnProperty("imageCaption"))
+                    object.imageCaption = message.imageCaption;
+                if (message.securityOrigin != null && message.hasOwnProperty("securityOrigin"))
+                    object.securityOrigin = $root.optimization_guide.proto.SecurityOrigin.toObject(message.securityOrigin, options);
+                return object;
+            };
+
+            /**
+             * Converts this ImageInfo to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.ImageInfo
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            ImageInfo.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for ImageInfo
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.ImageInfo
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            ImageInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.ImageInfo";
             };
 
             return ImageInfo;
@@ -3320,6 +11656,50 @@ export const optimization_guide = $root.optimization_guide = (() => {
             SecurityOrigin.prototype.value = null;
 
             /**
+             * Creates a new SecurityOrigin instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.SecurityOrigin
+             * @static
+             * @param {optimization_guide.proto.ISecurityOrigin=} [properties] Properties to set
+             * @returns {optimization_guide.proto.SecurityOrigin} SecurityOrigin instance
+             */
+            SecurityOrigin.create = function create(properties) {
+                return new SecurityOrigin(properties);
+            };
+
+            /**
+             * Encodes the specified SecurityOrigin message. Does not implicitly {@link optimization_guide.proto.SecurityOrigin.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.SecurityOrigin
+             * @static
+             * @param {optimization_guide.proto.ISecurityOrigin} message SecurityOrigin message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            SecurityOrigin.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.opaque != null && Object.hasOwnProperty.call(message, "opaque"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.opaque);
+                if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified SecurityOrigin message, length delimited. Does not implicitly {@link optimization_guide.proto.SecurityOrigin.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.SecurityOrigin
+             * @static
+             * @param {optimization_guide.proto.ISecurityOrigin} message SecurityOrigin message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            SecurityOrigin.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a SecurityOrigin message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.SecurityOrigin
@@ -3353,6 +11733,111 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a SecurityOrigin message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.SecurityOrigin
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.SecurityOrigin} SecurityOrigin
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            SecurityOrigin.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a SecurityOrigin message.
+             * @function verify
+             * @memberof optimization_guide.proto.SecurityOrigin
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            SecurityOrigin.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.opaque != null && message.hasOwnProperty("opaque"))
+                    if (typeof message.opaque !== "boolean")
+                        return "opaque: boolean expected";
+                if (message.value != null && message.hasOwnProperty("value"))
+                    if (!$util.isString(message.value))
+                        return "value: string expected";
+                return null;
+            };
+
+            /**
+             * Creates a SecurityOrigin message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.SecurityOrigin
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.SecurityOrigin} SecurityOrigin
+             */
+            SecurityOrigin.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.SecurityOrigin)
+                    return object;
+                let message = new $root.optimization_guide.proto.SecurityOrigin();
+                if (object.opaque != null)
+                    message.opaque = Boolean(object.opaque);
+                if (object.value != null)
+                    message.value = String(object.value);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a SecurityOrigin message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.SecurityOrigin
+             * @static
+             * @param {optimization_guide.proto.SecurityOrigin} message SecurityOrigin
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            SecurityOrigin.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults) {
+                    object.opaque = false;
+                    object.value = "";
+                }
+                if (message.opaque != null && message.hasOwnProperty("opaque"))
+                    object.opaque = message.opaque;
+                if (message.value != null && message.hasOwnProperty("value"))
+                    object.value = message.value;
+                return object;
+            };
+
+            /**
+             * Converts this SecurityOrigin to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.SecurityOrigin
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            SecurityOrigin.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for SecurityOrigin
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.SecurityOrigin
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            SecurityOrigin.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.SecurityOrigin";
             };
 
             return SecurityOrigin;
@@ -3391,6 +11876,48 @@ export const optimization_guide = $root.optimization_guide = (() => {
             SVGRootData.prototype.innerText = null;
 
             /**
+             * Creates a new SVGRootData instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.SVGRootData
+             * @static
+             * @param {optimization_guide.proto.ISVGRootData=} [properties] Properties to set
+             * @returns {optimization_guide.proto.SVGRootData} SVGRootData instance
+             */
+            SVGRootData.create = function create(properties) {
+                return new SVGRootData(properties);
+            };
+
+            /**
+             * Encodes the specified SVGRootData message. Does not implicitly {@link optimization_guide.proto.SVGRootData.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.SVGRootData
+             * @static
+             * @param {optimization_guide.proto.ISVGRootData} message SVGRootData message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            SVGRootData.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.innerText != null && Object.hasOwnProperty.call(message, "innerText"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.innerText);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified SVGRootData message, length delimited. Does not implicitly {@link optimization_guide.proto.SVGRootData.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.SVGRootData
+             * @static
+             * @param {optimization_guide.proto.ISVGRootData} message SVGRootData message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            SVGRootData.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a SVGRootData message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.SVGRootData
@@ -3420,6 +11947,102 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a SVGRootData message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.SVGRootData
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.SVGRootData} SVGRootData
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            SVGRootData.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a SVGRootData message.
+             * @function verify
+             * @memberof optimization_guide.proto.SVGRootData
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            SVGRootData.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.innerText != null && message.hasOwnProperty("innerText"))
+                    if (!$util.isString(message.innerText))
+                        return "innerText: string expected";
+                return null;
+            };
+
+            /**
+             * Creates a SVGRootData message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.SVGRootData
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.SVGRootData} SVGRootData
+             */
+            SVGRootData.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.SVGRootData)
+                    return object;
+                let message = new $root.optimization_guide.proto.SVGRootData();
+                if (object.innerText != null)
+                    message.innerText = String(object.innerText);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a SVGRootData message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.SVGRootData
+             * @static
+             * @param {optimization_guide.proto.SVGRootData} message SVGRootData
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            SVGRootData.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults)
+                    object.innerText = "";
+                if (message.innerText != null && message.hasOwnProperty("innerText"))
+                    object.innerText = message.innerText;
+                return object;
+            };
+
+            /**
+             * Converts this SVGRootData to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.SVGRootData
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            SVGRootData.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for SVGRootData
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.SVGRootData
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            SVGRootData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.SVGRootData";
             };
 
             return SVGRootData;
@@ -3467,6 +12090,50 @@ export const optimization_guide = $root.optimization_guide = (() => {
             CanvasData.prototype.layoutHeight = null;
 
             /**
+             * Creates a new CanvasData instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.CanvasData
+             * @static
+             * @param {optimization_guide.proto.ICanvasData=} [properties] Properties to set
+             * @returns {optimization_guide.proto.CanvasData} CanvasData instance
+             */
+            CanvasData.create = function create(properties) {
+                return new CanvasData(properties);
+            };
+
+            /**
+             * Encodes the specified CanvasData message. Does not implicitly {@link optimization_guide.proto.CanvasData.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.CanvasData
+             * @static
+             * @param {optimization_guide.proto.ICanvasData} message CanvasData message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            CanvasData.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.layoutWidth != null && Object.hasOwnProperty.call(message, "layoutWidth"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.layoutWidth);
+                if (message.layoutHeight != null && Object.hasOwnProperty.call(message, "layoutHeight"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.layoutHeight);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified CanvasData message, length delimited. Does not implicitly {@link optimization_guide.proto.CanvasData.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.CanvasData
+             * @static
+             * @param {optimization_guide.proto.ICanvasData} message CanvasData message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            CanvasData.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a CanvasData message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.CanvasData
@@ -3500,6 +12167,111 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a CanvasData message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.CanvasData
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.CanvasData} CanvasData
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            CanvasData.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a CanvasData message.
+             * @function verify
+             * @memberof optimization_guide.proto.CanvasData
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            CanvasData.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.layoutWidth != null && message.hasOwnProperty("layoutWidth"))
+                    if (!$util.isInteger(message.layoutWidth))
+                        return "layoutWidth: integer expected";
+                if (message.layoutHeight != null && message.hasOwnProperty("layoutHeight"))
+                    if (!$util.isInteger(message.layoutHeight))
+                        return "layoutHeight: integer expected";
+                return null;
+            };
+
+            /**
+             * Creates a CanvasData message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.CanvasData
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.CanvasData} CanvasData
+             */
+            CanvasData.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.CanvasData)
+                    return object;
+                let message = new $root.optimization_guide.proto.CanvasData();
+                if (object.layoutWidth != null)
+                    message.layoutWidth = object.layoutWidth | 0;
+                if (object.layoutHeight != null)
+                    message.layoutHeight = object.layoutHeight | 0;
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a CanvasData message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.CanvasData
+             * @static
+             * @param {optimization_guide.proto.CanvasData} message CanvasData
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            CanvasData.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults) {
+                    object.layoutWidth = 0;
+                    object.layoutHeight = 0;
+                }
+                if (message.layoutWidth != null && message.hasOwnProperty("layoutWidth"))
+                    object.layoutWidth = message.layoutWidth;
+                if (message.layoutHeight != null && message.hasOwnProperty("layoutHeight"))
+                    object.layoutHeight = message.layoutHeight;
+                return object;
+            };
+
+            /**
+             * Converts this CanvasData to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.CanvasData
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            CanvasData.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for CanvasData
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.CanvasData
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            CanvasData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.CanvasData";
             };
 
             return CanvasData;
@@ -3547,6 +12319,50 @@ export const optimization_guide = $root.optimization_guide = (() => {
             VideoData.prototype.securityOrigin = null;
 
             /**
+             * Creates a new VideoData instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.VideoData
+             * @static
+             * @param {optimization_guide.proto.IVideoData=} [properties] Properties to set
+             * @returns {optimization_guide.proto.VideoData} VideoData instance
+             */
+            VideoData.create = function create(properties) {
+                return new VideoData(properties);
+            };
+
+            /**
+             * Encodes the specified VideoData message. Does not implicitly {@link optimization_guide.proto.VideoData.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.VideoData
+             * @static
+             * @param {optimization_guide.proto.IVideoData} message VideoData message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            VideoData.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.url);
+                if (message.securityOrigin != null && Object.hasOwnProperty.call(message, "securityOrigin"))
+                    $root.optimization_guide.proto.SecurityOrigin.encode(message.securityOrigin, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified VideoData message, length delimited. Does not implicitly {@link optimization_guide.proto.VideoData.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.VideoData
+             * @static
+             * @param {optimization_guide.proto.IVideoData} message VideoData message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            VideoData.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a VideoData message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.VideoData
@@ -3580,6 +12396,116 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a VideoData message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.VideoData
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.VideoData} VideoData
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            VideoData.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a VideoData message.
+             * @function verify
+             * @memberof optimization_guide.proto.VideoData
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            VideoData.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.url != null && message.hasOwnProperty("url"))
+                    if (!$util.isString(message.url))
+                        return "url: string expected";
+                if (message.securityOrigin != null && message.hasOwnProperty("securityOrigin")) {
+                    let error = $root.optimization_guide.proto.SecurityOrigin.verify(message.securityOrigin);
+                    if (error)
+                        return "securityOrigin." + error;
+                }
+                return null;
+            };
+
+            /**
+             * Creates a VideoData message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.VideoData
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.VideoData} VideoData
+             */
+            VideoData.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.VideoData)
+                    return object;
+                let message = new $root.optimization_guide.proto.VideoData();
+                if (object.url != null)
+                    message.url = String(object.url);
+                if (object.securityOrigin != null) {
+                    if (typeof object.securityOrigin !== "object")
+                        throw TypeError(".optimization_guide.proto.VideoData.securityOrigin: object expected");
+                    message.securityOrigin = $root.optimization_guide.proto.SecurityOrigin.fromObject(object.securityOrigin);
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a VideoData message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.VideoData
+             * @static
+             * @param {optimization_guide.proto.VideoData} message VideoData
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            VideoData.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults) {
+                    object.url = "";
+                    object.securityOrigin = null;
+                }
+                if (message.url != null && message.hasOwnProperty("url"))
+                    object.url = message.url;
+                if (message.securityOrigin != null && message.hasOwnProperty("securityOrigin"))
+                    object.securityOrigin = $root.optimization_guide.proto.SecurityOrigin.toObject(message.securityOrigin, options);
+                return object;
+            };
+
+            /**
+             * Converts this VideoData to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.VideoData
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            VideoData.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for VideoData
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.VideoData
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            VideoData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.VideoData";
             };
 
             return VideoData;
@@ -3628,6 +12554,54 @@ export const optimization_guide = $root.optimization_guide = (() => {
             AnchorData.prototype.rel = $util.emptyArray;
 
             /**
+             * Creates a new AnchorData instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.AnchorData
+             * @static
+             * @param {optimization_guide.proto.IAnchorData=} [properties] Properties to set
+             * @returns {optimization_guide.proto.AnchorData} AnchorData instance
+             */
+            AnchorData.create = function create(properties) {
+                return new AnchorData(properties);
+            };
+
+            /**
+             * Encodes the specified AnchorData message. Does not implicitly {@link optimization_guide.proto.AnchorData.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.AnchorData
+             * @static
+             * @param {optimization_guide.proto.IAnchorData} message AnchorData message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            AnchorData.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.url);
+                if (message.rel != null && message.rel.length) {
+                    writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                    for (let i = 0; i < message.rel.length; ++i)
+                        writer.int32(message.rel[i]);
+                    writer.ldelim();
+                }
+                return writer;
+            };
+
+            /**
+             * Encodes the specified AnchorData message, length delimited. Does not implicitly {@link optimization_guide.proto.AnchorData.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.AnchorData
+             * @static
+             * @param {optimization_guide.proto.IAnchorData} message AnchorData message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            AnchorData.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes an AnchorData message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.AnchorData
@@ -3668,6 +12642,162 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes an AnchorData message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.AnchorData
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.AnchorData} AnchorData
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            AnchorData.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies an AnchorData message.
+             * @function verify
+             * @memberof optimization_guide.proto.AnchorData
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            AnchorData.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.url != null && message.hasOwnProperty("url"))
+                    if (!$util.isString(message.url))
+                        return "url: string expected";
+                if (message.rel != null && message.hasOwnProperty("rel")) {
+                    if (!Array.isArray(message.rel))
+                        return "rel: array expected";
+                    for (let i = 0; i < message.rel.length; ++i)
+                        switch (message.rel[i]) {
+                        default:
+                            return "rel: enum value[] expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                        case 5:
+                            break;
+                        }
+                }
+                return null;
+            };
+
+            /**
+             * Creates an AnchorData message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.AnchorData
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.AnchorData} AnchorData
+             */
+            AnchorData.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.AnchorData)
+                    return object;
+                let message = new $root.optimization_guide.proto.AnchorData();
+                if (object.url != null)
+                    message.url = String(object.url);
+                if (object.rel) {
+                    if (!Array.isArray(object.rel))
+                        throw TypeError(".optimization_guide.proto.AnchorData.rel: array expected");
+                    message.rel = [];
+                    for (let i = 0; i < object.rel.length; ++i)
+                        switch (object.rel[i]) {
+                        default:
+                            if (typeof object.rel[i] === "number") {
+                                message.rel[i] = object.rel[i];
+                                break;
+                            }
+                        case "ANCHOR_REL_UNKNOWN":
+                        case 0:
+                            message.rel[i] = 0;
+                            break;
+                        case "ANCHOR_REL_NO_REFERRER":
+                        case 1:
+                            message.rel[i] = 1;
+                            break;
+                        case "ANCHOR_REL_NO_OPENER":
+                        case 2:
+                            message.rel[i] = 2;
+                            break;
+                        case "ANCHOR_REL_OPENER":
+                        case 3:
+                            message.rel[i] = 3;
+                            break;
+                        case "ANCHOR_REL_PRIVACY_POLICY":
+                        case 4:
+                            message.rel[i] = 4;
+                            break;
+                        case "ANCHOR_REL_TERMS_OF_SERVICE":
+                        case 5:
+                            message.rel[i] = 5;
+                            break;
+                        }
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from an AnchorData message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.AnchorData
+             * @static
+             * @param {optimization_guide.proto.AnchorData} message AnchorData
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            AnchorData.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.arrays || options.defaults)
+                    object.rel = [];
+                if (options.defaults)
+                    object.url = "";
+                if (message.url != null && message.hasOwnProperty("url"))
+                    object.url = message.url;
+                if (message.rel && message.rel.length) {
+                    object.rel = [];
+                    for (let j = 0; j < message.rel.length; ++j)
+                        object.rel[j] = options.enums === String ? $root.optimization_guide.proto.AnchorRel[message.rel[j]] === undefined ? message.rel[j] : $root.optimization_guide.proto.AnchorRel[message.rel[j]] : message.rel[j];
+                }
+                return object;
+            };
+
+            /**
+             * Converts this AnchorData to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.AnchorData
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            AnchorData.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for AnchorData
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.AnchorData
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            AnchorData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.AnchorData";
             };
 
             return AnchorData;
@@ -3720,6 +12850,50 @@ export const optimization_guide = $root.optimization_guide = (() => {
             FormInfo.prototype.actionUrl = null;
 
             /**
+             * Creates a new FormInfo instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.FormInfo
+             * @static
+             * @param {optimization_guide.proto.IFormInfo=} [properties] Properties to set
+             * @returns {optimization_guide.proto.FormInfo} FormInfo instance
+             */
+            FormInfo.create = function create(properties) {
+                return new FormInfo(properties);
+            };
+
+            /**
+             * Encodes the specified FormInfo message. Does not implicitly {@link optimization_guide.proto.FormInfo.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.FormInfo
+             * @static
+             * @param {optimization_guide.proto.IFormInfo} message FormInfo message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            FormInfo.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.formName != null && Object.hasOwnProperty.call(message, "formName"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.formName);
+                if (message.actionUrl != null && Object.hasOwnProperty.call(message, "actionUrl"))
+                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.actionUrl);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified FormInfo message, length delimited. Does not implicitly {@link optimization_guide.proto.FormInfo.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.FormInfo
+             * @static
+             * @param {optimization_guide.proto.IFormInfo} message FormInfo message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            FormInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a FormInfo message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.FormInfo
@@ -3753,6 +12927,111 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a FormInfo message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.FormInfo
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.FormInfo} FormInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            FormInfo.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a FormInfo message.
+             * @function verify
+             * @memberof optimization_guide.proto.FormInfo
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            FormInfo.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.formName != null && message.hasOwnProperty("formName"))
+                    if (!$util.isString(message.formName))
+                        return "formName: string expected";
+                if (message.actionUrl != null && message.hasOwnProperty("actionUrl"))
+                    if (!$util.isString(message.actionUrl))
+                        return "actionUrl: string expected";
+                return null;
+            };
+
+            /**
+             * Creates a FormInfo message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.FormInfo
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.FormInfo} FormInfo
+             */
+            FormInfo.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.FormInfo)
+                    return object;
+                let message = new $root.optimization_guide.proto.FormInfo();
+                if (object.formName != null)
+                    message.formName = String(object.formName);
+                if (object.actionUrl != null)
+                    message.actionUrl = String(object.actionUrl);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a FormInfo message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.FormInfo
+             * @static
+             * @param {optimization_guide.proto.FormInfo} message FormInfo
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            FormInfo.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults) {
+                    object.formName = "";
+                    object.actionUrl = "";
+                }
+                if (message.formName != null && message.hasOwnProperty("formName"))
+                    object.formName = message.formName;
+                if (message.actionUrl != null && message.hasOwnProperty("actionUrl"))
+                    object.actionUrl = message.actionUrl;
+                return object;
+            };
+
+            /**
+             * Converts this FormInfo to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.FormInfo
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            FormInfo.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for FormInfo
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.FormInfo
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            FormInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.FormInfo";
             };
 
             return FormInfo;
@@ -3899,6 +13178,73 @@ export const optimization_guide = $root.optimization_guide = (() => {
             FormControlData.prototype.isReadonly = null;
 
             /**
+             * Creates a new FormControlData instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.FormControlData
+             * @static
+             * @param {optimization_guide.proto.IFormControlData=} [properties] Properties to set
+             * @returns {optimization_guide.proto.FormControlData} FormControlData instance
+             */
+            FormControlData.create = function create(properties) {
+                return new FormControlData(properties);
+            };
+
+            /**
+             * Encodes the specified FormControlData message. Does not implicitly {@link optimization_guide.proto.FormControlData.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.FormControlData
+             * @static
+             * @param {optimization_guide.proto.IFormControlData} message FormControlData message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            FormControlData.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.fieldName != null && Object.hasOwnProperty.call(message, "fieldName"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.fieldName);
+                if (message.fieldValue != null && Object.hasOwnProperty.call(message, "fieldValue"))
+                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.fieldValue);
+                if (message.formControlType != null && Object.hasOwnProperty.call(message, "formControlType"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.formControlType);
+                if (message.selectOptions != null && message.selectOptions.length)
+                    for (let i = 0; i < message.selectOptions.length; ++i)
+                        $root.optimization_guide.proto.SelectOption.encode(message.selectOptions[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                if (message.placeholder != null && Object.hasOwnProperty.call(message, "placeholder"))
+                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.placeholder);
+                if (message.isChecked != null && Object.hasOwnProperty.call(message, "isChecked"))
+                    writer.uint32(/* id 6, wireType 0 =*/48).bool(message.isChecked);
+                if (message.isRequired != null && Object.hasOwnProperty.call(message, "isRequired"))
+                    writer.uint32(/* id 7, wireType 0 =*/56).bool(message.isRequired);
+                if (message.redactionDecision != null && Object.hasOwnProperty.call(message, "redactionDecision"))
+                    writer.uint32(/* id 8, wireType 0 =*/64).int32(message.redactionDecision);
+                if (message.coarseAutofillFieldType != null && message.coarseAutofillFieldType.length) {
+                    writer.uint32(/* id 9, wireType 2 =*/74).fork();
+                    for (let i = 0; i < message.coarseAutofillFieldType.length; ++i)
+                        writer.int32(message.coarseAutofillFieldType[i]);
+                    writer.ldelim();
+                }
+                if (message.autofillSectionId != null && Object.hasOwnProperty.call(message, "autofillSectionId"))
+                    writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.autofillSectionId);
+                if (message.isReadonly != null && Object.hasOwnProperty.call(message, "isReadonly"))
+                    writer.uint32(/* id 11, wireType 0 =*/88).bool(message.isReadonly);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified FormControlData message, length delimited. Does not implicitly {@link optimization_guide.proto.FormControlData.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.FormControlData
+             * @static
+             * @param {optimization_guide.proto.IFormControlData} message FormControlData message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            FormControlData.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a FormControlData message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.FormControlData
@@ -3979,6 +13325,476 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 return message;
             };
 
+            /**
+             * Decodes a FormControlData message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.FormControlData
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.FormControlData} FormControlData
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            FormControlData.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a FormControlData message.
+             * @function verify
+             * @memberof optimization_guide.proto.FormControlData
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            FormControlData.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.fieldName != null && message.hasOwnProperty("fieldName"))
+                    if (!$util.isString(message.fieldName))
+                        return "fieldName: string expected";
+                if (message.fieldValue != null && message.hasOwnProperty("fieldValue"))
+                    if (!$util.isString(message.fieldValue))
+                        return "fieldValue: string expected";
+                if (message.formControlType != null && message.hasOwnProperty("formControlType"))
+                    switch (message.formControlType) {
+                    default:
+                        return "formControlType: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                    case 10:
+                    case 11:
+                    case 12:
+                    case 13:
+                    case 15:
+                    case 16:
+                    case 17:
+                    case 18:
+                    case 19:
+                    case 20:
+                    case 21:
+                    case 22:
+                    case 23:
+                    case 24:
+                    case 25:
+                    case 26:
+                    case 27:
+                    case 28:
+                    case 29:
+                    case 30:
+                    case 31:
+                    case 32:
+                    case 33:
+                        break;
+                    }
+                if (message.selectOptions != null && message.hasOwnProperty("selectOptions")) {
+                    if (!Array.isArray(message.selectOptions))
+                        return "selectOptions: array expected";
+                    for (let i = 0; i < message.selectOptions.length; ++i) {
+                        let error = $root.optimization_guide.proto.SelectOption.verify(message.selectOptions[i]);
+                        if (error)
+                            return "selectOptions." + error;
+                    }
+                }
+                if (message.placeholder != null && message.hasOwnProperty("placeholder"))
+                    if (!$util.isString(message.placeholder))
+                        return "placeholder: string expected";
+                if (message.isChecked != null && message.hasOwnProperty("isChecked"))
+                    if (typeof message.isChecked !== "boolean")
+                        return "isChecked: boolean expected";
+                if (message.isRequired != null && message.hasOwnProperty("isRequired"))
+                    if (typeof message.isRequired !== "boolean")
+                        return "isRequired: boolean expected";
+                if (message.redactionDecision != null && message.hasOwnProperty("redactionDecision"))
+                    switch (message.redactionDecision) {
+                    default:
+                        return "redactionDecision: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                        break;
+                    }
+                if (message.coarseAutofillFieldType != null && message.hasOwnProperty("coarseAutofillFieldType")) {
+                    if (!Array.isArray(message.coarseAutofillFieldType))
+                        return "coarseAutofillFieldType: array expected";
+                    for (let i = 0; i < message.coarseAutofillFieldType.length; ++i)
+                        switch (message.coarseAutofillFieldType[i]) {
+                        default:
+                            return "coarseAutofillFieldType: enum value[] expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                            break;
+                        }
+                }
+                if (message.autofillSectionId != null && message.hasOwnProperty("autofillSectionId"))
+                    if (!$util.isInteger(message.autofillSectionId))
+                        return "autofillSectionId: integer expected";
+                if (message.isReadonly != null && message.hasOwnProperty("isReadonly"))
+                    if (typeof message.isReadonly !== "boolean")
+                        return "isReadonly: boolean expected";
+                return null;
+            };
+
+            /**
+             * Creates a FormControlData message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.FormControlData
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.FormControlData} FormControlData
+             */
+            FormControlData.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.FormControlData)
+                    return object;
+                let message = new $root.optimization_guide.proto.FormControlData();
+                if (object.fieldName != null)
+                    message.fieldName = String(object.fieldName);
+                if (object.fieldValue != null)
+                    message.fieldValue = String(object.fieldValue);
+                switch (object.formControlType) {
+                default:
+                    if (typeof object.formControlType === "number") {
+                        message.formControlType = object.formControlType;
+                        break;
+                    }
+                    break;
+                case "FORM_CONTROL_TYPE_UNSPECIFIED":
+                case 0:
+                    message.formControlType = 0;
+                    break;
+                case "FORM_CONTROL_TYPE_CONTENT_EDITABLE":
+                case 1:
+                    message.formControlType = 1;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_CHECKBOX":
+                case 2:
+                    message.formControlType = 2;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_EMAIL":
+                case 3:
+                    message.formControlType = 3;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_MONTH":
+                case 4:
+                    message.formControlType = 4;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_NUMBER":
+                case 5:
+                    message.formControlType = 5;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_PASSWORD":
+                case 6:
+                    message.formControlType = 6;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_RADIO":
+                case 7:
+                    message.formControlType = 7;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_SEARCH":
+                case 8:
+                    message.formControlType = 8;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_TELEPHONE":
+                case 9:
+                    message.formControlType = 9;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_TEXT":
+                case 10:
+                    message.formControlType = 10;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_URL":
+                case 11:
+                    message.formControlType = 11;
+                    break;
+                case "FORM_CONTROL_TYPE_SELECT_ONE":
+                case 12:
+                    message.formControlType = 12;
+                    break;
+                case "FORM_CONTROL_TYPE_SELECT_MULTIPLE":
+                case 13:
+                    message.formControlType = 13;
+                    break;
+                case "FORM_CONTROL_TYPE_TEXT_AREA":
+                case 15:
+                    message.formControlType = 15;
+                    break;
+                case "FORM_CONTROL_TYPE_BUTTON_BUTTON":
+                case 16:
+                    message.formControlType = 16;
+                    break;
+                case "FORM_CONTROL_TYPE_BUTTON_SUBMIT":
+                case 17:
+                    message.formControlType = 17;
+                    break;
+                case "FORM_CONTROL_TYPE_BUTTON_RESET":
+                case 18:
+                    message.formControlType = 18;
+                    break;
+                case "FORM_CONTROL_TYPE_BUTTON_POPOVER":
+                case 19:
+                    message.formControlType = 19;
+                    break;
+                case "FORM_CONTROL_TYPE_FIELDSET":
+                case 20:
+                    message.formControlType = 20;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_BUTTON":
+                case 21:
+                    message.formControlType = 21;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_COLOR":
+                case 22:
+                    message.formControlType = 22;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_DATE":
+                case 23:
+                    message.formControlType = 23;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_DATETIME_LOCAL":
+                case 24:
+                    message.formControlType = 24;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_FILE":
+                case 25:
+                    message.formControlType = 25;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_HIDDEN":
+                case 26:
+                    message.formControlType = 26;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_IMAGE":
+                case 27:
+                    message.formControlType = 27;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_RANGE":
+                case 28:
+                    message.formControlType = 28;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_RESET":
+                case 29:
+                    message.formControlType = 29;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_SUBMIT":
+                case 30:
+                    message.formControlType = 30;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_TIME":
+                case 31:
+                    message.formControlType = 31;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_WEEK":
+                case 32:
+                    message.formControlType = 32;
+                    break;
+                case "FORM_CONTROL_TYPE_OUTPUT":
+                case 33:
+                    message.formControlType = 33;
+                    break;
+                }
+                if (object.selectOptions) {
+                    if (!Array.isArray(object.selectOptions))
+                        throw TypeError(".optimization_guide.proto.FormControlData.selectOptions: array expected");
+                    message.selectOptions = [];
+                    for (let i = 0; i < object.selectOptions.length; ++i) {
+                        if (typeof object.selectOptions[i] !== "object")
+                            throw TypeError(".optimization_guide.proto.FormControlData.selectOptions: object expected");
+                        message.selectOptions[i] = $root.optimization_guide.proto.SelectOption.fromObject(object.selectOptions[i]);
+                    }
+                }
+                if (object.placeholder != null)
+                    message.placeholder = String(object.placeholder);
+                if (object.isChecked != null)
+                    message.isChecked = Boolean(object.isChecked);
+                if (object.isRequired != null)
+                    message.isRequired = Boolean(object.isRequired);
+                switch (object.redactionDecision) {
+                default:
+                    if (typeof object.redactionDecision === "number") {
+                        message.redactionDecision = object.redactionDecision;
+                        break;
+                    }
+                    break;
+                case "REDACTION_DECISION_NO_REDACTION_NECESSARY":
+                case 0:
+                    message.redactionDecision = 0;
+                    break;
+                case "REDACTION_DECISION_UNREDACTED_EMPTY_PASSWORD":
+                case 1:
+                    message.redactionDecision = 1;
+                    break;
+                case "REDACTION_DECISION_REDACTED_HAS_BEEN_PASSWORD":
+                case 2:
+                    message.redactionDecision = 2;
+                    break;
+                case "REDACTION_DECISION_UNREDACTED_EMPTY_PAYMENT_FIELD":
+                case 3:
+                    message.redactionDecision = 3;
+                    break;
+                case "REDACTION_DECISION_REDACTED_IS_SENSITIVE_PAYMENT_FIELD":
+                case 4:
+                    message.redactionDecision = 4;
+                    break;
+                case "REDACTION_DECISION_UNREDACTED_EMPTY_CUSTOM_PASSWORD":
+                case 5:
+                    message.redactionDecision = 5;
+                    break;
+                case "REDACTION_DECISION_REDACTED_CUSTOM_PASSWORD_CSS":
+                case 6:
+                    message.redactionDecision = 6;
+                    break;
+                case "REDACTION_DECISION_REDACTED_CUSTOM_PASSWORD_JS":
+                case 7:
+                    message.redactionDecision = 7;
+                    break;
+                case "REDACTION_DECISION_REDACTED_IS_OTP":
+                case 8:
+                    message.redactionDecision = 8;
+                    break;
+                case "REDACTION_DECISION_UNREDACTED_EMPTY_OTP_FIELD":
+                case 9:
+                    message.redactionDecision = 9;
+                    break;
+                }
+                if (object.coarseAutofillFieldType) {
+                    if (!Array.isArray(object.coarseAutofillFieldType))
+                        throw TypeError(".optimization_guide.proto.FormControlData.coarseAutofillFieldType: array expected");
+                    message.coarseAutofillFieldType = [];
+                    for (let i = 0; i < object.coarseAutofillFieldType.length; ++i)
+                        switch (object.coarseAutofillFieldType[i]) {
+                        default:
+                            if (typeof object.coarseAutofillFieldType[i] === "number") {
+                                message.coarseAutofillFieldType[i] = object.coarseAutofillFieldType[i];
+                                break;
+                            }
+                        case "COARSE_AUTOFILL_FIELD_TYPE_UNSUPPORTED":
+                        case 0:
+                            message.coarseAutofillFieldType[i] = 0;
+                            break;
+                        case "COARSE_AUTOFILL_FIELD_TYPE_ADDRESS":
+                        case 1:
+                            message.coarseAutofillFieldType[i] = 1;
+                            break;
+                        case "COARSE_AUTOFILL_FIELD_TYPE_CREDIT_CARD":
+                        case 2:
+                            message.coarseAutofillFieldType[i] = 2;
+                            break;
+                        case "COARSE_AUTOFILL_FIELD_TYPE_OTP":
+                        case 3:
+                            message.coarseAutofillFieldType[i] = 3;
+                            break;
+                        }
+                }
+                if (object.autofillSectionId != null)
+                    message.autofillSectionId = object.autofillSectionId >>> 0;
+                if (object.isReadonly != null)
+                    message.isReadonly = Boolean(object.isReadonly);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a FormControlData message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.FormControlData
+             * @static
+             * @param {optimization_guide.proto.FormControlData} message FormControlData
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            FormControlData.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.arrays || options.defaults) {
+                    object.selectOptions = [];
+                    object.coarseAutofillFieldType = [];
+                }
+                if (options.defaults) {
+                    object.fieldName = "";
+                    object.fieldValue = "";
+                    object.formControlType = options.enums === String ? "FORM_CONTROL_TYPE_UNSPECIFIED" : 0;
+                    object.placeholder = "";
+                    object.isChecked = false;
+                    object.isRequired = false;
+                    object.redactionDecision = options.enums === String ? "REDACTION_DECISION_NO_REDACTION_NECESSARY" : 0;
+                    object.autofillSectionId = 0;
+                    object.isReadonly = false;
+                }
+                if (message.fieldName != null && message.hasOwnProperty("fieldName"))
+                    object.fieldName = message.fieldName;
+                if (message.fieldValue != null && message.hasOwnProperty("fieldValue"))
+                    object.fieldValue = message.fieldValue;
+                if (message.formControlType != null && message.hasOwnProperty("formControlType"))
+                    object.formControlType = options.enums === String ? $root.optimization_guide.proto.FormControlType[message.formControlType] === undefined ? message.formControlType : $root.optimization_guide.proto.FormControlType[message.formControlType] : message.formControlType;
+                if (message.selectOptions && message.selectOptions.length) {
+                    object.selectOptions = [];
+                    for (let j = 0; j < message.selectOptions.length; ++j)
+                        object.selectOptions[j] = $root.optimization_guide.proto.SelectOption.toObject(message.selectOptions[j], options);
+                }
+                if (message.placeholder != null && message.hasOwnProperty("placeholder"))
+                    object.placeholder = message.placeholder;
+                if (message.isChecked != null && message.hasOwnProperty("isChecked"))
+                    object.isChecked = message.isChecked;
+                if (message.isRequired != null && message.hasOwnProperty("isRequired"))
+                    object.isRequired = message.isRequired;
+                if (message.redactionDecision != null && message.hasOwnProperty("redactionDecision"))
+                    object.redactionDecision = options.enums === String ? $root.optimization_guide.proto.RedactionDecision[message.redactionDecision] === undefined ? message.redactionDecision : $root.optimization_guide.proto.RedactionDecision[message.redactionDecision] : message.redactionDecision;
+                if (message.coarseAutofillFieldType && message.coarseAutofillFieldType.length) {
+                    object.coarseAutofillFieldType = [];
+                    for (let j = 0; j < message.coarseAutofillFieldType.length; ++j)
+                        object.coarseAutofillFieldType[j] = options.enums === String ? $root.optimization_guide.proto.CoarseAutofillFieldType[message.coarseAutofillFieldType[j]] === undefined ? message.coarseAutofillFieldType[j] : $root.optimization_guide.proto.CoarseAutofillFieldType[message.coarseAutofillFieldType[j]] : message.coarseAutofillFieldType[j];
+                }
+                if (message.autofillSectionId != null && message.hasOwnProperty("autofillSectionId"))
+                    object.autofillSectionId = message.autofillSectionId;
+                if (message.isReadonly != null && message.hasOwnProperty("isReadonly"))
+                    object.isReadonly = message.isReadonly;
+                return object;
+            };
+
+            /**
+             * Converts this FormControlData to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.FormControlData
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            FormControlData.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for FormControlData
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.FormControlData
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            FormControlData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.FormControlData";
+            };
+
             return FormControlData;
         })();
 
@@ -4055,6 +13871,54 @@ export const optimization_guide = $root.optimization_guide = (() => {
             SelectOption.prototype.isDisabled = null;
 
             /**
+             * Creates a new SelectOption instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.SelectOption
+             * @static
+             * @param {optimization_guide.proto.ISelectOption=} [properties] Properties to set
+             * @returns {optimization_guide.proto.SelectOption} SelectOption instance
+             */
+            SelectOption.create = function create(properties) {
+                return new SelectOption(properties);
+            };
+
+            /**
+             * Encodes the specified SelectOption message. Does not implicitly {@link optimization_guide.proto.SelectOption.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.SelectOption
+             * @static
+             * @param {optimization_guide.proto.ISelectOption} message SelectOption message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            SelectOption.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.value);
+                if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.text);
+                if (message.isSelected != null && Object.hasOwnProperty.call(message, "isSelected"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.isSelected);
+                if (message.isDisabled != null && Object.hasOwnProperty.call(message, "isDisabled"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.isDisabled);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified SelectOption message, length delimited. Does not implicitly {@link optimization_guide.proto.SelectOption.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.SelectOption
+             * @static
+             * @param {optimization_guide.proto.ISelectOption} message SelectOption message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            SelectOption.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a SelectOption message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.SelectOption
@@ -4096,6 +13960,127 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a SelectOption message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.SelectOption
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.SelectOption} SelectOption
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            SelectOption.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a SelectOption message.
+             * @function verify
+             * @memberof optimization_guide.proto.SelectOption
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            SelectOption.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.value != null && message.hasOwnProperty("value"))
+                    if (!$util.isString(message.value))
+                        return "value: string expected";
+                if (message.text != null && message.hasOwnProperty("text"))
+                    if (!$util.isString(message.text))
+                        return "text: string expected";
+                if (message.isSelected != null && message.hasOwnProperty("isSelected"))
+                    if (typeof message.isSelected !== "boolean")
+                        return "isSelected: boolean expected";
+                if (message.isDisabled != null && message.hasOwnProperty("isDisabled"))
+                    if (typeof message.isDisabled !== "boolean")
+                        return "isDisabled: boolean expected";
+                return null;
+            };
+
+            /**
+             * Creates a SelectOption message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.SelectOption
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.SelectOption} SelectOption
+             */
+            SelectOption.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.SelectOption)
+                    return object;
+                let message = new $root.optimization_guide.proto.SelectOption();
+                if (object.value != null)
+                    message.value = String(object.value);
+                if (object.text != null)
+                    message.text = String(object.text);
+                if (object.isSelected != null)
+                    message.isSelected = Boolean(object.isSelected);
+                if (object.isDisabled != null)
+                    message.isDisabled = Boolean(object.isDisabled);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a SelectOption message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.SelectOption
+             * @static
+             * @param {optimization_guide.proto.SelectOption} message SelectOption
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            SelectOption.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults) {
+                    object.value = "";
+                    object.text = "";
+                    object.isSelected = false;
+                    object.isDisabled = false;
+                }
+                if (message.value != null && message.hasOwnProperty("value"))
+                    object.value = message.value;
+                if (message.text != null && message.hasOwnProperty("text"))
+                    object.text = message.text;
+                if (message.isSelected != null && message.hasOwnProperty("isSelected"))
+                    object.isSelected = message.isSelected;
+                if (message.isDisabled != null && message.hasOwnProperty("isDisabled"))
+                    object.isDisabled = message.isDisabled;
+                return object;
+            };
+
+            /**
+             * Converts this SelectOption to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.SelectOption
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            SelectOption.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for SelectOption
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.SelectOption
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            SelectOption.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.SelectOption";
             };
 
             return SelectOption;
@@ -4144,6 +14129,48 @@ export const optimization_guide = $root.optimization_guide = (() => {
             TableData.prototype.tableName = null;
 
             /**
+             * Creates a new TableData instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.TableData
+             * @static
+             * @param {optimization_guide.proto.ITableData=} [properties] Properties to set
+             * @returns {optimization_guide.proto.TableData} TableData instance
+             */
+            TableData.create = function create(properties) {
+                return new TableData(properties);
+            };
+
+            /**
+             * Encodes the specified TableData message. Does not implicitly {@link optimization_guide.proto.TableData.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.TableData
+             * @static
+             * @param {optimization_guide.proto.ITableData} message TableData message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            TableData.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.tableName != null && Object.hasOwnProperty.call(message, "tableName"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.tableName);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified TableData message, length delimited. Does not implicitly {@link optimization_guide.proto.TableData.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.TableData
+             * @static
+             * @param {optimization_guide.proto.ITableData} message TableData message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            TableData.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a TableData message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.TableData
@@ -4173,6 +14200,102 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a TableData message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.TableData
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.TableData} TableData
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            TableData.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a TableData message.
+             * @function verify
+             * @memberof optimization_guide.proto.TableData
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            TableData.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.tableName != null && message.hasOwnProperty("tableName"))
+                    if (!$util.isString(message.tableName))
+                        return "tableName: string expected";
+                return null;
+            };
+
+            /**
+             * Creates a TableData message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.TableData
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.TableData} TableData
+             */
+            TableData.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.TableData)
+                    return object;
+                let message = new $root.optimization_guide.proto.TableData();
+                if (object.tableName != null)
+                    message.tableName = String(object.tableName);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a TableData message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.TableData
+             * @static
+             * @param {optimization_guide.proto.TableData} message TableData
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            TableData.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults)
+                    object.tableName = "";
+                if (message.tableName != null && message.hasOwnProperty("tableName"))
+                    object.tableName = message.tableName;
+                return object;
+            };
+
+            /**
+             * Converts this TableData to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.TableData
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            TableData.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for TableData
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.TableData
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            TableData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.TableData";
             };
 
             return TableData;
@@ -4234,6 +14357,50 @@ export const optimization_guide = $root.optimization_guide = (() => {
             });
 
             /**
+             * Creates a new IframeData instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.IframeData
+             * @static
+             * @param {optimization_guide.proto.IIframeData=} [properties] Properties to set
+             * @returns {optimization_guide.proto.IframeData} IframeData instance
+             */
+            IframeData.create = function create(properties) {
+                return new IframeData(properties);
+            };
+
+            /**
+             * Encodes the specified IframeData message. Does not implicitly {@link optimization_guide.proto.IframeData.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.IframeData
+             * @static
+             * @param {optimization_guide.proto.IIframeData} message IframeData message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            IframeData.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.frameData != null && Object.hasOwnProperty.call(message, "frameData"))
+                    $root.optimization_guide.proto.FrameData.encode(message.frameData, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                if (message.redactedFrameMetadata != null && Object.hasOwnProperty.call(message, "redactedFrameMetadata"))
+                    $root.optimization_guide.proto.IframeData.RedactedFrameMetadata.encode(message.redactedFrameMetadata, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified IframeData message, length delimited. Does not implicitly {@link optimization_guide.proto.IframeData.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.IframeData
+             * @static
+             * @param {optimization_guide.proto.IIframeData} message IframeData message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            IframeData.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes an IframeData message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.IframeData
@@ -4269,6 +14436,132 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 return message;
             };
 
+            /**
+             * Decodes an IframeData message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.IframeData
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.IframeData} IframeData
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            IframeData.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies an IframeData message.
+             * @function verify
+             * @memberof optimization_guide.proto.IframeData
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            IframeData.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                let properties = {};
+                if (message.frameData != null && message.hasOwnProperty("frameData")) {
+                    properties.data = 1;
+                    {
+                        let error = $root.optimization_guide.proto.FrameData.verify(message.frameData);
+                        if (error)
+                            return "frameData." + error;
+                    }
+                }
+                if (message.redactedFrameMetadata != null && message.hasOwnProperty("redactedFrameMetadata")) {
+                    if (properties.data === 1)
+                        return "data: multiple values";
+                    properties.data = 1;
+                    {
+                        let error = $root.optimization_guide.proto.IframeData.RedactedFrameMetadata.verify(message.redactedFrameMetadata);
+                        if (error)
+                            return "redactedFrameMetadata." + error;
+                    }
+                }
+                return null;
+            };
+
+            /**
+             * Creates an IframeData message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.IframeData
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.IframeData} IframeData
+             */
+            IframeData.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.IframeData)
+                    return object;
+                let message = new $root.optimization_guide.proto.IframeData();
+                if (object.frameData != null) {
+                    if (typeof object.frameData !== "object")
+                        throw TypeError(".optimization_guide.proto.IframeData.frameData: object expected");
+                    message.frameData = $root.optimization_guide.proto.FrameData.fromObject(object.frameData);
+                }
+                if (object.redactedFrameMetadata != null) {
+                    if (typeof object.redactedFrameMetadata !== "object")
+                        throw TypeError(".optimization_guide.proto.IframeData.redactedFrameMetadata: object expected");
+                    message.redactedFrameMetadata = $root.optimization_guide.proto.IframeData.RedactedFrameMetadata.fromObject(object.redactedFrameMetadata);
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from an IframeData message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.IframeData
+             * @static
+             * @param {optimization_guide.proto.IframeData} message IframeData
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            IframeData.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (message.frameData != null && message.hasOwnProperty("frameData")) {
+                    object.frameData = $root.optimization_guide.proto.FrameData.toObject(message.frameData, options);
+                    if (options.oneofs)
+                        object.data = "frameData";
+                }
+                if (message.redactedFrameMetadata != null && message.hasOwnProperty("redactedFrameMetadata")) {
+                    object.redactedFrameMetadata = $root.optimization_guide.proto.IframeData.RedactedFrameMetadata.toObject(message.redactedFrameMetadata, options);
+                    if (options.oneofs)
+                        object.data = "redactedFrameMetadata";
+                }
+                return object;
+            };
+
+            /**
+             * Converts this IframeData to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.IframeData
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            IframeData.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for IframeData
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.IframeData
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            IframeData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.IframeData";
+            };
+
             IframeData.RedactedFrameMetadata = (function() {
 
                 /**
@@ -4302,6 +14595,48 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 RedactedFrameMetadata.prototype.reason = null;
 
                 /**
+                 * Creates a new RedactedFrameMetadata instance using the specified properties.
+                 * @function create
+                 * @memberof optimization_guide.proto.IframeData.RedactedFrameMetadata
+                 * @static
+                 * @param {optimization_guide.proto.IframeData.IRedactedFrameMetadata=} [properties] Properties to set
+                 * @returns {optimization_guide.proto.IframeData.RedactedFrameMetadata} RedactedFrameMetadata instance
+                 */
+                RedactedFrameMetadata.create = function create(properties) {
+                    return new RedactedFrameMetadata(properties);
+                };
+
+                /**
+                 * Encodes the specified RedactedFrameMetadata message. Does not implicitly {@link optimization_guide.proto.IframeData.RedactedFrameMetadata.verify|verify} messages.
+                 * @function encode
+                 * @memberof optimization_guide.proto.IframeData.RedactedFrameMetadata
+                 * @static
+                 * @param {optimization_guide.proto.IframeData.IRedactedFrameMetadata} message RedactedFrameMetadata message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                RedactedFrameMetadata.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.reason != null && Object.hasOwnProperty.call(message, "reason"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.reason);
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified RedactedFrameMetadata message, length delimited. Does not implicitly {@link optimization_guide.proto.IframeData.RedactedFrameMetadata.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof optimization_guide.proto.IframeData.RedactedFrameMetadata
+                 * @static
+                 * @param {optimization_guide.proto.IframeData.IRedactedFrameMetadata} message RedactedFrameMetadata message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                RedactedFrameMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
                  * Decodes a RedactedFrameMetadata message from the specified reader or buffer.
                  * @function decode
                  * @memberof optimization_guide.proto.IframeData.RedactedFrameMetadata
@@ -4331,6 +14666,126 @@ export const optimization_guide = $root.optimization_guide = (() => {
                         }
                     }
                     return message;
+                };
+
+                /**
+                 * Decodes a RedactedFrameMetadata message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof optimization_guide.proto.IframeData.RedactedFrameMetadata
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {optimization_guide.proto.IframeData.RedactedFrameMetadata} RedactedFrameMetadata
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                RedactedFrameMetadata.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a RedactedFrameMetadata message.
+                 * @function verify
+                 * @memberof optimization_guide.proto.IframeData.RedactedFrameMetadata
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                RedactedFrameMetadata.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.reason != null && message.hasOwnProperty("reason"))
+                        switch (message.reason) {
+                        default:
+                            return "reason: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    return null;
+                };
+
+                /**
+                 * Creates a RedactedFrameMetadata message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof optimization_guide.proto.IframeData.RedactedFrameMetadata
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {optimization_guide.proto.IframeData.RedactedFrameMetadata} RedactedFrameMetadata
+                 */
+                RedactedFrameMetadata.fromObject = function fromObject(object) {
+                    if (object instanceof $root.optimization_guide.proto.IframeData.RedactedFrameMetadata)
+                        return object;
+                    let message = new $root.optimization_guide.proto.IframeData.RedactedFrameMetadata();
+                    switch (object.reason) {
+                    default:
+                        if (typeof object.reason === "number") {
+                            message.reason = object.reason;
+                            break;
+                        }
+                        break;
+                    case "REASON_UNSPECIFIED":
+                    case 0:
+                        message.reason = 0;
+                        break;
+                    case "REASON_CROSS_SITE":
+                    case 1:
+                        message.reason = 1;
+                        break;
+                    case "REASON_CROSS_ORIGIN":
+                    case 2:
+                        message.reason = 2;
+                        break;
+                    }
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a RedactedFrameMetadata message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof optimization_guide.proto.IframeData.RedactedFrameMetadata
+                 * @static
+                 * @param {optimization_guide.proto.IframeData.RedactedFrameMetadata} message RedactedFrameMetadata
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                RedactedFrameMetadata.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    let object = {};
+                    if (options.defaults)
+                        object.reason = options.enums === String ? "REASON_UNSPECIFIED" : 0;
+                    if (message.reason != null && message.hasOwnProperty("reason"))
+                        object.reason = options.enums === String ? $root.optimization_guide.proto.IframeData.RedactedFrameMetadata.Reason[message.reason] === undefined ? message.reason : $root.optimization_guide.proto.IframeData.RedactedFrameMetadata.Reason[message.reason] : message.reason;
+                    return object;
+                };
+
+                /**
+                 * Converts this RedactedFrameMetadata to JSON.
+                 * @function toJSON
+                 * @memberof optimization_guide.proto.IframeData.RedactedFrameMetadata
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                RedactedFrameMetadata.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                /**
+                 * Gets the default type url for RedactedFrameMetadata
+                 * @function getTypeUrl
+                 * @memberof optimization_guide.proto.IframeData.RedactedFrameMetadata
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                RedactedFrameMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/optimization_guide.proto.IframeData.RedactedFrameMetadata";
                 };
 
                 /**
@@ -4478,6 +14933,66 @@ export const optimization_guide = $root.optimization_guide = (() => {
             FrameData.prototype.scriptToolResults = $util.emptyArray;
 
             /**
+             * Creates a new FrameData instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.FrameData
+             * @static
+             * @param {optimization_guide.proto.IFrameData=} [properties] Properties to set
+             * @returns {optimization_guide.proto.FrameData} FrameData instance
+             */
+            FrameData.create = function create(properties) {
+                return new FrameData(properties);
+            };
+
+            /**
+             * Encodes the specified FrameData message. Does not implicitly {@link optimization_guide.proto.FrameData.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.FrameData
+             * @static
+             * @param {optimization_guide.proto.IFrameData} message FrameData message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            FrameData.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.securityOrigin != null && Object.hasOwnProperty.call(message, "securityOrigin"))
+                    $root.optimization_guide.proto.SecurityOrigin.encode(message.securityOrigin, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                if (message.frameInteractionInfo != null && Object.hasOwnProperty.call(message, "frameInteractionInfo"))
+                    $root.optimization_guide.proto.FrameInteractionInfo.encode(message.frameInteractionInfo, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                if (message.documentIdentifier != null && Object.hasOwnProperty.call(message, "documentIdentifier"))
+                    $root.optimization_guide.proto.DocumentIdentifier.encode(message.documentIdentifier, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.url);
+                if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.title);
+                if (message.paidContentMetadata != null && Object.hasOwnProperty.call(message, "paidContentMetadata"))
+                    $root.optimization_guide.proto.PaidContentMetadata.encode(message.paidContentMetadata, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                if (message.mediaData != null && Object.hasOwnProperty.call(message, "mediaData"))
+                    $root.optimization_guide.proto.MediaData.encode(message.mediaData, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                if (message.scriptTools != null && message.scriptTools.length)
+                    for (let i = 0; i < message.scriptTools.length; ++i)
+                        $root.optimization_guide.proto.ScriptTool.encode(message.scriptTools[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                if (message.scriptToolResults != null && message.scriptToolResults.length)
+                    for (let i = 0; i < message.scriptToolResults.length; ++i)
+                        $root.optimization_guide.proto.ScriptToolResult.encode(message.scriptToolResults[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified FrameData message, length delimited. Does not implicitly {@link optimization_guide.proto.FrameData.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.FrameData
+             * @static
+             * @param {optimization_guide.proto.IFrameData} message FrameData message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            FrameData.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a FrameData message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.FrameData
@@ -4545,6 +15060,228 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 return message;
             };
 
+            /**
+             * Decodes a FrameData message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.FrameData
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.FrameData} FrameData
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            FrameData.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a FrameData message.
+             * @function verify
+             * @memberof optimization_guide.proto.FrameData
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            FrameData.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.securityOrigin != null && message.hasOwnProperty("securityOrigin")) {
+                    let error = $root.optimization_guide.proto.SecurityOrigin.verify(message.securityOrigin);
+                    if (error)
+                        return "securityOrigin." + error;
+                }
+                if (message.frameInteractionInfo != null && message.hasOwnProperty("frameInteractionInfo")) {
+                    let error = $root.optimization_guide.proto.FrameInteractionInfo.verify(message.frameInteractionInfo);
+                    if (error)
+                        return "frameInteractionInfo." + error;
+                }
+                if (message.documentIdentifier != null && message.hasOwnProperty("documentIdentifier")) {
+                    let error = $root.optimization_guide.proto.DocumentIdentifier.verify(message.documentIdentifier);
+                    if (error)
+                        return "documentIdentifier." + error;
+                }
+                if (message.url != null && message.hasOwnProperty("url"))
+                    if (!$util.isString(message.url))
+                        return "url: string expected";
+                if (message.title != null && message.hasOwnProperty("title"))
+                    if (!$util.isString(message.title))
+                        return "title: string expected";
+                if (message.paidContentMetadata != null && message.hasOwnProperty("paidContentMetadata")) {
+                    let error = $root.optimization_guide.proto.PaidContentMetadata.verify(message.paidContentMetadata);
+                    if (error)
+                        return "paidContentMetadata." + error;
+                }
+                if (message.mediaData != null && message.hasOwnProperty("mediaData")) {
+                    let error = $root.optimization_guide.proto.MediaData.verify(message.mediaData);
+                    if (error)
+                        return "mediaData." + error;
+                }
+                if (message.scriptTools != null && message.hasOwnProperty("scriptTools")) {
+                    if (!Array.isArray(message.scriptTools))
+                        return "scriptTools: array expected";
+                    for (let i = 0; i < message.scriptTools.length; ++i) {
+                        let error = $root.optimization_guide.proto.ScriptTool.verify(message.scriptTools[i]);
+                        if (error)
+                            return "scriptTools." + error;
+                    }
+                }
+                if (message.scriptToolResults != null && message.hasOwnProperty("scriptToolResults")) {
+                    if (!Array.isArray(message.scriptToolResults))
+                        return "scriptToolResults: array expected";
+                    for (let i = 0; i < message.scriptToolResults.length; ++i) {
+                        let error = $root.optimization_guide.proto.ScriptToolResult.verify(message.scriptToolResults[i]);
+                        if (error)
+                            return "scriptToolResults." + error;
+                    }
+                }
+                return null;
+            };
+
+            /**
+             * Creates a FrameData message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.FrameData
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.FrameData} FrameData
+             */
+            FrameData.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.FrameData)
+                    return object;
+                let message = new $root.optimization_guide.proto.FrameData();
+                if (object.securityOrigin != null) {
+                    if (typeof object.securityOrigin !== "object")
+                        throw TypeError(".optimization_guide.proto.FrameData.securityOrigin: object expected");
+                    message.securityOrigin = $root.optimization_guide.proto.SecurityOrigin.fromObject(object.securityOrigin);
+                }
+                if (object.frameInteractionInfo != null) {
+                    if (typeof object.frameInteractionInfo !== "object")
+                        throw TypeError(".optimization_guide.proto.FrameData.frameInteractionInfo: object expected");
+                    message.frameInteractionInfo = $root.optimization_guide.proto.FrameInteractionInfo.fromObject(object.frameInteractionInfo);
+                }
+                if (object.documentIdentifier != null) {
+                    if (typeof object.documentIdentifier !== "object")
+                        throw TypeError(".optimization_guide.proto.FrameData.documentIdentifier: object expected");
+                    message.documentIdentifier = $root.optimization_guide.proto.DocumentIdentifier.fromObject(object.documentIdentifier);
+                }
+                if (object.url != null)
+                    message.url = String(object.url);
+                if (object.title != null)
+                    message.title = String(object.title);
+                if (object.paidContentMetadata != null) {
+                    if (typeof object.paidContentMetadata !== "object")
+                        throw TypeError(".optimization_guide.proto.FrameData.paidContentMetadata: object expected");
+                    message.paidContentMetadata = $root.optimization_guide.proto.PaidContentMetadata.fromObject(object.paidContentMetadata);
+                }
+                if (object.mediaData != null) {
+                    if (typeof object.mediaData !== "object")
+                        throw TypeError(".optimization_guide.proto.FrameData.mediaData: object expected");
+                    message.mediaData = $root.optimization_guide.proto.MediaData.fromObject(object.mediaData);
+                }
+                if (object.scriptTools) {
+                    if (!Array.isArray(object.scriptTools))
+                        throw TypeError(".optimization_guide.proto.FrameData.scriptTools: array expected");
+                    message.scriptTools = [];
+                    for (let i = 0; i < object.scriptTools.length; ++i) {
+                        if (typeof object.scriptTools[i] !== "object")
+                            throw TypeError(".optimization_guide.proto.FrameData.scriptTools: object expected");
+                        message.scriptTools[i] = $root.optimization_guide.proto.ScriptTool.fromObject(object.scriptTools[i]);
+                    }
+                }
+                if (object.scriptToolResults) {
+                    if (!Array.isArray(object.scriptToolResults))
+                        throw TypeError(".optimization_guide.proto.FrameData.scriptToolResults: array expected");
+                    message.scriptToolResults = [];
+                    for (let i = 0; i < object.scriptToolResults.length; ++i) {
+                        if (typeof object.scriptToolResults[i] !== "object")
+                            throw TypeError(".optimization_guide.proto.FrameData.scriptToolResults: object expected");
+                        message.scriptToolResults[i] = $root.optimization_guide.proto.ScriptToolResult.fromObject(object.scriptToolResults[i]);
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a FrameData message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.FrameData
+             * @static
+             * @param {optimization_guide.proto.FrameData} message FrameData
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            FrameData.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.arrays || options.defaults) {
+                    object.scriptTools = [];
+                    object.scriptToolResults = [];
+                }
+                if (options.defaults) {
+                    object.securityOrigin = null;
+                    object.frameInteractionInfo = null;
+                    object.documentIdentifier = null;
+                    object.url = "";
+                    object.title = "";
+                    object.paidContentMetadata = null;
+                    object.mediaData = null;
+                }
+                if (message.securityOrigin != null && message.hasOwnProperty("securityOrigin"))
+                    object.securityOrigin = $root.optimization_guide.proto.SecurityOrigin.toObject(message.securityOrigin, options);
+                if (message.frameInteractionInfo != null && message.hasOwnProperty("frameInteractionInfo"))
+                    object.frameInteractionInfo = $root.optimization_guide.proto.FrameInteractionInfo.toObject(message.frameInteractionInfo, options);
+                if (message.documentIdentifier != null && message.hasOwnProperty("documentIdentifier"))
+                    object.documentIdentifier = $root.optimization_guide.proto.DocumentIdentifier.toObject(message.documentIdentifier, options);
+                if (message.url != null && message.hasOwnProperty("url"))
+                    object.url = message.url;
+                if (message.title != null && message.hasOwnProperty("title"))
+                    object.title = message.title;
+                if (message.paidContentMetadata != null && message.hasOwnProperty("paidContentMetadata"))
+                    object.paidContentMetadata = $root.optimization_guide.proto.PaidContentMetadata.toObject(message.paidContentMetadata, options);
+                if (message.mediaData != null && message.hasOwnProperty("mediaData"))
+                    object.mediaData = $root.optimization_guide.proto.MediaData.toObject(message.mediaData, options);
+                if (message.scriptTools && message.scriptTools.length) {
+                    object.scriptTools = [];
+                    for (let j = 0; j < message.scriptTools.length; ++j)
+                        object.scriptTools[j] = $root.optimization_guide.proto.ScriptTool.toObject(message.scriptTools[j], options);
+                }
+                if (message.scriptToolResults && message.scriptToolResults.length) {
+                    object.scriptToolResults = [];
+                    for (let j = 0; j < message.scriptToolResults.length; ++j)
+                        object.scriptToolResults[j] = $root.optimization_guide.proto.ScriptToolResult.toObject(message.scriptToolResults[j], options);
+                }
+                return object;
+            };
+
+            /**
+             * Converts this FrameData to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.FrameData
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            FrameData.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for FrameData
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.FrameData
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            FrameData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.FrameData";
+            };
+
             return FrameData;
         })();
 
@@ -4603,6 +15340,52 @@ export const optimization_guide = $root.optimization_guide = (() => {
             FrameInteractionInfo.prototype.accessibilityFocusedNodeId = null;
 
             /**
+             * Creates a new FrameInteractionInfo instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.FrameInteractionInfo
+             * @static
+             * @param {optimization_guide.proto.IFrameInteractionInfo=} [properties] Properties to set
+             * @returns {optimization_guide.proto.FrameInteractionInfo} FrameInteractionInfo instance
+             */
+            FrameInteractionInfo.create = function create(properties) {
+                return new FrameInteractionInfo(properties);
+            };
+
+            /**
+             * Encodes the specified FrameInteractionInfo message. Does not implicitly {@link optimization_guide.proto.FrameInteractionInfo.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.FrameInteractionInfo
+             * @static
+             * @param {optimization_guide.proto.IFrameInteractionInfo} message FrameInteractionInfo message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            FrameInteractionInfo.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.selection != null && Object.hasOwnProperty.call(message, "selection"))
+                    $root.optimization_guide.proto.Selection.encode(message.selection, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                if (message.focusedNodeId != null && Object.hasOwnProperty.call(message, "focusedNodeId"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.focusedNodeId);
+                if (message.accessibilityFocusedNodeId != null && Object.hasOwnProperty.call(message, "accessibilityFocusedNodeId"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.accessibilityFocusedNodeId);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified FrameInteractionInfo message, length delimited. Does not implicitly {@link optimization_guide.proto.FrameInteractionInfo.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.FrameInteractionInfo
+             * @static
+             * @param {optimization_guide.proto.IFrameInteractionInfo} message FrameInteractionInfo message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            FrameInteractionInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a FrameInteractionInfo message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.FrameInteractionInfo
@@ -4640,6 +15423,124 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a FrameInteractionInfo message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.FrameInteractionInfo
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.FrameInteractionInfo} FrameInteractionInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            FrameInteractionInfo.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a FrameInteractionInfo message.
+             * @function verify
+             * @memberof optimization_guide.proto.FrameInteractionInfo
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            FrameInteractionInfo.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.selection != null && message.hasOwnProperty("selection")) {
+                    let error = $root.optimization_guide.proto.Selection.verify(message.selection);
+                    if (error)
+                        return "selection." + error;
+                }
+                if (message.focusedNodeId != null && message.hasOwnProperty("focusedNodeId"))
+                    if (!$util.isInteger(message.focusedNodeId))
+                        return "focusedNodeId: integer expected";
+                if (message.accessibilityFocusedNodeId != null && message.hasOwnProperty("accessibilityFocusedNodeId"))
+                    if (!$util.isInteger(message.accessibilityFocusedNodeId))
+                        return "accessibilityFocusedNodeId: integer expected";
+                return null;
+            };
+
+            /**
+             * Creates a FrameInteractionInfo message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.FrameInteractionInfo
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.FrameInteractionInfo} FrameInteractionInfo
+             */
+            FrameInteractionInfo.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.FrameInteractionInfo)
+                    return object;
+                let message = new $root.optimization_guide.proto.FrameInteractionInfo();
+                if (object.selection != null) {
+                    if (typeof object.selection !== "object")
+                        throw TypeError(".optimization_guide.proto.FrameInteractionInfo.selection: object expected");
+                    message.selection = $root.optimization_guide.proto.Selection.fromObject(object.selection);
+                }
+                if (object.focusedNodeId != null)
+                    message.focusedNodeId = object.focusedNodeId | 0;
+                if (object.accessibilityFocusedNodeId != null)
+                    message.accessibilityFocusedNodeId = object.accessibilityFocusedNodeId | 0;
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a FrameInteractionInfo message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.FrameInteractionInfo
+             * @static
+             * @param {optimization_guide.proto.FrameInteractionInfo} message FrameInteractionInfo
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            FrameInteractionInfo.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults) {
+                    object.selection = null;
+                    object.focusedNodeId = 0;
+                    object.accessibilityFocusedNodeId = 0;
+                }
+                if (message.selection != null && message.hasOwnProperty("selection"))
+                    object.selection = $root.optimization_guide.proto.Selection.toObject(message.selection, options);
+                if (message.focusedNodeId != null && message.hasOwnProperty("focusedNodeId"))
+                    object.focusedNodeId = message.focusedNodeId;
+                if (message.accessibilityFocusedNodeId != null && message.hasOwnProperty("accessibilityFocusedNodeId"))
+                    object.accessibilityFocusedNodeId = message.accessibilityFocusedNodeId;
+                return object;
+            };
+
+            /**
+             * Converts this FrameInteractionInfo to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.FrameInteractionInfo
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            FrameInteractionInfo.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for FrameInteractionInfo
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.FrameInteractionInfo
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            FrameInteractionInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.FrameInteractionInfo";
             };
 
             return FrameInteractionInfo;
@@ -4722,6 +15623,56 @@ export const optimization_guide = $root.optimization_guide = (() => {
             Selection.prototype.selectedText = null;
 
             /**
+             * Creates a new Selection instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.Selection
+             * @static
+             * @param {optimization_guide.proto.ISelection=} [properties] Properties to set
+             * @returns {optimization_guide.proto.Selection} Selection instance
+             */
+            Selection.create = function create(properties) {
+                return new Selection(properties);
+            };
+
+            /**
+             * Encodes the specified Selection message. Does not implicitly {@link optimization_guide.proto.Selection.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.Selection
+             * @static
+             * @param {optimization_guide.proto.ISelection} message Selection message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Selection.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.startNodeId != null && Object.hasOwnProperty.call(message, "startNodeId"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.startNodeId);
+                if (message.startOffset != null && Object.hasOwnProperty.call(message, "startOffset"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.startOffset);
+                if (message.endNodeId != null && Object.hasOwnProperty.call(message, "endNodeId"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.endNodeId);
+                if (message.endOffset != null && Object.hasOwnProperty.call(message, "endOffset"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.endOffset);
+                if (message.selectedText != null && Object.hasOwnProperty.call(message, "selectedText"))
+                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.selectedText);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified Selection message, length delimited. Does not implicitly {@link optimization_guide.proto.Selection.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.Selection
+             * @static
+             * @param {optimization_guide.proto.ISelection} message Selection message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Selection.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a Selection message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.Selection
@@ -4769,6 +15720,135 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 return message;
             };
 
+            /**
+             * Decodes a Selection message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.Selection
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.Selection} Selection
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Selection.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a Selection message.
+             * @function verify
+             * @memberof optimization_guide.proto.Selection
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            Selection.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.startNodeId != null && message.hasOwnProperty("startNodeId"))
+                    if (!$util.isInteger(message.startNodeId))
+                        return "startNodeId: integer expected";
+                if (message.startOffset != null && message.hasOwnProperty("startOffset"))
+                    if (!$util.isInteger(message.startOffset))
+                        return "startOffset: integer expected";
+                if (message.endNodeId != null && message.hasOwnProperty("endNodeId"))
+                    if (!$util.isInteger(message.endNodeId))
+                        return "endNodeId: integer expected";
+                if (message.endOffset != null && message.hasOwnProperty("endOffset"))
+                    if (!$util.isInteger(message.endOffset))
+                        return "endOffset: integer expected";
+                if (message.selectedText != null && message.hasOwnProperty("selectedText"))
+                    if (!$util.isString(message.selectedText))
+                        return "selectedText: string expected";
+                return null;
+            };
+
+            /**
+             * Creates a Selection message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.Selection
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.Selection} Selection
+             */
+            Selection.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.Selection)
+                    return object;
+                let message = new $root.optimization_guide.proto.Selection();
+                if (object.startNodeId != null)
+                    message.startNodeId = object.startNodeId | 0;
+                if (object.startOffset != null)
+                    message.startOffset = object.startOffset | 0;
+                if (object.endNodeId != null)
+                    message.endNodeId = object.endNodeId | 0;
+                if (object.endOffset != null)
+                    message.endOffset = object.endOffset | 0;
+                if (object.selectedText != null)
+                    message.selectedText = String(object.selectedText);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a Selection message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.Selection
+             * @static
+             * @param {optimization_guide.proto.Selection} message Selection
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Selection.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults) {
+                    object.startNodeId = 0;
+                    object.startOffset = 0;
+                    object.endNodeId = 0;
+                    object.endOffset = 0;
+                    object.selectedText = "";
+                }
+                if (message.startNodeId != null && message.hasOwnProperty("startNodeId"))
+                    object.startNodeId = message.startNodeId;
+                if (message.startOffset != null && message.hasOwnProperty("startOffset"))
+                    object.startOffset = message.startOffset;
+                if (message.endNodeId != null && message.hasOwnProperty("endNodeId"))
+                    object.endNodeId = message.endNodeId;
+                if (message.endOffset != null && message.hasOwnProperty("endOffset"))
+                    object.endOffset = message.endOffset;
+                if (message.selectedText != null && message.hasOwnProperty("selectedText"))
+                    object.selectedText = message.selectedText;
+                return object;
+            };
+
+            /**
+             * Converts this Selection to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.Selection
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            Selection.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for Selection
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.Selection
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            Selection.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.Selection";
+            };
+
             return Selection;
         })();
 
@@ -4812,6 +15892,48 @@ export const optimization_guide = $root.optimization_guide = (() => {
             DocumentIdentifier.prototype.serializedToken = null;
 
             /**
+             * Creates a new DocumentIdentifier instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.DocumentIdentifier
+             * @static
+             * @param {optimization_guide.proto.IDocumentIdentifier=} [properties] Properties to set
+             * @returns {optimization_guide.proto.DocumentIdentifier} DocumentIdentifier instance
+             */
+            DocumentIdentifier.create = function create(properties) {
+                return new DocumentIdentifier(properties);
+            };
+
+            /**
+             * Encodes the specified DocumentIdentifier message. Does not implicitly {@link optimization_guide.proto.DocumentIdentifier.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.DocumentIdentifier
+             * @static
+             * @param {optimization_guide.proto.IDocumentIdentifier} message DocumentIdentifier message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            DocumentIdentifier.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.serializedToken != null && Object.hasOwnProperty.call(message, "serializedToken"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.serializedToken);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified DocumentIdentifier message, length delimited. Does not implicitly {@link optimization_guide.proto.DocumentIdentifier.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.DocumentIdentifier
+             * @static
+             * @param {optimization_guide.proto.IDocumentIdentifier} message DocumentIdentifier message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            DocumentIdentifier.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a DocumentIdentifier message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.DocumentIdentifier
@@ -4841,6 +15963,102 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a DocumentIdentifier message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.DocumentIdentifier
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.DocumentIdentifier} DocumentIdentifier
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            DocumentIdentifier.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a DocumentIdentifier message.
+             * @function verify
+             * @memberof optimization_guide.proto.DocumentIdentifier
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            DocumentIdentifier.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.serializedToken != null && message.hasOwnProperty("serializedToken"))
+                    if (!$util.isString(message.serializedToken))
+                        return "serializedToken: string expected";
+                return null;
+            };
+
+            /**
+             * Creates a DocumentIdentifier message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.DocumentIdentifier
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.DocumentIdentifier} DocumentIdentifier
+             */
+            DocumentIdentifier.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.DocumentIdentifier)
+                    return object;
+                let message = new $root.optimization_guide.proto.DocumentIdentifier();
+                if (object.serializedToken != null)
+                    message.serializedToken = String(object.serializedToken);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a DocumentIdentifier message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.DocumentIdentifier
+             * @static
+             * @param {optimization_guide.proto.DocumentIdentifier} message DocumentIdentifier
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            DocumentIdentifier.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults)
+                    object.serializedToken = "";
+                if (message.serializedToken != null && message.hasOwnProperty("serializedToken"))
+                    object.serializedToken = message.serializedToken;
+                return object;
+            };
+
+            /**
+             * Converts this DocumentIdentifier to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.DocumentIdentifier
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            DocumentIdentifier.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for DocumentIdentifier
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.DocumentIdentifier
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            DocumentIdentifier.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.DocumentIdentifier";
             };
 
             return DocumentIdentifier;
@@ -4880,6 +16098,48 @@ export const optimization_guide = $root.optimization_guide = (() => {
             PaidContentMetadata.prototype.containsPaidContent = null;
 
             /**
+             * Creates a new PaidContentMetadata instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.PaidContentMetadata
+             * @static
+             * @param {optimization_guide.proto.IPaidContentMetadata=} [properties] Properties to set
+             * @returns {optimization_guide.proto.PaidContentMetadata} PaidContentMetadata instance
+             */
+            PaidContentMetadata.create = function create(properties) {
+                return new PaidContentMetadata(properties);
+            };
+
+            /**
+             * Encodes the specified PaidContentMetadata message. Does not implicitly {@link optimization_guide.proto.PaidContentMetadata.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.PaidContentMetadata
+             * @static
+             * @param {optimization_guide.proto.IPaidContentMetadata} message PaidContentMetadata message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            PaidContentMetadata.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.containsPaidContent != null && Object.hasOwnProperty.call(message, "containsPaidContent"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.containsPaidContent);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified PaidContentMetadata message, length delimited. Does not implicitly {@link optimization_guide.proto.PaidContentMetadata.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.PaidContentMetadata
+             * @static
+             * @param {optimization_guide.proto.IPaidContentMetadata} message PaidContentMetadata message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            PaidContentMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a PaidContentMetadata message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.PaidContentMetadata
@@ -4909,6 +16169,102 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a PaidContentMetadata message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.PaidContentMetadata
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.PaidContentMetadata} PaidContentMetadata
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            PaidContentMetadata.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a PaidContentMetadata message.
+             * @function verify
+             * @memberof optimization_guide.proto.PaidContentMetadata
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            PaidContentMetadata.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.containsPaidContent != null && message.hasOwnProperty("containsPaidContent"))
+                    if (typeof message.containsPaidContent !== "boolean")
+                        return "containsPaidContent: boolean expected";
+                return null;
+            };
+
+            /**
+             * Creates a PaidContentMetadata message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.PaidContentMetadata
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.PaidContentMetadata} PaidContentMetadata
+             */
+            PaidContentMetadata.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.PaidContentMetadata)
+                    return object;
+                let message = new $root.optimization_guide.proto.PaidContentMetadata();
+                if (object.containsPaidContent != null)
+                    message.containsPaidContent = Boolean(object.containsPaidContent);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a PaidContentMetadata message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.PaidContentMetadata
+             * @static
+             * @param {optimization_guide.proto.PaidContentMetadata} message PaidContentMetadata
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            PaidContentMetadata.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults)
+                    object.containsPaidContent = false;
+                if (message.containsPaidContent != null && message.hasOwnProperty("containsPaidContent"))
+                    object.containsPaidContent = message.containsPaidContent;
+                return object;
+            };
+
+            /**
+             * Converts this PaidContentMetadata to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.PaidContentMetadata
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            PaidContentMetadata.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for PaidContentMetadata
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.PaidContentMetadata
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            PaidContentMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.PaidContentMetadata";
             };
 
             return PaidContentMetadata;
@@ -5022,6 +16378,63 @@ export const optimization_guide = $root.optimization_guide = (() => {
             MediaData.prototype.album = null;
 
             /**
+             * Creates a new MediaData instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.MediaData
+             * @static
+             * @param {optimization_guide.proto.IMediaData=} [properties] Properties to set
+             * @returns {optimization_guide.proto.MediaData} MediaData instance
+             */
+            MediaData.create = function create(properties) {
+                return new MediaData(properties);
+            };
+
+            /**
+             * Encodes the specified MediaData message. Does not implicitly {@link optimization_guide.proto.MediaData.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.MediaData
+             * @static
+             * @param {optimization_guide.proto.IMediaData} message MediaData message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            MediaData.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.mediaDataType != null && Object.hasOwnProperty.call(message, "mediaDataType"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.mediaDataType);
+                if (message.transcripts != null && message.transcripts.length)
+                    for (let i = 0; i < message.transcripts.length; ++i)
+                        $root.optimization_guide.proto.MediaTranscript.encode(message.transcripts[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                if (message.durationMilliseconds != null && Object.hasOwnProperty.call(message, "durationMilliseconds"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).int64(message.durationMilliseconds);
+                if (message.currentPositionMilliseconds != null && Object.hasOwnProperty.call(message, "currentPositionMilliseconds"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).int64(message.currentPositionMilliseconds);
+                if (message.isPlaying != null && Object.hasOwnProperty.call(message, "isPlaying"))
+                    writer.uint32(/* id 5, wireType 0 =*/40).bool(message.isPlaying);
+                if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.title);
+                if (message.artist != null && Object.hasOwnProperty.call(message, "artist"))
+                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.artist);
+                if (message.album != null && Object.hasOwnProperty.call(message, "album"))
+                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.album);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified MediaData message, length delimited. Does not implicitly {@link optimization_guide.proto.MediaData.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.MediaData
+             * @static
+             * @param {optimization_guide.proto.IMediaData} message MediaData message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            MediaData.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a MediaData message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.MediaData
@@ -5083,6 +16496,229 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 return message;
             };
 
+            /**
+             * Decodes a MediaData message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.MediaData
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.MediaData} MediaData
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            MediaData.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a MediaData message.
+             * @function verify
+             * @memberof optimization_guide.proto.MediaData
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            MediaData.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.mediaDataType != null && message.hasOwnProperty("mediaDataType"))
+                    switch (message.mediaDataType) {
+                    default:
+                        return "mediaDataType: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                        break;
+                    }
+                if (message.transcripts != null && message.hasOwnProperty("transcripts")) {
+                    if (!Array.isArray(message.transcripts))
+                        return "transcripts: array expected";
+                    for (let i = 0; i < message.transcripts.length; ++i) {
+                        let error = $root.optimization_guide.proto.MediaTranscript.verify(message.transcripts[i]);
+                        if (error)
+                            return "transcripts." + error;
+                    }
+                }
+                if (message.durationMilliseconds != null && message.hasOwnProperty("durationMilliseconds"))
+                    if (!$util.isInteger(message.durationMilliseconds) && !(message.durationMilliseconds && $util.isInteger(message.durationMilliseconds.low) && $util.isInteger(message.durationMilliseconds.high)))
+                        return "durationMilliseconds: integer|Long expected";
+                if (message.currentPositionMilliseconds != null && message.hasOwnProperty("currentPositionMilliseconds"))
+                    if (!$util.isInteger(message.currentPositionMilliseconds) && !(message.currentPositionMilliseconds && $util.isInteger(message.currentPositionMilliseconds.low) && $util.isInteger(message.currentPositionMilliseconds.high)))
+                        return "currentPositionMilliseconds: integer|Long expected";
+                if (message.isPlaying != null && message.hasOwnProperty("isPlaying"))
+                    if (typeof message.isPlaying !== "boolean")
+                        return "isPlaying: boolean expected";
+                if (message.title != null && message.hasOwnProperty("title"))
+                    if (!$util.isString(message.title))
+                        return "title: string expected";
+                if (message.artist != null && message.hasOwnProperty("artist"))
+                    if (!$util.isString(message.artist))
+                        return "artist: string expected";
+                if (message.album != null && message.hasOwnProperty("album"))
+                    if (!$util.isString(message.album))
+                        return "album: string expected";
+                return null;
+            };
+
+            /**
+             * Creates a MediaData message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.MediaData
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.MediaData} MediaData
+             */
+            MediaData.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.MediaData)
+                    return object;
+                let message = new $root.optimization_guide.proto.MediaData();
+                switch (object.mediaDataType) {
+                default:
+                    if (typeof object.mediaDataType === "number") {
+                        message.mediaDataType = object.mediaDataType;
+                        break;
+                    }
+                    break;
+                case "MEDIA_DATA_TYPE_UNKNOWN":
+                case 0:
+                    message.mediaDataType = 0;
+                    break;
+                case "MEDIA_DATA_TYPE_VIDEO":
+                case 1:
+                    message.mediaDataType = 1;
+                    break;
+                case "MEDIA_DATA_TYPE_AUDIO":
+                case 2:
+                    message.mediaDataType = 2;
+                    break;
+                }
+                if (object.transcripts) {
+                    if (!Array.isArray(object.transcripts))
+                        throw TypeError(".optimization_guide.proto.MediaData.transcripts: array expected");
+                    message.transcripts = [];
+                    for (let i = 0; i < object.transcripts.length; ++i) {
+                        if (typeof object.transcripts[i] !== "object")
+                            throw TypeError(".optimization_guide.proto.MediaData.transcripts: object expected");
+                        message.transcripts[i] = $root.optimization_guide.proto.MediaTranscript.fromObject(object.transcripts[i]);
+                    }
+                }
+                if (object.durationMilliseconds != null)
+                    if ($util.Long)
+                        (message.durationMilliseconds = $util.Long.fromValue(object.durationMilliseconds)).unsigned = false;
+                    else if (typeof object.durationMilliseconds === "string")
+                        message.durationMilliseconds = parseInt(object.durationMilliseconds, 10);
+                    else if (typeof object.durationMilliseconds === "number")
+                        message.durationMilliseconds = object.durationMilliseconds;
+                    else if (typeof object.durationMilliseconds === "object")
+                        message.durationMilliseconds = new $util.LongBits(object.durationMilliseconds.low >>> 0, object.durationMilliseconds.high >>> 0).toNumber();
+                if (object.currentPositionMilliseconds != null)
+                    if ($util.Long)
+                        (message.currentPositionMilliseconds = $util.Long.fromValue(object.currentPositionMilliseconds)).unsigned = false;
+                    else if (typeof object.currentPositionMilliseconds === "string")
+                        message.currentPositionMilliseconds = parseInt(object.currentPositionMilliseconds, 10);
+                    else if (typeof object.currentPositionMilliseconds === "number")
+                        message.currentPositionMilliseconds = object.currentPositionMilliseconds;
+                    else if (typeof object.currentPositionMilliseconds === "object")
+                        message.currentPositionMilliseconds = new $util.LongBits(object.currentPositionMilliseconds.low >>> 0, object.currentPositionMilliseconds.high >>> 0).toNumber();
+                if (object.isPlaying != null)
+                    message.isPlaying = Boolean(object.isPlaying);
+                if (object.title != null)
+                    message.title = String(object.title);
+                if (object.artist != null)
+                    message.artist = String(object.artist);
+                if (object.album != null)
+                    message.album = String(object.album);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a MediaData message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.MediaData
+             * @static
+             * @param {optimization_guide.proto.MediaData} message MediaData
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            MediaData.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.arrays || options.defaults)
+                    object.transcripts = [];
+                if (options.defaults) {
+                    object.mediaDataType = options.enums === String ? "MEDIA_DATA_TYPE_UNKNOWN" : 0;
+                    if ($util.Long) {
+                        let long = new $util.Long(0, 0, false);
+                        object.durationMilliseconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.durationMilliseconds = options.longs === String ? "0" : 0;
+                    if ($util.Long) {
+                        let long = new $util.Long(0, 0, false);
+                        object.currentPositionMilliseconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.currentPositionMilliseconds = options.longs === String ? "0" : 0;
+                    object.isPlaying = false;
+                    object.title = "";
+                    object.artist = "";
+                    object.album = "";
+                }
+                if (message.mediaDataType != null && message.hasOwnProperty("mediaDataType"))
+                    object.mediaDataType = options.enums === String ? $root.optimization_guide.proto.MediaDataType[message.mediaDataType] === undefined ? message.mediaDataType : $root.optimization_guide.proto.MediaDataType[message.mediaDataType] : message.mediaDataType;
+                if (message.transcripts && message.transcripts.length) {
+                    object.transcripts = [];
+                    for (let j = 0; j < message.transcripts.length; ++j)
+                        object.transcripts[j] = $root.optimization_guide.proto.MediaTranscript.toObject(message.transcripts[j], options);
+                }
+                if (message.durationMilliseconds != null && message.hasOwnProperty("durationMilliseconds"))
+                    if (typeof message.durationMilliseconds === "number")
+                        object.durationMilliseconds = options.longs === String ? String(message.durationMilliseconds) : message.durationMilliseconds;
+                    else
+                        object.durationMilliseconds = options.longs === String ? $util.Long.prototype.toString.call(message.durationMilliseconds) : options.longs === Number ? new $util.LongBits(message.durationMilliseconds.low >>> 0, message.durationMilliseconds.high >>> 0).toNumber() : message.durationMilliseconds;
+                if (message.currentPositionMilliseconds != null && message.hasOwnProperty("currentPositionMilliseconds"))
+                    if (typeof message.currentPositionMilliseconds === "number")
+                        object.currentPositionMilliseconds = options.longs === String ? String(message.currentPositionMilliseconds) : message.currentPositionMilliseconds;
+                    else
+                        object.currentPositionMilliseconds = options.longs === String ? $util.Long.prototype.toString.call(message.currentPositionMilliseconds) : options.longs === Number ? new $util.LongBits(message.currentPositionMilliseconds.low >>> 0, message.currentPositionMilliseconds.high >>> 0).toNumber() : message.currentPositionMilliseconds;
+                if (message.isPlaying != null && message.hasOwnProperty("isPlaying"))
+                    object.isPlaying = message.isPlaying;
+                if (message.title != null && message.hasOwnProperty("title"))
+                    object.title = message.title;
+                if (message.artist != null && message.hasOwnProperty("artist"))
+                    object.artist = message.artist;
+                if (message.album != null && message.hasOwnProperty("album"))
+                    object.album = message.album;
+                return object;
+            };
+
+            /**
+             * Converts this MediaData to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.MediaData
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            MediaData.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for MediaData
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.MediaData
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            MediaData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.MediaData";
+            };
+
             return MediaData;
         })();
 
@@ -5129,6 +16765,50 @@ export const optimization_guide = $root.optimization_guide = (() => {
             MediaTranscript.prototype.startTimestampMilliseconds = null;
 
             /**
+             * Creates a new MediaTranscript instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.MediaTranscript
+             * @static
+             * @param {optimization_guide.proto.IMediaTranscript=} [properties] Properties to set
+             * @returns {optimization_guide.proto.MediaTranscript} MediaTranscript instance
+             */
+            MediaTranscript.create = function create(properties) {
+                return new MediaTranscript(properties);
+            };
+
+            /**
+             * Encodes the specified MediaTranscript message. Does not implicitly {@link optimization_guide.proto.MediaTranscript.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.MediaTranscript
+             * @static
+             * @param {optimization_guide.proto.IMediaTranscript} message MediaTranscript message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            MediaTranscript.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.text);
+                if (message.startTimestampMilliseconds != null && Object.hasOwnProperty.call(message, "startTimestampMilliseconds"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).int64(message.startTimestampMilliseconds);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified MediaTranscript message, length delimited. Does not implicitly {@link optimization_guide.proto.MediaTranscript.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.MediaTranscript
+             * @static
+             * @param {optimization_guide.proto.IMediaTranscript} message MediaTranscript message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            MediaTranscript.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a MediaTranscript message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.MediaTranscript
@@ -5162,6 +16842,125 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a MediaTranscript message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.MediaTranscript
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.MediaTranscript} MediaTranscript
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            MediaTranscript.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a MediaTranscript message.
+             * @function verify
+             * @memberof optimization_guide.proto.MediaTranscript
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            MediaTranscript.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.text != null && message.hasOwnProperty("text"))
+                    if (!$util.isString(message.text))
+                        return "text: string expected";
+                if (message.startTimestampMilliseconds != null && message.hasOwnProperty("startTimestampMilliseconds"))
+                    if (!$util.isInteger(message.startTimestampMilliseconds) && !(message.startTimestampMilliseconds && $util.isInteger(message.startTimestampMilliseconds.low) && $util.isInteger(message.startTimestampMilliseconds.high)))
+                        return "startTimestampMilliseconds: integer|Long expected";
+                return null;
+            };
+
+            /**
+             * Creates a MediaTranscript message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.MediaTranscript
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.MediaTranscript} MediaTranscript
+             */
+            MediaTranscript.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.MediaTranscript)
+                    return object;
+                let message = new $root.optimization_guide.proto.MediaTranscript();
+                if (object.text != null)
+                    message.text = String(object.text);
+                if (object.startTimestampMilliseconds != null)
+                    if ($util.Long)
+                        (message.startTimestampMilliseconds = $util.Long.fromValue(object.startTimestampMilliseconds)).unsigned = false;
+                    else if (typeof object.startTimestampMilliseconds === "string")
+                        message.startTimestampMilliseconds = parseInt(object.startTimestampMilliseconds, 10);
+                    else if (typeof object.startTimestampMilliseconds === "number")
+                        message.startTimestampMilliseconds = object.startTimestampMilliseconds;
+                    else if (typeof object.startTimestampMilliseconds === "object")
+                        message.startTimestampMilliseconds = new $util.LongBits(object.startTimestampMilliseconds.low >>> 0, object.startTimestampMilliseconds.high >>> 0).toNumber();
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a MediaTranscript message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.MediaTranscript
+             * @static
+             * @param {optimization_guide.proto.MediaTranscript} message MediaTranscript
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            MediaTranscript.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults) {
+                    object.text = "";
+                    if ($util.Long) {
+                        let long = new $util.Long(0, 0, false);
+                        object.startTimestampMilliseconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.startTimestampMilliseconds = options.longs === String ? "0" : 0;
+                }
+                if (message.text != null && message.hasOwnProperty("text"))
+                    object.text = message.text;
+                if (message.startTimestampMilliseconds != null && message.hasOwnProperty("startTimestampMilliseconds"))
+                    if (typeof message.startTimestampMilliseconds === "number")
+                        object.startTimestampMilliseconds = options.longs === String ? String(message.startTimestampMilliseconds) : message.startTimestampMilliseconds;
+                    else
+                        object.startTimestampMilliseconds = options.longs === String ? $util.Long.prototype.toString.call(message.startTimestampMilliseconds) : options.longs === Number ? new $util.LongBits(message.startTimestampMilliseconds.low >>> 0, message.startTimestampMilliseconds.high >>> 0).toNumber() : message.startTimestampMilliseconds;
+                return object;
+            };
+
+            /**
+             * Converts this MediaTranscript to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.MediaTranscript
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            MediaTranscript.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for MediaTranscript
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.MediaTranscript
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            MediaTranscript.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.MediaTranscript";
             };
 
             return MediaTranscript;
@@ -5229,6 +17028,54 @@ export const optimization_guide = $root.optimization_guide = (() => {
             ScriptTool.prototype.annotations = null;
 
             /**
+             * Creates a new ScriptTool instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.ScriptTool
+             * @static
+             * @param {optimization_guide.proto.IScriptTool=} [properties] Properties to set
+             * @returns {optimization_guide.proto.ScriptTool} ScriptTool instance
+             */
+            ScriptTool.create = function create(properties) {
+                return new ScriptTool(properties);
+            };
+
+            /**
+             * Encodes the specified ScriptTool message. Does not implicitly {@link optimization_guide.proto.ScriptTool.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.ScriptTool
+             * @static
+             * @param {optimization_guide.proto.IScriptTool} message ScriptTool message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ScriptTool.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+                if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                if (message.inputSchema != null && Object.hasOwnProperty.call(message, "inputSchema"))
+                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.inputSchema);
+                if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                    $root.optimization_guide.proto.ScriptToolAnnotations.encode(message.annotations, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified ScriptTool message, length delimited. Does not implicitly {@link optimization_guide.proto.ScriptTool.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.ScriptTool
+             * @static
+             * @param {optimization_guide.proto.IScriptTool} message ScriptTool message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ScriptTool.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a ScriptTool message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.ScriptTool
@@ -5272,6 +17119,132 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 return message;
             };
 
+            /**
+             * Decodes a ScriptTool message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.ScriptTool
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.ScriptTool} ScriptTool
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ScriptTool.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a ScriptTool message.
+             * @function verify
+             * @memberof optimization_guide.proto.ScriptTool
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            ScriptTool.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.name != null && message.hasOwnProperty("name"))
+                    if (!$util.isString(message.name))
+                        return "name: string expected";
+                if (message.description != null && message.hasOwnProperty("description"))
+                    if (!$util.isString(message.description))
+                        return "description: string expected";
+                if (message.inputSchema != null && message.hasOwnProperty("inputSchema"))
+                    if (!$util.isString(message.inputSchema))
+                        return "inputSchema: string expected";
+                if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                    let error = $root.optimization_guide.proto.ScriptToolAnnotations.verify(message.annotations);
+                    if (error)
+                        return "annotations." + error;
+                }
+                return null;
+            };
+
+            /**
+             * Creates a ScriptTool message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.ScriptTool
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.ScriptTool} ScriptTool
+             */
+            ScriptTool.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.ScriptTool)
+                    return object;
+                let message = new $root.optimization_guide.proto.ScriptTool();
+                if (object.name != null)
+                    message.name = String(object.name);
+                if (object.description != null)
+                    message.description = String(object.description);
+                if (object.inputSchema != null)
+                    message.inputSchema = String(object.inputSchema);
+                if (object.annotations != null) {
+                    if (typeof object.annotations !== "object")
+                        throw TypeError(".optimization_guide.proto.ScriptTool.annotations: object expected");
+                    message.annotations = $root.optimization_guide.proto.ScriptToolAnnotations.fromObject(object.annotations);
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a ScriptTool message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.ScriptTool
+             * @static
+             * @param {optimization_guide.proto.ScriptTool} message ScriptTool
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            ScriptTool.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults) {
+                    object.name = "";
+                    object.description = "";
+                    object.inputSchema = "";
+                    object.annotations = null;
+                }
+                if (message.name != null && message.hasOwnProperty("name"))
+                    object.name = message.name;
+                if (message.description != null && message.hasOwnProperty("description"))
+                    object.description = message.description;
+                if (message.inputSchema != null && message.hasOwnProperty("inputSchema"))
+                    object.inputSchema = message.inputSchema;
+                if (message.annotations != null && message.hasOwnProperty("annotations"))
+                    object.annotations = $root.optimization_guide.proto.ScriptToolAnnotations.toObject(message.annotations, options);
+                return object;
+            };
+
+            /**
+             * Converts this ScriptTool to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.ScriptTool
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            ScriptTool.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for ScriptTool
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.ScriptTool
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            ScriptTool.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.ScriptTool";
+            };
+
             return ScriptTool;
         })();
 
@@ -5308,6 +17281,48 @@ export const optimization_guide = $root.optimization_guide = (() => {
             ScriptToolAnnotations.prototype.readOnly = null;
 
             /**
+             * Creates a new ScriptToolAnnotations instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.ScriptToolAnnotations
+             * @static
+             * @param {optimization_guide.proto.IScriptToolAnnotations=} [properties] Properties to set
+             * @returns {optimization_guide.proto.ScriptToolAnnotations} ScriptToolAnnotations instance
+             */
+            ScriptToolAnnotations.create = function create(properties) {
+                return new ScriptToolAnnotations(properties);
+            };
+
+            /**
+             * Encodes the specified ScriptToolAnnotations message. Does not implicitly {@link optimization_guide.proto.ScriptToolAnnotations.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.ScriptToolAnnotations
+             * @static
+             * @param {optimization_guide.proto.IScriptToolAnnotations} message ScriptToolAnnotations message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ScriptToolAnnotations.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.readOnly != null && Object.hasOwnProperty.call(message, "readOnly"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.readOnly);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified ScriptToolAnnotations message, length delimited. Does not implicitly {@link optimization_guide.proto.ScriptToolAnnotations.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.ScriptToolAnnotations
+             * @static
+             * @param {optimization_guide.proto.IScriptToolAnnotations} message ScriptToolAnnotations message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ScriptToolAnnotations.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a ScriptToolAnnotations message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.ScriptToolAnnotations
@@ -5337,6 +17352,102 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a ScriptToolAnnotations message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.ScriptToolAnnotations
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.ScriptToolAnnotations} ScriptToolAnnotations
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ScriptToolAnnotations.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a ScriptToolAnnotations message.
+             * @function verify
+             * @memberof optimization_guide.proto.ScriptToolAnnotations
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            ScriptToolAnnotations.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.readOnly != null && message.hasOwnProperty("readOnly"))
+                    if (typeof message.readOnly !== "boolean")
+                        return "readOnly: boolean expected";
+                return null;
+            };
+
+            /**
+             * Creates a ScriptToolAnnotations message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.ScriptToolAnnotations
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.ScriptToolAnnotations} ScriptToolAnnotations
+             */
+            ScriptToolAnnotations.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.ScriptToolAnnotations)
+                    return object;
+                let message = new $root.optimization_guide.proto.ScriptToolAnnotations();
+                if (object.readOnly != null)
+                    message.readOnly = Boolean(object.readOnly);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a ScriptToolAnnotations message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.ScriptToolAnnotations
+             * @static
+             * @param {optimization_guide.proto.ScriptToolAnnotations} message ScriptToolAnnotations
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            ScriptToolAnnotations.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults)
+                    object.readOnly = false;
+                if (message.readOnly != null && message.hasOwnProperty("readOnly"))
+                    object.readOnly = message.readOnly;
+                return object;
+            };
+
+            /**
+             * Converts this ScriptToolAnnotations to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.ScriptToolAnnotations
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            ScriptToolAnnotations.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for ScriptToolAnnotations
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.ScriptToolAnnotations
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            ScriptToolAnnotations.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.ScriptToolAnnotations";
             };
 
             return ScriptToolAnnotations;
@@ -5417,6 +17528,56 @@ export const optimization_guide = $root.optimization_guide = (() => {
             ScriptToolResult.prototype.tool = null;
 
             /**
+             * Creates a new ScriptToolResult instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.ScriptToolResult
+             * @static
+             * @param {optimization_guide.proto.IScriptToolResult=} [properties] Properties to set
+             * @returns {optimization_guide.proto.ScriptToolResult} ScriptToolResult instance
+             */
+            ScriptToolResult.create = function create(properties) {
+                return new ScriptToolResult(properties);
+            };
+
+            /**
+             * Encodes the specified ScriptToolResult message. Does not implicitly {@link optimization_guide.proto.ScriptToolResult.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.ScriptToolResult
+             * @static
+             * @param {optimization_guide.proto.IScriptToolResult} message ScriptToolResult message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ScriptToolResult.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.indexOfScriptToolAction != null && Object.hasOwnProperty.call(message, "indexOfScriptToolAction"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.indexOfScriptToolAction);
+                if (message.result != null && Object.hasOwnProperty.call(message, "result"))
+                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.result);
+                if (message.toolName != null && Object.hasOwnProperty.call(message, "toolName"))
+                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.toolName);
+                if (message.inputArguments != null && Object.hasOwnProperty.call(message, "inputArguments"))
+                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.inputArguments);
+                if (message.tool != null && Object.hasOwnProperty.call(message, "tool"))
+                    $root.optimization_guide.proto.ScriptTool.encode(message.tool, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified ScriptToolResult message, length delimited. Does not implicitly {@link optimization_guide.proto.ScriptToolResult.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.ScriptToolResult
+             * @static
+             * @param {optimization_guide.proto.IScriptToolResult} message ScriptToolResult message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ScriptToolResult.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a ScriptToolResult message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.ScriptToolResult
@@ -5464,6 +17625,140 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 return message;
             };
 
+            /**
+             * Decodes a ScriptToolResult message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.ScriptToolResult
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.ScriptToolResult} ScriptToolResult
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ScriptToolResult.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a ScriptToolResult message.
+             * @function verify
+             * @memberof optimization_guide.proto.ScriptToolResult
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            ScriptToolResult.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.indexOfScriptToolAction != null && message.hasOwnProperty("indexOfScriptToolAction"))
+                    if (!$util.isInteger(message.indexOfScriptToolAction))
+                        return "indexOfScriptToolAction: integer expected";
+                if (message.result != null && message.hasOwnProperty("result"))
+                    if (!$util.isString(message.result))
+                        return "result: string expected";
+                if (message.toolName != null && message.hasOwnProperty("toolName"))
+                    if (!$util.isString(message.toolName))
+                        return "toolName: string expected";
+                if (message.inputArguments != null && message.hasOwnProperty("inputArguments"))
+                    if (!$util.isString(message.inputArguments))
+                        return "inputArguments: string expected";
+                if (message.tool != null && message.hasOwnProperty("tool")) {
+                    let error = $root.optimization_guide.proto.ScriptTool.verify(message.tool);
+                    if (error)
+                        return "tool." + error;
+                }
+                return null;
+            };
+
+            /**
+             * Creates a ScriptToolResult message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.ScriptToolResult
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.ScriptToolResult} ScriptToolResult
+             */
+            ScriptToolResult.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.ScriptToolResult)
+                    return object;
+                let message = new $root.optimization_guide.proto.ScriptToolResult();
+                if (object.indexOfScriptToolAction != null)
+                    message.indexOfScriptToolAction = object.indexOfScriptToolAction | 0;
+                if (object.result != null)
+                    message.result = String(object.result);
+                if (object.toolName != null)
+                    message.toolName = String(object.toolName);
+                if (object.inputArguments != null)
+                    message.inputArguments = String(object.inputArguments);
+                if (object.tool != null) {
+                    if (typeof object.tool !== "object")
+                        throw TypeError(".optimization_guide.proto.ScriptToolResult.tool: object expected");
+                    message.tool = $root.optimization_guide.proto.ScriptTool.fromObject(object.tool);
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a ScriptToolResult message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.ScriptToolResult
+             * @static
+             * @param {optimization_guide.proto.ScriptToolResult} message ScriptToolResult
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            ScriptToolResult.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults) {
+                    object.indexOfScriptToolAction = 0;
+                    object.result = "";
+                    object.toolName = "";
+                    object.inputArguments = "";
+                    object.tool = null;
+                }
+                if (message.indexOfScriptToolAction != null && message.hasOwnProperty("indexOfScriptToolAction"))
+                    object.indexOfScriptToolAction = message.indexOfScriptToolAction;
+                if (message.result != null && message.hasOwnProperty("result"))
+                    object.result = message.result;
+                if (message.toolName != null && message.hasOwnProperty("toolName"))
+                    object.toolName = message.toolName;
+                if (message.inputArguments != null && message.hasOwnProperty("inputArguments"))
+                    object.inputArguments = message.inputArguments;
+                if (message.tool != null && message.hasOwnProperty("tool"))
+                    object.tool = $root.optimization_guide.proto.ScriptTool.toObject(message.tool, options);
+                return object;
+            };
+
+            /**
+             * Converts this ScriptToolResult to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.ScriptToolResult
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            ScriptToolResult.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for ScriptToolResult
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.ScriptToolResult
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            ScriptToolResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.ScriptToolResult";
+            };
+
             return ScriptToolResult;
         })();
 
@@ -5500,6 +17795,48 @@ export const optimization_guide = $root.optimization_guide = (() => {
             TableRowData.prototype.type = null;
 
             /**
+             * Creates a new TableRowData instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.TableRowData
+             * @static
+             * @param {optimization_guide.proto.ITableRowData=} [properties] Properties to set
+             * @returns {optimization_guide.proto.TableRowData} TableRowData instance
+             */
+            TableRowData.create = function create(properties) {
+                return new TableRowData(properties);
+            };
+
+            /**
+             * Encodes the specified TableRowData message. Does not implicitly {@link optimization_guide.proto.TableRowData.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.TableRowData
+             * @static
+             * @param {optimization_guide.proto.ITableRowData} message TableRowData message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            TableRowData.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified TableRowData message, length delimited. Does not implicitly {@link optimization_guide.proto.TableRowData.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.TableRowData
+             * @static
+             * @param {optimization_guide.proto.ITableRowData} message TableRowData message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            TableRowData.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a TableRowData message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.TableRowData
@@ -5529,6 +17866,131 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a TableRowData message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.TableRowData
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.TableRowData} TableRowData
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            TableRowData.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a TableRowData message.
+             * @function verify
+             * @memberof optimization_guide.proto.TableRowData
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            TableRowData.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.type != null && message.hasOwnProperty("type"))
+                    switch (message.type) {
+                    default:
+                        return "type: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                        break;
+                    }
+                return null;
+            };
+
+            /**
+             * Creates a TableRowData message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.TableRowData
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.TableRowData} TableRowData
+             */
+            TableRowData.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.TableRowData)
+                    return object;
+                let message = new $root.optimization_guide.proto.TableRowData();
+                switch (object.type) {
+                default:
+                    if (typeof object.type === "number") {
+                        message.type = object.type;
+                        break;
+                    }
+                    break;
+                case "TABLE_ROW_TYPE_UNKNOWN":
+                case 0:
+                    message.type = 0;
+                    break;
+                case "TABLE_ROW_TYPE_HEADER":
+                case 1:
+                    message.type = 1;
+                    break;
+                case "TABLE_ROW_TYPE_BODY":
+                case 2:
+                    message.type = 2;
+                    break;
+                case "TABLE_ROW_TYPE_FOOTER":
+                case 3:
+                    message.type = 3;
+                    break;
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a TableRowData message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.TableRowData
+             * @static
+             * @param {optimization_guide.proto.TableRowData} message TableRowData
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            TableRowData.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults)
+                    object.type = options.enums === String ? "TABLE_ROW_TYPE_UNKNOWN" : 0;
+                if (message.type != null && message.hasOwnProperty("type"))
+                    object.type = options.enums === String ? $root.optimization_guide.proto.TableRowType[message.type] === undefined ? message.type : $root.optimization_guide.proto.TableRowType[message.type] : message.type;
+                return object;
+            };
+
+            /**
+             * Converts this TableRowData to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.TableRowData
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            TableRowData.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for TableRowData
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.TableRowData
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            TableRowData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.TableRowData";
             };
 
             return TableRowData;
@@ -5609,6 +18071,54 @@ export const optimization_guide = $root.optimization_guide = (() => {
             PageInteractionInfo.prototype.focusedFrame = null;
 
             /**
+             * Creates a new PageInteractionInfo instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.PageInteractionInfo
+             * @static
+             * @param {optimization_guide.proto.IPageInteractionInfo=} [properties] Properties to set
+             * @returns {optimization_guide.proto.PageInteractionInfo} PageInteractionInfo instance
+             */
+            PageInteractionInfo.create = function create(properties) {
+                return new PageInteractionInfo(properties);
+            };
+
+            /**
+             * Encodes the specified PageInteractionInfo message. Does not implicitly {@link optimization_guide.proto.PageInteractionInfo.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.PageInteractionInfo
+             * @static
+             * @param {optimization_guide.proto.IPageInteractionInfo} message PageInteractionInfo message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            PageInteractionInfo.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.focusedNodeId != null && Object.hasOwnProperty.call(message, "focusedNodeId"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.focusedNodeId);
+                if (message.accessibilityFocusedNodeId != null && Object.hasOwnProperty.call(message, "accessibilityFocusedNodeId"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.accessibilityFocusedNodeId);
+                if (message.mousePosition != null && Object.hasOwnProperty.call(message, "mousePosition"))
+                    $root.optimization_guide.proto.Point.encode(message.mousePosition, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                if (message.focusedFrame != null && Object.hasOwnProperty.call(message, "focusedFrame"))
+                    $root.optimization_guide.proto.DocumentIdentifier.encode(message.focusedFrame, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified PageInteractionInfo message, length delimited. Does not implicitly {@link optimization_guide.proto.PageInteractionInfo.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.PageInteractionInfo
+             * @static
+             * @param {optimization_guide.proto.IPageInteractionInfo} message PageInteractionInfo message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            PageInteractionInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a PageInteractionInfo message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.PageInteractionInfo
@@ -5650,6 +18160,137 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a PageInteractionInfo message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.PageInteractionInfo
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.PageInteractionInfo} PageInteractionInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            PageInteractionInfo.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a PageInteractionInfo message.
+             * @function verify
+             * @memberof optimization_guide.proto.PageInteractionInfo
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            PageInteractionInfo.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.focusedNodeId != null && message.hasOwnProperty("focusedNodeId"))
+                    if (!$util.isInteger(message.focusedNodeId))
+                        return "focusedNodeId: integer expected";
+                if (message.accessibilityFocusedNodeId != null && message.hasOwnProperty("accessibilityFocusedNodeId"))
+                    if (!$util.isInteger(message.accessibilityFocusedNodeId))
+                        return "accessibilityFocusedNodeId: integer expected";
+                if (message.mousePosition != null && message.hasOwnProperty("mousePosition")) {
+                    let error = $root.optimization_guide.proto.Point.verify(message.mousePosition);
+                    if (error)
+                        return "mousePosition." + error;
+                }
+                if (message.focusedFrame != null && message.hasOwnProperty("focusedFrame")) {
+                    let error = $root.optimization_guide.proto.DocumentIdentifier.verify(message.focusedFrame);
+                    if (error)
+                        return "focusedFrame." + error;
+                }
+                return null;
+            };
+
+            /**
+             * Creates a PageInteractionInfo message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.PageInteractionInfo
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.PageInteractionInfo} PageInteractionInfo
+             */
+            PageInteractionInfo.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.PageInteractionInfo)
+                    return object;
+                let message = new $root.optimization_guide.proto.PageInteractionInfo();
+                if (object.focusedNodeId != null)
+                    message.focusedNodeId = object.focusedNodeId | 0;
+                if (object.accessibilityFocusedNodeId != null)
+                    message.accessibilityFocusedNodeId = object.accessibilityFocusedNodeId | 0;
+                if (object.mousePosition != null) {
+                    if (typeof object.mousePosition !== "object")
+                        throw TypeError(".optimization_guide.proto.PageInteractionInfo.mousePosition: object expected");
+                    message.mousePosition = $root.optimization_guide.proto.Point.fromObject(object.mousePosition);
+                }
+                if (object.focusedFrame != null) {
+                    if (typeof object.focusedFrame !== "object")
+                        throw TypeError(".optimization_guide.proto.PageInteractionInfo.focusedFrame: object expected");
+                    message.focusedFrame = $root.optimization_guide.proto.DocumentIdentifier.fromObject(object.focusedFrame);
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a PageInteractionInfo message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.PageInteractionInfo
+             * @static
+             * @param {optimization_guide.proto.PageInteractionInfo} message PageInteractionInfo
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            PageInteractionInfo.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults) {
+                    object.focusedNodeId = 0;
+                    object.accessibilityFocusedNodeId = 0;
+                    object.mousePosition = null;
+                    object.focusedFrame = null;
+                }
+                if (message.focusedNodeId != null && message.hasOwnProperty("focusedNodeId"))
+                    object.focusedNodeId = message.focusedNodeId;
+                if (message.accessibilityFocusedNodeId != null && message.hasOwnProperty("accessibilityFocusedNodeId"))
+                    object.accessibilityFocusedNodeId = message.accessibilityFocusedNodeId;
+                if (message.mousePosition != null && message.hasOwnProperty("mousePosition"))
+                    object.mousePosition = $root.optimization_guide.proto.Point.toObject(message.mousePosition, options);
+                if (message.focusedFrame != null && message.hasOwnProperty("focusedFrame"))
+                    object.focusedFrame = $root.optimization_guide.proto.DocumentIdentifier.toObject(message.focusedFrame, options);
+                return object;
+            };
+
+            /**
+             * Converts this PageInteractionInfo to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.PageInteractionInfo
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            PageInteractionInfo.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for PageInteractionInfo
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.PageInteractionInfo
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            PageInteractionInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.PageInteractionInfo";
             };
 
             return PageInteractionInfo;
@@ -5697,6 +18338,50 @@ export const optimization_guide = $root.optimization_guide = (() => {
             Point.prototype.y = null;
 
             /**
+             * Creates a new Point instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.Point
+             * @static
+             * @param {optimization_guide.proto.IPoint=} [properties] Properties to set
+             * @returns {optimization_guide.proto.Point} Point instance
+             */
+            Point.create = function create(properties) {
+                return new Point(properties);
+            };
+
+            /**
+             * Encodes the specified Point message. Does not implicitly {@link optimization_guide.proto.Point.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.Point
+             * @static
+             * @param {optimization_guide.proto.IPoint} message Point message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Point.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.x != null && Object.hasOwnProperty.call(message, "x"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.x);
+                if (message.y != null && Object.hasOwnProperty.call(message, "y"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.y);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified Point message, length delimited. Does not implicitly {@link optimization_guide.proto.Point.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.Point
+             * @static
+             * @param {optimization_guide.proto.IPoint} message Point message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Point.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a Point message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.Point
@@ -5730,6 +18415,111 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a Point message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.Point
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.Point} Point
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Point.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a Point message.
+             * @function verify
+             * @memberof optimization_guide.proto.Point
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            Point.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.x != null && message.hasOwnProperty("x"))
+                    if (!$util.isInteger(message.x))
+                        return "x: integer expected";
+                if (message.y != null && message.hasOwnProperty("y"))
+                    if (!$util.isInteger(message.y))
+                        return "y: integer expected";
+                return null;
+            };
+
+            /**
+             * Creates a Point message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.Point
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.Point} Point
+             */
+            Point.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.Point)
+                    return object;
+                let message = new $root.optimization_guide.proto.Point();
+                if (object.x != null)
+                    message.x = object.x | 0;
+                if (object.y != null)
+                    message.y = object.y | 0;
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a Point message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.Point
+             * @static
+             * @param {optimization_guide.proto.Point} message Point
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Point.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults) {
+                    object.x = 0;
+                    object.y = 0;
+                }
+                if (message.x != null && message.hasOwnProperty("x"))
+                    object.x = message.x;
+                if (message.y != null && message.hasOwnProperty("y"))
+                    object.y = message.y;
+                return object;
+            };
+
+            /**
+             * Converts this Point to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.Point
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            Point.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for Point
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.Point
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            Point.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.Point";
             };
 
             return Point;
@@ -5800,6 +18590,54 @@ export const optimization_guide = $root.optimization_guide = (() => {
             PopupWindow.prototype.openerCommonAncestorDomNodeId = null;
 
             /**
+             * Creates a new PopupWindow instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.PopupWindow
+             * @static
+             * @param {optimization_guide.proto.IPopupWindow=} [properties] Properties to set
+             * @returns {optimization_guide.proto.PopupWindow} PopupWindow instance
+             */
+            PopupWindow.create = function create(properties) {
+                return new PopupWindow(properties);
+            };
+
+            /**
+             * Encodes the specified PopupWindow message. Does not implicitly {@link optimization_guide.proto.PopupWindow.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.PopupWindow
+             * @static
+             * @param {optimization_guide.proto.IPopupWindow} message PopupWindow message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            PopupWindow.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.rootNode != null && Object.hasOwnProperty.call(message, "rootNode"))
+                    $root.optimization_guide.proto.ContentNode.encode(message.rootNode, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                if (message.openerDocumentId != null && Object.hasOwnProperty.call(message, "openerDocumentId"))
+                    $root.optimization_guide.proto.DocumentIdentifier.encode(message.openerDocumentId, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                if (message.openerCommonAncestorDomNodeId != null && Object.hasOwnProperty.call(message, "openerCommonAncestorDomNodeId"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.openerCommonAncestorDomNodeId);
+                if (message.visibleBoundingBox != null && Object.hasOwnProperty.call(message, "visibleBoundingBox"))
+                    $root.optimization_guide.proto.BoundingRect.encode(message.visibleBoundingBox, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified PopupWindow message, length delimited. Does not implicitly {@link optimization_guide.proto.PopupWindow.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.PopupWindow
+             * @static
+             * @param {optimization_guide.proto.IPopupWindow} message PopupWindow message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            PopupWindow.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a PopupWindow message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.PopupWindow
@@ -5843,6 +18681,142 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 return message;
             };
 
+            /**
+             * Decodes a PopupWindow message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.PopupWindow
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.PopupWindow} PopupWindow
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            PopupWindow.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a PopupWindow message.
+             * @function verify
+             * @memberof optimization_guide.proto.PopupWindow
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            PopupWindow.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.rootNode != null && message.hasOwnProperty("rootNode")) {
+                    let error = $root.optimization_guide.proto.ContentNode.verify(message.rootNode);
+                    if (error)
+                        return "rootNode." + error;
+                }
+                if (message.visibleBoundingBox != null && message.hasOwnProperty("visibleBoundingBox")) {
+                    let error = $root.optimization_guide.proto.BoundingRect.verify(message.visibleBoundingBox);
+                    if (error)
+                        return "visibleBoundingBox." + error;
+                }
+                if (message.openerDocumentId != null && message.hasOwnProperty("openerDocumentId")) {
+                    let error = $root.optimization_guide.proto.DocumentIdentifier.verify(message.openerDocumentId);
+                    if (error)
+                        return "openerDocumentId." + error;
+                }
+                if (message.openerCommonAncestorDomNodeId != null && message.hasOwnProperty("openerCommonAncestorDomNodeId"))
+                    if (!$util.isInteger(message.openerCommonAncestorDomNodeId))
+                        return "openerCommonAncestorDomNodeId: integer expected";
+                return null;
+            };
+
+            /**
+             * Creates a PopupWindow message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.PopupWindow
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.PopupWindow} PopupWindow
+             */
+            PopupWindow.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.PopupWindow)
+                    return object;
+                let message = new $root.optimization_guide.proto.PopupWindow();
+                if (object.rootNode != null) {
+                    if (typeof object.rootNode !== "object")
+                        throw TypeError(".optimization_guide.proto.PopupWindow.rootNode: object expected");
+                    message.rootNode = $root.optimization_guide.proto.ContentNode.fromObject(object.rootNode);
+                }
+                if (object.visibleBoundingBox != null) {
+                    if (typeof object.visibleBoundingBox !== "object")
+                        throw TypeError(".optimization_guide.proto.PopupWindow.visibleBoundingBox: object expected");
+                    message.visibleBoundingBox = $root.optimization_guide.proto.BoundingRect.fromObject(object.visibleBoundingBox);
+                }
+                if (object.openerDocumentId != null) {
+                    if (typeof object.openerDocumentId !== "object")
+                        throw TypeError(".optimization_guide.proto.PopupWindow.openerDocumentId: object expected");
+                    message.openerDocumentId = $root.optimization_guide.proto.DocumentIdentifier.fromObject(object.openerDocumentId);
+                }
+                if (object.openerCommonAncestorDomNodeId != null)
+                    message.openerCommonAncestorDomNodeId = object.openerCommonAncestorDomNodeId | 0;
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a PopupWindow message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.PopupWindow
+             * @static
+             * @param {optimization_guide.proto.PopupWindow} message PopupWindow
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            PopupWindow.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults) {
+                    object.rootNode = null;
+                    object.openerDocumentId = null;
+                    object.openerCommonAncestorDomNodeId = 0;
+                    object.visibleBoundingBox = null;
+                }
+                if (message.rootNode != null && message.hasOwnProperty("rootNode"))
+                    object.rootNode = $root.optimization_guide.proto.ContentNode.toObject(message.rootNode, options);
+                if (message.openerDocumentId != null && message.hasOwnProperty("openerDocumentId"))
+                    object.openerDocumentId = $root.optimization_guide.proto.DocumentIdentifier.toObject(message.openerDocumentId, options);
+                if (message.openerCommonAncestorDomNodeId != null && message.hasOwnProperty("openerCommonAncestorDomNodeId"))
+                    object.openerCommonAncestorDomNodeId = message.openerCommonAncestorDomNodeId;
+                if (message.visibleBoundingBox != null && message.hasOwnProperty("visibleBoundingBox"))
+                    object.visibleBoundingBox = $root.optimization_guide.proto.BoundingRect.toObject(message.visibleBoundingBox, options);
+                return object;
+            };
+
+            /**
+             * Converts this PopupWindow to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.PopupWindow
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            PopupWindow.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for PopupWindow
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.PopupWindow
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            PopupWindow.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.PopupWindow";
+            };
+
             return PopupWindow;
         })();
 
@@ -5880,6 +18854,48 @@ export const optimization_guide = $root.optimization_guide = (() => {
             ProfileInformation.prototype.autofillInformation = null;
 
             /**
+             * Creates a new ProfileInformation instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.ProfileInformation
+             * @static
+             * @param {optimization_guide.proto.IProfileInformation=} [properties] Properties to set
+             * @returns {optimization_guide.proto.ProfileInformation} ProfileInformation instance
+             */
+            ProfileInformation.create = function create(properties) {
+                return new ProfileInformation(properties);
+            };
+
+            /**
+             * Encodes the specified ProfileInformation message. Does not implicitly {@link optimization_guide.proto.ProfileInformation.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.ProfileInformation
+             * @static
+             * @param {optimization_guide.proto.IProfileInformation} message ProfileInformation message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ProfileInformation.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.autofillInformation != null && Object.hasOwnProperty.call(message, "autofillInformation"))
+                    $root.optimization_guide.proto.AutofillInformation.encode(message.autofillInformation, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified ProfileInformation message, length delimited. Does not implicitly {@link optimization_guide.proto.ProfileInformation.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.ProfileInformation
+             * @static
+             * @param {optimization_guide.proto.IProfileInformation} message ProfileInformation message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ProfileInformation.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a ProfileInformation message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.ProfileInformation
@@ -5909,6 +18925,107 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a ProfileInformation message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.ProfileInformation
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.ProfileInformation} ProfileInformation
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ProfileInformation.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a ProfileInformation message.
+             * @function verify
+             * @memberof optimization_guide.proto.ProfileInformation
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            ProfileInformation.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.autofillInformation != null && message.hasOwnProperty("autofillInformation")) {
+                    let error = $root.optimization_guide.proto.AutofillInformation.verify(message.autofillInformation);
+                    if (error)
+                        return "autofillInformation." + error;
+                }
+                return null;
+            };
+
+            /**
+             * Creates a ProfileInformation message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.ProfileInformation
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.ProfileInformation} ProfileInformation
+             */
+            ProfileInformation.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.ProfileInformation)
+                    return object;
+                let message = new $root.optimization_guide.proto.ProfileInformation();
+                if (object.autofillInformation != null) {
+                    if (typeof object.autofillInformation !== "object")
+                        throw TypeError(".optimization_guide.proto.ProfileInformation.autofillInformation: object expected");
+                    message.autofillInformation = $root.optimization_guide.proto.AutofillInformation.fromObject(object.autofillInformation);
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a ProfileInformation message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.ProfileInformation
+             * @static
+             * @param {optimization_guide.proto.ProfileInformation} message ProfileInformation
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            ProfileInformation.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults)
+                    object.autofillInformation = null;
+                if (message.autofillInformation != null && message.hasOwnProperty("autofillInformation"))
+                    object.autofillInformation = $root.optimization_guide.proto.AutofillInformation.toObject(message.autofillInformation, options);
+                return object;
+            };
+
+            /**
+             * Converts this ProfileInformation to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.ProfileInformation
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            ProfileInformation.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for ProfileInformation
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.ProfileInformation
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            ProfileInformation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.ProfileInformation";
             };
 
             return ProfileInformation;
@@ -5949,6 +19066,52 @@ export const optimization_guide = $root.optimization_guide = (() => {
             AutofillInformation.prototype.fillableData = $util.emptyArray;
 
             /**
+             * Creates a new AutofillInformation instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.AutofillInformation
+             * @static
+             * @param {optimization_guide.proto.IAutofillInformation=} [properties] Properties to set
+             * @returns {optimization_guide.proto.AutofillInformation} AutofillInformation instance
+             */
+            AutofillInformation.create = function create(properties) {
+                return new AutofillInformation(properties);
+            };
+
+            /**
+             * Encodes the specified AutofillInformation message. Does not implicitly {@link optimization_guide.proto.AutofillInformation.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.AutofillInformation
+             * @static
+             * @param {optimization_guide.proto.IAutofillInformation} message AutofillInformation message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            AutofillInformation.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.fillableData != null && message.fillableData.length) {
+                    writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                    for (let i = 0; i < message.fillableData.length; ++i)
+                        writer.int32(message.fillableData[i]);
+                    writer.ldelim();
+                }
+                return writer;
+            };
+
+            /**
+             * Encodes the specified AutofillInformation message, length delimited. Does not implicitly {@link optimization_guide.proto.AutofillInformation.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.AutofillInformation
+             * @static
+             * @param {optimization_guide.proto.IAutofillInformation} message AutofillInformation message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            AutofillInformation.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes an AutofillInformation message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.AutofillInformation
@@ -5985,6 +19148,138 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes an AutofillInformation message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.AutofillInformation
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.AutofillInformation} AutofillInformation
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            AutofillInformation.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies an AutofillInformation message.
+             * @function verify
+             * @memberof optimization_guide.proto.AutofillInformation
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            AutofillInformation.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.fillableData != null && message.hasOwnProperty("fillableData")) {
+                    if (!Array.isArray(message.fillableData))
+                        return "fillableData: array expected";
+                    for (let i = 0; i < message.fillableData.length; ++i)
+                        switch (message.fillableData[i]) {
+                        default:
+                            return "fillableData: enum value[] expected";
+                        case 0:
+                        case 1:
+                        case 6:
+                            break;
+                        }
+                }
+                return null;
+            };
+
+            /**
+             * Creates an AutofillInformation message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.AutofillInformation
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.AutofillInformation} AutofillInformation
+             */
+            AutofillInformation.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.AutofillInformation)
+                    return object;
+                let message = new $root.optimization_guide.proto.AutofillInformation();
+                if (object.fillableData) {
+                    if (!Array.isArray(object.fillableData))
+                        throw TypeError(".optimization_guide.proto.AutofillInformation.fillableData: array expected");
+                    message.fillableData = [];
+                    for (let i = 0; i < object.fillableData.length; ++i)
+                        switch (object.fillableData[i]) {
+                        default:
+                            if (typeof object.fillableData[i] === "number") {
+                                message.fillableData[i] = object.fillableData[i];
+                                break;
+                            }
+                        case "UNSPECIFIED":
+                        case 0:
+                            message.fillableData[i] = 0;
+                            break;
+                        case "ADDRESS":
+                        case 1:
+                            message.fillableData[i] = 1;
+                            break;
+                        case "CREDIT_CARD":
+                        case 6:
+                            message.fillableData[i] = 6;
+                            break;
+                        }
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from an AutofillInformation message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.AutofillInformation
+             * @static
+             * @param {optimization_guide.proto.AutofillInformation} message AutofillInformation
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            AutofillInformation.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.arrays || options.defaults)
+                    object.fillableData = [];
+                if (message.fillableData && message.fillableData.length) {
+                    object.fillableData = [];
+                    for (let j = 0; j < message.fillableData.length; ++j)
+                        object.fillableData[j] = options.enums === String ? $root.optimization_guide.proto.AutofillInformation.FillableData[message.fillableData[j]] === undefined ? message.fillableData[j] : $root.optimization_guide.proto.AutofillInformation.FillableData[message.fillableData[j]] : message.fillableData[j];
+                }
+                return object;
+            };
+
+            /**
+             * Converts this AutofillInformation to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.AutofillInformation
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            AutofillInformation.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for AutofillInformation
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.AutofillInformation
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            AutofillInformation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.AutofillInformation";
             };
 
             /**
@@ -6044,6 +19339,48 @@ export const optimization_guide = $root.optimization_guide = (() => {
             GeminiInChromePageMetadata.prototype.screenshotInfo = null;
 
             /**
+             * Creates a new GeminiInChromePageMetadata instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.GeminiInChromePageMetadata
+             * @static
+             * @param {optimization_guide.proto.IGeminiInChromePageMetadata=} [properties] Properties to set
+             * @returns {optimization_guide.proto.GeminiInChromePageMetadata} GeminiInChromePageMetadata instance
+             */
+            GeminiInChromePageMetadata.create = function create(properties) {
+                return new GeminiInChromePageMetadata(properties);
+            };
+
+            /**
+             * Encodes the specified GeminiInChromePageMetadata message. Does not implicitly {@link optimization_guide.proto.GeminiInChromePageMetadata.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.GeminiInChromePageMetadata
+             * @static
+             * @param {optimization_guide.proto.IGeminiInChromePageMetadata} message GeminiInChromePageMetadata message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            GeminiInChromePageMetadata.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.screenshotInfo != null && Object.hasOwnProperty.call(message, "screenshotInfo"))
+                    $root.optimization_guide.proto.ScreenshotInfo.encode(message.screenshotInfo, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified GeminiInChromePageMetadata message, length delimited. Does not implicitly {@link optimization_guide.proto.GeminiInChromePageMetadata.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.GeminiInChromePageMetadata
+             * @static
+             * @param {optimization_guide.proto.IGeminiInChromePageMetadata} message GeminiInChromePageMetadata message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            GeminiInChromePageMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a GeminiInChromePageMetadata message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.GeminiInChromePageMetadata
@@ -6073,6 +19410,107 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a GeminiInChromePageMetadata message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.GeminiInChromePageMetadata
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.GeminiInChromePageMetadata} GeminiInChromePageMetadata
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            GeminiInChromePageMetadata.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a GeminiInChromePageMetadata message.
+             * @function verify
+             * @memberof optimization_guide.proto.GeminiInChromePageMetadata
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            GeminiInChromePageMetadata.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.screenshotInfo != null && message.hasOwnProperty("screenshotInfo")) {
+                    let error = $root.optimization_guide.proto.ScreenshotInfo.verify(message.screenshotInfo);
+                    if (error)
+                        return "screenshotInfo." + error;
+                }
+                return null;
+            };
+
+            /**
+             * Creates a GeminiInChromePageMetadata message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.GeminiInChromePageMetadata
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.GeminiInChromePageMetadata} GeminiInChromePageMetadata
+             */
+            GeminiInChromePageMetadata.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.GeminiInChromePageMetadata)
+                    return object;
+                let message = new $root.optimization_guide.proto.GeminiInChromePageMetadata();
+                if (object.screenshotInfo != null) {
+                    if (typeof object.screenshotInfo !== "object")
+                        throw TypeError(".optimization_guide.proto.GeminiInChromePageMetadata.screenshotInfo: object expected");
+                    message.screenshotInfo = $root.optimization_guide.proto.ScreenshotInfo.fromObject(object.screenshotInfo);
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a GeminiInChromePageMetadata message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.GeminiInChromePageMetadata
+             * @static
+             * @param {optimization_guide.proto.GeminiInChromePageMetadata} message GeminiInChromePageMetadata
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            GeminiInChromePageMetadata.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults)
+                    object.screenshotInfo = null;
+                if (message.screenshotInfo != null && message.hasOwnProperty("screenshotInfo"))
+                    object.screenshotInfo = $root.optimization_guide.proto.ScreenshotInfo.toObject(message.screenshotInfo, options);
+                return object;
+            };
+
+            /**
+             * Converts this GeminiInChromePageMetadata to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.GeminiInChromePageMetadata
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            GeminiInChromePageMetadata.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for GeminiInChromePageMetadata
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.GeminiInChromePageMetadata
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            GeminiInChromePageMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.GeminiInChromePageMetadata";
             };
 
             return GeminiInChromePageMetadata;
@@ -6114,6 +19552,48 @@ export const optimization_guide = $root.optimization_guide = (() => {
             ScreenshotInfo.prototype.hasSelectionRegionInScreenshot = null;
 
             /**
+             * Creates a new ScreenshotInfo instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.ScreenshotInfo
+             * @static
+             * @param {optimization_guide.proto.IScreenshotInfo=} [properties] Properties to set
+             * @returns {optimization_guide.proto.ScreenshotInfo} ScreenshotInfo instance
+             */
+            ScreenshotInfo.create = function create(properties) {
+                return new ScreenshotInfo(properties);
+            };
+
+            /**
+             * Encodes the specified ScreenshotInfo message. Does not implicitly {@link optimization_guide.proto.ScreenshotInfo.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.ScreenshotInfo
+             * @static
+             * @param {optimization_guide.proto.IScreenshotInfo} message ScreenshotInfo message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ScreenshotInfo.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.hasSelectionRegionInScreenshot != null && Object.hasOwnProperty.call(message, "hasSelectionRegionInScreenshot"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.hasSelectionRegionInScreenshot);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified ScreenshotInfo message, length delimited. Does not implicitly {@link optimization_guide.proto.ScreenshotInfo.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.ScreenshotInfo
+             * @static
+             * @param {optimization_guide.proto.IScreenshotInfo} message ScreenshotInfo message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ScreenshotInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a ScreenshotInfo message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.ScreenshotInfo
@@ -6143,6 +19623,102 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a ScreenshotInfo message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.ScreenshotInfo
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.ScreenshotInfo} ScreenshotInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ScreenshotInfo.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a ScreenshotInfo message.
+             * @function verify
+             * @memberof optimization_guide.proto.ScreenshotInfo
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            ScreenshotInfo.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.hasSelectionRegionInScreenshot != null && message.hasOwnProperty("hasSelectionRegionInScreenshot"))
+                    if (typeof message.hasSelectionRegionInScreenshot !== "boolean")
+                        return "hasSelectionRegionInScreenshot: boolean expected";
+                return null;
+            };
+
+            /**
+             * Creates a ScreenshotInfo message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.ScreenshotInfo
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.ScreenshotInfo} ScreenshotInfo
+             */
+            ScreenshotInfo.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.ScreenshotInfo)
+                    return object;
+                let message = new $root.optimization_guide.proto.ScreenshotInfo();
+                if (object.hasSelectionRegionInScreenshot != null)
+                    message.hasSelectionRegionInScreenshot = Boolean(object.hasSelectionRegionInScreenshot);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a ScreenshotInfo message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.ScreenshotInfo
+             * @static
+             * @param {optimization_guide.proto.ScreenshotInfo} message ScreenshotInfo
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            ScreenshotInfo.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults)
+                    object.hasSelectionRegionInScreenshot = false;
+                if (message.hasSelectionRegionInScreenshot != null && message.hasOwnProperty("hasSelectionRegionInScreenshot"))
+                    object.hasSelectionRegionInScreenshot = message.hasSelectionRegionInScreenshot;
+                return object;
+            };
+
+            /**
+             * Converts this ScreenshotInfo to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.ScreenshotInfo
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            ScreenshotInfo.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for ScreenshotInfo
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.ScreenshotInfo
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            ScreenshotInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.ScreenshotInfo";
             };
 
             return ScreenshotInfo;
@@ -6190,6 +19766,50 @@ export const optimization_guide = $root.optimization_guide = (() => {
             AutofillGlobalId.prototype.rendererId = null;
 
             /**
+             * Creates a new AutofillGlobalId instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.AutofillGlobalId
+             * @static
+             * @param {optimization_guide.proto.IAutofillGlobalId=} [properties] Properties to set
+             * @returns {optimization_guide.proto.AutofillGlobalId} AutofillGlobalId instance
+             */
+            AutofillGlobalId.create = function create(properties) {
+                return new AutofillGlobalId(properties);
+            };
+
+            /**
+             * Encodes the specified AutofillGlobalId message. Does not implicitly {@link optimization_guide.proto.AutofillGlobalId.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.AutofillGlobalId
+             * @static
+             * @param {optimization_guide.proto.IAutofillGlobalId} message AutofillGlobalId message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            AutofillGlobalId.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.frameToken != null && Object.hasOwnProperty.call(message, "frameToken"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.frameToken);
+                if (message.rendererId != null && Object.hasOwnProperty.call(message, "rendererId"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.rendererId);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified AutofillGlobalId message, length delimited. Does not implicitly {@link optimization_guide.proto.AutofillGlobalId.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.AutofillGlobalId
+             * @static
+             * @param {optimization_guide.proto.IAutofillGlobalId} message AutofillGlobalId message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            AutofillGlobalId.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes an AutofillGlobalId message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.AutofillGlobalId
@@ -6223,6 +19843,125 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes an AutofillGlobalId message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.AutofillGlobalId
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.AutofillGlobalId} AutofillGlobalId
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            AutofillGlobalId.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies an AutofillGlobalId message.
+             * @function verify
+             * @memberof optimization_guide.proto.AutofillGlobalId
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            AutofillGlobalId.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.frameToken != null && message.hasOwnProperty("frameToken"))
+                    if (!$util.isString(message.frameToken))
+                        return "frameToken: string expected";
+                if (message.rendererId != null && message.hasOwnProperty("rendererId"))
+                    if (!$util.isInteger(message.rendererId) && !(message.rendererId && $util.isInteger(message.rendererId.low) && $util.isInteger(message.rendererId.high)))
+                        return "rendererId: integer|Long expected";
+                return null;
+            };
+
+            /**
+             * Creates an AutofillGlobalId message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.AutofillGlobalId
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.AutofillGlobalId} AutofillGlobalId
+             */
+            AutofillGlobalId.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.AutofillGlobalId)
+                    return object;
+                let message = new $root.optimization_guide.proto.AutofillGlobalId();
+                if (object.frameToken != null)
+                    message.frameToken = String(object.frameToken);
+                if (object.rendererId != null)
+                    if ($util.Long)
+                        (message.rendererId = $util.Long.fromValue(object.rendererId)).unsigned = true;
+                    else if (typeof object.rendererId === "string")
+                        message.rendererId = parseInt(object.rendererId, 10);
+                    else if (typeof object.rendererId === "number")
+                        message.rendererId = object.rendererId;
+                    else if (typeof object.rendererId === "object")
+                        message.rendererId = new $util.LongBits(object.rendererId.low >>> 0, object.rendererId.high >>> 0).toNumber(true);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from an AutofillGlobalId message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.AutofillGlobalId
+             * @static
+             * @param {optimization_guide.proto.AutofillGlobalId} message AutofillGlobalId
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            AutofillGlobalId.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults) {
+                    object.frameToken = "";
+                    if ($util.Long) {
+                        let long = new $util.Long(0, 0, true);
+                        object.rendererId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.rendererId = options.longs === String ? "0" : 0;
+                }
+                if (message.frameToken != null && message.hasOwnProperty("frameToken"))
+                    object.frameToken = message.frameToken;
+                if (message.rendererId != null && message.hasOwnProperty("rendererId"))
+                    if (typeof message.rendererId === "number")
+                        object.rendererId = options.longs === String ? String(message.rendererId) : message.rendererId;
+                    else
+                        object.rendererId = options.longs === String ? $util.Long.prototype.toString.call(message.rendererId) : options.longs === Number ? new $util.LongBits(message.rendererId.low >>> 0, message.rendererId.high >>> 0).toNumber(true) : message.rendererId;
+                return object;
+            };
+
+            /**
+             * Converts this AutofillGlobalId to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.AutofillGlobalId
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            AutofillGlobalId.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for AutofillGlobalId
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.AutofillGlobalId
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            AutofillGlobalId.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.AutofillGlobalId";
             };
 
             return AutofillGlobalId;
@@ -6308,6 +20047,57 @@ export const optimization_guide = $root.optimization_guide = (() => {
             FormData.prototype.actionUrl = null;
 
             /**
+             * Creates a new FormData instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.FormData
+             * @static
+             * @param {optimization_guide.proto.IFormData=} [properties] Properties to set
+             * @returns {optimization_guide.proto.FormData} FormData instance
+             */
+            FormData.create = function create(properties) {
+                return new FormData(properties);
+            };
+
+            /**
+             * Encodes the specified FormData message. Does not implicitly {@link optimization_guide.proto.FormData.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.FormData
+             * @static
+             * @param {optimization_guide.proto.IFormData} message FormData message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            FormData.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.formName != null && Object.hasOwnProperty.call(message, "formName"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.formName);
+                if (message.fields != null && message.fields.length)
+                    for (let i = 0; i < message.fields.length; ++i)
+                        $root.optimization_guide.proto.FormFieldData.encode(message.fields[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                if (message.globalId != null && Object.hasOwnProperty.call(message, "globalId"))
+                    $root.optimization_guide.proto.AutofillGlobalId.encode(message.globalId, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                if (message.formSignature != null && Object.hasOwnProperty.call(message, "formSignature"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).uint64(message.formSignature);
+                if (message.actionUrl != null && Object.hasOwnProperty.call(message, "actionUrl"))
+                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.actionUrl);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified FormData message, length delimited. Does not implicitly {@link optimization_guide.proto.FormData.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.FormData
+             * @static
+             * @param {optimization_guide.proto.IFormData} message FormData message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            FormData.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a FormData message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.FormData
@@ -6355,6 +20145,172 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a FormData message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.FormData
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.FormData} FormData
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            FormData.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a FormData message.
+             * @function verify
+             * @memberof optimization_guide.proto.FormData
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            FormData.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.formName != null && message.hasOwnProperty("formName"))
+                    if (!$util.isString(message.formName))
+                        return "formName: string expected";
+                if (message.fields != null && message.hasOwnProperty("fields")) {
+                    if (!Array.isArray(message.fields))
+                        return "fields: array expected";
+                    for (let i = 0; i < message.fields.length; ++i) {
+                        let error = $root.optimization_guide.proto.FormFieldData.verify(message.fields[i]);
+                        if (error)
+                            return "fields." + error;
+                    }
+                }
+                if (message.globalId != null && message.hasOwnProperty("globalId")) {
+                    let error = $root.optimization_guide.proto.AutofillGlobalId.verify(message.globalId);
+                    if (error)
+                        return "globalId." + error;
+                }
+                if (message.formSignature != null && message.hasOwnProperty("formSignature"))
+                    if (!$util.isInteger(message.formSignature) && !(message.formSignature && $util.isInteger(message.formSignature.low) && $util.isInteger(message.formSignature.high)))
+                        return "formSignature: integer|Long expected";
+                if (message.actionUrl != null && message.hasOwnProperty("actionUrl"))
+                    if (!$util.isString(message.actionUrl))
+                        return "actionUrl: string expected";
+                return null;
+            };
+
+            /**
+             * Creates a FormData message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.FormData
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.FormData} FormData
+             */
+            FormData.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.FormData)
+                    return object;
+                let message = new $root.optimization_guide.proto.FormData();
+                if (object.formName != null)
+                    message.formName = String(object.formName);
+                if (object.fields) {
+                    if (!Array.isArray(object.fields))
+                        throw TypeError(".optimization_guide.proto.FormData.fields: array expected");
+                    message.fields = [];
+                    for (let i = 0; i < object.fields.length; ++i) {
+                        if (typeof object.fields[i] !== "object")
+                            throw TypeError(".optimization_guide.proto.FormData.fields: object expected");
+                        message.fields[i] = $root.optimization_guide.proto.FormFieldData.fromObject(object.fields[i]);
+                    }
+                }
+                if (object.globalId != null) {
+                    if (typeof object.globalId !== "object")
+                        throw TypeError(".optimization_guide.proto.FormData.globalId: object expected");
+                    message.globalId = $root.optimization_guide.proto.AutofillGlobalId.fromObject(object.globalId);
+                }
+                if (object.formSignature != null)
+                    if ($util.Long)
+                        (message.formSignature = $util.Long.fromValue(object.formSignature)).unsigned = true;
+                    else if (typeof object.formSignature === "string")
+                        message.formSignature = parseInt(object.formSignature, 10);
+                    else if (typeof object.formSignature === "number")
+                        message.formSignature = object.formSignature;
+                    else if (typeof object.formSignature === "object")
+                        message.formSignature = new $util.LongBits(object.formSignature.low >>> 0, object.formSignature.high >>> 0).toNumber(true);
+                if (object.actionUrl != null)
+                    message.actionUrl = String(object.actionUrl);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a FormData message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.FormData
+             * @static
+             * @param {optimization_guide.proto.FormData} message FormData
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            FormData.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.arrays || options.defaults)
+                    object.fields = [];
+                if (options.defaults) {
+                    object.formName = "";
+                    object.globalId = null;
+                    if ($util.Long) {
+                        let long = new $util.Long(0, 0, true);
+                        object.formSignature = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.formSignature = options.longs === String ? "0" : 0;
+                    object.actionUrl = "";
+                }
+                if (message.formName != null && message.hasOwnProperty("formName"))
+                    object.formName = message.formName;
+                if (message.fields && message.fields.length) {
+                    object.fields = [];
+                    for (let j = 0; j < message.fields.length; ++j)
+                        object.fields[j] = $root.optimization_guide.proto.FormFieldData.toObject(message.fields[j], options);
+                }
+                if (message.globalId != null && message.hasOwnProperty("globalId"))
+                    object.globalId = $root.optimization_guide.proto.AutofillGlobalId.toObject(message.globalId, options);
+                if (message.formSignature != null && message.hasOwnProperty("formSignature"))
+                    if (typeof message.formSignature === "number")
+                        object.formSignature = options.longs === String ? String(message.formSignature) : message.formSignature;
+                    else
+                        object.formSignature = options.longs === String ? $util.Long.prototype.toString.call(message.formSignature) : options.longs === Number ? new $util.LongBits(message.formSignature.low >>> 0, message.formSignature.high >>> 0).toNumber(true) : message.formSignature;
+                if (message.actionUrl != null && message.hasOwnProperty("actionUrl"))
+                    object.actionUrl = message.actionUrl;
+                return object;
+            };
+
+            /**
+             * Converts this FormData to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.FormData
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            FormData.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for FormData
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.FormData
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            FormData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.FormData";
             };
 
             return FormData;
@@ -6525,6 +20481,75 @@ export const optimization_guide = $root.optimization_guide = (() => {
             FormFieldData.prototype.ariaDescription = null;
 
             /**
+             * Creates a new FormFieldData instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.FormFieldData
+             * @static
+             * @param {optimization_guide.proto.IFormFieldData=} [properties] Properties to set
+             * @returns {optimization_guide.proto.FormFieldData} FormFieldData instance
+             */
+            FormFieldData.create = function create(properties) {
+                return new FormFieldData(properties);
+            };
+
+            /**
+             * Encodes the specified FormFieldData message. Does not implicitly {@link optimization_guide.proto.FormFieldData.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.FormFieldData
+             * @static
+             * @param {optimization_guide.proto.IFormFieldData} message FormFieldData message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            FormFieldData.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.fieldName != null && Object.hasOwnProperty.call(message, "fieldName"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.fieldName);
+                if (message.fieldLabel != null && Object.hasOwnProperty.call(message, "fieldLabel"))
+                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.fieldLabel);
+                if (message.fieldValue != null && Object.hasOwnProperty.call(message, "fieldValue"))
+                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.fieldValue);
+                if (message.isVisible != null && Object.hasOwnProperty.call(message, "isVisible"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.isVisible);
+                if (message.isFocusable != null && Object.hasOwnProperty.call(message, "isFocusable"))
+                    writer.uint32(/* id 5, wireType 0 =*/40).bool(message.isFocusable);
+                if (message.formControlType != null && Object.hasOwnProperty.call(message, "formControlType"))
+                    writer.uint32(/* id 6, wireType 0 =*/48).int32(message.formControlType);
+                if (message.selectOptions != null && message.selectOptions.length)
+                    for (let i = 0; i < message.selectOptions.length; ++i)
+                        $root.optimization_guide.proto.SelectOption.encode(message.selectOptions[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                if (message.placeholder != null && Object.hasOwnProperty.call(message, "placeholder"))
+                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.placeholder);
+                if (message.formControlAxNodeId != null && Object.hasOwnProperty.call(message, "formControlAxNodeId"))
+                    writer.uint32(/* id 9, wireType 0 =*/72).int32(message.formControlAxNodeId);
+                if (message.isEligible != null && Object.hasOwnProperty.call(message, "isEligible"))
+                    writer.uint32(/* id 10, wireType 0 =*/80).bool(message.isEligible);
+                if (message.globalId != null && Object.hasOwnProperty.call(message, "globalId"))
+                    $root.optimization_guide.proto.AutofillGlobalId.encode(message.globalId, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                if (message.fieldSignature != null && Object.hasOwnProperty.call(message, "fieldSignature"))
+                    writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.fieldSignature);
+                if (message.ariaLabel != null && Object.hasOwnProperty.call(message, "ariaLabel"))
+                    writer.uint32(/* id 13, wireType 2 =*/106).string(message.ariaLabel);
+                if (message.ariaDescription != null && Object.hasOwnProperty.call(message, "ariaDescription"))
+                    writer.uint32(/* id 14, wireType 2 =*/114).string(message.ariaDescription);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified FormFieldData message, length delimited. Does not implicitly {@link optimization_guide.proto.FormFieldData.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.FormFieldData
+             * @static
+             * @param {optimization_guide.proto.IFormFieldData} message FormFieldData message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            FormFieldData.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a FormFieldData message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.FormFieldData
@@ -6610,6 +20635,404 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 return message;
             };
 
+            /**
+             * Decodes a FormFieldData message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.FormFieldData
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.FormFieldData} FormFieldData
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            FormFieldData.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a FormFieldData message.
+             * @function verify
+             * @memberof optimization_guide.proto.FormFieldData
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            FormFieldData.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.fieldName != null && message.hasOwnProperty("fieldName"))
+                    if (!$util.isString(message.fieldName))
+                        return "fieldName: string expected";
+                if (message.fieldLabel != null && message.hasOwnProperty("fieldLabel"))
+                    if (!$util.isString(message.fieldLabel))
+                        return "fieldLabel: string expected";
+                if (message.fieldValue != null && message.hasOwnProperty("fieldValue"))
+                    if (!$util.isString(message.fieldValue))
+                        return "fieldValue: string expected";
+                if (message.isVisible != null && message.hasOwnProperty("isVisible"))
+                    if (typeof message.isVisible !== "boolean")
+                        return "isVisible: boolean expected";
+                if (message.isFocusable != null && message.hasOwnProperty("isFocusable"))
+                    if (typeof message.isFocusable !== "boolean")
+                        return "isFocusable: boolean expected";
+                if (message.formControlType != null && message.hasOwnProperty("formControlType"))
+                    switch (message.formControlType) {
+                    default:
+                        return "formControlType: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                    case 10:
+                    case 11:
+                    case 12:
+                    case 13:
+                    case 15:
+                    case 16:
+                    case 17:
+                    case 18:
+                    case 19:
+                    case 20:
+                    case 21:
+                    case 22:
+                    case 23:
+                    case 24:
+                    case 25:
+                    case 26:
+                    case 27:
+                    case 28:
+                    case 29:
+                    case 30:
+                    case 31:
+                    case 32:
+                    case 33:
+                        break;
+                    }
+                if (message.selectOptions != null && message.hasOwnProperty("selectOptions")) {
+                    if (!Array.isArray(message.selectOptions))
+                        return "selectOptions: array expected";
+                    for (let i = 0; i < message.selectOptions.length; ++i) {
+                        let error = $root.optimization_guide.proto.SelectOption.verify(message.selectOptions[i]);
+                        if (error)
+                            return "selectOptions." + error;
+                    }
+                }
+                if (message.placeholder != null && message.hasOwnProperty("placeholder"))
+                    if (!$util.isString(message.placeholder))
+                        return "placeholder: string expected";
+                if (message.formControlAxNodeId != null && message.hasOwnProperty("formControlAxNodeId"))
+                    if (!$util.isInteger(message.formControlAxNodeId))
+                        return "formControlAxNodeId: integer expected";
+                if (message.isEligible != null && message.hasOwnProperty("isEligible"))
+                    if (typeof message.isEligible !== "boolean")
+                        return "isEligible: boolean expected";
+                if (message.globalId != null && message.hasOwnProperty("globalId")) {
+                    let error = $root.optimization_guide.proto.AutofillGlobalId.verify(message.globalId);
+                    if (error)
+                        return "globalId." + error;
+                }
+                if (message.fieldSignature != null && message.hasOwnProperty("fieldSignature"))
+                    if (!$util.isInteger(message.fieldSignature))
+                        return "fieldSignature: integer expected";
+                if (message.ariaLabel != null && message.hasOwnProperty("ariaLabel"))
+                    if (!$util.isString(message.ariaLabel))
+                        return "ariaLabel: string expected";
+                if (message.ariaDescription != null && message.hasOwnProperty("ariaDescription"))
+                    if (!$util.isString(message.ariaDescription))
+                        return "ariaDescription: string expected";
+                return null;
+            };
+
+            /**
+             * Creates a FormFieldData message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.FormFieldData
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.FormFieldData} FormFieldData
+             */
+            FormFieldData.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.FormFieldData)
+                    return object;
+                let message = new $root.optimization_guide.proto.FormFieldData();
+                if (object.fieldName != null)
+                    message.fieldName = String(object.fieldName);
+                if (object.fieldLabel != null)
+                    message.fieldLabel = String(object.fieldLabel);
+                if (object.fieldValue != null)
+                    message.fieldValue = String(object.fieldValue);
+                if (object.isVisible != null)
+                    message.isVisible = Boolean(object.isVisible);
+                if (object.isFocusable != null)
+                    message.isFocusable = Boolean(object.isFocusable);
+                switch (object.formControlType) {
+                default:
+                    if (typeof object.formControlType === "number") {
+                        message.formControlType = object.formControlType;
+                        break;
+                    }
+                    break;
+                case "FORM_CONTROL_TYPE_UNSPECIFIED":
+                case 0:
+                    message.formControlType = 0;
+                    break;
+                case "FORM_CONTROL_TYPE_CONTENT_EDITABLE":
+                case 1:
+                    message.formControlType = 1;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_CHECKBOX":
+                case 2:
+                    message.formControlType = 2;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_EMAIL":
+                case 3:
+                    message.formControlType = 3;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_MONTH":
+                case 4:
+                    message.formControlType = 4;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_NUMBER":
+                case 5:
+                    message.formControlType = 5;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_PASSWORD":
+                case 6:
+                    message.formControlType = 6;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_RADIO":
+                case 7:
+                    message.formControlType = 7;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_SEARCH":
+                case 8:
+                    message.formControlType = 8;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_TELEPHONE":
+                case 9:
+                    message.formControlType = 9;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_TEXT":
+                case 10:
+                    message.formControlType = 10;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_URL":
+                case 11:
+                    message.formControlType = 11;
+                    break;
+                case "FORM_CONTROL_TYPE_SELECT_ONE":
+                case 12:
+                    message.formControlType = 12;
+                    break;
+                case "FORM_CONTROL_TYPE_SELECT_MULTIPLE":
+                case 13:
+                    message.formControlType = 13;
+                    break;
+                case "FORM_CONTROL_TYPE_TEXT_AREA":
+                case 15:
+                    message.formControlType = 15;
+                    break;
+                case "FORM_CONTROL_TYPE_BUTTON_BUTTON":
+                case 16:
+                    message.formControlType = 16;
+                    break;
+                case "FORM_CONTROL_TYPE_BUTTON_SUBMIT":
+                case 17:
+                    message.formControlType = 17;
+                    break;
+                case "FORM_CONTROL_TYPE_BUTTON_RESET":
+                case 18:
+                    message.formControlType = 18;
+                    break;
+                case "FORM_CONTROL_TYPE_BUTTON_POPOVER":
+                case 19:
+                    message.formControlType = 19;
+                    break;
+                case "FORM_CONTROL_TYPE_FIELDSET":
+                case 20:
+                    message.formControlType = 20;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_BUTTON":
+                case 21:
+                    message.formControlType = 21;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_COLOR":
+                case 22:
+                    message.formControlType = 22;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_DATE":
+                case 23:
+                    message.formControlType = 23;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_DATETIME_LOCAL":
+                case 24:
+                    message.formControlType = 24;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_FILE":
+                case 25:
+                    message.formControlType = 25;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_HIDDEN":
+                case 26:
+                    message.formControlType = 26;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_IMAGE":
+                case 27:
+                    message.formControlType = 27;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_RANGE":
+                case 28:
+                    message.formControlType = 28;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_RESET":
+                case 29:
+                    message.formControlType = 29;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_SUBMIT":
+                case 30:
+                    message.formControlType = 30;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_TIME":
+                case 31:
+                    message.formControlType = 31;
+                    break;
+                case "FORM_CONTROL_TYPE_INPUT_WEEK":
+                case 32:
+                    message.formControlType = 32;
+                    break;
+                case "FORM_CONTROL_TYPE_OUTPUT":
+                case 33:
+                    message.formControlType = 33;
+                    break;
+                }
+                if (object.selectOptions) {
+                    if (!Array.isArray(object.selectOptions))
+                        throw TypeError(".optimization_guide.proto.FormFieldData.selectOptions: array expected");
+                    message.selectOptions = [];
+                    for (let i = 0; i < object.selectOptions.length; ++i) {
+                        if (typeof object.selectOptions[i] !== "object")
+                            throw TypeError(".optimization_guide.proto.FormFieldData.selectOptions: object expected");
+                        message.selectOptions[i] = $root.optimization_guide.proto.SelectOption.fromObject(object.selectOptions[i]);
+                    }
+                }
+                if (object.placeholder != null)
+                    message.placeholder = String(object.placeholder);
+                if (object.formControlAxNodeId != null)
+                    message.formControlAxNodeId = object.formControlAxNodeId | 0;
+                if (object.isEligible != null)
+                    message.isEligible = Boolean(object.isEligible);
+                if (object.globalId != null) {
+                    if (typeof object.globalId !== "object")
+                        throw TypeError(".optimization_guide.proto.FormFieldData.globalId: object expected");
+                    message.globalId = $root.optimization_guide.proto.AutofillGlobalId.fromObject(object.globalId);
+                }
+                if (object.fieldSignature != null)
+                    message.fieldSignature = object.fieldSignature >>> 0;
+                if (object.ariaLabel != null)
+                    message.ariaLabel = String(object.ariaLabel);
+                if (object.ariaDescription != null)
+                    message.ariaDescription = String(object.ariaDescription);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a FormFieldData message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.FormFieldData
+             * @static
+             * @param {optimization_guide.proto.FormFieldData} message FormFieldData
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            FormFieldData.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.arrays || options.defaults)
+                    object.selectOptions = [];
+                if (options.defaults) {
+                    object.fieldName = "";
+                    object.fieldLabel = "";
+                    object.fieldValue = "";
+                    object.isVisible = false;
+                    object.isFocusable = false;
+                    object.formControlType = options.enums === String ? "FORM_CONTROL_TYPE_UNSPECIFIED" : 0;
+                    object.placeholder = "";
+                    object.formControlAxNodeId = 0;
+                    object.isEligible = false;
+                    object.globalId = null;
+                    object.fieldSignature = 0;
+                    object.ariaLabel = "";
+                    object.ariaDescription = "";
+                }
+                if (message.fieldName != null && message.hasOwnProperty("fieldName"))
+                    object.fieldName = message.fieldName;
+                if (message.fieldLabel != null && message.hasOwnProperty("fieldLabel"))
+                    object.fieldLabel = message.fieldLabel;
+                if (message.fieldValue != null && message.hasOwnProperty("fieldValue"))
+                    object.fieldValue = message.fieldValue;
+                if (message.isVisible != null && message.hasOwnProperty("isVisible"))
+                    object.isVisible = message.isVisible;
+                if (message.isFocusable != null && message.hasOwnProperty("isFocusable"))
+                    object.isFocusable = message.isFocusable;
+                if (message.formControlType != null && message.hasOwnProperty("formControlType"))
+                    object.formControlType = options.enums === String ? $root.optimization_guide.proto.FormControlType[message.formControlType] === undefined ? message.formControlType : $root.optimization_guide.proto.FormControlType[message.formControlType] : message.formControlType;
+                if (message.selectOptions && message.selectOptions.length) {
+                    object.selectOptions = [];
+                    for (let j = 0; j < message.selectOptions.length; ++j)
+                        object.selectOptions[j] = $root.optimization_guide.proto.SelectOption.toObject(message.selectOptions[j], options);
+                }
+                if (message.placeholder != null && message.hasOwnProperty("placeholder"))
+                    object.placeholder = message.placeholder;
+                if (message.formControlAxNodeId != null && message.hasOwnProperty("formControlAxNodeId"))
+                    object.formControlAxNodeId = message.formControlAxNodeId;
+                if (message.isEligible != null && message.hasOwnProperty("isEligible"))
+                    object.isEligible = message.isEligible;
+                if (message.globalId != null && message.hasOwnProperty("globalId"))
+                    object.globalId = $root.optimization_guide.proto.AutofillGlobalId.toObject(message.globalId, options);
+                if (message.fieldSignature != null && message.hasOwnProperty("fieldSignature"))
+                    object.fieldSignature = message.fieldSignature;
+                if (message.ariaLabel != null && message.hasOwnProperty("ariaLabel"))
+                    object.ariaLabel = message.ariaLabel;
+                if (message.ariaDescription != null && message.hasOwnProperty("ariaDescription"))
+                    object.ariaDescription = message.ariaDescription;
+                return object;
+            };
+
+            /**
+             * Converts this FormFieldData to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.FormFieldData
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            FormFieldData.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for FormFieldData
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.FormFieldData
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            FormFieldData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.FormFieldData";
+            };
+
             return FormFieldData;
         })();
 
@@ -6647,6 +21070,49 @@ export const optimization_guide = $root.optimization_guide = (() => {
             TableRow.prototype.cells = $util.emptyArray;
 
             /**
+             * Creates a new TableRow instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.TableRow
+             * @static
+             * @param {optimization_guide.proto.ITableRow=} [properties] Properties to set
+             * @returns {optimization_guide.proto.TableRow} TableRow instance
+             */
+            TableRow.create = function create(properties) {
+                return new TableRow(properties);
+            };
+
+            /**
+             * Encodes the specified TableRow message. Does not implicitly {@link optimization_guide.proto.TableRow.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.TableRow
+             * @static
+             * @param {optimization_guide.proto.ITableRow} message TableRow message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            TableRow.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.cells != null && message.cells.length)
+                    for (let i = 0; i < message.cells.length; ++i)
+                        $root.optimization_guide.proto.ContentNode.encode(message.cells[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified TableRow message, length delimited. Does not implicitly {@link optimization_guide.proto.TableRow.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.TableRow
+             * @static
+             * @param {optimization_guide.proto.ITableRow} message TableRow message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            TableRow.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a TableRow message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.TableRow
@@ -6678,6 +21144,119 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a TableRow message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.TableRow
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.TableRow} TableRow
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            TableRow.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a TableRow message.
+             * @function verify
+             * @memberof optimization_guide.proto.TableRow
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            TableRow.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.cells != null && message.hasOwnProperty("cells")) {
+                    if (!Array.isArray(message.cells))
+                        return "cells: array expected";
+                    for (let i = 0; i < message.cells.length; ++i) {
+                        let error = $root.optimization_guide.proto.ContentNode.verify(message.cells[i]);
+                        if (error)
+                            return "cells." + error;
+                    }
+                }
+                return null;
+            };
+
+            /**
+             * Creates a TableRow message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.TableRow
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.TableRow} TableRow
+             */
+            TableRow.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.TableRow)
+                    return object;
+                let message = new $root.optimization_guide.proto.TableRow();
+                if (object.cells) {
+                    if (!Array.isArray(object.cells))
+                        throw TypeError(".optimization_guide.proto.TableRow.cells: array expected");
+                    message.cells = [];
+                    for (let i = 0; i < object.cells.length; ++i) {
+                        if (typeof object.cells[i] !== "object")
+                            throw TypeError(".optimization_guide.proto.TableRow.cells: object expected");
+                        message.cells[i] = $root.optimization_guide.proto.ContentNode.fromObject(object.cells[i]);
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a TableRow message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.TableRow
+             * @static
+             * @param {optimization_guide.proto.TableRow} message TableRow
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            TableRow.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.arrays || options.defaults)
+                    object.cells = [];
+                if (message.cells && message.cells.length) {
+                    object.cells = [];
+                    for (let j = 0; j < message.cells.length; ++j)
+                        object.cells[j] = $root.optimization_guide.proto.ContentNode.toObject(message.cells[j], options);
+                }
+                return object;
+            };
+
+            /**
+             * Converts this TableRow to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.TableRow
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            TableRow.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for TableRow
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.TableRow
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            TableRow.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.TableRow";
             };
 
             return TableRow;
@@ -6736,6 +21315,52 @@ export const optimization_guide = $root.optimization_guide = (() => {
             UserAnnotationsEntry.prototype.value = null;
 
             /**
+             * Creates a new UserAnnotationsEntry instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.UserAnnotationsEntry
+             * @static
+             * @param {optimization_guide.proto.IUserAnnotationsEntry=} [properties] Properties to set
+             * @returns {optimization_guide.proto.UserAnnotationsEntry} UserAnnotationsEntry instance
+             */
+            UserAnnotationsEntry.create = function create(properties) {
+                return new UserAnnotationsEntry(properties);
+            };
+
+            /**
+             * Encodes the specified UserAnnotationsEntry message. Does not implicitly {@link optimization_guide.proto.UserAnnotationsEntry.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.UserAnnotationsEntry
+             * @static
+             * @param {optimization_guide.proto.IUserAnnotationsEntry} message UserAnnotationsEntry message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            UserAnnotationsEntry.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.entryId != null && Object.hasOwnProperty.call(message, "entryId"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).int64(message.entryId);
+                if (message.key != null && Object.hasOwnProperty.call(message, "key"))
+                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.key);
+                if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.value);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified UserAnnotationsEntry message, length delimited. Does not implicitly {@link optimization_guide.proto.UserAnnotationsEntry.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.UserAnnotationsEntry
+             * @static
+             * @param {optimization_guide.proto.IUserAnnotationsEntry} message UserAnnotationsEntry message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            UserAnnotationsEntry.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a UserAnnotationsEntry message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.UserAnnotationsEntry
@@ -6773,6 +21398,133 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a UserAnnotationsEntry message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.UserAnnotationsEntry
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.UserAnnotationsEntry} UserAnnotationsEntry
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            UserAnnotationsEntry.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a UserAnnotationsEntry message.
+             * @function verify
+             * @memberof optimization_guide.proto.UserAnnotationsEntry
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            UserAnnotationsEntry.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.entryId != null && message.hasOwnProperty("entryId"))
+                    if (!$util.isInteger(message.entryId) && !(message.entryId && $util.isInteger(message.entryId.low) && $util.isInteger(message.entryId.high)))
+                        return "entryId: integer|Long expected";
+                if (message.key != null && message.hasOwnProperty("key"))
+                    if (!$util.isString(message.key))
+                        return "key: string expected";
+                if (message.value != null && message.hasOwnProperty("value"))
+                    if (!$util.isString(message.value))
+                        return "value: string expected";
+                return null;
+            };
+
+            /**
+             * Creates a UserAnnotationsEntry message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.UserAnnotationsEntry
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.UserAnnotationsEntry} UserAnnotationsEntry
+             */
+            UserAnnotationsEntry.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.UserAnnotationsEntry)
+                    return object;
+                let message = new $root.optimization_guide.proto.UserAnnotationsEntry();
+                if (object.entryId != null)
+                    if ($util.Long)
+                        (message.entryId = $util.Long.fromValue(object.entryId)).unsigned = false;
+                    else if (typeof object.entryId === "string")
+                        message.entryId = parseInt(object.entryId, 10);
+                    else if (typeof object.entryId === "number")
+                        message.entryId = object.entryId;
+                    else if (typeof object.entryId === "object")
+                        message.entryId = new $util.LongBits(object.entryId.low >>> 0, object.entryId.high >>> 0).toNumber();
+                if (object.key != null)
+                    message.key = String(object.key);
+                if (object.value != null)
+                    message.value = String(object.value);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a UserAnnotationsEntry message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.UserAnnotationsEntry
+             * @static
+             * @param {optimization_guide.proto.UserAnnotationsEntry} message UserAnnotationsEntry
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            UserAnnotationsEntry.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults) {
+                    if ($util.Long) {
+                        let long = new $util.Long(0, 0, false);
+                        object.entryId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.entryId = options.longs === String ? "0" : 0;
+                    object.key = "";
+                    object.value = "";
+                }
+                if (message.entryId != null && message.hasOwnProperty("entryId"))
+                    if (typeof message.entryId === "number")
+                        object.entryId = options.longs === String ? String(message.entryId) : message.entryId;
+                    else
+                        object.entryId = options.longs === String ? $util.Long.prototype.toString.call(message.entryId) : options.longs === Number ? new $util.LongBits(message.entryId.low >>> 0, message.entryId.high >>> 0).toNumber() : message.entryId;
+                if (message.key != null && message.hasOwnProperty("key"))
+                    object.key = message.key;
+                if (message.value != null && message.hasOwnProperty("value"))
+                    object.value = message.value;
+                return object;
+            };
+
+            /**
+             * Converts this UserAnnotationsEntry to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.UserAnnotationsEntry
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            UserAnnotationsEntry.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for UserAnnotationsEntry
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.UserAnnotationsEntry
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            UserAnnotationsEntry.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.UserAnnotationsEntry";
             };
 
             return UserAnnotationsEntry;
@@ -6830,6 +21582,53 @@ export const optimization_guide = $root.optimization_guide = (() => {
             TabGroup.prototype.groupId = null;
 
             /**
+             * Creates a new TabGroup instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.TabGroup
+             * @static
+             * @param {optimization_guide.proto.ITabGroup=} [properties] Properties to set
+             * @returns {optimization_guide.proto.TabGroup} TabGroup instance
+             */
+            TabGroup.create = function create(properties) {
+                return new TabGroup(properties);
+            };
+
+            /**
+             * Encodes the specified TabGroup message. Does not implicitly {@link optimization_guide.proto.TabGroup.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.TabGroup
+             * @static
+             * @param {optimization_guide.proto.ITabGroup} message TabGroup message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            TabGroup.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.label != null && Object.hasOwnProperty.call(message, "label"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.label);
+                if (message.tabs != null && message.tabs.length)
+                    for (let i = 0; i < message.tabs.length; ++i)
+                        $root.optimization_guide.proto.Tab.encode(message.tabs[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                if (message.groupId != null && Object.hasOwnProperty.call(message, "groupId"))
+                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.groupId);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified TabGroup message, length delimited. Does not implicitly {@link optimization_guide.proto.TabGroup.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.TabGroup
+             * @static
+             * @param {optimization_guide.proto.ITabGroup} message TabGroup message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            TabGroup.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a TabGroup message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.TabGroup
@@ -6869,6 +21668,137 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a TabGroup message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.TabGroup
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.TabGroup} TabGroup
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            TabGroup.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a TabGroup message.
+             * @function verify
+             * @memberof optimization_guide.proto.TabGroup
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            TabGroup.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.label != null && message.hasOwnProperty("label"))
+                    if (!$util.isString(message.label))
+                        return "label: string expected";
+                if (message.tabs != null && message.hasOwnProperty("tabs")) {
+                    if (!Array.isArray(message.tabs))
+                        return "tabs: array expected";
+                    for (let i = 0; i < message.tabs.length; ++i) {
+                        let error = $root.optimization_guide.proto.Tab.verify(message.tabs[i]);
+                        if (error)
+                            return "tabs." + error;
+                    }
+                }
+                if (message.groupId != null && message.hasOwnProperty("groupId"))
+                    if (!$util.isString(message.groupId))
+                        return "groupId: string expected";
+                return null;
+            };
+
+            /**
+             * Creates a TabGroup message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.TabGroup
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.TabGroup} TabGroup
+             */
+            TabGroup.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.TabGroup)
+                    return object;
+                let message = new $root.optimization_guide.proto.TabGroup();
+                if (object.label != null)
+                    message.label = String(object.label);
+                if (object.tabs) {
+                    if (!Array.isArray(object.tabs))
+                        throw TypeError(".optimization_guide.proto.TabGroup.tabs: array expected");
+                    message.tabs = [];
+                    for (let i = 0; i < object.tabs.length; ++i) {
+                        if (typeof object.tabs[i] !== "object")
+                            throw TypeError(".optimization_guide.proto.TabGroup.tabs: object expected");
+                        message.tabs[i] = $root.optimization_guide.proto.Tab.fromObject(object.tabs[i]);
+                    }
+                }
+                if (object.groupId != null)
+                    message.groupId = String(object.groupId);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a TabGroup message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.TabGroup
+             * @static
+             * @param {optimization_guide.proto.TabGroup} message TabGroup
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            TabGroup.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.arrays || options.defaults)
+                    object.tabs = [];
+                if (options.defaults) {
+                    object.label = "";
+                    object.groupId = "";
+                }
+                if (message.label != null && message.hasOwnProperty("label"))
+                    object.label = message.label;
+                if (message.tabs && message.tabs.length) {
+                    object.tabs = [];
+                    for (let j = 0; j < message.tabs.length; ++j)
+                        object.tabs[j] = $root.optimization_guide.proto.Tab.toObject(message.tabs[j], options);
+                }
+                if (message.groupId != null && message.hasOwnProperty("groupId"))
+                    object.groupId = message.groupId;
+                return object;
+            };
+
+            /**
+             * Converts this TabGroup to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.TabGroup
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            TabGroup.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for TabGroup
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.TabGroup
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            TabGroup.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.TabGroup";
             };
 
             return TabGroup;
@@ -6934,6 +21864,54 @@ export const optimization_guide = $root.optimization_guide = (() => {
             Tab.prototype.pageContext = null;
 
             /**
+             * Creates a new Tab instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.Tab
+             * @static
+             * @param {optimization_guide.proto.ITab=} [properties] Properties to set
+             * @returns {optimization_guide.proto.Tab} Tab instance
+             */
+            Tab.create = function create(properties) {
+                return new Tab(properties);
+            };
+
+            /**
+             * Encodes the specified Tab message. Does not implicitly {@link optimization_guide.proto.Tab.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.Tab
+             * @static
+             * @param {optimization_guide.proto.ITab} message Tab message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Tab.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.tabId != null && Object.hasOwnProperty.call(message, "tabId"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).int64(message.tabId);
+                if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
+                if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.url);
+                if (message.pageContext != null && Object.hasOwnProperty.call(message, "pageContext"))
+                    $root.optimization_guide.proto.PageContext.encode(message.pageContext, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified Tab message, length delimited. Does not implicitly {@link optimization_guide.proto.Tab.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.Tab
+             * @static
+             * @param {optimization_guide.proto.ITab} message Tab message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Tab.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a Tab message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.Tab
@@ -6975,6 +21953,146 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a Tab message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.Tab
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.Tab} Tab
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Tab.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a Tab message.
+             * @function verify
+             * @memberof optimization_guide.proto.Tab
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            Tab.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.tabId != null && message.hasOwnProperty("tabId"))
+                    if (!$util.isInteger(message.tabId) && !(message.tabId && $util.isInteger(message.tabId.low) && $util.isInteger(message.tabId.high)))
+                        return "tabId: integer|Long expected";
+                if (message.title != null && message.hasOwnProperty("title"))
+                    if (!$util.isString(message.title))
+                        return "title: string expected";
+                if (message.url != null && message.hasOwnProperty("url"))
+                    if (!$util.isString(message.url))
+                        return "url: string expected";
+                if (message.pageContext != null && message.hasOwnProperty("pageContext")) {
+                    let error = $root.optimization_guide.proto.PageContext.verify(message.pageContext);
+                    if (error)
+                        return "pageContext." + error;
+                }
+                return null;
+            };
+
+            /**
+             * Creates a Tab message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.Tab
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.Tab} Tab
+             */
+            Tab.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.Tab)
+                    return object;
+                let message = new $root.optimization_guide.proto.Tab();
+                if (object.tabId != null)
+                    if ($util.Long)
+                        (message.tabId = $util.Long.fromValue(object.tabId)).unsigned = false;
+                    else if (typeof object.tabId === "string")
+                        message.tabId = parseInt(object.tabId, 10);
+                    else if (typeof object.tabId === "number")
+                        message.tabId = object.tabId;
+                    else if (typeof object.tabId === "object")
+                        message.tabId = new $util.LongBits(object.tabId.low >>> 0, object.tabId.high >>> 0).toNumber();
+                if (object.title != null)
+                    message.title = String(object.title);
+                if (object.url != null)
+                    message.url = String(object.url);
+                if (object.pageContext != null) {
+                    if (typeof object.pageContext !== "object")
+                        throw TypeError(".optimization_guide.proto.Tab.pageContext: object expected");
+                    message.pageContext = $root.optimization_guide.proto.PageContext.fromObject(object.pageContext);
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a Tab message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.Tab
+             * @static
+             * @param {optimization_guide.proto.Tab} message Tab
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Tab.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults) {
+                    if ($util.Long) {
+                        let long = new $util.Long(0, 0, false);
+                        object.tabId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.tabId = options.longs === String ? "0" : 0;
+                    object.title = "";
+                    object.url = "";
+                    object.pageContext = null;
+                }
+                if (message.tabId != null && message.hasOwnProperty("tabId"))
+                    if (typeof message.tabId === "number")
+                        object.tabId = options.longs === String ? String(message.tabId) : message.tabId;
+                    else
+                        object.tabId = options.longs === String ? $util.Long.prototype.toString.call(message.tabId) : options.longs === Number ? new $util.LongBits(message.tabId.low >>> 0, message.tabId.high >>> 0).toNumber() : message.tabId;
+                if (message.title != null && message.hasOwnProperty("title"))
+                    object.title = message.title;
+                if (message.url != null && message.hasOwnProperty("url"))
+                    object.url = message.url;
+                if (message.pageContext != null && message.hasOwnProperty("pageContext"))
+                    object.pageContext = $root.optimization_guide.proto.PageContext.toObject(message.pageContext, options);
+                return object;
+            };
+
+            /**
+             * Converts this Tab to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.Tab
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            Tab.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for Tab
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.Tab
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            Tab.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.Tab";
             };
 
             return Tab;
@@ -7022,6 +22140,50 @@ export const optimization_guide = $root.optimization_guide = (() => {
             SiteEngagementEntry.prototype.score = null;
 
             /**
+             * Creates a new SiteEngagementEntry instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.SiteEngagementEntry
+             * @static
+             * @param {optimization_guide.proto.ISiteEngagementEntry=} [properties] Properties to set
+             * @returns {optimization_guide.proto.SiteEngagementEntry} SiteEngagementEntry instance
+             */
+            SiteEngagementEntry.create = function create(properties) {
+                return new SiteEngagementEntry(properties);
+            };
+
+            /**
+             * Encodes the specified SiteEngagementEntry message. Does not implicitly {@link optimization_guide.proto.SiteEngagementEntry.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.SiteEngagementEntry
+             * @static
+             * @param {optimization_guide.proto.ISiteEngagementEntry} message SiteEngagementEntry message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            SiteEngagementEntry.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.url);
+                if (message.score != null && Object.hasOwnProperty.call(message, "score"))
+                    writer.uint32(/* id 2, wireType 5 =*/21).float(message.score);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified SiteEngagementEntry message, length delimited. Does not implicitly {@link optimization_guide.proto.SiteEngagementEntry.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.SiteEngagementEntry
+             * @static
+             * @param {optimization_guide.proto.ISiteEngagementEntry} message SiteEngagementEntry message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            SiteEngagementEntry.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a SiteEngagementEntry message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.SiteEngagementEntry
@@ -7055,6 +22217,111 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a SiteEngagementEntry message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.SiteEngagementEntry
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.SiteEngagementEntry} SiteEngagementEntry
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            SiteEngagementEntry.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a SiteEngagementEntry message.
+             * @function verify
+             * @memberof optimization_guide.proto.SiteEngagementEntry
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            SiteEngagementEntry.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.url != null && message.hasOwnProperty("url"))
+                    if (!$util.isString(message.url))
+                        return "url: string expected";
+                if (message.score != null && message.hasOwnProperty("score"))
+                    if (typeof message.score !== "number")
+                        return "score: number expected";
+                return null;
+            };
+
+            /**
+             * Creates a SiteEngagementEntry message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.SiteEngagementEntry
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.SiteEngagementEntry} SiteEngagementEntry
+             */
+            SiteEngagementEntry.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.SiteEngagementEntry)
+                    return object;
+                let message = new $root.optimization_guide.proto.SiteEngagementEntry();
+                if (object.url != null)
+                    message.url = String(object.url);
+                if (object.score != null)
+                    message.score = Number(object.score);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a SiteEngagementEntry message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.SiteEngagementEntry
+             * @static
+             * @param {optimization_guide.proto.SiteEngagementEntry} message SiteEngagementEntry
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            SiteEngagementEntry.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults) {
+                    object.url = "";
+                    object.score = 0;
+                }
+                if (message.url != null && message.hasOwnProperty("url"))
+                    object.url = message.url;
+                if (message.score != null && message.hasOwnProperty("score"))
+                    object.score = options.json && !isFinite(message.score) ? String(message.score) : message.score;
+                return object;
+            };
+
+            /**
+             * Converts this SiteEngagementEntry to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.SiteEngagementEntry
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            SiteEngagementEntry.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for SiteEngagementEntry
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.SiteEngagementEntry
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            SiteEngagementEntry.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.SiteEngagementEntry";
             };
 
             return SiteEngagementEntry;
@@ -7094,6 +22361,49 @@ export const optimization_guide = $root.optimization_guide = (() => {
             SiteEngagement.prototype.entries = $util.emptyArray;
 
             /**
+             * Creates a new SiteEngagement instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.SiteEngagement
+             * @static
+             * @param {optimization_guide.proto.ISiteEngagement=} [properties] Properties to set
+             * @returns {optimization_guide.proto.SiteEngagement} SiteEngagement instance
+             */
+            SiteEngagement.create = function create(properties) {
+                return new SiteEngagement(properties);
+            };
+
+            /**
+             * Encodes the specified SiteEngagement message. Does not implicitly {@link optimization_guide.proto.SiteEngagement.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.SiteEngagement
+             * @static
+             * @param {optimization_guide.proto.ISiteEngagement} message SiteEngagement message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            SiteEngagement.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.entries != null && message.entries.length)
+                    for (let i = 0; i < message.entries.length; ++i)
+                        $root.optimization_guide.proto.SiteEngagementEntry.encode(message.entries[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified SiteEngagement message, length delimited. Does not implicitly {@link optimization_guide.proto.SiteEngagement.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.SiteEngagement
+             * @static
+             * @param {optimization_guide.proto.ISiteEngagement} message SiteEngagement message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            SiteEngagement.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a SiteEngagement message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.SiteEngagement
@@ -7125,6 +22435,119 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a SiteEngagement message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.SiteEngagement
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.SiteEngagement} SiteEngagement
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            SiteEngagement.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a SiteEngagement message.
+             * @function verify
+             * @memberof optimization_guide.proto.SiteEngagement
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            SiteEngagement.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.entries != null && message.hasOwnProperty("entries")) {
+                    if (!Array.isArray(message.entries))
+                        return "entries: array expected";
+                    for (let i = 0; i < message.entries.length; ++i) {
+                        let error = $root.optimization_guide.proto.SiteEngagementEntry.verify(message.entries[i]);
+                        if (error)
+                            return "entries." + error;
+                    }
+                }
+                return null;
+            };
+
+            /**
+             * Creates a SiteEngagement message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.SiteEngagement
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.SiteEngagement} SiteEngagement
+             */
+            SiteEngagement.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.SiteEngagement)
+                    return object;
+                let message = new $root.optimization_guide.proto.SiteEngagement();
+                if (object.entries) {
+                    if (!Array.isArray(object.entries))
+                        throw TypeError(".optimization_guide.proto.SiteEngagement.entries: array expected");
+                    message.entries = [];
+                    for (let i = 0; i < object.entries.length; ++i) {
+                        if (typeof object.entries[i] !== "object")
+                            throw TypeError(".optimization_guide.proto.SiteEngagement.entries: object expected");
+                        message.entries[i] = $root.optimization_guide.proto.SiteEngagementEntry.fromObject(object.entries[i]);
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a SiteEngagement message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.SiteEngagement
+             * @static
+             * @param {optimization_guide.proto.SiteEngagement} message SiteEngagement
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            SiteEngagement.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.arrays || options.defaults)
+                    object.entries = [];
+                if (message.entries && message.entries.length) {
+                    object.entries = [];
+                    for (let j = 0; j < message.entries.length; ++j)
+                        object.entries[j] = $root.optimization_guide.proto.SiteEngagementEntry.toObject(message.entries[j], options);
+                }
+                return object;
+            };
+
+            /**
+             * Converts this SiteEngagement to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.SiteEngagement
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            SiteEngagement.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for SiteEngagement
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.SiteEngagement
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            SiteEngagement.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.SiteEngagement";
             };
 
             return SiteEngagement;
@@ -7186,6 +22609,52 @@ export const optimization_guide = $root.optimization_guide = (() => {
             Coordinate.prototype.pixelType = null;
 
             /**
+             * Creates a new Coordinate instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.Coordinate
+             * @static
+             * @param {optimization_guide.proto.ICoordinate=} [properties] Properties to set
+             * @returns {optimization_guide.proto.Coordinate} Coordinate instance
+             */
+            Coordinate.create = function create(properties) {
+                return new Coordinate(properties);
+            };
+
+            /**
+             * Encodes the specified Coordinate message. Does not implicitly {@link optimization_guide.proto.Coordinate.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.Coordinate
+             * @static
+             * @param {optimization_guide.proto.ICoordinate} message Coordinate message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Coordinate.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.x != null && Object.hasOwnProperty.call(message, "x"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.x);
+                if (message.y != null && Object.hasOwnProperty.call(message, "y"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.y);
+                if (message.pixelType != null && Object.hasOwnProperty.call(message, "pixelType"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pixelType);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified Coordinate message, length delimited. Does not implicitly {@link optimization_guide.proto.Coordinate.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.Coordinate
+             * @static
+             * @param {optimization_guide.proto.ICoordinate} message Coordinate message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Coordinate.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a Coordinate message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.Coordinate
@@ -7223,6 +22692,143 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a Coordinate message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.Coordinate
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.Coordinate} Coordinate
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Coordinate.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a Coordinate message.
+             * @function verify
+             * @memberof optimization_guide.proto.Coordinate
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            Coordinate.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.x != null && message.hasOwnProperty("x"))
+                    if (!$util.isInteger(message.x))
+                        return "x: integer expected";
+                if (message.y != null && message.hasOwnProperty("y"))
+                    if (!$util.isInteger(message.y))
+                        return "y: integer expected";
+                if (message.pixelType != null && message.hasOwnProperty("pixelType"))
+                    switch (message.pixelType) {
+                    default:
+                        return "pixelType: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                        break;
+                    }
+                return null;
+            };
+
+            /**
+             * Creates a Coordinate message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.Coordinate
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.Coordinate} Coordinate
+             */
+            Coordinate.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.Coordinate)
+                    return object;
+                let message = new $root.optimization_guide.proto.Coordinate();
+                if (object.x != null)
+                    message.x = object.x | 0;
+                if (object.y != null)
+                    message.y = object.y | 0;
+                switch (object.pixelType) {
+                default:
+                    if (typeof object.pixelType === "number") {
+                        message.pixelType = object.pixelType;
+                        break;
+                    }
+                    break;
+                case "PIXEL_TYPE_UNSPECIFIED":
+                case 0:
+                    message.pixelType = 0;
+                    break;
+                case "PIXEL_TYPE_DIPS":
+                case 1:
+                    message.pixelType = 1;
+                    break;
+                case "PIXEL_TYPE_PHYSICAL_PIXELS":
+                case 2:
+                    message.pixelType = 2;
+                    break;
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a Coordinate message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.Coordinate
+             * @static
+             * @param {optimization_guide.proto.Coordinate} message Coordinate
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Coordinate.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults) {
+                    object.x = 0;
+                    object.y = 0;
+                    object.pixelType = options.enums === String ? "PIXEL_TYPE_UNSPECIFIED" : 0;
+                }
+                if (message.x != null && message.hasOwnProperty("x"))
+                    object.x = message.x;
+                if (message.y != null && message.hasOwnProperty("y"))
+                    object.y = message.y;
+                if (message.pixelType != null && message.hasOwnProperty("pixelType"))
+                    object.pixelType = options.enums === String ? $root.optimization_guide.proto.Coordinate.PixelType[message.pixelType] === undefined ? message.pixelType : $root.optimization_guide.proto.Coordinate.PixelType[message.pixelType] : message.pixelType;
+                return object;
+            };
+
+            /**
+             * Converts this Coordinate to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.Coordinate
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            Coordinate.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for Coordinate
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.Coordinate
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            Coordinate.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.Coordinate";
             };
 
             /**
@@ -7295,6 +22901,50 @@ export const optimization_guide = $root.optimization_guide = (() => {
             MetaTag.prototype.content = null;
 
             /**
+             * Creates a new MetaTag instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.MetaTag
+             * @static
+             * @param {optimization_guide.proto.IMetaTag=} [properties] Properties to set
+             * @returns {optimization_guide.proto.MetaTag} MetaTag instance
+             */
+            MetaTag.create = function create(properties) {
+                return new MetaTag(properties);
+            };
+
+            /**
+             * Encodes the specified MetaTag message. Does not implicitly {@link optimization_guide.proto.MetaTag.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.MetaTag
+             * @static
+             * @param {optimization_guide.proto.IMetaTag} message MetaTag message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            MetaTag.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                if (message.content != null && Object.hasOwnProperty.call(message, "content"))
+                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.content);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified MetaTag message, length delimited. Does not implicitly {@link optimization_guide.proto.MetaTag.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.MetaTag
+             * @static
+             * @param {optimization_guide.proto.IMetaTag} message MetaTag message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            MetaTag.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a MetaTag message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.MetaTag
@@ -7328,6 +22978,111 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a MetaTag message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.MetaTag
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.MetaTag} MetaTag
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            MetaTag.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a MetaTag message.
+             * @function verify
+             * @memberof optimization_guide.proto.MetaTag
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            MetaTag.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.name != null && message.hasOwnProperty("name"))
+                    if (!$util.isString(message.name))
+                        return "name: string expected";
+                if (message.content != null && message.hasOwnProperty("content"))
+                    if (!$util.isString(message.content))
+                        return "content: string expected";
+                return null;
+            };
+
+            /**
+             * Creates a MetaTag message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.MetaTag
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.MetaTag} MetaTag
+             */
+            MetaTag.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.MetaTag)
+                    return object;
+                let message = new $root.optimization_guide.proto.MetaTag();
+                if (object.name != null)
+                    message.name = String(object.name);
+                if (object.content != null)
+                    message.content = String(object.content);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a MetaTag message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.MetaTag
+             * @static
+             * @param {optimization_guide.proto.MetaTag} message MetaTag
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            MetaTag.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults) {
+                    object.name = "";
+                    object.content = "";
+                }
+                if (message.name != null && message.hasOwnProperty("name"))
+                    object.name = message.name;
+                if (message.content != null && message.hasOwnProperty("content"))
+                    object.content = message.content;
+                return object;
+            };
+
+            /**
+             * Converts this MetaTag to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.MetaTag
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            MetaTag.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for MetaTag
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.MetaTag
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            MetaTag.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.MetaTag";
             };
 
             return MetaTag;
@@ -7386,6 +23141,53 @@ export const optimization_guide = $root.optimization_guide = (() => {
             FrameMetadata.prototype.hasMediaTranscripts = null;
 
             /**
+             * Creates a new FrameMetadata instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.FrameMetadata
+             * @static
+             * @param {optimization_guide.proto.IFrameMetadata=} [properties] Properties to set
+             * @returns {optimization_guide.proto.FrameMetadata} FrameMetadata instance
+             */
+            FrameMetadata.create = function create(properties) {
+                return new FrameMetadata(properties);
+            };
+
+            /**
+             * Encodes the specified FrameMetadata message. Does not implicitly {@link optimization_guide.proto.FrameMetadata.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.FrameMetadata
+             * @static
+             * @param {optimization_guide.proto.IFrameMetadata} message FrameMetadata message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            FrameMetadata.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.url);
+                if (message.metaTags != null && message.metaTags.length)
+                    for (let i = 0; i < message.metaTags.length; ++i)
+                        $root.optimization_guide.proto.MetaTag.encode(message.metaTags[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                if (message.hasMediaTranscripts != null && Object.hasOwnProperty.call(message, "hasMediaTranscripts"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.hasMediaTranscripts);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified FrameMetadata message, length delimited. Does not implicitly {@link optimization_guide.proto.FrameMetadata.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.FrameMetadata
+             * @static
+             * @param {optimization_guide.proto.IFrameMetadata} message FrameMetadata message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            FrameMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a FrameMetadata message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.FrameMetadata
@@ -7427,6 +23229,137 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 return message;
             };
 
+            /**
+             * Decodes a FrameMetadata message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.FrameMetadata
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.FrameMetadata} FrameMetadata
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            FrameMetadata.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a FrameMetadata message.
+             * @function verify
+             * @memberof optimization_guide.proto.FrameMetadata
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            FrameMetadata.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.url != null && message.hasOwnProperty("url"))
+                    if (!$util.isString(message.url))
+                        return "url: string expected";
+                if (message.metaTags != null && message.hasOwnProperty("metaTags")) {
+                    if (!Array.isArray(message.metaTags))
+                        return "metaTags: array expected";
+                    for (let i = 0; i < message.metaTags.length; ++i) {
+                        let error = $root.optimization_guide.proto.MetaTag.verify(message.metaTags[i]);
+                        if (error)
+                            return "metaTags." + error;
+                    }
+                }
+                if (message.hasMediaTranscripts != null && message.hasOwnProperty("hasMediaTranscripts"))
+                    if (typeof message.hasMediaTranscripts !== "boolean")
+                        return "hasMediaTranscripts: boolean expected";
+                return null;
+            };
+
+            /**
+             * Creates a FrameMetadata message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.FrameMetadata
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.FrameMetadata} FrameMetadata
+             */
+            FrameMetadata.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.FrameMetadata)
+                    return object;
+                let message = new $root.optimization_guide.proto.FrameMetadata();
+                if (object.url != null)
+                    message.url = String(object.url);
+                if (object.metaTags) {
+                    if (!Array.isArray(object.metaTags))
+                        throw TypeError(".optimization_guide.proto.FrameMetadata.metaTags: array expected");
+                    message.metaTags = [];
+                    for (let i = 0; i < object.metaTags.length; ++i) {
+                        if (typeof object.metaTags[i] !== "object")
+                            throw TypeError(".optimization_guide.proto.FrameMetadata.metaTags: object expected");
+                        message.metaTags[i] = $root.optimization_guide.proto.MetaTag.fromObject(object.metaTags[i]);
+                    }
+                }
+                if (object.hasMediaTranscripts != null)
+                    message.hasMediaTranscripts = Boolean(object.hasMediaTranscripts);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a FrameMetadata message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.FrameMetadata
+             * @static
+             * @param {optimization_guide.proto.FrameMetadata} message FrameMetadata
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            FrameMetadata.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.arrays || options.defaults)
+                    object.metaTags = [];
+                if (options.defaults) {
+                    object.url = "";
+                    object.hasMediaTranscripts = false;
+                }
+                if (message.url != null && message.hasOwnProperty("url"))
+                    object.url = message.url;
+                if (message.metaTags && message.metaTags.length) {
+                    object.metaTags = [];
+                    for (let j = 0; j < message.metaTags.length; ++j)
+                        object.metaTags[j] = $root.optimization_guide.proto.MetaTag.toObject(message.metaTags[j], options);
+                }
+                if (message.hasMediaTranscripts != null && message.hasOwnProperty("hasMediaTranscripts"))
+                    object.hasMediaTranscripts = message.hasMediaTranscripts;
+                return object;
+            };
+
+            /**
+             * Converts this FrameMetadata to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.FrameMetadata
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            FrameMetadata.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for FrameMetadata
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.FrameMetadata
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            FrameMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.FrameMetadata";
+            };
+
             return FrameMetadata;
         })();
 
@@ -7466,6 +23399,49 @@ export const optimization_guide = $root.optimization_guide = (() => {
             PageMetadata.prototype.frameMetadata = $util.emptyArray;
 
             /**
+             * Creates a new PageMetadata instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.PageMetadata
+             * @static
+             * @param {optimization_guide.proto.IPageMetadata=} [properties] Properties to set
+             * @returns {optimization_guide.proto.PageMetadata} PageMetadata instance
+             */
+            PageMetadata.create = function create(properties) {
+                return new PageMetadata(properties);
+            };
+
+            /**
+             * Encodes the specified PageMetadata message. Does not implicitly {@link optimization_guide.proto.PageMetadata.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.PageMetadata
+             * @static
+             * @param {optimization_guide.proto.IPageMetadata} message PageMetadata message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            PageMetadata.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.frameMetadata != null && message.frameMetadata.length)
+                    for (let i = 0; i < message.frameMetadata.length; ++i)
+                        $root.optimization_guide.proto.FrameMetadata.encode(message.frameMetadata[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified PageMetadata message, length delimited. Does not implicitly {@link optimization_guide.proto.PageMetadata.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.PageMetadata
+             * @static
+             * @param {optimization_guide.proto.IPageMetadata} message PageMetadata message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            PageMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a PageMetadata message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.PageMetadata
@@ -7497,6 +23473,119 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a PageMetadata message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.PageMetadata
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.PageMetadata} PageMetadata
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            PageMetadata.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a PageMetadata message.
+             * @function verify
+             * @memberof optimization_guide.proto.PageMetadata
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            PageMetadata.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.frameMetadata != null && message.hasOwnProperty("frameMetadata")) {
+                    if (!Array.isArray(message.frameMetadata))
+                        return "frameMetadata: array expected";
+                    for (let i = 0; i < message.frameMetadata.length; ++i) {
+                        let error = $root.optimization_guide.proto.FrameMetadata.verify(message.frameMetadata[i]);
+                        if (error)
+                            return "frameMetadata." + error;
+                    }
+                }
+                return null;
+            };
+
+            /**
+             * Creates a PageMetadata message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.PageMetadata
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.PageMetadata} PageMetadata
+             */
+            PageMetadata.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.PageMetadata)
+                    return object;
+                let message = new $root.optimization_guide.proto.PageMetadata();
+                if (object.frameMetadata) {
+                    if (!Array.isArray(object.frameMetadata))
+                        throw TypeError(".optimization_guide.proto.PageMetadata.frameMetadata: array expected");
+                    message.frameMetadata = [];
+                    for (let i = 0; i < object.frameMetadata.length; ++i) {
+                        if (typeof object.frameMetadata[i] !== "object")
+                            throw TypeError(".optimization_guide.proto.PageMetadata.frameMetadata: object expected");
+                        message.frameMetadata[i] = $root.optimization_guide.proto.FrameMetadata.fromObject(object.frameMetadata[i]);
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a PageMetadata message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.PageMetadata
+             * @static
+             * @param {optimization_guide.proto.PageMetadata} message PageMetadata
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            PageMetadata.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.arrays || options.defaults)
+                    object.frameMetadata = [];
+                if (message.frameMetadata && message.frameMetadata.length) {
+                    object.frameMetadata = [];
+                    for (let j = 0; j < message.frameMetadata.length; ++j)
+                        object.frameMetadata[j] = $root.optimization_guide.proto.FrameMetadata.toObject(message.frameMetadata[j], options);
+                }
+                return object;
+            };
+
+            /**
+             * Converts this PageMetadata to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.PageMetadata
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            PageMetadata.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for PageMetadata
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.PageMetadata
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            PageMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.PageMetadata";
             };
 
             return PageMetadata;
@@ -7544,6 +23633,50 @@ export const optimization_guide = $root.optimization_guide = (() => {
             DocumentSelection.prototype.selection = null;
 
             /**
+             * Creates a new DocumentSelection instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.DocumentSelection
+             * @static
+             * @param {optimization_guide.proto.IDocumentSelection=} [properties] Properties to set
+             * @returns {optimization_guide.proto.DocumentSelection} DocumentSelection instance
+             */
+            DocumentSelection.create = function create(properties) {
+                return new DocumentSelection(properties);
+            };
+
+            /**
+             * Encodes the specified DocumentSelection message. Does not implicitly {@link optimization_guide.proto.DocumentSelection.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.DocumentSelection
+             * @static
+             * @param {optimization_guide.proto.IDocumentSelection} message DocumentSelection message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            DocumentSelection.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.documentIdentifier != null && Object.hasOwnProperty.call(message, "documentIdentifier"))
+                    $root.optimization_guide.proto.DocumentIdentifier.encode(message.documentIdentifier, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                if (message.selection != null && Object.hasOwnProperty.call(message, "selection"))
+                    $root.optimization_guide.proto.Selection.encode(message.selection, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified DocumentSelection message, length delimited. Does not implicitly {@link optimization_guide.proto.DocumentSelection.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.DocumentSelection
+             * @static
+             * @param {optimization_guide.proto.IDocumentSelection} message DocumentSelection message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            DocumentSelection.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
              * Decodes a DocumentSelection message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.DocumentSelection
@@ -7577,6 +23710,121 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
+            };
+
+            /**
+             * Decodes a DocumentSelection message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.DocumentSelection
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.DocumentSelection} DocumentSelection
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            DocumentSelection.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a DocumentSelection message.
+             * @function verify
+             * @memberof optimization_guide.proto.DocumentSelection
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            DocumentSelection.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.documentIdentifier != null && message.hasOwnProperty("documentIdentifier")) {
+                    let error = $root.optimization_guide.proto.DocumentIdentifier.verify(message.documentIdentifier);
+                    if (error)
+                        return "documentIdentifier." + error;
+                }
+                if (message.selection != null && message.hasOwnProperty("selection")) {
+                    let error = $root.optimization_guide.proto.Selection.verify(message.selection);
+                    if (error)
+                        return "selection." + error;
+                }
+                return null;
+            };
+
+            /**
+             * Creates a DocumentSelection message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.DocumentSelection
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.DocumentSelection} DocumentSelection
+             */
+            DocumentSelection.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.DocumentSelection)
+                    return object;
+                let message = new $root.optimization_guide.proto.DocumentSelection();
+                if (object.documentIdentifier != null) {
+                    if (typeof object.documentIdentifier !== "object")
+                        throw TypeError(".optimization_guide.proto.DocumentSelection.documentIdentifier: object expected");
+                    message.documentIdentifier = $root.optimization_guide.proto.DocumentIdentifier.fromObject(object.documentIdentifier);
+                }
+                if (object.selection != null) {
+                    if (typeof object.selection !== "object")
+                        throw TypeError(".optimization_guide.proto.DocumentSelection.selection: object expected");
+                    message.selection = $root.optimization_guide.proto.Selection.fromObject(object.selection);
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a DocumentSelection message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.DocumentSelection
+             * @static
+             * @param {optimization_guide.proto.DocumentSelection} message DocumentSelection
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            DocumentSelection.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults) {
+                    object.documentIdentifier = null;
+                    object.selection = null;
+                }
+                if (message.documentIdentifier != null && message.hasOwnProperty("documentIdentifier"))
+                    object.documentIdentifier = $root.optimization_guide.proto.DocumentIdentifier.toObject(message.documentIdentifier, options);
+                if (message.selection != null && message.hasOwnProperty("selection"))
+                    object.selection = $root.optimization_guide.proto.Selection.toObject(message.selection, options);
+                return object;
+            };
+
+            /**
+             * Converts this DocumentSelection to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.DocumentSelection
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            DocumentSelection.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for DocumentSelection
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.DocumentSelection
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            DocumentSelection.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.DocumentSelection";
             };
 
             return DocumentSelection;

@@ -26,6 +26,29 @@ export namespace optimization_guide {
             public values: number[];
 
             /**
+             * Creates a new FloatArray instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FloatArray instance
+             */
+            public static create(properties?: optimization_guide.proto.IFloatArray): optimization_guide.proto.FloatArray;
+
+            /**
+             * Encodes the specified FloatArray message. Does not implicitly {@link optimization_guide.proto.FloatArray.verify|verify} messages.
+             * @param message FloatArray message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IFloatArray, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FloatArray message, length delimited. Does not implicitly {@link optimization_guide.proto.FloatArray.verify|verify} messages.
+             * @param message FloatArray message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IFloatArray, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a FloatArray message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -34,6 +57,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.FloatArray;
+
+            /**
+             * Decodes a FloatArray message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FloatArray
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.FloatArray;
+
+            /**
+             * Verifies a FloatArray message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FloatArray message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FloatArray
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.FloatArray;
+
+            /**
+             * Creates a plain object from a FloatArray message. Also converts values to other types if specified.
+             * @param message FloatArray
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.FloatArray, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FloatArray to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FloatArray
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an Embedding. */
@@ -62,6 +129,29 @@ export namespace optimization_guide {
             public floats?: (optimization_guide.proto.IFloatArray|null);
 
             /**
+             * Creates a new Embedding instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Embedding instance
+             */
+            public static create(properties?: optimization_guide.proto.IEmbedding): optimization_guide.proto.Embedding;
+
+            /**
+             * Encodes the specified Embedding message. Does not implicitly {@link optimization_guide.proto.Embedding.verify|verify} messages.
+             * @param message Embedding message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IEmbedding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Embedding message, length delimited. Does not implicitly {@link optimization_guide.proto.Embedding.verify|verify} messages.
+             * @param message Embedding message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IEmbedding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes an Embedding message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -70,6 +160,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.Embedding;
+
+            /**
+             * Decodes an Embedding message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Embedding
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.Embedding;
+
+            /**
+             * Verifies an Embedding message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Embedding message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Embedding
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.Embedding;
+
+            /**
+             * Creates a plain object from an Embedding message. Also converts values to other types if specified.
+             * @param message Embedding
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.Embedding, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Embedding to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Embedding
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a AXTreeUpdate. */
@@ -111,6 +245,29 @@ export namespace optimization_guide {
             public nodes: optimization_guide.proto.IAXNodeData[];
 
             /**
+             * Creates a new AXTreeUpdate instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns AXTreeUpdate instance
+             */
+            public static create(properties?: optimization_guide.proto.IAXTreeUpdate): optimization_guide.proto.AXTreeUpdate;
+
+            /**
+             * Encodes the specified AXTreeUpdate message. Does not implicitly {@link optimization_guide.proto.AXTreeUpdate.verify|verify} messages.
+             * @param message AXTreeUpdate message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IAXTreeUpdate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified AXTreeUpdate message, length delimited. Does not implicitly {@link optimization_guide.proto.AXTreeUpdate.verify|verify} messages.
+             * @param message AXTreeUpdate message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IAXTreeUpdate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a AXTreeUpdate message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -119,6 +276,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.AXTreeUpdate;
+
+            /**
+             * Decodes a AXTreeUpdate message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns AXTreeUpdate
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.AXTreeUpdate;
+
+            /**
+             * Verifies a AXTreeUpdate message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a AXTreeUpdate message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns AXTreeUpdate
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.AXTreeUpdate;
+
+            /**
+             * Creates a plain object from a AXTreeUpdate message. Also converts values to other types if specified.
+             * @param message AXTreeUpdate
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.AXTreeUpdate, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this AXTreeUpdate to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for AXTreeUpdate
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a AXTreeData. */
@@ -228,6 +429,29 @@ export namespace optimization_guide {
             public metadata: string[];
 
             /**
+             * Creates a new AXTreeData instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns AXTreeData instance
+             */
+            public static create(properties?: optimization_guide.proto.IAXTreeData): optimization_guide.proto.AXTreeData;
+
+            /**
+             * Encodes the specified AXTreeData message. Does not implicitly {@link optimization_guide.proto.AXTreeData.verify|verify} messages.
+             * @param message AXTreeData message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IAXTreeData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified AXTreeData message, length delimited. Does not implicitly {@link optimization_guide.proto.AXTreeData.verify|verify} messages.
+             * @param message AXTreeData message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IAXTreeData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a AXTreeData message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -236,6 +460,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.AXTreeData;
+
+            /**
+             * Decodes a AXTreeData message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns AXTreeData
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.AXTreeData;
+
+            /**
+             * Verifies a AXTreeData message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a AXTreeData message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns AXTreeData
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.AXTreeData;
+
+            /**
+             * Creates a plain object from a AXTreeData message. Also converts values to other types if specified.
+             * @param message AXTreeData
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.AXTreeData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this AXTreeData to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for AXTreeData
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a AXNodeData. */
@@ -297,6 +565,29 @@ export namespace optimization_guide {
             public relativeBounds?: (optimization_guide.proto.IAXRelativeBounds|null);
 
             /**
+             * Creates a new AXNodeData instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns AXNodeData instance
+             */
+            public static create(properties?: optimization_guide.proto.IAXNodeData): optimization_guide.proto.AXNodeData;
+
+            /**
+             * Encodes the specified AXNodeData message. Does not implicitly {@link optimization_guide.proto.AXNodeData.verify|verify} messages.
+             * @param message AXNodeData message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IAXNodeData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified AXNodeData message, length delimited. Does not implicitly {@link optimization_guide.proto.AXNodeData.verify|verify} messages.
+             * @param message AXNodeData message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IAXNodeData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a AXNodeData message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -305,6 +596,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.AXNodeData;
+
+            /**
+             * Decodes a AXNodeData message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns AXNodeData
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.AXNodeData;
+
+            /**
+             * Verifies a AXNodeData message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a AXNodeData message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns AXNodeData
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.AXNodeData;
+
+            /**
+             * Creates a plain object from a AXNodeData message. Also converts values to other types if specified.
+             * @param message AXNodeData
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.AXNodeData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this AXNodeData to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for AXNodeData
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a AXAttribute. */
@@ -414,6 +749,29 @@ export namespace optimization_guide {
             public attributeValue?: ("stringValue"|"intValue"|"floatValue"|"boolValue"|"intListValue"|"stringListValue"|"htmlAttributeValue");
 
             /**
+             * Creates a new AXAttribute instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns AXAttribute instance
+             */
+            public static create(properties?: optimization_guide.proto.IAXAttribute): optimization_guide.proto.AXAttribute;
+
+            /**
+             * Encodes the specified AXAttribute message. Does not implicitly {@link optimization_guide.proto.AXAttribute.verify|verify} messages.
+             * @param message AXAttribute message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IAXAttribute, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified AXAttribute message, length delimited. Does not implicitly {@link optimization_guide.proto.AXAttribute.verify|verify} messages.
+             * @param message AXAttribute message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IAXAttribute, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a AXAttribute message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -422,6 +780,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.AXAttribute;
+
+            /**
+             * Decodes a AXAttribute message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns AXAttribute
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.AXAttribute;
+
+            /**
+             * Verifies a AXAttribute message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a AXAttribute message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns AXAttribute
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.AXAttribute;
+
+            /**
+             * Creates a plain object from a AXAttribute message. Also converts values to other types if specified.
+             * @param message AXAttribute
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.AXAttribute, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this AXAttribute to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for AXAttribute
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a AXIntList. */
@@ -444,6 +846,29 @@ export namespace optimization_guide {
             public value: number[];
 
             /**
+             * Creates a new AXIntList instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns AXIntList instance
+             */
+            public static create(properties?: optimization_guide.proto.IAXIntList): optimization_guide.proto.AXIntList;
+
+            /**
+             * Encodes the specified AXIntList message. Does not implicitly {@link optimization_guide.proto.AXIntList.verify|verify} messages.
+             * @param message AXIntList message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IAXIntList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified AXIntList message, length delimited. Does not implicitly {@link optimization_guide.proto.AXIntList.verify|verify} messages.
+             * @param message AXIntList message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IAXIntList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a AXIntList message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -452,6 +877,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.AXIntList;
+
+            /**
+             * Decodes a AXIntList message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns AXIntList
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.AXIntList;
+
+            /**
+             * Verifies a AXIntList message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a AXIntList message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns AXIntList
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.AXIntList;
+
+            /**
+             * Creates a plain object from a AXIntList message. Also converts values to other types if specified.
+             * @param message AXIntList
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.AXIntList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this AXIntList to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for AXIntList
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a AXStringList. */
@@ -474,6 +943,29 @@ export namespace optimization_guide {
             public value: string[];
 
             /**
+             * Creates a new AXStringList instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns AXStringList instance
+             */
+            public static create(properties?: optimization_guide.proto.IAXStringList): optimization_guide.proto.AXStringList;
+
+            /**
+             * Encodes the specified AXStringList message. Does not implicitly {@link optimization_guide.proto.AXStringList.verify|verify} messages.
+             * @param message AXStringList message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IAXStringList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified AXStringList message, length delimited. Does not implicitly {@link optimization_guide.proto.AXStringList.verify|verify} messages.
+             * @param message AXStringList message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IAXStringList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a AXStringList message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -482,6 +974,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.AXStringList;
+
+            /**
+             * Decodes a AXStringList message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns AXStringList
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.AXStringList;
+
+            /**
+             * Verifies a AXStringList message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a AXStringList message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns AXStringList
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.AXStringList;
+
+            /**
+             * Creates a plain object from a AXStringList message. Also converts values to other types if specified.
+             * @param message AXStringList
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.AXStringList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this AXStringList to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for AXStringList
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a AXRelativeBounds. */
@@ -537,6 +1073,29 @@ export namespace optimization_guide {
             public transform: number[];
 
             /**
+             * Creates a new AXRelativeBounds instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns AXRelativeBounds instance
+             */
+            public static create(properties?: optimization_guide.proto.IAXRelativeBounds): optimization_guide.proto.AXRelativeBounds;
+
+            /**
+             * Encodes the specified AXRelativeBounds message. Does not implicitly {@link optimization_guide.proto.AXRelativeBounds.verify|verify} messages.
+             * @param message AXRelativeBounds message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IAXRelativeBounds, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified AXRelativeBounds message, length delimited. Does not implicitly {@link optimization_guide.proto.AXRelativeBounds.verify|verify} messages.
+             * @param message AXRelativeBounds message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IAXRelativeBounds, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a AXRelativeBounds message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -545,6 +1104,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.AXRelativeBounds;
+
+            /**
+             * Decodes a AXRelativeBounds message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns AXRelativeBounds
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.AXRelativeBounds;
+
+            /**
+             * Verifies a AXRelativeBounds message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a AXRelativeBounds message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns AXRelativeBounds
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.AXRelativeBounds;
+
+            /**
+             * Creates a plain object from a AXRelativeBounds message. Also converts values to other types if specified.
+             * @param message AXRelativeBounds
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.AXRelativeBounds, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this AXRelativeBounds to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for AXRelativeBounds
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a PageContext. */
@@ -637,6 +1240,29 @@ export namespace optimization_guide {
             public annotatedPageContent?: (optimization_guide.proto.IAnnotatedPageContent|null);
 
             /**
+             * Creates a new PageContext instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns PageContext instance
+             */
+            public static create(properties?: optimization_guide.proto.IPageContext): optimization_guide.proto.PageContext;
+
+            /**
+             * Encodes the specified PageContext message. Does not implicitly {@link optimization_guide.proto.PageContext.verify|verify} messages.
+             * @param message PageContext message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IPageContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified PageContext message, length delimited. Does not implicitly {@link optimization_guide.proto.PageContext.verify|verify} messages.
+             * @param message PageContext message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IPageContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a PageContext message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -645,6 +1271,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.PageContext;
+
+            /**
+             * Decodes a PageContext message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns PageContext
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.PageContext;
+
+            /**
+             * Verifies a PageContext message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a PageContext message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns PageContext
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.PageContext;
+
+            /**
+             * Creates a plain object from a PageContext message. Also converts values to other types if specified.
+             * @param message PageContext
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.PageContext, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this PageContext to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for PageContext
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an AnnotatedPageContent. */
@@ -799,6 +1469,29 @@ export namespace optimization_guide {
             public geminiInChromePageMetadata?: (optimization_guide.proto.IGeminiInChromePageMetadata|null);
 
             /**
+             * Creates a new AnnotatedPageContent instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns AnnotatedPageContent instance
+             */
+            public static create(properties?: optimization_guide.proto.IAnnotatedPageContent): optimization_guide.proto.AnnotatedPageContent;
+
+            /**
+             * Encodes the specified AnnotatedPageContent message. Does not implicitly {@link optimization_guide.proto.AnnotatedPageContent.verify|verify} messages.
+             * @param message AnnotatedPageContent message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IAnnotatedPageContent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified AnnotatedPageContent message, length delimited. Does not implicitly {@link optimization_guide.proto.AnnotatedPageContent.verify|verify} messages.
+             * @param message AnnotatedPageContent message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IAnnotatedPageContent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes an AnnotatedPageContent message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -807,6 +1500,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.AnnotatedPageContent;
+
+            /**
+             * Decodes an AnnotatedPageContent message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns AnnotatedPageContent
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.AnnotatedPageContent;
+
+            /**
+             * Verifies an AnnotatedPageContent message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an AnnotatedPageContent message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns AnnotatedPageContent
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.AnnotatedPageContent;
+
+            /**
+             * Creates a plain object from an AnnotatedPageContent message. Also converts values to other types if specified.
+             * @param message AnnotatedPageContent
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.AnnotatedPageContent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this AnnotatedPageContent to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for AnnotatedPageContent
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ContentNode. */
@@ -860,6 +1597,29 @@ export namespace optimization_guide {
             public contentAttributes?: (optimization_guide.proto.IContentAttributes|null);
 
             /**
+             * Creates a new ContentNode instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ContentNode instance
+             */
+            public static create(properties?: optimization_guide.proto.IContentNode): optimization_guide.proto.ContentNode;
+
+            /**
+             * Encodes the specified ContentNode message. Does not implicitly {@link optimization_guide.proto.ContentNode.verify|verify} messages.
+             * @param message ContentNode message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IContentNode, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ContentNode message, length delimited. Does not implicitly {@link optimization_guide.proto.ContentNode.verify|verify} messages.
+             * @param message ContentNode message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IContentNode, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a ContentNode message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -868,6 +1628,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.ContentNode;
+
+            /**
+             * Decodes a ContentNode message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ContentNode
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.ContentNode;
+
+            /**
+             * Verifies a ContentNode message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ContentNode message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ContentNode
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.ContentNode;
+
+            /**
+             * Creates a plain object from a ContentNode message. Also converts values to other types if specified.
+             * @param message ContentNode
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.ContentNode, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ContentNode to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ContentNode
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ContentAttributes. */
@@ -1101,6 +1905,29 @@ export namespace optimization_guide {
             public contentData?: ("textData"|"imageData"|"svgRootData"|"canvasData"|"videoData"|"anchorData"|"formData"|"formControlData"|"tableData"|"iframeData"|"tableRowData");
 
             /**
+             * Creates a new ContentAttributes instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ContentAttributes instance
+             */
+            public static create(properties?: optimization_guide.proto.IContentAttributes): optimization_guide.proto.ContentAttributes;
+
+            /**
+             * Encodes the specified ContentAttributes message. Does not implicitly {@link optimization_guide.proto.ContentAttributes.verify|verify} messages.
+             * @param message ContentAttributes message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IContentAttributes, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ContentAttributes message, length delimited. Does not implicitly {@link optimization_guide.proto.ContentAttributes.verify|verify} messages.
+             * @param message ContentAttributes message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IContentAttributes, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a ContentAttributes message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -1109,6 +1936,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.ContentAttributes;
+
+            /**
+             * Decodes a ContentAttributes message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ContentAttributes
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.ContentAttributes;
+
+            /**
+             * Verifies a ContentAttributes message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ContentAttributes message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ContentAttributes
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.ContentAttributes;
+
+            /**
+             * Creates a plain object from a ContentAttributes message. Also converts values to other types if specified.
+             * @param message ContentAttributes
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.ContentAttributes, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ContentAttributes to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ContentAttributes
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a Geometry. */
@@ -1231,6 +2102,29 @@ export namespace optimization_guide {
             public isFixedOrStickyPosition?: (boolean|null);
 
             /**
+             * Creates a new Geometry instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Geometry instance
+             */
+            public static create(properties?: optimization_guide.proto.IGeometry): optimization_guide.proto.Geometry;
+
+            /**
+             * Encodes the specified Geometry message. Does not implicitly {@link optimization_guide.proto.Geometry.verify|verify} messages.
+             * @param message Geometry message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IGeometry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Geometry message, length delimited. Does not implicitly {@link optimization_guide.proto.Geometry.verify|verify} messages.
+             * @param message Geometry message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IGeometry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a Geometry message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -1239,6 +2133,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.Geometry;
+
+            /**
+             * Decodes a Geometry message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Geometry
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.Geometry;
+
+            /**
+             * Verifies a Geometry message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Geometry message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Geometry
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.Geometry;
+
+            /**
+             * Creates a plain object from a Geometry message. Also converts values to other types if specified.
+             * @param message Geometry
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.Geometry, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Geometry to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Geometry
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a BoundingRect. */
@@ -1279,6 +2217,29 @@ export namespace optimization_guide {
             public height?: (number|null);
 
             /**
+             * Creates a new BoundingRect instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BoundingRect instance
+             */
+            public static create(properties?: optimization_guide.proto.IBoundingRect): optimization_guide.proto.BoundingRect;
+
+            /**
+             * Encodes the specified BoundingRect message. Does not implicitly {@link optimization_guide.proto.BoundingRect.verify|verify} messages.
+             * @param message BoundingRect message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IBoundingRect, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BoundingRect message, length delimited. Does not implicitly {@link optimization_guide.proto.BoundingRect.verify|verify} messages.
+             * @param message BoundingRect message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IBoundingRect, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a BoundingRect message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -1287,6 +2248,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.BoundingRect;
+
+            /**
+             * Decodes a BoundingRect message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BoundingRect
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.BoundingRect;
+
+            /**
+             * Verifies a BoundingRect message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BoundingRect message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BoundingRect
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.BoundingRect;
+
+            /**
+             * Creates a plain object from a BoundingRect message. Also converts values to other types if specified.
+             * @param message BoundingRect
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.BoundingRect, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BoundingRect to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BoundingRect
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an InteractionInfo. */
@@ -1539,6 +2544,29 @@ export namespace optimization_guide {
             public ariaActionTargetNodeIds: number[];
 
             /**
+             * Creates a new InteractionInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns InteractionInfo instance
+             */
+            public static create(properties?: optimization_guide.proto.IInteractionInfo): optimization_guide.proto.InteractionInfo;
+
+            /**
+             * Encodes the specified InteractionInfo message. Does not implicitly {@link optimization_guide.proto.InteractionInfo.verify|verify} messages.
+             * @param message InteractionInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IInteractionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified InteractionInfo message, length delimited. Does not implicitly {@link optimization_guide.proto.InteractionInfo.verify|verify} messages.
+             * @param message InteractionInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IInteractionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes an InteractionInfo message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -1547,6 +2575,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.InteractionInfo;
+
+            /**
+             * Decodes an InteractionInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns InteractionInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.InteractionInfo;
+
+            /**
+             * Verifies an InteractionInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an InteractionInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns InteractionInfo
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.InteractionInfo;
+
+            /**
+             * Creates a plain object from an InteractionInfo message. Also converts values to other types if specified.
+             * @param message InteractionInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.InteractionInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this InteractionInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for InteractionInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ScrollerInfo. */
@@ -1610,6 +2682,29 @@ export namespace optimization_guide {
             public userScrollableVertical?: (boolean|null);
 
             /**
+             * Creates a new ScrollerInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ScrollerInfo instance
+             */
+            public static create(properties?: optimization_guide.proto.IScrollerInfo): optimization_guide.proto.ScrollerInfo;
+
+            /**
+             * Encodes the specified ScrollerInfo message. Does not implicitly {@link optimization_guide.proto.ScrollerInfo.verify|verify} messages.
+             * @param message ScrollerInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IScrollerInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ScrollerInfo message, length delimited. Does not implicitly {@link optimization_guide.proto.ScrollerInfo.verify|verify} messages.
+             * @param message ScrollerInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IScrollerInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a ScrollerInfo message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -1618,6 +2713,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.ScrollerInfo;
+
+            /**
+             * Decodes a ScrollerInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ScrollerInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.ScrollerInfo;
+
+            /**
+             * Verifies a ScrollerInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ScrollerInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ScrollerInfo
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.ScrollerInfo;
+
+            /**
+             * Creates a plain object from a ScrollerInfo message. Also converts values to other types if specified.
+             * @param message ScrollerInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.ScrollerInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ScrollerInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ScrollerInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a BoundingSize. */
@@ -1646,6 +2785,29 @@ export namespace optimization_guide {
             public height?: (number|null);
 
             /**
+             * Creates a new BoundingSize instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BoundingSize instance
+             */
+            public static create(properties?: optimization_guide.proto.IBoundingSize): optimization_guide.proto.BoundingSize;
+
+            /**
+             * Encodes the specified BoundingSize message. Does not implicitly {@link optimization_guide.proto.BoundingSize.verify|verify} messages.
+             * @param message BoundingSize message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IBoundingSize, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BoundingSize message, length delimited. Does not implicitly {@link optimization_guide.proto.BoundingSize.verify|verify} messages.
+             * @param message BoundingSize message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IBoundingSize, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a BoundingSize message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -1654,6 +2816,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.BoundingSize;
+
+            /**
+             * Decodes a BoundingSize message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BoundingSize
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.BoundingSize;
+
+            /**
+             * Verifies a BoundingSize message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BoundingSize message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BoundingSize
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.BoundingSize;
+
+            /**
+             * Creates a plain object from a BoundingSize message. Also converts values to other types if specified.
+             * @param message BoundingSize
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.BoundingSize, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BoundingSize to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BoundingSize
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a TextInfo. */
@@ -1682,6 +2888,29 @@ export namespace optimization_guide {
             public textStyle?: (optimization_guide.proto.ITextStyle|null);
 
             /**
+             * Creates a new TextInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TextInfo instance
+             */
+            public static create(properties?: optimization_guide.proto.ITextInfo): optimization_guide.proto.TextInfo;
+
+            /**
+             * Encodes the specified TextInfo message. Does not implicitly {@link optimization_guide.proto.TextInfo.verify|verify} messages.
+             * @param message TextInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.ITextInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TextInfo message, length delimited. Does not implicitly {@link optimization_guide.proto.TextInfo.verify|verify} messages.
+             * @param message TextInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.ITextInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a TextInfo message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -1690,6 +2919,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.TextInfo;
+
+            /**
+             * Decodes a TextInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TextInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.TextInfo;
+
+            /**
+             * Verifies a TextInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TextInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TextInfo
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.TextInfo;
+
+            /**
+             * Creates a plain object from a TextInfo message. Also converts values to other types if specified.
+             * @param message TextInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.TextInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TextInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TextInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a TextStyle. */
@@ -1742,6 +3015,29 @@ export namespace optimization_guide {
             public color?: (number|null);
 
             /**
+             * Creates a new TextStyle instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TextStyle instance
+             */
+            public static create(properties?: optimization_guide.proto.ITextStyle): optimization_guide.proto.TextStyle;
+
+            /**
+             * Encodes the specified TextStyle message. Does not implicitly {@link optimization_guide.proto.TextStyle.verify|verify} messages.
+             * @param message TextStyle message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.ITextStyle, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TextStyle message, length delimited. Does not implicitly {@link optimization_guide.proto.TextStyle.verify|verify} messages.
+             * @param message TextStyle message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.ITextStyle, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a TextStyle message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -1750,6 +3046,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.TextStyle;
+
+            /**
+             * Decodes a TextStyle message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TextStyle
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.TextStyle;
+
+            /**
+             * Verifies a TextStyle message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TextStyle message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TextStyle
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.TextStyle;
+
+            /**
+             * Creates a plain object from a TextStyle message. Also converts values to other types if specified.
+             * @param message TextStyle
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.TextStyle, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TextStyle to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TextStyle
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an ImageInfo. */
@@ -1781,6 +3121,29 @@ export namespace optimization_guide {
             public securityOrigin?: (optimization_guide.proto.ISecurityOrigin|null);
 
             /**
+             * Creates a new ImageInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ImageInfo instance
+             */
+            public static create(properties?: optimization_guide.proto.IImageInfo): optimization_guide.proto.ImageInfo;
+
+            /**
+             * Encodes the specified ImageInfo message. Does not implicitly {@link optimization_guide.proto.ImageInfo.verify|verify} messages.
+             * @param message ImageInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IImageInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ImageInfo message, length delimited. Does not implicitly {@link optimization_guide.proto.ImageInfo.verify|verify} messages.
+             * @param message ImageInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IImageInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes an ImageInfo message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -1789,6 +3152,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.ImageInfo;
+
+            /**
+             * Decodes an ImageInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ImageInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.ImageInfo;
+
+            /**
+             * Verifies an ImageInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an ImageInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ImageInfo
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.ImageInfo;
+
+            /**
+             * Creates a plain object from an ImageInfo message. Also converts values to other types if specified.
+             * @param message ImageInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.ImageInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ImageInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ImageInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a SecurityOrigin. */
@@ -1832,6 +3239,29 @@ export namespace optimization_guide {
             public value?: (string|null);
 
             /**
+             * Creates a new SecurityOrigin instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SecurityOrigin instance
+             */
+            public static create(properties?: optimization_guide.proto.ISecurityOrigin): optimization_guide.proto.SecurityOrigin;
+
+            /**
+             * Encodes the specified SecurityOrigin message. Does not implicitly {@link optimization_guide.proto.SecurityOrigin.verify|verify} messages.
+             * @param message SecurityOrigin message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.ISecurityOrigin, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SecurityOrigin message, length delimited. Does not implicitly {@link optimization_guide.proto.SecurityOrigin.verify|verify} messages.
+             * @param message SecurityOrigin message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.ISecurityOrigin, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a SecurityOrigin message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -1840,6 +3270,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.SecurityOrigin;
+
+            /**
+             * Decodes a SecurityOrigin message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SecurityOrigin
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.SecurityOrigin;
+
+            /**
+             * Verifies a SecurityOrigin message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SecurityOrigin message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SecurityOrigin
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.SecurityOrigin;
+
+            /**
+             * Creates a plain object from a SecurityOrigin message. Also converts values to other types if specified.
+             * @param message SecurityOrigin
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.SecurityOrigin, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SecurityOrigin to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SecurityOrigin
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a SVGRootData. */
@@ -1862,6 +3336,29 @@ export namespace optimization_guide {
             public innerText?: (string|null);
 
             /**
+             * Creates a new SVGRootData instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SVGRootData instance
+             */
+            public static create(properties?: optimization_guide.proto.ISVGRootData): optimization_guide.proto.SVGRootData;
+
+            /**
+             * Encodes the specified SVGRootData message. Does not implicitly {@link optimization_guide.proto.SVGRootData.verify|verify} messages.
+             * @param message SVGRootData message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.ISVGRootData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SVGRootData message, length delimited. Does not implicitly {@link optimization_guide.proto.SVGRootData.verify|verify} messages.
+             * @param message SVGRootData message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.ISVGRootData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a SVGRootData message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -1870,6 +3367,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.SVGRootData;
+
+            /**
+             * Decodes a SVGRootData message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SVGRootData
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.SVGRootData;
+
+            /**
+             * Verifies a SVGRootData message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SVGRootData message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SVGRootData
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.SVGRootData;
+
+            /**
+             * Creates a plain object from a SVGRootData message. Also converts values to other types if specified.
+             * @param message SVGRootData
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.SVGRootData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SVGRootData to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SVGRootData
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a CanvasData. */
@@ -1898,6 +3439,29 @@ export namespace optimization_guide {
             public layoutHeight?: (number|null);
 
             /**
+             * Creates a new CanvasData instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns CanvasData instance
+             */
+            public static create(properties?: optimization_guide.proto.ICanvasData): optimization_guide.proto.CanvasData;
+
+            /**
+             * Encodes the specified CanvasData message. Does not implicitly {@link optimization_guide.proto.CanvasData.verify|verify} messages.
+             * @param message CanvasData message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.ICanvasData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified CanvasData message, length delimited. Does not implicitly {@link optimization_guide.proto.CanvasData.verify|verify} messages.
+             * @param message CanvasData message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.ICanvasData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a CanvasData message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -1906,6 +3470,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.CanvasData;
+
+            /**
+             * Decodes a CanvasData message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns CanvasData
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.CanvasData;
+
+            /**
+             * Verifies a CanvasData message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a CanvasData message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns CanvasData
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.CanvasData;
+
+            /**
+             * Creates a plain object from a CanvasData message. Also converts values to other types if specified.
+             * @param message CanvasData
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.CanvasData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this CanvasData to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for CanvasData
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a VideoData. */
@@ -1934,6 +3542,29 @@ export namespace optimization_guide {
             public securityOrigin?: (optimization_guide.proto.ISecurityOrigin|null);
 
             /**
+             * Creates a new VideoData instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns VideoData instance
+             */
+            public static create(properties?: optimization_guide.proto.IVideoData): optimization_guide.proto.VideoData;
+
+            /**
+             * Encodes the specified VideoData message. Does not implicitly {@link optimization_guide.proto.VideoData.verify|verify} messages.
+             * @param message VideoData message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IVideoData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified VideoData message, length delimited. Does not implicitly {@link optimization_guide.proto.VideoData.verify|verify} messages.
+             * @param message VideoData message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IVideoData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a VideoData message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -1942,6 +3573,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.VideoData;
+
+            /**
+             * Decodes a VideoData message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns VideoData
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.VideoData;
+
+            /**
+             * Verifies a VideoData message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a VideoData message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns VideoData
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.VideoData;
+
+            /**
+             * Creates a plain object from a VideoData message. Also converts values to other types if specified.
+             * @param message VideoData
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.VideoData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this VideoData to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for VideoData
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an AnchorData. */
@@ -1970,6 +3645,29 @@ export namespace optimization_guide {
             public rel: optimization_guide.proto.AnchorRel[];
 
             /**
+             * Creates a new AnchorData instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns AnchorData instance
+             */
+            public static create(properties?: optimization_guide.proto.IAnchorData): optimization_guide.proto.AnchorData;
+
+            /**
+             * Encodes the specified AnchorData message. Does not implicitly {@link optimization_guide.proto.AnchorData.verify|verify} messages.
+             * @param message AnchorData message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IAnchorData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified AnchorData message, length delimited. Does not implicitly {@link optimization_guide.proto.AnchorData.verify|verify} messages.
+             * @param message AnchorData message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IAnchorData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes an AnchorData message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -1978,6 +3676,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.AnchorData;
+
+            /**
+             * Decodes an AnchorData message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns AnchorData
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.AnchorData;
+
+            /**
+             * Verifies an AnchorData message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an AnchorData message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns AnchorData
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.AnchorData;
+
+            /**
+             * Creates a plain object from an AnchorData message. Also converts values to other types if specified.
+             * @param message AnchorData
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.AnchorData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this AnchorData to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for AnchorData
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a FormInfo. */
@@ -2017,6 +3759,29 @@ export namespace optimization_guide {
             public actionUrl?: (string|null);
 
             /**
+             * Creates a new FormInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FormInfo instance
+             */
+            public static create(properties?: optimization_guide.proto.IFormInfo): optimization_guide.proto.FormInfo;
+
+            /**
+             * Encodes the specified FormInfo message. Does not implicitly {@link optimization_guide.proto.FormInfo.verify|verify} messages.
+             * @param message FormInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IFormInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FormInfo message, length delimited. Does not implicitly {@link optimization_guide.proto.FormInfo.verify|verify} messages.
+             * @param message FormInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IFormInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a FormInfo message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -2025,6 +3790,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.FormInfo;
+
+            /**
+             * Decodes a FormInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FormInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.FormInfo;
+
+            /**
+             * Verifies a FormInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FormInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FormInfo
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.FormInfo;
+
+            /**
+             * Creates a plain object from a FormInfo message. Also converts values to other types if specified.
+             * @param message FormInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.FormInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FormInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FormInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a FormControlData. */
@@ -2139,6 +3948,29 @@ export namespace optimization_guide {
             public isReadonly?: (boolean|null);
 
             /**
+             * Creates a new FormControlData instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FormControlData instance
+             */
+            public static create(properties?: optimization_guide.proto.IFormControlData): optimization_guide.proto.FormControlData;
+
+            /**
+             * Encodes the specified FormControlData message. Does not implicitly {@link optimization_guide.proto.FormControlData.verify|verify} messages.
+             * @param message FormControlData message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IFormControlData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FormControlData message, length delimited. Does not implicitly {@link optimization_guide.proto.FormControlData.verify|verify} messages.
+             * @param message FormControlData message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IFormControlData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a FormControlData message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -2147,6 +3979,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.FormControlData;
+
+            /**
+             * Decodes a FormControlData message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FormControlData
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.FormControlData;
+
+            /**
+             * Verifies a FormControlData message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FormControlData message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FormControlData
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.FormControlData;
+
+            /**
+             * Creates a plain object from a FormControlData message. Also converts values to other types if specified.
+             * @param message FormControlData
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.FormControlData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FormControlData to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FormControlData
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a SelectOption. */
@@ -2210,6 +4086,29 @@ export namespace optimization_guide {
             public isDisabled?: (boolean|null);
 
             /**
+             * Creates a new SelectOption instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SelectOption instance
+             */
+            public static create(properties?: optimization_guide.proto.ISelectOption): optimization_guide.proto.SelectOption;
+
+            /**
+             * Encodes the specified SelectOption message. Does not implicitly {@link optimization_guide.proto.SelectOption.verify|verify} messages.
+             * @param message SelectOption message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.ISelectOption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SelectOption message, length delimited. Does not implicitly {@link optimization_guide.proto.SelectOption.verify|verify} messages.
+             * @param message SelectOption message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.ISelectOption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a SelectOption message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -2218,6 +4117,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.SelectOption;
+
+            /**
+             * Decodes a SelectOption message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SelectOption
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.SelectOption;
+
+            /**
+             * Verifies a SelectOption message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SelectOption message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SelectOption
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.SelectOption;
+
+            /**
+             * Creates a plain object from a SelectOption message. Also converts values to other types if specified.
+             * @param message SelectOption
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.SelectOption, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SelectOption to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SelectOption
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a TableData. */
@@ -2254,6 +4197,29 @@ export namespace optimization_guide {
             public tableName?: (string|null);
 
             /**
+             * Creates a new TableData instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TableData instance
+             */
+            public static create(properties?: optimization_guide.proto.ITableData): optimization_guide.proto.TableData;
+
+            /**
+             * Encodes the specified TableData message. Does not implicitly {@link optimization_guide.proto.TableData.verify|verify} messages.
+             * @param message TableData message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.ITableData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TableData message, length delimited. Does not implicitly {@link optimization_guide.proto.TableData.verify|verify} messages.
+             * @param message TableData message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.ITableData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a TableData message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -2262,6 +4228,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.TableData;
+
+            /**
+             * Decodes a TableData message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TableData
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.TableData;
+
+            /**
+             * Verifies a TableData message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TableData message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TableData
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.TableData;
+
+            /**
+             * Creates a plain object from a TableData message. Also converts values to other types if specified.
+             * @param message TableData
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.TableData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TableData to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TableData
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an IframeData. */
@@ -2293,6 +4303,29 @@ export namespace optimization_guide {
             public data?: ("frameData"|"redactedFrameMetadata");
 
             /**
+             * Creates a new IframeData instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns IframeData instance
+             */
+            public static create(properties?: optimization_guide.proto.IIframeData): optimization_guide.proto.IframeData;
+
+            /**
+             * Encodes the specified IframeData message. Does not implicitly {@link optimization_guide.proto.IframeData.verify|verify} messages.
+             * @param message IframeData message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IIframeData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified IframeData message, length delimited. Does not implicitly {@link optimization_guide.proto.IframeData.verify|verify} messages.
+             * @param message IframeData message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IIframeData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes an IframeData message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -2301,6 +4334,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.IframeData;
+
+            /**
+             * Decodes an IframeData message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns IframeData
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.IframeData;
+
+            /**
+             * Verifies an IframeData message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an IframeData message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns IframeData
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.IframeData;
+
+            /**
+             * Creates a plain object from an IframeData message. Also converts values to other types if specified.
+             * @param message IframeData
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.IframeData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this IframeData to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for IframeData
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace IframeData {
@@ -2325,6 +4402,29 @@ export namespace optimization_guide {
                 public reason?: (optimization_guide.proto.IframeData.RedactedFrameMetadata.Reason|null);
 
                 /**
+                 * Creates a new RedactedFrameMetadata instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns RedactedFrameMetadata instance
+                 */
+                public static create(properties?: optimization_guide.proto.IframeData.IRedactedFrameMetadata): optimization_guide.proto.IframeData.RedactedFrameMetadata;
+
+                /**
+                 * Encodes the specified RedactedFrameMetadata message. Does not implicitly {@link optimization_guide.proto.IframeData.RedactedFrameMetadata.verify|verify} messages.
+                 * @param message RedactedFrameMetadata message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: optimization_guide.proto.IframeData.IRedactedFrameMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified RedactedFrameMetadata message, length delimited. Does not implicitly {@link optimization_guide.proto.IframeData.RedactedFrameMetadata.verify|verify} messages.
+                 * @param message RedactedFrameMetadata message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: optimization_guide.proto.IframeData.IRedactedFrameMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
                  * Decodes a RedactedFrameMetadata message from the specified reader or buffer.
                  * @param reader Reader or buffer to decode from
                  * @param [length] Message length if known beforehand
@@ -2333,6 +4433,50 @@ export namespace optimization_guide {
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
                 public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.IframeData.RedactedFrameMetadata;
+
+                /**
+                 * Decodes a RedactedFrameMetadata message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns RedactedFrameMetadata
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.IframeData.RedactedFrameMetadata;
+
+                /**
+                 * Verifies a RedactedFrameMetadata message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a RedactedFrameMetadata message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns RedactedFrameMetadata
+                 */
+                public static fromObject(object: { [k: string]: any }): optimization_guide.proto.IframeData.RedactedFrameMetadata;
+
+                /**
+                 * Creates a plain object from a RedactedFrameMetadata message. Also converts values to other types if specified.
+                 * @param message RedactedFrameMetadata
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: optimization_guide.proto.IframeData.RedactedFrameMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this RedactedFrameMetadata to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for RedactedFrameMetadata
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
             namespace RedactedFrameMetadata {
@@ -2442,6 +4586,29 @@ export namespace optimization_guide {
             public scriptToolResults: optimization_guide.proto.IScriptToolResult[];
 
             /**
+             * Creates a new FrameData instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FrameData instance
+             */
+            public static create(properties?: optimization_guide.proto.IFrameData): optimization_guide.proto.FrameData;
+
+            /**
+             * Encodes the specified FrameData message. Does not implicitly {@link optimization_guide.proto.FrameData.verify|verify} messages.
+             * @param message FrameData message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IFrameData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FrameData message, length delimited. Does not implicitly {@link optimization_guide.proto.FrameData.verify|verify} messages.
+             * @param message FrameData message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IFrameData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a FrameData message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -2450,6 +4617,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.FrameData;
+
+            /**
+             * Decodes a FrameData message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FrameData
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.FrameData;
+
+            /**
+             * Verifies a FrameData message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FrameData message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FrameData
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.FrameData;
+
+            /**
+             * Creates a plain object from a FrameData message. Also converts values to other types if specified.
+             * @param message FrameData
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.FrameData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FrameData to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FrameData
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a FrameInteractionInfo. */
@@ -2494,6 +4705,29 @@ export namespace optimization_guide {
             public accessibilityFocusedNodeId?: (number|null);
 
             /**
+             * Creates a new FrameInteractionInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FrameInteractionInfo instance
+             */
+            public static create(properties?: optimization_guide.proto.IFrameInteractionInfo): optimization_guide.proto.FrameInteractionInfo;
+
+            /**
+             * Encodes the specified FrameInteractionInfo message. Does not implicitly {@link optimization_guide.proto.FrameInteractionInfo.verify|verify} messages.
+             * @param message FrameInteractionInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IFrameInteractionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FrameInteractionInfo message, length delimited. Does not implicitly {@link optimization_guide.proto.FrameInteractionInfo.verify|verify} messages.
+             * @param message FrameInteractionInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IFrameInteractionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a FrameInteractionInfo message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -2502,6 +4736,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.FrameInteractionInfo;
+
+            /**
+             * Decodes a FrameInteractionInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FrameInteractionInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.FrameInteractionInfo;
+
+            /**
+             * Verifies a FrameInteractionInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FrameInteractionInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FrameInteractionInfo
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.FrameInteractionInfo;
+
+            /**
+             * Creates a plain object from a FrameInteractionInfo message. Also converts values to other types if specified.
+             * @param message FrameInteractionInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.FrameInteractionInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FrameInteractionInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FrameInteractionInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a Selection. */
@@ -2572,6 +4850,29 @@ export namespace optimization_guide {
             public selectedText?: (string|null);
 
             /**
+             * Creates a new Selection instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Selection instance
+             */
+            public static create(properties?: optimization_guide.proto.ISelection): optimization_guide.proto.Selection;
+
+            /**
+             * Encodes the specified Selection message. Does not implicitly {@link optimization_guide.proto.Selection.verify|verify} messages.
+             * @param message Selection message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.ISelection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Selection message, length delimited. Does not implicitly {@link optimization_guide.proto.Selection.verify|verify} messages.
+             * @param message Selection message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.ISelection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a Selection message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -2580,6 +4881,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.Selection;
+
+            /**
+             * Decodes a Selection message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Selection
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.Selection;
+
+            /**
+             * Verifies a Selection message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Selection message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Selection
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.Selection;
+
+            /**
+             * Creates a plain object from a Selection message. Also converts values to other types if specified.
+             * @param message Selection
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.Selection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Selection to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Selection
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a DocumentIdentifier. */
@@ -2615,6 +4960,29 @@ export namespace optimization_guide {
             public serializedToken?: (string|null);
 
             /**
+             * Creates a new DocumentIdentifier instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns DocumentIdentifier instance
+             */
+            public static create(properties?: optimization_guide.proto.IDocumentIdentifier): optimization_guide.proto.DocumentIdentifier;
+
+            /**
+             * Encodes the specified DocumentIdentifier message. Does not implicitly {@link optimization_guide.proto.DocumentIdentifier.verify|verify} messages.
+             * @param message DocumentIdentifier message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IDocumentIdentifier, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified DocumentIdentifier message, length delimited. Does not implicitly {@link optimization_guide.proto.DocumentIdentifier.verify|verify} messages.
+             * @param message DocumentIdentifier message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IDocumentIdentifier, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a DocumentIdentifier message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -2623,6 +4991,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.DocumentIdentifier;
+
+            /**
+             * Decodes a DocumentIdentifier message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns DocumentIdentifier
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.DocumentIdentifier;
+
+            /**
+             * Verifies a DocumentIdentifier message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a DocumentIdentifier message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns DocumentIdentifier
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.DocumentIdentifier;
+
+            /**
+             * Creates a plain object from a DocumentIdentifier message. Also converts values to other types if specified.
+             * @param message DocumentIdentifier
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.DocumentIdentifier, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this DocumentIdentifier to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for DocumentIdentifier
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a PaidContentMetadata. */
@@ -2648,6 +5060,29 @@ export namespace optimization_guide {
             public containsPaidContent?: (boolean|null);
 
             /**
+             * Creates a new PaidContentMetadata instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns PaidContentMetadata instance
+             */
+            public static create(properties?: optimization_guide.proto.IPaidContentMetadata): optimization_guide.proto.PaidContentMetadata;
+
+            /**
+             * Encodes the specified PaidContentMetadata message. Does not implicitly {@link optimization_guide.proto.PaidContentMetadata.verify|verify} messages.
+             * @param message PaidContentMetadata message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IPaidContentMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified PaidContentMetadata message, length delimited. Does not implicitly {@link optimization_guide.proto.PaidContentMetadata.verify|verify} messages.
+             * @param message PaidContentMetadata message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IPaidContentMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a PaidContentMetadata message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -2656,6 +5091,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.PaidContentMetadata;
+
+            /**
+             * Decodes a PaidContentMetadata message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns PaidContentMetadata
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.PaidContentMetadata;
+
+            /**
+             * Verifies a PaidContentMetadata message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a PaidContentMetadata message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns PaidContentMetadata
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.PaidContentMetadata;
+
+            /**
+             * Creates a plain object from a PaidContentMetadata message. Also converts values to other types if specified.
+             * @param message PaidContentMetadata
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.PaidContentMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this PaidContentMetadata to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for PaidContentMetadata
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a MediaData. */
@@ -2741,6 +5220,29 @@ export namespace optimization_guide {
             public album?: (string|null);
 
             /**
+             * Creates a new MediaData instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns MediaData instance
+             */
+            public static create(properties?: optimization_guide.proto.IMediaData): optimization_guide.proto.MediaData;
+
+            /**
+             * Encodes the specified MediaData message. Does not implicitly {@link optimization_guide.proto.MediaData.verify|verify} messages.
+             * @param message MediaData message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IMediaData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified MediaData message, length delimited. Does not implicitly {@link optimization_guide.proto.MediaData.verify|verify} messages.
+             * @param message MediaData message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IMediaData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a MediaData message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -2749,6 +5251,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.MediaData;
+
+            /**
+             * Decodes a MediaData message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns MediaData
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.MediaData;
+
+            /**
+             * Verifies a MediaData message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a MediaData message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns MediaData
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.MediaData;
+
+            /**
+             * Creates a plain object from a MediaData message. Also converts values to other types if specified.
+             * @param message MediaData
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.MediaData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this MediaData to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for MediaData
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a MediaTranscript. */
@@ -2780,6 +5326,29 @@ export namespace optimization_guide {
             public startTimestampMilliseconds?: (number|null);
 
             /**
+             * Creates a new MediaTranscript instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns MediaTranscript instance
+             */
+            public static create(properties?: optimization_guide.proto.IMediaTranscript): optimization_guide.proto.MediaTranscript;
+
+            /**
+             * Encodes the specified MediaTranscript message. Does not implicitly {@link optimization_guide.proto.MediaTranscript.verify|verify} messages.
+             * @param message MediaTranscript message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IMediaTranscript, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified MediaTranscript message, length delimited. Does not implicitly {@link optimization_guide.proto.MediaTranscript.verify|verify} messages.
+             * @param message MediaTranscript message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IMediaTranscript, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a MediaTranscript message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -2788,6 +5357,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.MediaTranscript;
+
+            /**
+             * Decodes a MediaTranscript message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns MediaTranscript
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.MediaTranscript;
+
+            /**
+             * Verifies a MediaTranscript message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a MediaTranscript message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns MediaTranscript
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.MediaTranscript;
+
+            /**
+             * Creates a plain object from a MediaTranscript message. Also converts values to other types if specified.
+             * @param message MediaTranscript
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.MediaTranscript, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this MediaTranscript to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for MediaTranscript
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ScriptTool. */
@@ -2834,6 +5447,29 @@ export namespace optimization_guide {
             public annotations?: (optimization_guide.proto.IScriptToolAnnotations|null);
 
             /**
+             * Creates a new ScriptTool instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ScriptTool instance
+             */
+            public static create(properties?: optimization_guide.proto.IScriptTool): optimization_guide.proto.ScriptTool;
+
+            /**
+             * Encodes the specified ScriptTool message. Does not implicitly {@link optimization_guide.proto.ScriptTool.verify|verify} messages.
+             * @param message ScriptTool message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IScriptTool, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ScriptTool message, length delimited. Does not implicitly {@link optimization_guide.proto.ScriptTool.verify|verify} messages.
+             * @param message ScriptTool message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IScriptTool, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a ScriptTool message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -2842,6 +5478,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.ScriptTool;
+
+            /**
+             * Decodes a ScriptTool message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ScriptTool
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.ScriptTool;
+
+            /**
+             * Verifies a ScriptTool message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ScriptTool message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ScriptTool
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.ScriptTool;
+
+            /**
+             * Creates a plain object from a ScriptTool message. Also converts values to other types if specified.
+             * @param message ScriptTool
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.ScriptTool, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ScriptTool to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ScriptTool
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ScriptToolAnnotations. */
@@ -2864,6 +5544,29 @@ export namespace optimization_guide {
             public readOnly?: (boolean|null);
 
             /**
+             * Creates a new ScriptToolAnnotations instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ScriptToolAnnotations instance
+             */
+            public static create(properties?: optimization_guide.proto.IScriptToolAnnotations): optimization_guide.proto.ScriptToolAnnotations;
+
+            /**
+             * Encodes the specified ScriptToolAnnotations message. Does not implicitly {@link optimization_guide.proto.ScriptToolAnnotations.verify|verify} messages.
+             * @param message ScriptToolAnnotations message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IScriptToolAnnotations, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ScriptToolAnnotations message, length delimited. Does not implicitly {@link optimization_guide.proto.ScriptToolAnnotations.verify|verify} messages.
+             * @param message ScriptToolAnnotations message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IScriptToolAnnotations, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a ScriptToolAnnotations message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -2872,6 +5575,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.ScriptToolAnnotations;
+
+            /**
+             * Decodes a ScriptToolAnnotations message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ScriptToolAnnotations
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.ScriptToolAnnotations;
+
+            /**
+             * Verifies a ScriptToolAnnotations message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ScriptToolAnnotations message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ScriptToolAnnotations
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.ScriptToolAnnotations;
+
+            /**
+             * Creates a plain object from a ScriptToolAnnotations message. Also converts values to other types if specified.
+             * @param message ScriptToolAnnotations
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.ScriptToolAnnotations, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ScriptToolAnnotations to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ScriptToolAnnotations
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ScriptToolResult. */
@@ -2934,6 +5681,29 @@ export namespace optimization_guide {
             public tool?: (optimization_guide.proto.IScriptTool|null);
 
             /**
+             * Creates a new ScriptToolResult instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ScriptToolResult instance
+             */
+            public static create(properties?: optimization_guide.proto.IScriptToolResult): optimization_guide.proto.ScriptToolResult;
+
+            /**
+             * Encodes the specified ScriptToolResult message. Does not implicitly {@link optimization_guide.proto.ScriptToolResult.verify|verify} messages.
+             * @param message ScriptToolResult message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IScriptToolResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ScriptToolResult message, length delimited. Does not implicitly {@link optimization_guide.proto.ScriptToolResult.verify|verify} messages.
+             * @param message ScriptToolResult message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IScriptToolResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a ScriptToolResult message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -2942,6 +5712,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.ScriptToolResult;
+
+            /**
+             * Decodes a ScriptToolResult message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ScriptToolResult
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.ScriptToolResult;
+
+            /**
+             * Verifies a ScriptToolResult message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ScriptToolResult message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ScriptToolResult
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.ScriptToolResult;
+
+            /**
+             * Creates a plain object from a ScriptToolResult message. Also converts values to other types if specified.
+             * @param message ScriptToolResult
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.ScriptToolResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ScriptToolResult to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ScriptToolResult
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a TableRowData. */
@@ -2964,6 +5778,29 @@ export namespace optimization_guide {
             public type?: (optimization_guide.proto.TableRowType|null);
 
             /**
+             * Creates a new TableRowData instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TableRowData instance
+             */
+            public static create(properties?: optimization_guide.proto.ITableRowData): optimization_guide.proto.TableRowData;
+
+            /**
+             * Encodes the specified TableRowData message. Does not implicitly {@link optimization_guide.proto.TableRowData.verify|verify} messages.
+             * @param message TableRowData message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.ITableRowData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TableRowData message, length delimited. Does not implicitly {@link optimization_guide.proto.TableRowData.verify|verify} messages.
+             * @param message TableRowData message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.ITableRowData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a TableRowData message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -2972,6 +5809,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.TableRowData;
+
+            /**
+             * Decodes a TableRowData message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TableRowData
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.TableRowData;
+
+            /**
+             * Verifies a TableRowData message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TableRowData message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TableRowData
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.TableRowData;
+
+            /**
+             * Creates a plain object from a TableRowData message. Also converts values to other types if specified.
+             * @param message TableRowData
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.TableRowData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TableRowData to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TableRowData
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a PageInteractionInfo. */
@@ -3037,6 +5918,29 @@ export namespace optimization_guide {
             public focusedFrame?: (optimization_guide.proto.IDocumentIdentifier|null);
 
             /**
+             * Creates a new PageInteractionInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns PageInteractionInfo instance
+             */
+            public static create(properties?: optimization_guide.proto.IPageInteractionInfo): optimization_guide.proto.PageInteractionInfo;
+
+            /**
+             * Encodes the specified PageInteractionInfo message. Does not implicitly {@link optimization_guide.proto.PageInteractionInfo.verify|verify} messages.
+             * @param message PageInteractionInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IPageInteractionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified PageInteractionInfo message, length delimited. Does not implicitly {@link optimization_guide.proto.PageInteractionInfo.verify|verify} messages.
+             * @param message PageInteractionInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IPageInteractionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a PageInteractionInfo message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -3045,6 +5949,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.PageInteractionInfo;
+
+            /**
+             * Decodes a PageInteractionInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns PageInteractionInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.PageInteractionInfo;
+
+            /**
+             * Verifies a PageInteractionInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a PageInteractionInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns PageInteractionInfo
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.PageInteractionInfo;
+
+            /**
+             * Creates a plain object from a PageInteractionInfo message. Also converts values to other types if specified.
+             * @param message PageInteractionInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.PageInteractionInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this PageInteractionInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for PageInteractionInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a Point. */
@@ -3073,6 +6021,29 @@ export namespace optimization_guide {
             public y?: (number|null);
 
             /**
+             * Creates a new Point instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Point instance
+             */
+            public static create(properties?: optimization_guide.proto.IPoint): optimization_guide.proto.Point;
+
+            /**
+             * Encodes the specified Point message. Does not implicitly {@link optimization_guide.proto.Point.verify|verify} messages.
+             * @param message Point message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IPoint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Point message, length delimited. Does not implicitly {@link optimization_guide.proto.Point.verify|verify} messages.
+             * @param message Point message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IPoint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a Point message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -3081,6 +6052,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.Point;
+
+            /**
+             * Decodes a Point message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Point
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.Point;
+
+            /**
+             * Verifies a Point message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Point message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Point
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.Point;
+
+            /**
+             * Creates a plain object from a Point message. Also converts values to other types if specified.
+             * @param message Point
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.Point, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Point to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Point
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a PopupWindow. */
@@ -3136,6 +6151,29 @@ export namespace optimization_guide {
             public openerCommonAncestorDomNodeId?: (number|null);
 
             /**
+             * Creates a new PopupWindow instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns PopupWindow instance
+             */
+            public static create(properties?: optimization_guide.proto.IPopupWindow): optimization_guide.proto.PopupWindow;
+
+            /**
+             * Encodes the specified PopupWindow message. Does not implicitly {@link optimization_guide.proto.PopupWindow.verify|verify} messages.
+             * @param message PopupWindow message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IPopupWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified PopupWindow message, length delimited. Does not implicitly {@link optimization_guide.proto.PopupWindow.verify|verify} messages.
+             * @param message PopupWindow message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IPopupWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a PopupWindow message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -3144,6 +6182,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.PopupWindow;
+
+            /**
+             * Decodes a PopupWindow message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns PopupWindow
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.PopupWindow;
+
+            /**
+             * Verifies a PopupWindow message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a PopupWindow message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns PopupWindow
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.PopupWindow;
+
+            /**
+             * Creates a plain object from a PopupWindow message. Also converts values to other types if specified.
+             * @param message PopupWindow
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.PopupWindow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this PopupWindow to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for PopupWindow
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ProfileInformation. */
@@ -3169,6 +6251,29 @@ export namespace optimization_guide {
             public autofillInformation?: (optimization_guide.proto.IAutofillInformation|null);
 
             /**
+             * Creates a new ProfileInformation instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ProfileInformation instance
+             */
+            public static create(properties?: optimization_guide.proto.IProfileInformation): optimization_guide.proto.ProfileInformation;
+
+            /**
+             * Encodes the specified ProfileInformation message. Does not implicitly {@link optimization_guide.proto.ProfileInformation.verify|verify} messages.
+             * @param message ProfileInformation message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IProfileInformation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ProfileInformation message, length delimited. Does not implicitly {@link optimization_guide.proto.ProfileInformation.verify|verify} messages.
+             * @param message ProfileInformation message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IProfileInformation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a ProfileInformation message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -3177,6 +6282,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.ProfileInformation;
+
+            /**
+             * Decodes a ProfileInformation message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ProfileInformation
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.ProfileInformation;
+
+            /**
+             * Verifies a ProfileInformation message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ProfileInformation message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ProfileInformation
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.ProfileInformation;
+
+            /**
+             * Creates a plain object from a ProfileInformation message. Also converts values to other types if specified.
+             * @param message ProfileInformation
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.ProfileInformation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ProfileInformation to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ProfileInformation
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an AutofillInformation. */
@@ -3202,6 +6351,29 @@ export namespace optimization_guide {
             public fillableData: optimization_guide.proto.AutofillInformation.FillableData[];
 
             /**
+             * Creates a new AutofillInformation instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns AutofillInformation instance
+             */
+            public static create(properties?: optimization_guide.proto.IAutofillInformation): optimization_guide.proto.AutofillInformation;
+
+            /**
+             * Encodes the specified AutofillInformation message. Does not implicitly {@link optimization_guide.proto.AutofillInformation.verify|verify} messages.
+             * @param message AutofillInformation message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IAutofillInformation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified AutofillInformation message, length delimited. Does not implicitly {@link optimization_guide.proto.AutofillInformation.verify|verify} messages.
+             * @param message AutofillInformation message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IAutofillInformation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes an AutofillInformation message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -3210,6 +6382,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.AutofillInformation;
+
+            /**
+             * Decodes an AutofillInformation message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns AutofillInformation
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.AutofillInformation;
+
+            /**
+             * Verifies an AutofillInformation message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an AutofillInformation message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns AutofillInformation
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.AutofillInformation;
+
+            /**
+             * Creates a plain object from an AutofillInformation message. Also converts values to other types if specified.
+             * @param message AutofillInformation
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.AutofillInformation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this AutofillInformation to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for AutofillInformation
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace AutofillInformation {
@@ -3251,6 +6467,29 @@ export namespace optimization_guide {
             public screenshotInfo?: (optimization_guide.proto.IScreenshotInfo|null);
 
             /**
+             * Creates a new GeminiInChromePageMetadata instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns GeminiInChromePageMetadata instance
+             */
+            public static create(properties?: optimization_guide.proto.IGeminiInChromePageMetadata): optimization_guide.proto.GeminiInChromePageMetadata;
+
+            /**
+             * Encodes the specified GeminiInChromePageMetadata message. Does not implicitly {@link optimization_guide.proto.GeminiInChromePageMetadata.verify|verify} messages.
+             * @param message GeminiInChromePageMetadata message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IGeminiInChromePageMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified GeminiInChromePageMetadata message, length delimited. Does not implicitly {@link optimization_guide.proto.GeminiInChromePageMetadata.verify|verify} messages.
+             * @param message GeminiInChromePageMetadata message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IGeminiInChromePageMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a GeminiInChromePageMetadata message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -3259,6 +6498,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.GeminiInChromePageMetadata;
+
+            /**
+             * Decodes a GeminiInChromePageMetadata message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns GeminiInChromePageMetadata
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.GeminiInChromePageMetadata;
+
+            /**
+             * Verifies a GeminiInChromePageMetadata message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a GeminiInChromePageMetadata message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns GeminiInChromePageMetadata
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.GeminiInChromePageMetadata;
+
+            /**
+             * Creates a plain object from a GeminiInChromePageMetadata message. Also converts values to other types if specified.
+             * @param message GeminiInChromePageMetadata
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.GeminiInChromePageMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this GeminiInChromePageMetadata to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for GeminiInChromePageMetadata
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ScreenshotInfo. */
@@ -3286,6 +6569,29 @@ export namespace optimization_guide {
             public hasSelectionRegionInScreenshot?: (boolean|null);
 
             /**
+             * Creates a new ScreenshotInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ScreenshotInfo instance
+             */
+            public static create(properties?: optimization_guide.proto.IScreenshotInfo): optimization_guide.proto.ScreenshotInfo;
+
+            /**
+             * Encodes the specified ScreenshotInfo message. Does not implicitly {@link optimization_guide.proto.ScreenshotInfo.verify|verify} messages.
+             * @param message ScreenshotInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IScreenshotInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ScreenshotInfo message, length delimited. Does not implicitly {@link optimization_guide.proto.ScreenshotInfo.verify|verify} messages.
+             * @param message ScreenshotInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IScreenshotInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a ScreenshotInfo message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -3294,6 +6600,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.ScreenshotInfo;
+
+            /**
+             * Decodes a ScreenshotInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ScreenshotInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.ScreenshotInfo;
+
+            /**
+             * Verifies a ScreenshotInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ScreenshotInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ScreenshotInfo
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.ScreenshotInfo;
+
+            /**
+             * Creates a plain object from a ScreenshotInfo message. Also converts values to other types if specified.
+             * @param message ScreenshotInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.ScreenshotInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ScreenshotInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ScreenshotInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an AutofillGlobalId. */
@@ -3322,6 +6672,29 @@ export namespace optimization_guide {
             public rendererId?: (number|null);
 
             /**
+             * Creates a new AutofillGlobalId instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns AutofillGlobalId instance
+             */
+            public static create(properties?: optimization_guide.proto.IAutofillGlobalId): optimization_guide.proto.AutofillGlobalId;
+
+            /**
+             * Encodes the specified AutofillGlobalId message. Does not implicitly {@link optimization_guide.proto.AutofillGlobalId.verify|verify} messages.
+             * @param message AutofillGlobalId message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IAutofillGlobalId, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified AutofillGlobalId message, length delimited. Does not implicitly {@link optimization_guide.proto.AutofillGlobalId.verify|verify} messages.
+             * @param message AutofillGlobalId message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IAutofillGlobalId, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes an AutofillGlobalId message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -3330,6 +6703,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.AutofillGlobalId;
+
+            /**
+             * Decodes an AutofillGlobalId message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns AutofillGlobalId
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.AutofillGlobalId;
+
+            /**
+             * Verifies an AutofillGlobalId message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an AutofillGlobalId message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns AutofillGlobalId
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.AutofillGlobalId;
+
+            /**
+             * Creates a plain object from an AutofillGlobalId message. Also converts values to other types if specified.
+             * @param message AutofillGlobalId
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.AutofillGlobalId, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this AutofillGlobalId to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for AutofillGlobalId
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a FormData. */
@@ -3398,6 +6815,29 @@ export namespace optimization_guide {
             public actionUrl?: (string|null);
 
             /**
+             * Creates a new FormData instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FormData instance
+             */
+            public static create(properties?: optimization_guide.proto.IFormData): optimization_guide.proto.FormData;
+
+            /**
+             * Encodes the specified FormData message. Does not implicitly {@link optimization_guide.proto.FormData.verify|verify} messages.
+             * @param message FormData message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IFormData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FormData message, length delimited. Does not implicitly {@link optimization_guide.proto.FormData.verify|verify} messages.
+             * @param message FormData message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IFormData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a FormData message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -3406,6 +6846,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.FormData;
+
+            /**
+             * Decodes a FormData message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FormData
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.FormData;
+
+            /**
+             * Verifies a FormData message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FormData message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FormData
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.FormData;
+
+            /**
+             * Creates a plain object from a FormData message. Also converts values to other types if specified.
+             * @param message FormData
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.FormData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FormData to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FormData
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a FormFieldData. */
@@ -3536,6 +7020,29 @@ export namespace optimization_guide {
             public ariaDescription?: (string|null);
 
             /**
+             * Creates a new FormFieldData instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FormFieldData instance
+             */
+            public static create(properties?: optimization_guide.proto.IFormFieldData): optimization_guide.proto.FormFieldData;
+
+            /**
+             * Encodes the specified FormFieldData message. Does not implicitly {@link optimization_guide.proto.FormFieldData.verify|verify} messages.
+             * @param message FormFieldData message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IFormFieldData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FormFieldData message, length delimited. Does not implicitly {@link optimization_guide.proto.FormFieldData.verify|verify} messages.
+             * @param message FormFieldData message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IFormFieldData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a FormFieldData message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -3544,6 +7051,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.FormFieldData;
+
+            /**
+             * Decodes a FormFieldData message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FormFieldData
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.FormFieldData;
+
+            /**
+             * Verifies a FormFieldData message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FormFieldData message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FormFieldData
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.FormFieldData;
+
+            /**
+             * Creates a plain object from a FormFieldData message. Also converts values to other types if specified.
+             * @param message FormFieldData
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.FormFieldData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FormFieldData to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FormFieldData
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a TableRow. */
@@ -3566,6 +7117,29 @@ export namespace optimization_guide {
             public cells: optimization_guide.proto.IContentNode[];
 
             /**
+             * Creates a new TableRow instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TableRow instance
+             */
+            public static create(properties?: optimization_guide.proto.ITableRow): optimization_guide.proto.TableRow;
+
+            /**
+             * Encodes the specified TableRow message. Does not implicitly {@link optimization_guide.proto.TableRow.verify|verify} messages.
+             * @param message TableRow message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.ITableRow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TableRow message, length delimited. Does not implicitly {@link optimization_guide.proto.TableRow.verify|verify} messages.
+             * @param message TableRow message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.ITableRow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a TableRow message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -3574,6 +7148,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.TableRow;
+
+            /**
+             * Decodes a TableRow message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TableRow
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.TableRow;
+
+            /**
+             * Verifies a TableRow message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TableRow message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TableRow
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.TableRow;
+
+            /**
+             * Creates a plain object from a TableRow message. Also converts values to other types if specified.
+             * @param message TableRow
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.TableRow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TableRow to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TableRow
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a UserAnnotationsEntry. */
@@ -3614,6 +7232,29 @@ export namespace optimization_guide {
             public value?: (string|null);
 
             /**
+             * Creates a new UserAnnotationsEntry instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns UserAnnotationsEntry instance
+             */
+            public static create(properties?: optimization_guide.proto.IUserAnnotationsEntry): optimization_guide.proto.UserAnnotationsEntry;
+
+            /**
+             * Encodes the specified UserAnnotationsEntry message. Does not implicitly {@link optimization_guide.proto.UserAnnotationsEntry.verify|verify} messages.
+             * @param message UserAnnotationsEntry message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IUserAnnotationsEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified UserAnnotationsEntry message, length delimited. Does not implicitly {@link optimization_guide.proto.UserAnnotationsEntry.verify|verify} messages.
+             * @param message UserAnnotationsEntry message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IUserAnnotationsEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a UserAnnotationsEntry message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -3622,6 +7263,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.UserAnnotationsEntry;
+
+            /**
+             * Decodes a UserAnnotationsEntry message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns UserAnnotationsEntry
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.UserAnnotationsEntry;
+
+            /**
+             * Verifies a UserAnnotationsEntry message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a UserAnnotationsEntry message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns UserAnnotationsEntry
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.UserAnnotationsEntry;
+
+            /**
+             * Creates a plain object from a UserAnnotationsEntry message. Also converts values to other types if specified.
+             * @param message UserAnnotationsEntry
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.UserAnnotationsEntry, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this UserAnnotationsEntry to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for UserAnnotationsEntry
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a TabGroup. */
@@ -3656,6 +7341,29 @@ export namespace optimization_guide {
             public groupId?: (string|null);
 
             /**
+             * Creates a new TabGroup instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TabGroup instance
+             */
+            public static create(properties?: optimization_guide.proto.ITabGroup): optimization_guide.proto.TabGroup;
+
+            /**
+             * Encodes the specified TabGroup message. Does not implicitly {@link optimization_guide.proto.TabGroup.verify|verify} messages.
+             * @param message TabGroup message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.ITabGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TabGroup message, length delimited. Does not implicitly {@link optimization_guide.proto.TabGroup.verify|verify} messages.
+             * @param message TabGroup message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.ITabGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a TabGroup message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -3664,6 +7372,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.TabGroup;
+
+            /**
+             * Decodes a TabGroup message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TabGroup
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.TabGroup;
+
+            /**
+             * Verifies a TabGroup message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TabGroup message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TabGroup
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.TabGroup;
+
+            /**
+             * Creates a plain object from a TabGroup message. Also converts values to other types if specified.
+             * @param message TabGroup
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.TabGroup, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TabGroup to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TabGroup
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a Tab. */
@@ -3704,6 +7456,29 @@ export namespace optimization_guide {
             public pageContext?: (optimization_guide.proto.IPageContext|null);
 
             /**
+             * Creates a new Tab instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Tab instance
+             */
+            public static create(properties?: optimization_guide.proto.ITab): optimization_guide.proto.Tab;
+
+            /**
+             * Encodes the specified Tab message. Does not implicitly {@link optimization_guide.proto.Tab.verify|verify} messages.
+             * @param message Tab message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.ITab, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Tab message, length delimited. Does not implicitly {@link optimization_guide.proto.Tab.verify|verify} messages.
+             * @param message Tab message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.ITab, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a Tab message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -3712,6 +7487,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.Tab;
+
+            /**
+             * Decodes a Tab message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Tab
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.Tab;
+
+            /**
+             * Verifies a Tab message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Tab message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Tab
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.Tab;
+
+            /**
+             * Creates a plain object from a Tab message. Also converts values to other types if specified.
+             * @param message Tab
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.Tab, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Tab to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Tab
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a SiteEngagementEntry. */
@@ -3740,6 +7559,29 @@ export namespace optimization_guide {
             public score?: (number|null);
 
             /**
+             * Creates a new SiteEngagementEntry instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SiteEngagementEntry instance
+             */
+            public static create(properties?: optimization_guide.proto.ISiteEngagementEntry): optimization_guide.proto.SiteEngagementEntry;
+
+            /**
+             * Encodes the specified SiteEngagementEntry message. Does not implicitly {@link optimization_guide.proto.SiteEngagementEntry.verify|verify} messages.
+             * @param message SiteEngagementEntry message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.ISiteEngagementEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SiteEngagementEntry message, length delimited. Does not implicitly {@link optimization_guide.proto.SiteEngagementEntry.verify|verify} messages.
+             * @param message SiteEngagementEntry message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.ISiteEngagementEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a SiteEngagementEntry message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -3748,6 +7590,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.SiteEngagementEntry;
+
+            /**
+             * Decodes a SiteEngagementEntry message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SiteEngagementEntry
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.SiteEngagementEntry;
+
+            /**
+             * Verifies a SiteEngagementEntry message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SiteEngagementEntry message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SiteEngagementEntry
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.SiteEngagementEntry;
+
+            /**
+             * Creates a plain object from a SiteEngagementEntry message. Also converts values to other types if specified.
+             * @param message SiteEngagementEntry
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.SiteEngagementEntry, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SiteEngagementEntry to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SiteEngagementEntry
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a SiteEngagement. */
@@ -3770,6 +7656,29 @@ export namespace optimization_guide {
             public entries: optimization_guide.proto.ISiteEngagementEntry[];
 
             /**
+             * Creates a new SiteEngagement instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SiteEngagement instance
+             */
+            public static create(properties?: optimization_guide.proto.ISiteEngagement): optimization_guide.proto.SiteEngagement;
+
+            /**
+             * Encodes the specified SiteEngagement message. Does not implicitly {@link optimization_guide.proto.SiteEngagement.verify|verify} messages.
+             * @param message SiteEngagement message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.ISiteEngagement, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SiteEngagement message, length delimited. Does not implicitly {@link optimization_guide.proto.SiteEngagement.verify|verify} messages.
+             * @param message SiteEngagement message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.ISiteEngagement, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a SiteEngagement message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -3778,6 +7687,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.SiteEngagement;
+
+            /**
+             * Decodes a SiteEngagement message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SiteEngagement
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.SiteEngagement;
+
+            /**
+             * Verifies a SiteEngagement message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SiteEngagement message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SiteEngagement
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.SiteEngagement;
+
+            /**
+             * Creates a plain object from a SiteEngagement message. Also converts values to other types if specified.
+             * @param message SiteEngagement
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.SiteEngagement, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SiteEngagement to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SiteEngagement
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a Coordinate. */
@@ -3823,6 +7776,29 @@ export namespace optimization_guide {
             public pixelType?: (optimization_guide.proto.Coordinate.PixelType|null);
 
             /**
+             * Creates a new Coordinate instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Coordinate instance
+             */
+            public static create(properties?: optimization_guide.proto.ICoordinate): optimization_guide.proto.Coordinate;
+
+            /**
+             * Encodes the specified Coordinate message. Does not implicitly {@link optimization_guide.proto.Coordinate.verify|verify} messages.
+             * @param message Coordinate message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.ICoordinate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Coordinate message, length delimited. Does not implicitly {@link optimization_guide.proto.Coordinate.verify|verify} messages.
+             * @param message Coordinate message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.ICoordinate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a Coordinate message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -3831,6 +7807,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.Coordinate;
+
+            /**
+             * Decodes a Coordinate message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Coordinate
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.Coordinate;
+
+            /**
+             * Verifies a Coordinate message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Coordinate message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Coordinate
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.Coordinate;
+
+            /**
+             * Creates a plain object from a Coordinate message. Also converts values to other types if specified.
+             * @param message Coordinate
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.Coordinate, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Coordinate to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Coordinate
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace Coordinate {
@@ -3872,6 +7892,29 @@ export namespace optimization_guide {
             public content?: (string|null);
 
             /**
+             * Creates a new MetaTag instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns MetaTag instance
+             */
+            public static create(properties?: optimization_guide.proto.IMetaTag): optimization_guide.proto.MetaTag;
+
+            /**
+             * Encodes the specified MetaTag message. Does not implicitly {@link optimization_guide.proto.MetaTag.verify|verify} messages.
+             * @param message MetaTag message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IMetaTag, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified MetaTag message, length delimited. Does not implicitly {@link optimization_guide.proto.MetaTag.verify|verify} messages.
+             * @param message MetaTag message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IMetaTag, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a MetaTag message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -3880,6 +7923,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.MetaTag;
+
+            /**
+             * Decodes a MetaTag message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns MetaTag
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.MetaTag;
+
+            /**
+             * Verifies a MetaTag message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a MetaTag message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns MetaTag
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.MetaTag;
+
+            /**
+             * Creates a plain object from a MetaTag message. Also converts values to other types if specified.
+             * @param message MetaTag
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.MetaTag, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this MetaTag to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for MetaTag
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a FrameMetadata. */
@@ -3917,6 +8004,29 @@ export namespace optimization_guide {
             public hasMediaTranscripts?: (boolean|null);
 
             /**
+             * Creates a new FrameMetadata instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FrameMetadata instance
+             */
+            public static create(properties?: optimization_guide.proto.IFrameMetadata): optimization_guide.proto.FrameMetadata;
+
+            /**
+             * Encodes the specified FrameMetadata message. Does not implicitly {@link optimization_guide.proto.FrameMetadata.verify|verify} messages.
+             * @param message FrameMetadata message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IFrameMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FrameMetadata message, length delimited. Does not implicitly {@link optimization_guide.proto.FrameMetadata.verify|verify} messages.
+             * @param message FrameMetadata message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IFrameMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a FrameMetadata message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -3925,6 +8035,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.FrameMetadata;
+
+            /**
+             * Decodes a FrameMetadata message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FrameMetadata
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.FrameMetadata;
+
+            /**
+             * Verifies a FrameMetadata message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FrameMetadata message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FrameMetadata
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.FrameMetadata;
+
+            /**
+             * Creates a plain object from a FrameMetadata message. Also converts values to other types if specified.
+             * @param message FrameMetadata
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.FrameMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FrameMetadata to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FrameMetadata
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a PageMetadata. */
@@ -3951,6 +8105,29 @@ export namespace optimization_guide {
             public frameMetadata: optimization_guide.proto.IFrameMetadata[];
 
             /**
+             * Creates a new PageMetadata instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns PageMetadata instance
+             */
+            public static create(properties?: optimization_guide.proto.IPageMetadata): optimization_guide.proto.PageMetadata;
+
+            /**
+             * Encodes the specified PageMetadata message. Does not implicitly {@link optimization_guide.proto.PageMetadata.verify|verify} messages.
+             * @param message PageMetadata message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IPageMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified PageMetadata message, length delimited. Does not implicitly {@link optimization_guide.proto.PageMetadata.verify|verify} messages.
+             * @param message PageMetadata message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IPageMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a PageMetadata message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -3959,6 +8136,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.PageMetadata;
+
+            /**
+             * Decodes a PageMetadata message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns PageMetadata
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.PageMetadata;
+
+            /**
+             * Verifies a PageMetadata message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a PageMetadata message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns PageMetadata
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.PageMetadata;
+
+            /**
+             * Creates a plain object from a PageMetadata message. Also converts values to other types if specified.
+             * @param message PageMetadata
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.PageMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this PageMetadata to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for PageMetadata
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a DocumentSelection. */
@@ -3987,6 +8208,29 @@ export namespace optimization_guide {
             public selection?: (optimization_guide.proto.ISelection|null);
 
             /**
+             * Creates a new DocumentSelection instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns DocumentSelection instance
+             */
+            public static create(properties?: optimization_guide.proto.IDocumentSelection): optimization_guide.proto.DocumentSelection;
+
+            /**
+             * Encodes the specified DocumentSelection message. Does not implicitly {@link optimization_guide.proto.DocumentSelection.verify|verify} messages.
+             * @param message DocumentSelection message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IDocumentSelection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified DocumentSelection message, length delimited. Does not implicitly {@link optimization_guide.proto.DocumentSelection.verify|verify} messages.
+             * @param message DocumentSelection message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IDocumentSelection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
              * Decodes a DocumentSelection message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -3995,6 +8239,50 @@ export namespace optimization_guide {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.DocumentSelection;
+
+            /**
+             * Decodes a DocumentSelection message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns DocumentSelection
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.DocumentSelection;
+
+            /**
+             * Verifies a DocumentSelection message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a DocumentSelection message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns DocumentSelection
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.DocumentSelection;
+
+            /**
+             * Creates a plain object from a DocumentSelection message. Also converts values to other types if specified.
+             * @param message DocumentSelection
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.DocumentSelection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this DocumentSelection to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for DocumentSelection
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /**
