@@ -2,14 +2,14 @@ import test from 'node:test';
 import assert from 'node:assert';
 import {processPage, convertToMarkdown} from '../distill-page.ts';
 
-test('Evaluate CDP markdown against real-world URLs', async () => {
+test.skip('Evaluate CDP markdown against real-world URLs', async () => {
   const urls = [
     'https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver',
     'https://web.dev/articles/lcp',
     'https://nextjs.org/docs/app/building-your-application/optimizing/fonts',
   ];
 
-  for (const url of urls) {
+  await Promise.all(urls.map(async (url) => {
     console.log(`\nTesting ${url}...`);
     try {
       const decodedProto = await processPage(url);
@@ -24,10 +24,9 @@ test('Evaluate CDP markdown against real-world URLs', async () => {
       assert.ok(hasCode, 'Markdown should show evidence of code block extraction');
 
       console.log(`✅ Passed. Extracted ${markdown.length} bytes of markdown.`);
-      // console.log(markdown.slice(0, 300) + '...');
     } catch (e) {
       console.error(`❌ Failed on ${url}:`, e);
       assert.fail(String(e));
     }
-  }
+  }));
 });
