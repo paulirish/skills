@@ -98,7 +98,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
       }
     });
   } else {
-    const url = process.argv.find(arg => arg.startsWith('http'));
+    const url = process.argv.find(arg => arg.startsWith('http') || arg.startsWith('file'));
 
     if (!url) {
       console.log(`
