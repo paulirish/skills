@@ -9,8 +9,7 @@ test('Decoding base64 string into AnnotatedPageContent object', () => {
     rootNode: {},
   };
 
-  const errMsg = pb.optimization_guide.proto.AnnotatedPageContent.verify(payload);
-  assert.ifError(errMsg);
+
 
   const message = pb.optimization_guide.proto.AnnotatedPageContent.create(payload);
   const buffer = pb.optimization_guide.proto.AnnotatedPageContent.encode(message).finish();

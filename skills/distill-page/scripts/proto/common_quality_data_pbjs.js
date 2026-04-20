@@ -93,19 +93,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified FloatArray message, length delimited. Does not implicitly {@link optimization_guide.proto.FloatArray.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.FloatArray
-             * @static
-             * @param {optimization_guide.proto.IFloatArray} message FloatArray message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            FloatArray.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a FloatArray message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.FloatArray
@@ -142,43 +129,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a FloatArray message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.FloatArray
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.FloatArray} FloatArray
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            FloatArray.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a FloatArray message.
-             * @function verify
-             * @memberof optimization_guide.proto.FloatArray
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            FloatArray.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.values != null && message.hasOwnProperty("values")) {
-                    if (!Array.isArray(message.values))
-                        return "values: array expected";
-                    for (let i = 0; i < message.values.length; ++i)
-                        if (typeof message.values[i] !== "number")
-                            return "values: number[] expected";
-                }
-                return null;
             };
 
             /**
@@ -235,21 +185,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             FloatArray.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for FloatArray
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.FloatArray
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            FloatArray.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.FloatArray";
             };
 
             return FloatArray;
@@ -319,19 +254,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified Embedding message, length delimited. Does not implicitly {@link optimization_guide.proto.Embedding.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.Embedding
-             * @static
-             * @param {optimization_guide.proto.IEmbedding} message Embedding message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            Embedding.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes an Embedding message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.Embedding
@@ -361,41 +283,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes an Embedding message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.Embedding
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.Embedding} Embedding
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            Embedding.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies an Embedding message.
-             * @function verify
-             * @memberof optimization_guide.proto.Embedding
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            Embedding.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.floats != null && message.hasOwnProperty("floats")) {
-                    let error = $root.optimization_guide.proto.FloatArray.verify(message.floats);
-                    if (error)
-                        return "floats." + error;
-                }
-                return null;
             };
 
             /**
@@ -447,21 +334,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             Embedding.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for Embedding
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.Embedding
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            Embedding.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.Embedding";
             };
 
             return Embedding;
@@ -558,19 +430,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified AXTreeUpdate message, length delimited. Does not implicitly {@link optimization_guide.proto.AXTreeUpdate.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.AXTreeUpdate
-             * @static
-             * @param {optimization_guide.proto.IAXTreeUpdate} message AXTreeUpdate message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            AXTreeUpdate.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a AXTreeUpdate message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.AXTreeUpdate
@@ -610,53 +469,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a AXTreeUpdate message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.AXTreeUpdate
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.AXTreeUpdate} AXTreeUpdate
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            AXTreeUpdate.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a AXTreeUpdate message.
-             * @function verify
-             * @memberof optimization_guide.proto.AXTreeUpdate
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            AXTreeUpdate.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.treeData != null && message.hasOwnProperty("treeData")) {
-                    let error = $root.optimization_guide.proto.AXTreeData.verify(message.treeData);
-                    if (error)
-                        return "treeData." + error;
-                }
-                if (message.rootId != null && message.hasOwnProperty("rootId"))
-                    if (!$util.isInteger(message.rootId))
-                        return "rootId: integer expected";
-                if (message.nodes != null && message.hasOwnProperty("nodes")) {
-                    if (!Array.isArray(message.nodes))
-                        return "nodes: array expected";
-                    for (let i = 0; i < message.nodes.length; ++i) {
-                        let error = $root.optimization_guide.proto.AXNodeData.verify(message.nodes[i]);
-                        if (error)
-                            return "nodes." + error;
-                    }
-                }
-                return null;
             };
 
             /**
@@ -731,21 +543,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             AXTreeUpdate.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for AXTreeUpdate
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.AXTreeUpdate
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            AXTreeUpdate.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.AXTreeUpdate";
             };
 
             return AXTreeUpdate;
@@ -970,19 +767,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified AXTreeData message, length delimited. Does not implicitly {@link optimization_guide.proto.AXTreeData.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.AXTreeData
-             * @static
-             * @param {optimization_guide.proto.IAXTreeData} message AXTreeData message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            AXTreeData.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a AXTreeData message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.AXTreeData
@@ -1070,97 +854,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a AXTreeData message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.AXTreeData
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.AXTreeData} AXTreeData
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            AXTreeData.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a AXTreeData message.
-             * @function verify
-             * @memberof optimization_guide.proto.AXTreeData
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            AXTreeData.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.doctype != null && message.hasOwnProperty("doctype"))
-                    if (!$util.isString(message.doctype))
-                        return "doctype: string expected";
-                if (message.loaded != null && message.hasOwnProperty("loaded"))
-                    if (typeof message.loaded !== "boolean")
-                        return "loaded: boolean expected";
-                if (message.loadingProgress != null && message.hasOwnProperty("loadingProgress"))
-                    if (typeof message.loadingProgress !== "number")
-                        return "loadingProgress: number expected";
-                if (message.mimetype != null && message.hasOwnProperty("mimetype"))
-                    if (!$util.isString(message.mimetype))
-                        return "mimetype: string expected";
-                if (message.title != null && message.hasOwnProperty("title"))
-                    if (!$util.isString(message.title))
-                        return "title: string expected";
-                if (message.focusId != null && message.hasOwnProperty("focusId"))
-                    if (!$util.isInteger(message.focusId))
-                        return "focusId: integer expected";
-                if (message.selIsBackward != null && message.hasOwnProperty("selIsBackward"))
-                    if (typeof message.selIsBackward !== "boolean")
-                        return "selIsBackward: boolean expected";
-                if (message.selAnchorObjectId != null && message.hasOwnProperty("selAnchorObjectId"))
-                    if (!$util.isInteger(message.selAnchorObjectId))
-                        return "selAnchorObjectId: integer expected";
-                if (message.selAnchorOffset != null && message.hasOwnProperty("selAnchorOffset"))
-                    if (!$util.isInteger(message.selAnchorOffset))
-                        return "selAnchorOffset: integer expected";
-                if (message.selAnchorAffinity != null && message.hasOwnProperty("selAnchorAffinity"))
-                    switch (message.selAnchorAffinity) {
-                    default:
-                        return "selAnchorAffinity: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                        break;
-                    }
-                if (message.selFocusObjectId != null && message.hasOwnProperty("selFocusObjectId"))
-                    if (!$util.isInteger(message.selFocusObjectId))
-                        return "selFocusObjectId: integer expected";
-                if (message.selFocusOffset != null && message.hasOwnProperty("selFocusOffset"))
-                    if (!$util.isInteger(message.selFocusOffset))
-                        return "selFocusOffset: integer expected";
-                if (message.selFocusAffinity != null && message.hasOwnProperty("selFocusAffinity"))
-                    switch (message.selFocusAffinity) {
-                    default:
-                        return "selFocusAffinity: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                        break;
-                    }
-                if (message.rootScrollerId != null && message.hasOwnProperty("rootScrollerId"))
-                    if (!$util.isInteger(message.rootScrollerId))
-                        return "rootScrollerId: integer expected";
-                if (message.metadata != null && message.hasOwnProperty("metadata")) {
-                    if (!Array.isArray(message.metadata))
-                        return "metadata: array expected";
-                    for (let i = 0; i < message.metadata.length; ++i)
-                        if (!$util.isString(message.metadata[i]))
-                            return "metadata: string[] expected";
-                }
-                return null;
             };
 
             /**
@@ -1327,21 +1020,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
-            /**
-             * Gets the default type url for AXTreeData
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.AXTreeData
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            AXTreeData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.AXTreeData";
-            };
-
             return AXTreeData;
         })();
 
@@ -1481,19 +1159,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified AXNodeData message, length delimited. Does not implicitly {@link optimization_guide.proto.AXNodeData.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.AXNodeData
-             * @static
-             * @param {optimization_guide.proto.IAXNodeData} message AXNodeData message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            AXNodeData.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a AXNodeData message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.AXNodeData
@@ -1556,286 +1221,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a AXNodeData message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.AXNodeData
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.AXNodeData} AXNodeData
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            AXNodeData.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a AXNodeData message.
-             * @function verify
-             * @memberof optimization_guide.proto.AXNodeData
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            AXNodeData.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.id != null && message.hasOwnProperty("id"))
-                    if (!$util.isInteger(message.id))
-                        return "id: integer expected";
-                if (message.role != null && message.hasOwnProperty("role"))
-                    switch (message.role) {
-                    default:
-                        return "role: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7:
-                    case 8:
-                    case 9:
-                    case 10:
-                    case 11:
-                    case 12:
-                    case 13:
-                    case 14:
-                    case 15:
-                    case 16:
-                    case 17:
-                    case 18:
-                    case 19:
-                    case 20:
-                    case 21:
-                    case 22:
-                    case 23:
-                    case 24:
-                    case 25:
-                    case 26:
-                    case 27:
-                    case 28:
-                    case 29:
-                    case 30:
-                    case 31:
-                    case 32:
-                    case 33:
-                    case 34:
-                    case 35:
-                    case 36:
-                    case 37:
-                    case 38:
-                    case 39:
-                    case 40:
-                    case 41:
-                    case 42:
-                    case 43:
-                    case 44:
-                    case 45:
-                    case 46:
-                    case 47:
-                    case 48:
-                    case 49:
-                    case 50:
-                    case 51:
-                    case 52:
-                    case 53:
-                    case 54:
-                    case 55:
-                    case 56:
-                    case 57:
-                    case 58:
-                    case 59:
-                    case 60:
-                    case 61:
-                    case 62:
-                    case 63:
-                    case 64:
-                    case 65:
-                    case 66:
-                    case 67:
-                    case 68:
-                    case 69:
-                    case 70:
-                    case 71:
-                    case 72:
-                    case 73:
-                    case 74:
-                    case 75:
-                    case 76:
-                    case 77:
-                    case 78:
-                    case 79:
-                    case 80:
-                    case 81:
-                    case 82:
-                    case 83:
-                    case 84:
-                    case 85:
-                    case 86:
-                    case 87:
-                    case 88:
-                    case 89:
-                    case 90:
-                    case 91:
-                    case 92:
-                    case 93:
-                    case 94:
-                    case 95:
-                    case 96:
-                    case 97:
-                    case 98:
-                    case 99:
-                    case 100:
-                    case 101:
-                    case 102:
-                    case 103:
-                    case 104:
-                    case 105:
-                    case 106:
-                    case 107:
-                    case 108:
-                    case 109:
-                    case 110:
-                    case 111:
-                    case 112:
-                    case 113:
-                    case 114:
-                    case 115:
-                    case 116:
-                    case 117:
-                    case 118:
-                    case 119:
-                    case 120:
-                    case 121:
-                    case 122:
-                    case 123:
-                    case 124:
-                    case 125:
-                    case 126:
-                    case 213:
-                    case 127:
-                    case 128:
-                    case 129:
-                    case 130:
-                    case 131:
-                    case 132:
-                    case 133:
-                    case 134:
-                    case 135:
-                    case 136:
-                    case 137:
-                    case 138:
-                    case 139:
-                    case 140:
-                    case 141:
-                    case 142:
-                    case 143:
-                    case 144:
-                    case 145:
-                    case 146:
-                    case 147:
-                    case 148:
-                    case 149:
-                    case 150:
-                    case 151:
-                    case 152:
-                    case 153:
-                    case 154:
-                    case 155:
-                    case 156:
-                    case 157:
-                    case 158:
-                    case 159:
-                    case 160:
-                    case 161:
-                    case 162:
-                    case 163:
-                    case 164:
-                    case 165:
-                    case 166:
-                    case 167:
-                    case 168:
-                    case 169:
-                    case 170:
-                    case 171:
-                    case 172:
-                    case 173:
-                    case 174:
-                    case 175:
-                    case 176:
-                    case 177:
-                    case 178:
-                    case 179:
-                    case 180:
-                    case 181:
-                    case 182:
-                    case 183:
-                    case 184:
-                    case 185:
-                    case 186:
-                    case 187:
-                    case 188:
-                    case 189:
-                    case 190:
-                    case 191:
-                    case 192:
-                    case 193:
-                    case 194:
-                    case 195:
-                    case 196:
-                    case 197:
-                    case 198:
-                    case 199:
-                    case 200:
-                    case 201:
-                    case 202:
-                    case 203:
-                    case 204:
-                    case 205:
-                    case 206:
-                    case 207:
-                    case 208:
-                    case 209:
-                    case 210:
-                    case 211:
-                    case 212:
-                        break;
-                    }
-                if (message.state != null && message.hasOwnProperty("state"))
-                    if (!$util.isInteger(message.state))
-                        return "state: integer expected";
-                if (message.actions != null && message.hasOwnProperty("actions"))
-                    if (!$util.isInteger(message.actions) && !(message.actions && $util.isInteger(message.actions.low) && $util.isInteger(message.actions.high)))
-                        return "actions: integer|Long expected";
-                if (message.attributes != null && message.hasOwnProperty("attributes")) {
-                    if (!Array.isArray(message.attributes))
-                        return "attributes: array expected";
-                    for (let i = 0; i < message.attributes.length; ++i) {
-                        let error = $root.optimization_guide.proto.AXAttribute.verify(message.attributes[i]);
-                        if (error)
-                            return "attributes." + error;
-                    }
-                }
-                if (message.childIds != null && message.hasOwnProperty("childIds")) {
-                    if (!Array.isArray(message.childIds))
-                        return "childIds: array expected";
-                    for (let i = 0; i < message.childIds.length; ++i)
-                        if (!$util.isInteger(message.childIds[i]))
-                            return "childIds: integer[] expected";
-                }
-                if (message.relativeBounds != null && message.hasOwnProperty("relativeBounds")) {
-                    let error = $root.optimization_guide.proto.AXRelativeBounds.verify(message.relativeBounds);
-                    if (error)
-                        return "relativeBounds." + error;
-                }
-                return null;
             };
 
             /**
@@ -2817,21 +2202,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
-            /**
-             * Gets the default type url for AXNodeData
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.AXNodeData
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            AXNodeData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.AXNodeData";
-            };
-
             return AXNodeData;
         })();
 
@@ -3066,19 +2436,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified AXAttribute message, length delimited. Does not implicitly {@link optimization_guide.proto.AXAttribute.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.AXAttribute
-             * @static
-             * @param {optimization_guide.proto.IAXAttribute} message AXAttribute message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            AXAttribute.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a AXAttribute message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.AXAttribute
@@ -3160,338 +2517,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a AXAttribute message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.AXAttribute
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.AXAttribute} AXAttribute
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            AXAttribute.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a AXAttribute message.
-             * @function verify
-             * @memberof optimization_guide.proto.AXAttribute
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            AXAttribute.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                let properties = {};
-                if (message.stringType != null && message.hasOwnProperty("stringType")) {
-                    properties.attributeKey = 1;
-                    switch (message.stringType) {
-                    default:
-                        return "stringType: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7:
-                    case 8:
-                    case 9:
-                    case 10:
-                    case 11:
-                    case 12:
-                    case 13:
-                    case 14:
-                    case 15:
-                    case 16:
-                    case 17:
-                    case 18:
-                    case 19:
-                    case 20:
-                    case 21:
-                    case 22:
-                    case 23:
-                    case 24:
-                    case 25:
-                    case 26:
-                    case 27:
-                    case 28:
-                    case 29:
-                    case 30:
-                    case 31:
-                    case 32:
-                    case 33:
-                    case 34:
-                    case 35:
-                    case 36:
-                    case 37:
-                    case 38:
-                    case 39:
-                    case 40:
-                    case 41:
-                    case 42:
-                        break;
-                    }
-                }
-                if (message.intType != null && message.hasOwnProperty("intType")) {
-                    if (properties.attributeKey === 1)
-                        return "attributeKey: multiple values";
-                    properties.attributeKey = 1;
-                    switch (message.intType) {
-                    default:
-                        return "intType: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7:
-                    case 8:
-                    case 9:
-                    case 10:
-                    case 11:
-                    case 12:
-                    case 13:
-                    case 14:
-                    case 15:
-                    case 16:
-                    case 17:
-                    case 18:
-                    case 19:
-                    case 20:
-                    case 21:
-                    case 22:
-                    case 23:
-                    case 24:
-                    case 25:
-                    case 26:
-                    case 27:
-                    case 28:
-                    case 29:
-                    case 30:
-                    case 31:
-                    case 32:
-                    case 33:
-                    case 34:
-                    case 35:
-                    case 36:
-                    case 37:
-                    case 38:
-                    case 39:
-                    case 40:
-                    case 41:
-                    case 42:
-                    case 43:
-                    case 44:
-                    case 45:
-                    case 46:
-                    case 47:
-                    case 48:
-                    case 49:
-                    case 50:
-                    case 51:
-                    case 52:
-                    case 53:
-                    case 54:
-                    case 55:
-                    case 56:
-                    case 57:
-                    case 58:
-                    case 59:
-                    case 60:
-                    case 61:
-                    case 62:
-                    case 63:
-                    case 64:
-                    case 65:
-                    case 66:
-                    case 67:
-                    case 68:
-                    case 69:
-                        break;
-                    }
-                }
-                if (message.floatType != null && message.hasOwnProperty("floatType")) {
-                    if (properties.attributeKey === 1)
-                        return "attributeKey: multiple values";
-                    properties.attributeKey = 1;
-                    switch (message.floatType) {
-                    default:
-                        return "floatType: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7:
-                    case 8:
-                        break;
-                    }
-                }
-                if (message.boolType != null && message.hasOwnProperty("boolType")) {
-                    if (properties.attributeKey === 1)
-                        return "attributeKey: multiple values";
-                    properties.attributeKey = 1;
-                    switch (message.boolType) {
-                    default:
-                        return "boolType: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7:
-                    case 8:
-                    case 9:
-                    case 10:
-                    case 11:
-                    case 12:
-                    case 13:
-                    case 14:
-                    case 15:
-                    case 16:
-                    case 17:
-                    case 18:
-                    case 19:
-                    case 20:
-                    case 21:
-                    case 22:
-                    case 23:
-                    case 24:
-                    case 25:
-                        break;
-                    }
-                }
-                if (message.intlistType != null && message.hasOwnProperty("intlistType")) {
-                    if (properties.attributeKey === 1)
-                        return "attributeKey: multiple values";
-                    properties.attributeKey = 1;
-                    switch (message.intlistType) {
-                    default:
-                        return "intlistType: enum value expected";
-                    case 0:
-                    case 1:
-                    case 29:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7:
-                    case 8:
-                    case 9:
-                    case 10:
-                    case 11:
-                    case 12:
-                    case 13:
-                    case 14:
-                    case 15:
-                    case 16:
-                    case 17:
-                    case 18:
-                    case 19:
-                    case 20:
-                    case 21:
-                    case 22:
-                    case 23:
-                    case 24:
-                    case 25:
-                    case 26:
-                    case 27:
-                    case 28:
-                        break;
-                    }
-                }
-                if (message.stringlistType != null && message.hasOwnProperty("stringlistType")) {
-                    if (properties.attributeKey === 1)
-                        return "attributeKey: multiple values";
-                    properties.attributeKey = 1;
-                    switch (message.stringlistType) {
-                    default:
-                        return "stringlistType: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                        break;
-                    }
-                }
-                if (message.htmlAttributeName != null && message.hasOwnProperty("htmlAttributeName")) {
-                    if (properties.attributeKey === 1)
-                        return "attributeKey: multiple values";
-                    properties.attributeKey = 1;
-                    if (!$util.isString(message.htmlAttributeName))
-                        return "htmlAttributeName: string expected";
-                }
-                if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
-                    properties.attributeValue = 1;
-                    if (!$util.isString(message.stringValue))
-                        return "stringValue: string expected";
-                }
-                if (message.intValue != null && message.hasOwnProperty("intValue")) {
-                    if (properties.attributeValue === 1)
-                        return "attributeValue: multiple values";
-                    properties.attributeValue = 1;
-                    if (!$util.isInteger(message.intValue))
-                        return "intValue: integer expected";
-                }
-                if (message.floatValue != null && message.hasOwnProperty("floatValue")) {
-                    if (properties.attributeValue === 1)
-                        return "attributeValue: multiple values";
-                    properties.attributeValue = 1;
-                    if (typeof message.floatValue !== "number")
-                        return "floatValue: number expected";
-                }
-                if (message.boolValue != null && message.hasOwnProperty("boolValue")) {
-                    if (properties.attributeValue === 1)
-                        return "attributeValue: multiple values";
-                    properties.attributeValue = 1;
-                    if (typeof message.boolValue !== "boolean")
-                        return "boolValue: boolean expected";
-                }
-                if (message.intListValue != null && message.hasOwnProperty("intListValue")) {
-                    if (properties.attributeValue === 1)
-                        return "attributeValue: multiple values";
-                    properties.attributeValue = 1;
-                    {
-                        let error = $root.optimization_guide.proto.AXIntList.verify(message.intListValue);
-                        if (error)
-                            return "intListValue." + error;
-                    }
-                }
-                if (message.stringListValue != null && message.hasOwnProperty("stringListValue")) {
-                    if (properties.attributeValue === 1)
-                        return "attributeValue: multiple values";
-                    properties.attributeValue = 1;
-                    {
-                        let error = $root.optimization_guide.proto.AXStringList.verify(message.stringListValue);
-                        if (error)
-                            return "stringListValue." + error;
-                    }
-                }
-                if (message.htmlAttributeValue != null && message.hasOwnProperty("htmlAttributeValue")) {
-                    if (properties.attributeValue === 1)
-                        return "attributeValue: multiple values";
-                    properties.attributeValue = 1;
-                    if (!$util.isString(message.htmlAttributeValue))
-                        return "htmlAttributeValue: string expected";
-                }
-                return null;
             };
 
             /**
@@ -4408,21 +3433,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
-            /**
-             * Gets the default type url for AXAttribute
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.AXAttribute
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            AXAttribute.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.AXAttribute";
-            };
-
             return AXAttribute;
         })();
 
@@ -4493,19 +3503,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified AXIntList message, length delimited. Does not implicitly {@link optimization_guide.proto.AXIntList.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.AXIntList
-             * @static
-             * @param {optimization_guide.proto.IAXIntList} message AXIntList message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            AXIntList.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a AXIntList message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.AXIntList
@@ -4542,43 +3539,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a AXIntList message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.AXIntList
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.AXIntList} AXIntList
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            AXIntList.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a AXIntList message.
-             * @function verify
-             * @memberof optimization_guide.proto.AXIntList
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            AXIntList.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.value != null && message.hasOwnProperty("value")) {
-                    if (!Array.isArray(message.value))
-                        return "value: array expected";
-                    for (let i = 0; i < message.value.length; ++i)
-                        if (!$util.isInteger(message.value[i]))
-                            return "value: integer[] expected";
-                }
-                return null;
             };
 
             /**
@@ -4635,21 +3595,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             AXIntList.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for AXIntList
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.AXIntList
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            AXIntList.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.AXIntList";
             };
 
             return AXIntList;
@@ -4719,19 +3664,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified AXStringList message, length delimited. Does not implicitly {@link optimization_guide.proto.AXStringList.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.AXStringList
-             * @static
-             * @param {optimization_guide.proto.IAXStringList} message AXStringList message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            AXStringList.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a AXStringList message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.AXStringList
@@ -4763,43 +3695,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a AXStringList message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.AXStringList
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.AXStringList} AXStringList
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            AXStringList.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a AXStringList message.
-             * @function verify
-             * @memberof optimization_guide.proto.AXStringList
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            AXStringList.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.value != null && message.hasOwnProperty("value")) {
-                    if (!Array.isArray(message.value))
-                        return "value: array expected";
-                    for (let i = 0; i < message.value.length; ++i)
-                        if (!$util.isString(message.value[i]))
-                            return "value: string[] expected";
-                }
-                return null;
             };
 
             /**
@@ -4856,21 +3751,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             AXStringList.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for AXStringList
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.AXStringList
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            AXStringList.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.AXStringList";
             };
 
             return AXStringList;
@@ -4999,19 +3879,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified AXRelativeBounds message, length delimited. Does not implicitly {@link optimization_guide.proto.AXRelativeBounds.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.AXRelativeBounds
-             * @static
-             * @param {optimization_guide.proto.IAXRelativeBounds} message AXRelativeBounds message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            AXRelativeBounds.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a AXRelativeBounds message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.AXRelativeBounds
@@ -5068,58 +3935,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a AXRelativeBounds message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.AXRelativeBounds
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.AXRelativeBounds} AXRelativeBounds
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            AXRelativeBounds.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a AXRelativeBounds message.
-             * @function verify
-             * @memberof optimization_guide.proto.AXRelativeBounds
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            AXRelativeBounds.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.offsetContainerId != null && message.hasOwnProperty("offsetContainerId"))
-                    if (!$util.isInteger(message.offsetContainerId))
-                        return "offsetContainerId: integer expected";
-                if (message.x != null && message.hasOwnProperty("x"))
-                    if (typeof message.x !== "number")
-                        return "x: number expected";
-                if (message.y != null && message.hasOwnProperty("y"))
-                    if (typeof message.y !== "number")
-                        return "y: number expected";
-                if (message.width != null && message.hasOwnProperty("width"))
-                    if (typeof message.width !== "number")
-                        return "width: number expected";
-                if (message.height != null && message.hasOwnProperty("height"))
-                    if (typeof message.height !== "number")
-                        return "height: number expected";
-                if (message.transform != null && message.hasOwnProperty("transform")) {
-                    if (!Array.isArray(message.transform))
-                        return "transform: array expected";
-                    for (let i = 0; i < message.transform.length; ++i)
-                        if (typeof message.transform[i] !== "number")
-                            return "transform: number[] expected";
-                }
-                return null;
             };
 
             /**
@@ -5203,21 +4018,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             AXRelativeBounds.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for AXRelativeBounds
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.AXRelativeBounds
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            AXRelativeBounds.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.AXRelativeBounds";
             };
 
             return AXRelativeBounds;
@@ -5385,19 +4185,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified PageContext message, length delimited. Does not implicitly {@link optimization_guide.proto.PageContext.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.PageContext
-             * @static
-             * @param {optimization_guide.proto.IPageContext} message PageContext message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            PageContext.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a PageContext message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.PageContext
@@ -5461,71 +4248,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a PageContext message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.PageContext
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.PageContext} PageContext
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            PageContext.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a PageContext message.
-             * @function verify
-             * @memberof optimization_guide.proto.PageContext
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            PageContext.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.url != null && message.hasOwnProperty("url"))
-                    if (!$util.isString(message.url))
-                        return "url: string expected";
-                if (message.title != null && message.hasOwnProperty("title"))
-                    if (!$util.isString(message.title))
-                        return "title: string expected";
-                if (message.axTreeData != null && message.hasOwnProperty("axTreeData")) {
-                    let error = $root.optimization_guide.proto.AXTreeUpdate.verify(message.axTreeData);
-                    if (error)
-                        return "axTreeData." + error;
-                }
-                if (message.innerText != null && message.hasOwnProperty("innerText"))
-                    if (!$util.isString(message.innerText))
-                        return "innerText: string expected";
-                if (message.innerTextOffset != null && message.hasOwnProperty("innerTextOffset"))
-                    if (!$util.isInteger(message.innerTextOffset) && !(message.innerTextOffset && $util.isInteger(message.innerTextOffset.low) && $util.isInteger(message.innerTextOffset.high)))
-                        return "innerTextOffset: integer|Long expected";
-                if (message.pagePassages != null && message.hasOwnProperty("pagePassages")) {
-                    if (!Array.isArray(message.pagePassages))
-                        return "pagePassages: array expected";
-                    for (let i = 0; i < message.pagePassages.length; ++i)
-                        if (!$util.isString(message.pagePassages[i]))
-                            return "pagePassages: string[] expected";
-                }
-                if (message.tabScreenshot != null && message.hasOwnProperty("tabScreenshot"))
-                    if (!$util.isString(message.tabScreenshot))
-                        return "tabScreenshot: string expected";
-                if (message.pdfData != null && message.hasOwnProperty("pdfData"))
-                    if (!$util.isString(message.pdfData))
-                        return "pdfData: string expected";
-                if (message.annotatedPageContent != null && message.hasOwnProperty("annotatedPageContent")) {
-                    let error = $root.optimization_guide.proto.AnnotatedPageContent.verify(message.annotatedPageContent);
-                    if (error)
-                        return "annotatedPageContent." + error;
-                }
-                return null;
             };
 
             /**
@@ -5644,21 +4366,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             PageContext.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for PageContext
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.PageContext
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            PageContext.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.PageContext";
             };
 
             return PageContext;
@@ -5869,19 +4576,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified AnnotatedPageContent message, length delimited. Does not implicitly {@link optimization_guide.proto.AnnotatedPageContent.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.AnnotatedPageContent
-             * @static
-             * @param {optimization_guide.proto.IAnnotatedPageContent} message AnnotatedPageContent message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            AnnotatedPageContent.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes an AnnotatedPageContent message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.AnnotatedPageContent
@@ -5947,91 +4641,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes an AnnotatedPageContent message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.AnnotatedPageContent
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.AnnotatedPageContent} AnnotatedPageContent
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            AnnotatedPageContent.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies an AnnotatedPageContent message.
-             * @function verify
-             * @memberof optimization_guide.proto.AnnotatedPageContent
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            AnnotatedPageContent.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.version != null && message.hasOwnProperty("version"))
-                    switch (message.version) {
-                    default:
-                        return "version: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                        break;
-                    }
-                if (message.mode != null && message.hasOwnProperty("mode"))
-                    switch (message.mode) {
-                    default:
-                        return "mode: enum value expected";
-                    case 0:
-                    case 1:
-                        break;
-                    }
-                if (message.rootNode != null && message.hasOwnProperty("rootNode")) {
-                    let error = $root.optimization_guide.proto.ContentNode.verify(message.rootNode);
-                    if (error)
-                        return "rootNode." + error;
-                }
-                if (message.mainFrameData != null && message.hasOwnProperty("mainFrameData")) {
-                    let error = $root.optimization_guide.proto.FrameData.verify(message.mainFrameData);
-                    if (error)
-                        return "mainFrameData." + error;
-                }
-                if (message.pageInteractionInfo != null && message.hasOwnProperty("pageInteractionInfo")) {
-                    let error = $root.optimization_guide.proto.PageInteractionInfo.verify(message.pageInteractionInfo);
-                    if (error)
-                        return "pageInteractionInfo." + error;
-                }
-                if (message.viewportGeometry != null && message.hasOwnProperty("viewportGeometry")) {
-                    let error = $root.optimization_guide.proto.BoundingRect.verify(message.viewportGeometry);
-                    if (error)
-                        return "viewportGeometry." + error;
-                }
-                if (message.tabId != null && message.hasOwnProperty("tabId"))
-                    if (!$util.isInteger(message.tabId))
-                        return "tabId: integer expected";
-                if (message.popupWindow != null && message.hasOwnProperty("popupWindow")) {
-                    let error = $root.optimization_guide.proto.PopupWindow.verify(message.popupWindow);
-                    if (error)
-                        return "popupWindow." + error;
-                }
-                if (message.profileInformation != null && message.hasOwnProperty("profileInformation")) {
-                    let error = $root.optimization_guide.proto.ProfileInformation.verify(message.profileInformation);
-                    if (error)
-                        return "profileInformation." + error;
-                }
-                if (message.geminiInChromePageMetadata != null && message.hasOwnProperty("geminiInChromePageMetadata")) {
-                    let error = $root.optimization_guide.proto.GeminiInChromePageMetadata.verify(message.geminiInChromePageMetadata);
-                    if (error)
-                        return "geminiInChromePageMetadata." + error;
-                }
-                return null;
             };
 
             /**
@@ -6181,21 +4790,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
-            /**
-             * Gets the default type url for AnnotatedPageContent
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.AnnotatedPageContent
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            AnnotatedPageContent.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.AnnotatedPageContent";
-            };
-
             return AnnotatedPageContent;
         })();
 
@@ -6293,19 +4887,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified ContentNode message, length delimited. Does not implicitly {@link optimization_guide.proto.ContentNode.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.ContentNode
-             * @static
-             * @param {optimization_guide.proto.IContentNode} message ContentNode message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            ContentNode.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a ContentNode message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.ContentNode
@@ -6341,50 +4922,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a ContentNode message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.ContentNode
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.ContentNode} ContentNode
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            ContentNode.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a ContentNode message.
-             * @function verify
-             * @memberof optimization_guide.proto.ContentNode
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            ContentNode.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.childrenNodes != null && message.hasOwnProperty("childrenNodes")) {
-                    if (!Array.isArray(message.childrenNodes))
-                        return "childrenNodes: array expected";
-                    for (let i = 0; i < message.childrenNodes.length; ++i) {
-                        let error = $root.optimization_guide.proto.ContentNode.verify(message.childrenNodes[i]);
-                        if (error)
-                            return "childrenNodes." + error;
-                    }
-                }
-                if (message.contentAttributes != null && message.hasOwnProperty("contentAttributes")) {
-                    let error = $root.optimization_guide.proto.ContentAttributes.verify(message.contentAttributes);
-                    if (error)
-                        return "contentAttributes." + error;
-                }
-                return null;
             };
 
             /**
@@ -6453,21 +4990,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             ContentNode.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for ContentNode
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.ContentNode
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            ContentNode.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.ContentNode";
             };
 
             return ContentNode;
@@ -6834,19 +5356,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified ContentAttributes message, length delimited. Does not implicitly {@link optimization_guide.proto.ContentAttributes.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.ContentAttributes
-             * @static
-             * @param {optimization_guide.proto.IContentAttributes} message ContentAttributes message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            ContentAttributes.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a ContentAttributes message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.ContentAttributes
@@ -6963,450 +5472,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a ContentAttributes message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.ContentAttributes
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.ContentAttributes} ContentAttributes
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            ContentAttributes.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a ContentAttributes message.
-             * @function verify
-             * @memberof optimization_guide.proto.ContentAttributes
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            ContentAttributes.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                let properties = {};
-                if (message.textData != null && message.hasOwnProperty("textData")) {
-                    properties.contentData = 1;
-                    {
-                        let error = $root.optimization_guide.proto.TextInfo.verify(message.textData);
-                        if (error)
-                            return "textData." + error;
-                    }
-                }
-                if (message.imageData != null && message.hasOwnProperty("imageData")) {
-                    if (properties.contentData === 1)
-                        return "contentData: multiple values";
-                    properties.contentData = 1;
-                    {
-                        let error = $root.optimization_guide.proto.ImageInfo.verify(message.imageData);
-                        if (error)
-                            return "imageData." + error;
-                    }
-                }
-                if (message.svgRootData != null && message.hasOwnProperty("svgRootData")) {
-                    if (properties.contentData === 1)
-                        return "contentData: multiple values";
-                    properties.contentData = 1;
-                    {
-                        let error = $root.optimization_guide.proto.SVGRootData.verify(message.svgRootData);
-                        if (error)
-                            return "svgRootData." + error;
-                    }
-                }
-                if (message.canvasData != null && message.hasOwnProperty("canvasData")) {
-                    if (properties.contentData === 1)
-                        return "contentData: multiple values";
-                    properties.contentData = 1;
-                    {
-                        let error = $root.optimization_guide.proto.CanvasData.verify(message.canvasData);
-                        if (error)
-                            return "canvasData." + error;
-                    }
-                }
-                if (message.videoData != null && message.hasOwnProperty("videoData")) {
-                    if (properties.contentData === 1)
-                        return "contentData: multiple values";
-                    properties.contentData = 1;
-                    {
-                        let error = $root.optimization_guide.proto.VideoData.verify(message.videoData);
-                        if (error)
-                            return "videoData." + error;
-                    }
-                }
-                if (message.anchorData != null && message.hasOwnProperty("anchorData")) {
-                    if (properties.contentData === 1)
-                        return "contentData: multiple values";
-                    properties.contentData = 1;
-                    {
-                        let error = $root.optimization_guide.proto.AnchorData.verify(message.anchorData);
-                        if (error)
-                            return "anchorData." + error;
-                    }
-                }
-                if (message.formData != null && message.hasOwnProperty("formData")) {
-                    if (properties.contentData === 1)
-                        return "contentData: multiple values";
-                    properties.contentData = 1;
-                    {
-                        let error = $root.optimization_guide.proto.FormInfo.verify(message.formData);
-                        if (error)
-                            return "formData." + error;
-                    }
-                }
-                if (message.formControlData != null && message.hasOwnProperty("formControlData")) {
-                    if (properties.contentData === 1)
-                        return "contentData: multiple values";
-                    properties.contentData = 1;
-                    {
-                        let error = $root.optimization_guide.proto.FormControlData.verify(message.formControlData);
-                        if (error)
-                            return "formControlData." + error;
-                    }
-                }
-                if (message.tableData != null && message.hasOwnProperty("tableData")) {
-                    if (properties.contentData === 1)
-                        return "contentData: multiple values";
-                    properties.contentData = 1;
-                    {
-                        let error = $root.optimization_guide.proto.TableData.verify(message.tableData);
-                        if (error)
-                            return "tableData." + error;
-                    }
-                }
-                if (message.iframeData != null && message.hasOwnProperty("iframeData")) {
-                    if (properties.contentData === 1)
-                        return "contentData: multiple values";
-                    properties.contentData = 1;
-                    {
-                        let error = $root.optimization_guide.proto.IframeData.verify(message.iframeData);
-                        if (error)
-                            return "iframeData." + error;
-                    }
-                }
-                if (message.tableRowData != null && message.hasOwnProperty("tableRowData")) {
-                    if (properties.contentData === 1)
-                        return "contentData: multiple values";
-                    properties.contentData = 1;
-                    {
-                        let error = $root.optimization_guide.proto.TableRowData.verify(message.tableRowData);
-                        if (error)
-                            return "tableRowData." + error;
-                    }
-                }
-                if (message.commonAncestorDomNodeId != null && message.hasOwnProperty("commonAncestorDomNodeId"))
-                    if (!$util.isInteger(message.commonAncestorDomNodeId))
-                        return "commonAncestorDomNodeId: integer expected";
-                if (message.attributeType != null && message.hasOwnProperty("attributeType"))
-                    switch (message.attributeType) {
-                    default:
-                        return "attributeType: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 20:
-                    case 22:
-                    case 9:
-                    case 25:
-                    case 26:
-                    case 27:
-                    case 6:
-                    case 7:
-                    case 23:
-                    case 8:
-                    case 24:
-                    case 10:
-                    case 21:
-                    case 11:
-                        break;
-                    }
-                if (message.geometry != null && message.hasOwnProperty("geometry")) {
-                    let error = $root.optimization_guide.proto.Geometry.verify(message.geometry);
-                    if (error)
-                        return "geometry." + error;
-                }
-                if (message.interactionInfo != null && message.hasOwnProperty("interactionInfo")) {
-                    let error = $root.optimization_guide.proto.InteractionInfo.verify(message.interactionInfo);
-                    if (error)
-                        return "interactionInfo." + error;
-                }
-                if (message.annotatedRoles != null && message.hasOwnProperty("annotatedRoles")) {
-                    if (!Array.isArray(message.annotatedRoles))
-                        return "annotatedRoles: array expected";
-                    for (let i = 0; i < message.annotatedRoles.length; ++i)
-                        switch (message.annotatedRoles[i]) {
-                        default:
-                            return "annotatedRoles: enum value[] expected";
-                        case 0:
-                        case 5:
-                        case 6:
-                        case 7:
-                        case 8:
-                        case 9:
-                        case 10:
-                        case 11:
-                        case 12:
-                        case 13:
-                        case 14:
-                            break;
-                        }
-                }
-                if (message.label != null && message.hasOwnProperty("label"))
-                    if (!$util.isString(message.label))
-                        return "label: string expected";
-                if (message.labelForDomNodeId != null && message.hasOwnProperty("labelForDomNodeId"))
-                    if (!$util.isInteger(message.labelForDomNodeId))
-                        return "labelForDomNodeId: integer expected";
-                if (message.ariaRole != null && message.hasOwnProperty("ariaRole"))
-                    switch (message.ariaRole) {
-                    default:
-                        return "ariaRole: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7:
-                    case 8:
-                    case 9:
-                    case 10:
-                    case 11:
-                    case 12:
-                    case 13:
-                    case 14:
-                    case 15:
-                    case 16:
-                    case 17:
-                    case 18:
-                    case 19:
-                    case 20:
-                    case 21:
-                    case 22:
-                    case 23:
-                    case 24:
-                    case 25:
-                    case 26:
-                    case 27:
-                    case 28:
-                    case 29:
-                    case 30:
-                    case 31:
-                    case 32:
-                    case 33:
-                    case 34:
-                    case 35:
-                    case 36:
-                    case 37:
-                    case 38:
-                    case 39:
-                    case 40:
-                    case 41:
-                    case 42:
-                    case 43:
-                    case 44:
-                    case 45:
-                    case 46:
-                    case 47:
-                    case 48:
-                    case 49:
-                    case 50:
-                    case 51:
-                    case 52:
-                    case 53:
-                    case 54:
-                    case 55:
-                    case 56:
-                    case 57:
-                    case 58:
-                    case 59:
-                    case 60:
-                    case 61:
-                    case 62:
-                    case 63:
-                    case 64:
-                    case 65:
-                    case 66:
-                    case 67:
-                    case 68:
-                    case 69:
-                    case 70:
-                    case 71:
-                    case 72:
-                    case 73:
-                    case 74:
-                    case 75:
-                    case 76:
-                    case 77:
-                    case 78:
-                    case 79:
-                    case 80:
-                    case 81:
-                    case 82:
-                    case 83:
-                    case 84:
-                    case 85:
-                    case 86:
-                    case 87:
-                    case 88:
-                    case 89:
-                    case 90:
-                    case 91:
-                    case 92:
-                    case 93:
-                    case 94:
-                    case 95:
-                    case 96:
-                    case 97:
-                    case 98:
-                    case 99:
-                    case 100:
-                    case 101:
-                    case 102:
-                    case 103:
-                    case 104:
-                    case 105:
-                    case 106:
-                    case 107:
-                    case 108:
-                    case 109:
-                    case 110:
-                    case 111:
-                    case 112:
-                    case 113:
-                    case 114:
-                    case 115:
-                    case 116:
-                    case 117:
-                    case 118:
-                    case 119:
-                    case 120:
-                    case 121:
-                    case 122:
-                    case 123:
-                    case 124:
-                    case 125:
-                    case 126:
-                    case 213:
-                    case 127:
-                    case 128:
-                    case 129:
-                    case 130:
-                    case 131:
-                    case 132:
-                    case 133:
-                    case 134:
-                    case 135:
-                    case 136:
-                    case 137:
-                    case 138:
-                    case 139:
-                    case 140:
-                    case 141:
-                    case 142:
-                    case 143:
-                    case 144:
-                    case 145:
-                    case 146:
-                    case 147:
-                    case 148:
-                    case 149:
-                    case 150:
-                    case 151:
-                    case 152:
-                    case 153:
-                    case 154:
-                    case 155:
-                    case 156:
-                    case 157:
-                    case 158:
-                    case 159:
-                    case 160:
-                    case 161:
-                    case 162:
-                    case 163:
-                    case 164:
-                    case 165:
-                    case 166:
-                    case 167:
-                    case 168:
-                    case 169:
-                    case 170:
-                    case 171:
-                    case 172:
-                    case 173:
-                    case 174:
-                    case 175:
-                    case 176:
-                    case 177:
-                    case 178:
-                    case 179:
-                    case 180:
-                    case 181:
-                    case 182:
-                    case 183:
-                    case 184:
-                    case 185:
-                    case 186:
-                    case 187:
-                    case 188:
-                    case 189:
-                    case 190:
-                    case 191:
-                    case 192:
-                    case 193:
-                    case 194:
-                    case 195:
-                    case 196:
-                    case 197:
-                    case 198:
-                    case 199:
-                    case 200:
-                    case 201:
-                    case 202:
-                    case 203:
-                    case 204:
-                    case 205:
-                    case 206:
-                    case 207:
-                    case 208:
-                    case 209:
-                    case 210:
-                    case 211:
-                    case 212:
-                        break;
-                    }
-                if (message.isAdRelated != null && message.hasOwnProperty("isAdRelated"))
-                    if (typeof message.isAdRelated !== "boolean")
-                        return "isAdRelated: boolean expected";
-                if (message.redactionDecision != null && message.hasOwnProperty("redactionDecision"))
-                    switch (message.redactionDecision) {
-                    default:
-                        return "redactionDecision: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7:
-                    case 8:
-                    case 9:
-                        break;
-                    }
-                return null;
             };
 
             /**
@@ -8672,21 +6737,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
-            /**
-             * Gets the default type url for ContentAttributes
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.ContentAttributes
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            ContentAttributes.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.ContentAttributes";
-            };
-
             return ContentAttributes;
         })();
 
@@ -8852,19 +6902,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified Geometry message, length delimited. Does not implicitly {@link optimization_guide.proto.Geometry.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.Geometry
-             * @static
-             * @param {optimization_guide.proto.IGeometry} message Geometry message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            Geometry.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a Geometry message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.Geometry
@@ -8912,63 +6949,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a Geometry message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.Geometry
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.Geometry} Geometry
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            Geometry.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a Geometry message.
-             * @function verify
-             * @memberof optimization_guide.proto.Geometry
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            Geometry.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.outerBoundingBox != null && message.hasOwnProperty("outerBoundingBox")) {
-                    let error = $root.optimization_guide.proto.BoundingRect.verify(message.outerBoundingBox);
-                    if (error)
-                        return "outerBoundingBox." + error;
-                }
-                if (message.visibleBoundingBox != null && message.hasOwnProperty("visibleBoundingBox")) {
-                    let error = $root.optimization_guide.proto.BoundingRect.verify(message.visibleBoundingBox);
-                    if (error)
-                        return "visibleBoundingBox." + error;
-                }
-                if (message.compositorBoundingBox != null && message.hasOwnProperty("compositorBoundingBox")) {
-                    let error = $root.optimization_guide.proto.BoundingRect.verify(message.compositorBoundingBox);
-                    if (error)
-                        return "compositorBoundingBox." + error;
-                }
-                if (message.fragmentVisibleBoundingBoxes != null && message.hasOwnProperty("fragmentVisibleBoundingBoxes")) {
-                    if (!Array.isArray(message.fragmentVisibleBoundingBoxes))
-                        return "fragmentVisibleBoundingBoxes: array expected";
-                    for (let i = 0; i < message.fragmentVisibleBoundingBoxes.length; ++i) {
-                        let error = $root.optimization_guide.proto.BoundingRect.verify(message.fragmentVisibleBoundingBoxes[i]);
-                        if (error)
-                            return "fragmentVisibleBoundingBoxes." + error;
-                    }
-                }
-                if (message.isFixedOrStickyPosition != null && message.hasOwnProperty("isFixedOrStickyPosition"))
-                    if (typeof message.isFixedOrStickyPosition !== "boolean")
-                        return "isFixedOrStickyPosition: boolean expected";
-                return null;
             };
 
             /**
@@ -9059,21 +7039,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             Geometry.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for Geometry
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.Geometry
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            Geometry.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.Geometry";
             };
 
             return Geometry;
@@ -9174,19 +7139,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified BoundingRect message, length delimited. Does not implicitly {@link optimization_guide.proto.BoundingRect.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.BoundingRect
-             * @static
-             * @param {optimization_guide.proto.IBoundingRect} message BoundingRect message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            BoundingRect.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a BoundingRect message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.BoundingRect
@@ -9228,48 +7180,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a BoundingRect message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.BoundingRect
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.BoundingRect} BoundingRect
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            BoundingRect.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a BoundingRect message.
-             * @function verify
-             * @memberof optimization_guide.proto.BoundingRect
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            BoundingRect.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.x != null && message.hasOwnProperty("x"))
-                    if (!$util.isInteger(message.x))
-                        return "x: integer expected";
-                if (message.y != null && message.hasOwnProperty("y"))
-                    if (!$util.isInteger(message.y))
-                        return "y: integer expected";
-                if (message.width != null && message.hasOwnProperty("width"))
-                    if (!$util.isInteger(message.width))
-                        return "width: integer expected";
-                if (message.height != null && message.hasOwnProperty("height"))
-                    if (!$util.isInteger(message.height))
-                        return "height: integer expected";
-                return null;
             };
 
             /**
@@ -9334,21 +7244,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             BoundingRect.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for BoundingRect
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.BoundingRect
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            BoundingRect.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.BoundingRect";
             };
 
             return BoundingRect;
@@ -9683,19 +7578,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified InteractionInfo message, length delimited. Does not implicitly {@link optimization_guide.proto.InteractionInfo.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.InteractionInfo
-             * @static
-             * @param {optimization_guide.proto.IInteractionInfo} message InteractionInfo message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            InteractionInfo.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes an InteractionInfo message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.InteractionInfo
@@ -9813,151 +7695,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes an InteractionInfo message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.InteractionInfo
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.InteractionInfo} InteractionInfo
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            InteractionInfo.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies an InteractionInfo message.
-             * @function verify
-             * @memberof optimization_guide.proto.InteractionInfo
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            InteractionInfo.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.scrollerInfo != null && message.hasOwnProperty("scrollerInfo")) {
-                    let error = $root.optimization_guide.proto.ScrollerInfo.verify(message.scrollerInfo);
-                    if (error)
-                        return "scrollerInfo." + error;
-                }
-                if (message.isSelectable != null && message.hasOwnProperty("isSelectable"))
-                    if (typeof message.isSelectable !== "boolean")
-                        return "isSelectable: boolean expected";
-                if (message.isEditable != null && message.hasOwnProperty("isEditable"))
-                    if (typeof message.isEditable !== "boolean")
-                        return "isEditable: boolean expected";
-                if (message.canResizeHorizontal != null && message.hasOwnProperty("canResizeHorizontal"))
-                    if (typeof message.canResizeHorizontal !== "boolean")
-                        return "canResizeHorizontal: boolean expected";
-                if (message.canResizeVertical != null && message.hasOwnProperty("canResizeVertical"))
-                    if (typeof message.canResizeVertical !== "boolean")
-                        return "canResizeVertical: boolean expected";
-                if (message.isFocusable != null && message.hasOwnProperty("isFocusable"))
-                    if (typeof message.isFocusable !== "boolean")
-                        return "isFocusable: boolean expected";
-                if (message.isDraggable != null && message.hasOwnProperty("isDraggable"))
-                    if (typeof message.isDraggable !== "boolean")
-                        return "isDraggable: boolean expected";
-                if (message.isClickable != null && message.hasOwnProperty("isClickable"))
-                    if (typeof message.isClickable !== "boolean")
-                        return "isClickable: boolean expected";
-                if (message.documentScopedZOrder != null && message.hasOwnProperty("documentScopedZOrder"))
-                    if (!$util.isInteger(message.documentScopedZOrder))
-                        return "documentScopedZOrder: integer expected";
-                if (message.debugClickabilityReasons != null && message.hasOwnProperty("debugClickabilityReasons")) {
-                    if (!Array.isArray(message.debugClickabilityReasons))
-                        return "debugClickabilityReasons: array expected";
-                    for (let i = 0; i < message.debugClickabilityReasons.length; ++i)
-                        switch (message.debugClickabilityReasons[i]) {
-                        default:
-                            return "debugClickabilityReasons: enum value[] expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
-                        case 5:
-                        case 6:
-                        case 7:
-                        case 8:
-                        case 9:
-                        case 10:
-                        case 11:
-                        case 12:
-                        case 13:
-                        case 14:
-                        case 15:
-                        case 16:
-                            break;
-                        }
-                }
-                if (message.clickabilityReasons != null && message.hasOwnProperty("clickabilityReasons")) {
-                    if (!Array.isArray(message.clickabilityReasons))
-                        return "clickabilityReasons: array expected";
-                    for (let i = 0; i < message.clickabilityReasons.length; ++i)
-                        switch (message.clickabilityReasons[i]) {
-                        default:
-                            return "clickabilityReasons: enum value[] expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
-                        case 5:
-                        case 6:
-                        case 7:
-                        case 8:
-                        case 9:
-                        case 10:
-                        case 11:
-                        case 12:
-                        case 13:
-                        case 14:
-                        case 15:
-                        case 16:
-                            break;
-                        }
-                }
-                if (message.isDisabled != null && message.hasOwnProperty("isDisabled"))
-                    if (typeof message.isDisabled !== "boolean")
-                        return "isDisabled: boolean expected";
-                if (message.interactionDisabledReasons != null && message.hasOwnProperty("interactionDisabledReasons")) {
-                    if (!Array.isArray(message.interactionDisabledReasons))
-                        return "interactionDisabledReasons: array expected";
-                    for (let i = 0; i < message.interactionDisabledReasons.length; ++i)
-                        switch (message.interactionDisabledReasons[i]) {
-                        default:
-                            return "interactionDisabledReasons: enum value[] expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
-                        case 5:
-                            break;
-                        }
-                }
-                if (message.isTabbable != null && message.hasOwnProperty("isTabbable"))
-                    if (typeof message.isTabbable !== "boolean")
-                        return "isTabbable: boolean expected";
-                if (message.hasAriaActivedescendant != null && message.hasOwnProperty("hasAriaActivedescendant"))
-                    if (typeof message.hasAriaActivedescendant !== "boolean")
-                        return "hasAriaActivedescendant: boolean expected";
-                if (message.ariaActionTargetNodeIds != null && message.hasOwnProperty("ariaActionTargetNodeIds")) {
-                    if (!Array.isArray(message.ariaActionTargetNodeIds))
-                        return "ariaActionTargetNodeIds: array expected";
-                    for (let i = 0; i < message.ariaActionTargetNodeIds.length; ++i)
-                        if (!$util.isInteger(message.ariaActionTargetNodeIds[i]))
-                            return "ariaActionTargetNodeIds: integer[] expected";
-                }
-                return null;
             };
 
             /**
@@ -10299,21 +8036,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
-            /**
-             * Gets the default type url for InteractionInfo
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.InteractionInfo
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            InteractionInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.InteractionInfo";
-            };
-
             return InteractionInfo;
         })();
 
@@ -10421,19 +8143,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified ScrollerInfo message, length delimited. Does not implicitly {@link optimization_guide.proto.ScrollerInfo.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.ScrollerInfo
-             * @static
-             * @param {optimization_guide.proto.IScrollerInfo} message ScrollerInfo message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            ScrollerInfo.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a ScrollerInfo message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.ScrollerInfo
@@ -10475,52 +8184,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a ScrollerInfo message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.ScrollerInfo
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.ScrollerInfo} ScrollerInfo
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            ScrollerInfo.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a ScrollerInfo message.
-             * @function verify
-             * @memberof optimization_guide.proto.ScrollerInfo
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            ScrollerInfo.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.scrollingBounds != null && message.hasOwnProperty("scrollingBounds")) {
-                    let error = $root.optimization_guide.proto.BoundingSize.verify(message.scrollingBounds);
-                    if (error)
-                        return "scrollingBounds." + error;
-                }
-                if (message.visibleArea != null && message.hasOwnProperty("visibleArea")) {
-                    let error = $root.optimization_guide.proto.BoundingRect.verify(message.visibleArea);
-                    if (error)
-                        return "visibleArea." + error;
-                }
-                if (message.userScrollableHorizontal != null && message.hasOwnProperty("userScrollableHorizontal"))
-                    if (typeof message.userScrollableHorizontal !== "boolean")
-                        return "userScrollableHorizontal: boolean expected";
-                if (message.userScrollableVertical != null && message.hasOwnProperty("userScrollableVertical"))
-                    if (typeof message.userScrollableVertical !== "boolean")
-                        return "userScrollableVertical: boolean expected";
-                return null;
             };
 
             /**
@@ -10591,21 +8254,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             ScrollerInfo.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for ScrollerInfo
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.ScrollerInfo
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            ScrollerInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.ScrollerInfo";
             };
 
             return ScrollerInfo;
@@ -10684,19 +8332,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified BoundingSize message, length delimited. Does not implicitly {@link optimization_guide.proto.BoundingSize.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.BoundingSize
-             * @static
-             * @param {optimization_guide.proto.IBoundingSize} message BoundingSize message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            BoundingSize.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a BoundingSize message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.BoundingSize
@@ -10730,42 +8365,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a BoundingSize message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.BoundingSize
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.BoundingSize} BoundingSize
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            BoundingSize.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a BoundingSize message.
-             * @function verify
-             * @memberof optimization_guide.proto.BoundingSize
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            BoundingSize.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.width != null && message.hasOwnProperty("width"))
-                    if (!$util.isInteger(message.width))
-                        return "width: integer expected";
-                if (message.height != null && message.hasOwnProperty("height"))
-                    if (!$util.isInteger(message.height))
-                        return "height: integer expected";
-                return null;
             };
 
             /**
@@ -10820,21 +8419,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             BoundingSize.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for BoundingSize
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.BoundingSize
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            BoundingSize.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.BoundingSize";
             };
 
             return BoundingSize;
@@ -10913,19 +8497,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified TextInfo message, length delimited. Does not implicitly {@link optimization_guide.proto.TextInfo.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.TextInfo
-             * @static
-             * @param {optimization_guide.proto.ITextInfo} message TextInfo message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            TextInfo.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a TextInfo message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.TextInfo
@@ -10959,44 +8530,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a TextInfo message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.TextInfo
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.TextInfo} TextInfo
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            TextInfo.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a TextInfo message.
-             * @function verify
-             * @memberof optimization_guide.proto.TextInfo
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            TextInfo.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.textContent != null && message.hasOwnProperty("textContent"))
-                    if (!$util.isString(message.textContent))
-                        return "textContent: string expected";
-                if (message.textStyle != null && message.hasOwnProperty("textStyle")) {
-                    let error = $root.optimization_guide.proto.TextStyle.verify(message.textStyle);
-                    if (error)
-                        return "textStyle." + error;
-                }
-                return null;
             };
 
             /**
@@ -11054,21 +8587,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             TextInfo.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for TextInfo
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.TextInfo
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            TextInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.TextInfo";
             };
 
             return TextInfo;
@@ -11168,19 +8686,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified TextStyle message, length delimited. Does not implicitly {@link optimization_guide.proto.TextStyle.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.TextStyle
-             * @static
-             * @param {optimization_guide.proto.ITextStyle} message TextStyle message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            TextStyle.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a TextStyle message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.TextStyle
@@ -11218,53 +8723,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a TextStyle message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.TextStyle
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.TextStyle} TextStyle
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            TextStyle.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a TextStyle message.
-             * @function verify
-             * @memberof optimization_guide.proto.TextStyle
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            TextStyle.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.textSize != null && message.hasOwnProperty("textSize"))
-                    switch (message.textSize) {
-                    default:
-                        return "textSize: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                        break;
-                    }
-                if (message.hasEmphasis != null && message.hasOwnProperty("hasEmphasis"))
-                    if (typeof message.hasEmphasis !== "boolean")
-                        return "hasEmphasis: boolean expected";
-                if (message.color != null && message.hasOwnProperty("color"))
-                    if (!$util.isInteger(message.color))
-                        return "color: integer expected";
-                return null;
             };
 
             /**
@@ -11352,21 +8810,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
-            /**
-             * Gets the default type url for TextStyle
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.TextStyle
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            TextStyle.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.TextStyle";
-            };
-
             return TextStyle;
         })();
 
@@ -11444,19 +8887,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified ImageInfo message, length delimited. Does not implicitly {@link optimization_guide.proto.ImageInfo.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.ImageInfo
-             * @static
-             * @param {optimization_guide.proto.IImageInfo} message ImageInfo message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            ImageInfo.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes an ImageInfo message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.ImageInfo
@@ -11490,44 +8920,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes an ImageInfo message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.ImageInfo
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.ImageInfo} ImageInfo
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            ImageInfo.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies an ImageInfo message.
-             * @function verify
-             * @memberof optimization_guide.proto.ImageInfo
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            ImageInfo.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.imageCaption != null && message.hasOwnProperty("imageCaption"))
-                    if (!$util.isString(message.imageCaption))
-                        return "imageCaption: string expected";
-                if (message.securityOrigin != null && message.hasOwnProperty("securityOrigin")) {
-                    let error = $root.optimization_guide.proto.SecurityOrigin.verify(message.securityOrigin);
-                    if (error)
-                        return "securityOrigin." + error;
-                }
-                return null;
             };
 
             /**
@@ -11585,21 +8977,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             ImageInfo.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for ImageInfo
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.ImageInfo
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            ImageInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.ImageInfo";
             };
 
             return ImageInfo;
@@ -11687,19 +9064,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified SecurityOrigin message, length delimited. Does not implicitly {@link optimization_guide.proto.SecurityOrigin.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.SecurityOrigin
-             * @static
-             * @param {optimization_guide.proto.ISecurityOrigin} message SecurityOrigin message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            SecurityOrigin.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a SecurityOrigin message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.SecurityOrigin
@@ -11733,42 +9097,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a SecurityOrigin message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.SecurityOrigin
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.SecurityOrigin} SecurityOrigin
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            SecurityOrigin.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a SecurityOrigin message.
-             * @function verify
-             * @memberof optimization_guide.proto.SecurityOrigin
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            SecurityOrigin.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.opaque != null && message.hasOwnProperty("opaque"))
-                    if (typeof message.opaque !== "boolean")
-                        return "opaque: boolean expected";
-                if (message.value != null && message.hasOwnProperty("value"))
-                    if (!$util.isString(message.value))
-                        return "value: string expected";
-                return null;
             };
 
             /**
@@ -11823,21 +9151,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             SecurityOrigin.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for SecurityOrigin
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.SecurityOrigin
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            SecurityOrigin.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.SecurityOrigin";
             };
 
             return SecurityOrigin;
@@ -11905,19 +9218,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified SVGRootData message, length delimited. Does not implicitly {@link optimization_guide.proto.SVGRootData.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.SVGRootData
-             * @static
-             * @param {optimization_guide.proto.ISVGRootData} message SVGRootData message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            SVGRootData.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a SVGRootData message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.SVGRootData
@@ -11947,39 +9247,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a SVGRootData message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.SVGRootData
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.SVGRootData} SVGRootData
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            SVGRootData.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a SVGRootData message.
-             * @function verify
-             * @memberof optimization_guide.proto.SVGRootData
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            SVGRootData.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.innerText != null && message.hasOwnProperty("innerText"))
-                    if (!$util.isString(message.innerText))
-                        return "innerText: string expected";
-                return null;
             };
 
             /**
@@ -12028,21 +9295,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             SVGRootData.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for SVGRootData
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.SVGRootData
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            SVGRootData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.SVGRootData";
             };
 
             return SVGRootData;
@@ -12121,19 +9373,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified CanvasData message, length delimited. Does not implicitly {@link optimization_guide.proto.CanvasData.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.CanvasData
-             * @static
-             * @param {optimization_guide.proto.ICanvasData} message CanvasData message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            CanvasData.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a CanvasData message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.CanvasData
@@ -12167,42 +9406,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a CanvasData message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.CanvasData
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.CanvasData} CanvasData
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            CanvasData.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a CanvasData message.
-             * @function verify
-             * @memberof optimization_guide.proto.CanvasData
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            CanvasData.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.layoutWidth != null && message.hasOwnProperty("layoutWidth"))
-                    if (!$util.isInteger(message.layoutWidth))
-                        return "layoutWidth: integer expected";
-                if (message.layoutHeight != null && message.hasOwnProperty("layoutHeight"))
-                    if (!$util.isInteger(message.layoutHeight))
-                        return "layoutHeight: integer expected";
-                return null;
             };
 
             /**
@@ -12257,21 +9460,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             CanvasData.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for CanvasData
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.CanvasData
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            CanvasData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.CanvasData";
             };
 
             return CanvasData;
@@ -12350,19 +9538,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified VideoData message, length delimited. Does not implicitly {@link optimization_guide.proto.VideoData.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.VideoData
-             * @static
-             * @param {optimization_guide.proto.IVideoData} message VideoData message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            VideoData.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a VideoData message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.VideoData
@@ -12396,44 +9571,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a VideoData message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.VideoData
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.VideoData} VideoData
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            VideoData.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a VideoData message.
-             * @function verify
-             * @memberof optimization_guide.proto.VideoData
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            VideoData.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.url != null && message.hasOwnProperty("url"))
-                    if (!$util.isString(message.url))
-                        return "url: string expected";
-                if (message.securityOrigin != null && message.hasOwnProperty("securityOrigin")) {
-                    let error = $root.optimization_guide.proto.SecurityOrigin.verify(message.securityOrigin);
-                    if (error)
-                        return "securityOrigin." + error;
-                }
-                return null;
             };
 
             /**
@@ -12491,21 +9628,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             VideoData.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for VideoData
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.VideoData
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            VideoData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.VideoData";
             };
 
             return VideoData;
@@ -12589,19 +9711,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified AnchorData message, length delimited. Does not implicitly {@link optimization_guide.proto.AnchorData.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.AnchorData
-             * @static
-             * @param {optimization_guide.proto.IAnchorData} message AnchorData message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            AnchorData.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes an AnchorData message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.AnchorData
@@ -12642,55 +9751,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes an AnchorData message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.AnchorData
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.AnchorData} AnchorData
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            AnchorData.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies an AnchorData message.
-             * @function verify
-             * @memberof optimization_guide.proto.AnchorData
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            AnchorData.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.url != null && message.hasOwnProperty("url"))
-                    if (!$util.isString(message.url))
-                        return "url: string expected";
-                if (message.rel != null && message.hasOwnProperty("rel")) {
-                    if (!Array.isArray(message.rel))
-                        return "rel: array expected";
-                    for (let i = 0; i < message.rel.length; ++i)
-                        switch (message.rel[i]) {
-                        default:
-                            return "rel: enum value[] expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
-                        case 5:
-                            break;
-                        }
-                }
-                return null;
             };
 
             /**
@@ -12785,21 +9845,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
-            /**
-             * Gets the default type url for AnchorData
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.AnchorData
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            AnchorData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.AnchorData";
-            };
-
             return AnchorData;
         })();
 
@@ -12881,19 +9926,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified FormInfo message, length delimited. Does not implicitly {@link optimization_guide.proto.FormInfo.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.FormInfo
-             * @static
-             * @param {optimization_guide.proto.IFormInfo} message FormInfo message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            FormInfo.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a FormInfo message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.FormInfo
@@ -12927,42 +9959,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a FormInfo message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.FormInfo
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.FormInfo} FormInfo
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            FormInfo.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a FormInfo message.
-             * @function verify
-             * @memberof optimization_guide.proto.FormInfo
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            FormInfo.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.formName != null && message.hasOwnProperty("formName"))
-                    if (!$util.isString(message.formName))
-                        return "formName: string expected";
-                if (message.actionUrl != null && message.hasOwnProperty("actionUrl"))
-                    if (!$util.isString(message.actionUrl))
-                        return "actionUrl: string expected";
-                return null;
             };
 
             /**
@@ -13017,21 +10013,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             FormInfo.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for FormInfo
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.FormInfo
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            FormInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.FormInfo";
             };
 
             return FormInfo;
@@ -13232,19 +10213,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified FormControlData message, length delimited. Does not implicitly {@link optimization_guide.proto.FormControlData.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.FormControlData
-             * @static
-             * @param {optimization_guide.proto.IFormControlData} message FormControlData message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            FormControlData.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a FormControlData message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.FormControlData
@@ -13323,135 +10291,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a FormControlData message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.FormControlData
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.FormControlData} FormControlData
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            FormControlData.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a FormControlData message.
-             * @function verify
-             * @memberof optimization_guide.proto.FormControlData
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            FormControlData.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.fieldName != null && message.hasOwnProperty("fieldName"))
-                    if (!$util.isString(message.fieldName))
-                        return "fieldName: string expected";
-                if (message.fieldValue != null && message.hasOwnProperty("fieldValue"))
-                    if (!$util.isString(message.fieldValue))
-                        return "fieldValue: string expected";
-                if (message.formControlType != null && message.hasOwnProperty("formControlType"))
-                    switch (message.formControlType) {
-                    default:
-                        return "formControlType: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7:
-                    case 8:
-                    case 9:
-                    case 10:
-                    case 11:
-                    case 12:
-                    case 13:
-                    case 15:
-                    case 16:
-                    case 17:
-                    case 18:
-                    case 19:
-                    case 20:
-                    case 21:
-                    case 22:
-                    case 23:
-                    case 24:
-                    case 25:
-                    case 26:
-                    case 27:
-                    case 28:
-                    case 29:
-                    case 30:
-                    case 31:
-                    case 32:
-                    case 33:
-                        break;
-                    }
-                if (message.selectOptions != null && message.hasOwnProperty("selectOptions")) {
-                    if (!Array.isArray(message.selectOptions))
-                        return "selectOptions: array expected";
-                    for (let i = 0; i < message.selectOptions.length; ++i) {
-                        let error = $root.optimization_guide.proto.SelectOption.verify(message.selectOptions[i]);
-                        if (error)
-                            return "selectOptions." + error;
-                    }
-                }
-                if (message.placeholder != null && message.hasOwnProperty("placeholder"))
-                    if (!$util.isString(message.placeholder))
-                        return "placeholder: string expected";
-                if (message.isChecked != null && message.hasOwnProperty("isChecked"))
-                    if (typeof message.isChecked !== "boolean")
-                        return "isChecked: boolean expected";
-                if (message.isRequired != null && message.hasOwnProperty("isRequired"))
-                    if (typeof message.isRequired !== "boolean")
-                        return "isRequired: boolean expected";
-                if (message.redactionDecision != null && message.hasOwnProperty("redactionDecision"))
-                    switch (message.redactionDecision) {
-                    default:
-                        return "redactionDecision: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7:
-                    case 8:
-                    case 9:
-                        break;
-                    }
-                if (message.coarseAutofillFieldType != null && message.hasOwnProperty("coarseAutofillFieldType")) {
-                    if (!Array.isArray(message.coarseAutofillFieldType))
-                        return "coarseAutofillFieldType: array expected";
-                    for (let i = 0; i < message.coarseAutofillFieldType.length; ++i)
-                        switch (message.coarseAutofillFieldType[i]) {
-                        default:
-                            return "coarseAutofillFieldType: enum value[] expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                            break;
-                        }
-                }
-                if (message.autofillSectionId != null && message.hasOwnProperty("autofillSectionId"))
-                    if (!$util.isInteger(message.autofillSectionId))
-                        return "autofillSectionId: integer expected";
-                if (message.isReadonly != null && message.hasOwnProperty("isReadonly"))
-                    if (typeof message.isReadonly !== "boolean")
-                        return "isReadonly: boolean expected";
-                return null;
             };
 
             /**
@@ -13780,21 +10619,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
-            /**
-             * Gets the default type url for FormControlData
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.FormControlData
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            FormControlData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.FormControlData";
-            };
-
             return FormControlData;
         })();
 
@@ -13906,19 +10730,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified SelectOption message, length delimited. Does not implicitly {@link optimization_guide.proto.SelectOption.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.SelectOption
-             * @static
-             * @param {optimization_guide.proto.ISelectOption} message SelectOption message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            SelectOption.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a SelectOption message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.SelectOption
@@ -13960,48 +10771,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a SelectOption message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.SelectOption
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.SelectOption} SelectOption
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            SelectOption.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a SelectOption message.
-             * @function verify
-             * @memberof optimization_guide.proto.SelectOption
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            SelectOption.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.value != null && message.hasOwnProperty("value"))
-                    if (!$util.isString(message.value))
-                        return "value: string expected";
-                if (message.text != null && message.hasOwnProperty("text"))
-                    if (!$util.isString(message.text))
-                        return "text: string expected";
-                if (message.isSelected != null && message.hasOwnProperty("isSelected"))
-                    if (typeof message.isSelected !== "boolean")
-                        return "isSelected: boolean expected";
-                if (message.isDisabled != null && message.hasOwnProperty("isDisabled"))
-                    if (typeof message.isDisabled !== "boolean")
-                        return "isDisabled: boolean expected";
-                return null;
             };
 
             /**
@@ -14066,21 +10835,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             SelectOption.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for SelectOption
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.SelectOption
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            SelectOption.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.SelectOption";
             };
 
             return SelectOption;
@@ -14158,19 +10912,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified TableData message, length delimited. Does not implicitly {@link optimization_guide.proto.TableData.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.TableData
-             * @static
-             * @param {optimization_guide.proto.ITableData} message TableData message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            TableData.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a TableData message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.TableData
@@ -14200,39 +10941,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a TableData message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.TableData
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.TableData} TableData
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            TableData.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a TableData message.
-             * @function verify
-             * @memberof optimization_guide.proto.TableData
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            TableData.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.tableName != null && message.hasOwnProperty("tableName"))
-                    if (!$util.isString(message.tableName))
-                        return "tableName: string expected";
-                return null;
             };
 
             /**
@@ -14281,21 +10989,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             TableData.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for TableData
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.TableData
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            TableData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.TableData";
             };
 
             return TableData;
@@ -14388,19 +11081,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified IframeData message, length delimited. Does not implicitly {@link optimization_guide.proto.IframeData.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.IframeData
-             * @static
-             * @param {optimization_guide.proto.IIframeData} message IframeData message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            IframeData.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes an IframeData message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.IframeData
@@ -14434,55 +11114,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes an IframeData message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.IframeData
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.IframeData} IframeData
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            IframeData.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies an IframeData message.
-             * @function verify
-             * @memberof optimization_guide.proto.IframeData
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            IframeData.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                let properties = {};
-                if (message.frameData != null && message.hasOwnProperty("frameData")) {
-                    properties.data = 1;
-                    {
-                        let error = $root.optimization_guide.proto.FrameData.verify(message.frameData);
-                        if (error)
-                            return "frameData." + error;
-                    }
-                }
-                if (message.redactedFrameMetadata != null && message.hasOwnProperty("redactedFrameMetadata")) {
-                    if (properties.data === 1)
-                        return "data: multiple values";
-                    properties.data = 1;
-                    {
-                        let error = $root.optimization_guide.proto.IframeData.RedactedFrameMetadata.verify(message.redactedFrameMetadata);
-                        if (error)
-                            return "redactedFrameMetadata." + error;
-                    }
-                }
-                return null;
             };
 
             /**
@@ -14547,21 +11178,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
-            /**
-             * Gets the default type url for IframeData
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.IframeData
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            IframeData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.IframeData";
-            };
-
             IframeData.RedactedFrameMetadata = (function() {
 
                 /**
@@ -14624,19 +11240,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 };
 
                 /**
-                 * Encodes the specified RedactedFrameMetadata message, length delimited. Does not implicitly {@link optimization_guide.proto.IframeData.RedactedFrameMetadata.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof optimization_guide.proto.IframeData.RedactedFrameMetadata
-                 * @static
-                 * @param {optimization_guide.proto.IframeData.IRedactedFrameMetadata} message RedactedFrameMetadata message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                RedactedFrameMetadata.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-
-                /**
                  * Decodes a RedactedFrameMetadata message from the specified reader or buffer.
                  * @function decode
                  * @memberof optimization_guide.proto.IframeData.RedactedFrameMetadata
@@ -14666,45 +11269,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                         }
                     }
                     return message;
-                };
-
-                /**
-                 * Decodes a RedactedFrameMetadata message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof optimization_guide.proto.IframeData.RedactedFrameMetadata
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {optimization_guide.proto.IframeData.RedactedFrameMetadata} RedactedFrameMetadata
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                RedactedFrameMetadata.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-
-                /**
-                 * Verifies a RedactedFrameMetadata message.
-                 * @function verify
-                 * @memberof optimization_guide.proto.IframeData.RedactedFrameMetadata
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                RedactedFrameMetadata.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.reason != null && message.hasOwnProperty("reason"))
-                        switch (message.reason) {
-                        default:
-                            return "reason: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
-                    return null;
                 };
 
                 /**
@@ -14771,21 +11335,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                  */
                 RedactedFrameMetadata.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-
-                /**
-                 * Gets the default type url for RedactedFrameMetadata
-                 * @function getTypeUrl
-                 * @memberof optimization_guide.proto.IframeData.RedactedFrameMetadata
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                RedactedFrameMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/optimization_guide.proto.IframeData.RedactedFrameMetadata";
                 };
 
                 /**
@@ -14980,19 +11529,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified FrameData message, length delimited. Does not implicitly {@link optimization_guide.proto.FrameData.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.FrameData
-             * @static
-             * @param {optimization_guide.proto.IFrameData} message FrameData message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            FrameData.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a FrameData message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.FrameData
@@ -15058,85 +11594,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a FrameData message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.FrameData
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.FrameData} FrameData
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            FrameData.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a FrameData message.
-             * @function verify
-             * @memberof optimization_guide.proto.FrameData
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            FrameData.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.securityOrigin != null && message.hasOwnProperty("securityOrigin")) {
-                    let error = $root.optimization_guide.proto.SecurityOrigin.verify(message.securityOrigin);
-                    if (error)
-                        return "securityOrigin." + error;
-                }
-                if (message.frameInteractionInfo != null && message.hasOwnProperty("frameInteractionInfo")) {
-                    let error = $root.optimization_guide.proto.FrameInteractionInfo.verify(message.frameInteractionInfo);
-                    if (error)
-                        return "frameInteractionInfo." + error;
-                }
-                if (message.documentIdentifier != null && message.hasOwnProperty("documentIdentifier")) {
-                    let error = $root.optimization_guide.proto.DocumentIdentifier.verify(message.documentIdentifier);
-                    if (error)
-                        return "documentIdentifier." + error;
-                }
-                if (message.url != null && message.hasOwnProperty("url"))
-                    if (!$util.isString(message.url))
-                        return "url: string expected";
-                if (message.title != null && message.hasOwnProperty("title"))
-                    if (!$util.isString(message.title))
-                        return "title: string expected";
-                if (message.paidContentMetadata != null && message.hasOwnProperty("paidContentMetadata")) {
-                    let error = $root.optimization_guide.proto.PaidContentMetadata.verify(message.paidContentMetadata);
-                    if (error)
-                        return "paidContentMetadata." + error;
-                }
-                if (message.mediaData != null && message.hasOwnProperty("mediaData")) {
-                    let error = $root.optimization_guide.proto.MediaData.verify(message.mediaData);
-                    if (error)
-                        return "mediaData." + error;
-                }
-                if (message.scriptTools != null && message.hasOwnProperty("scriptTools")) {
-                    if (!Array.isArray(message.scriptTools))
-                        return "scriptTools: array expected";
-                    for (let i = 0; i < message.scriptTools.length; ++i) {
-                        let error = $root.optimization_guide.proto.ScriptTool.verify(message.scriptTools[i]);
-                        if (error)
-                            return "scriptTools." + error;
-                    }
-                }
-                if (message.scriptToolResults != null && message.hasOwnProperty("scriptToolResults")) {
-                    if (!Array.isArray(message.scriptToolResults))
-                        return "scriptToolResults: array expected";
-                    for (let i = 0; i < message.scriptToolResults.length; ++i) {
-                        let error = $root.optimization_guide.proto.ScriptToolResult.verify(message.scriptToolResults[i]);
-                        if (error)
-                            return "scriptToolResults." + error;
-                    }
-                }
-                return null;
             };
 
             /**
@@ -15267,21 +11724,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
-            /**
-             * Gets the default type url for FrameData
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.FrameData
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            FrameData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.FrameData";
-            };
-
             return FrameData;
         })();
 
@@ -15373,19 +11815,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified FrameInteractionInfo message, length delimited. Does not implicitly {@link optimization_guide.proto.FrameInteractionInfo.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.FrameInteractionInfo
-             * @static
-             * @param {optimization_guide.proto.IFrameInteractionInfo} message FrameInteractionInfo message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            FrameInteractionInfo.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a FrameInteractionInfo message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.FrameInteractionInfo
@@ -15423,47 +11852,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a FrameInteractionInfo message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.FrameInteractionInfo
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.FrameInteractionInfo} FrameInteractionInfo
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            FrameInteractionInfo.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a FrameInteractionInfo message.
-             * @function verify
-             * @memberof optimization_guide.proto.FrameInteractionInfo
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            FrameInteractionInfo.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.selection != null && message.hasOwnProperty("selection")) {
-                    let error = $root.optimization_guide.proto.Selection.verify(message.selection);
-                    if (error)
-                        return "selection." + error;
-                }
-                if (message.focusedNodeId != null && message.hasOwnProperty("focusedNodeId"))
-                    if (!$util.isInteger(message.focusedNodeId))
-                        return "focusedNodeId: integer expected";
-                if (message.accessibilityFocusedNodeId != null && message.hasOwnProperty("accessibilityFocusedNodeId"))
-                    if (!$util.isInteger(message.accessibilityFocusedNodeId))
-                        return "accessibilityFocusedNodeId: integer expected";
-                return null;
             };
 
             /**
@@ -15526,21 +11914,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             FrameInteractionInfo.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for FrameInteractionInfo
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.FrameInteractionInfo
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            FrameInteractionInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.FrameInteractionInfo";
             };
 
             return FrameInteractionInfo;
@@ -15660,19 +12033,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified Selection message, length delimited. Does not implicitly {@link optimization_guide.proto.Selection.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.Selection
-             * @static
-             * @param {optimization_guide.proto.ISelection} message Selection message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            Selection.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a Selection message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.Selection
@@ -15718,51 +12078,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a Selection message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.Selection
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.Selection} Selection
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            Selection.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a Selection message.
-             * @function verify
-             * @memberof optimization_guide.proto.Selection
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            Selection.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.startNodeId != null && message.hasOwnProperty("startNodeId"))
-                    if (!$util.isInteger(message.startNodeId))
-                        return "startNodeId: integer expected";
-                if (message.startOffset != null && message.hasOwnProperty("startOffset"))
-                    if (!$util.isInteger(message.startOffset))
-                        return "startOffset: integer expected";
-                if (message.endNodeId != null && message.hasOwnProperty("endNodeId"))
-                    if (!$util.isInteger(message.endNodeId))
-                        return "endNodeId: integer expected";
-                if (message.endOffset != null && message.hasOwnProperty("endOffset"))
-                    if (!$util.isInteger(message.endOffset))
-                        return "endOffset: integer expected";
-                if (message.selectedText != null && message.hasOwnProperty("selectedText"))
-                    if (!$util.isString(message.selectedText))
-                        return "selectedText: string expected";
-                return null;
             };
 
             /**
@@ -15832,21 +12147,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             Selection.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for Selection
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.Selection
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            Selection.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.Selection";
             };
 
             return Selection;
@@ -15921,19 +12221,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified DocumentIdentifier message, length delimited. Does not implicitly {@link optimization_guide.proto.DocumentIdentifier.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.DocumentIdentifier
-             * @static
-             * @param {optimization_guide.proto.IDocumentIdentifier} message DocumentIdentifier message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            DocumentIdentifier.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a DocumentIdentifier message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.DocumentIdentifier
@@ -15963,39 +12250,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a DocumentIdentifier message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.DocumentIdentifier
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.DocumentIdentifier} DocumentIdentifier
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            DocumentIdentifier.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a DocumentIdentifier message.
-             * @function verify
-             * @memberof optimization_guide.proto.DocumentIdentifier
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            DocumentIdentifier.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.serializedToken != null && message.hasOwnProperty("serializedToken"))
-                    if (!$util.isString(message.serializedToken))
-                        return "serializedToken: string expected";
-                return null;
             };
 
             /**
@@ -16044,21 +12298,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             DocumentIdentifier.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for DocumentIdentifier
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.DocumentIdentifier
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            DocumentIdentifier.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.DocumentIdentifier";
             };
 
             return DocumentIdentifier;
@@ -16127,19 +12366,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified PaidContentMetadata message, length delimited. Does not implicitly {@link optimization_guide.proto.PaidContentMetadata.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.PaidContentMetadata
-             * @static
-             * @param {optimization_guide.proto.IPaidContentMetadata} message PaidContentMetadata message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            PaidContentMetadata.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a PaidContentMetadata message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.PaidContentMetadata
@@ -16169,39 +12395,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a PaidContentMetadata message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.PaidContentMetadata
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.PaidContentMetadata} PaidContentMetadata
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            PaidContentMetadata.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a PaidContentMetadata message.
-             * @function verify
-             * @memberof optimization_guide.proto.PaidContentMetadata
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            PaidContentMetadata.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.containsPaidContent != null && message.hasOwnProperty("containsPaidContent"))
-                    if (typeof message.containsPaidContent !== "boolean")
-                        return "containsPaidContent: boolean expected";
-                return null;
             };
 
             /**
@@ -16250,21 +12443,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             PaidContentMetadata.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for PaidContentMetadata
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.PaidContentMetadata
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            PaidContentMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.PaidContentMetadata";
             };
 
             return PaidContentMetadata;
@@ -16422,19 +12600,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified MediaData message, length delimited. Does not implicitly {@link optimization_guide.proto.MediaData.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.MediaData
-             * @static
-             * @param {optimization_guide.proto.IMediaData} message MediaData message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            MediaData.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a MediaData message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.MediaData
@@ -16494,72 +12659,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a MediaData message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.MediaData
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.MediaData} MediaData
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            MediaData.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a MediaData message.
-             * @function verify
-             * @memberof optimization_guide.proto.MediaData
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            MediaData.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.mediaDataType != null && message.hasOwnProperty("mediaDataType"))
-                    switch (message.mediaDataType) {
-                    default:
-                        return "mediaDataType: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                        break;
-                    }
-                if (message.transcripts != null && message.hasOwnProperty("transcripts")) {
-                    if (!Array.isArray(message.transcripts))
-                        return "transcripts: array expected";
-                    for (let i = 0; i < message.transcripts.length; ++i) {
-                        let error = $root.optimization_guide.proto.MediaTranscript.verify(message.transcripts[i]);
-                        if (error)
-                            return "transcripts." + error;
-                    }
-                }
-                if (message.durationMilliseconds != null && message.hasOwnProperty("durationMilliseconds"))
-                    if (!$util.isInteger(message.durationMilliseconds) && !(message.durationMilliseconds && $util.isInteger(message.durationMilliseconds.low) && $util.isInteger(message.durationMilliseconds.high)))
-                        return "durationMilliseconds: integer|Long expected";
-                if (message.currentPositionMilliseconds != null && message.hasOwnProperty("currentPositionMilliseconds"))
-                    if (!$util.isInteger(message.currentPositionMilliseconds) && !(message.currentPositionMilliseconds && $util.isInteger(message.currentPositionMilliseconds.low) && $util.isInteger(message.currentPositionMilliseconds.high)))
-                        return "currentPositionMilliseconds: integer|Long expected";
-                if (message.isPlaying != null && message.hasOwnProperty("isPlaying"))
-                    if (typeof message.isPlaying !== "boolean")
-                        return "isPlaying: boolean expected";
-                if (message.title != null && message.hasOwnProperty("title"))
-                    if (!$util.isString(message.title))
-                        return "title: string expected";
-                if (message.artist != null && message.hasOwnProperty("artist"))
-                    if (!$util.isString(message.artist))
-                        return "artist: string expected";
-                if (message.album != null && message.hasOwnProperty("album"))
-                    if (!$util.isString(message.album))
-                        return "album: string expected";
-                return null;
             };
 
             /**
@@ -16704,21 +12803,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
-            /**
-             * Gets the default type url for MediaData
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.MediaData
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            MediaData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.MediaData";
-            };
-
             return MediaData;
         })();
 
@@ -16796,19 +12880,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified MediaTranscript message, length delimited. Does not implicitly {@link optimization_guide.proto.MediaTranscript.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.MediaTranscript
-             * @static
-             * @param {optimization_guide.proto.IMediaTranscript} message MediaTranscript message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            MediaTranscript.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a MediaTranscript message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.MediaTranscript
@@ -16842,42 +12913,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a MediaTranscript message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.MediaTranscript
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.MediaTranscript} MediaTranscript
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            MediaTranscript.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a MediaTranscript message.
-             * @function verify
-             * @memberof optimization_guide.proto.MediaTranscript
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            MediaTranscript.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.text != null && message.hasOwnProperty("text"))
-                    if (!$util.isString(message.text))
-                        return "text: string expected";
-                if (message.startTimestampMilliseconds != null && message.hasOwnProperty("startTimestampMilliseconds"))
-                    if (!$util.isInteger(message.startTimestampMilliseconds) && !(message.startTimestampMilliseconds && $util.isInteger(message.startTimestampMilliseconds.low) && $util.isInteger(message.startTimestampMilliseconds.high)))
-                        return "startTimestampMilliseconds: integer|Long expected";
-                return null;
             };
 
             /**
@@ -16946,21 +12981,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             MediaTranscript.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for MediaTranscript
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.MediaTranscript
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            MediaTranscript.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.MediaTranscript";
             };
 
             return MediaTranscript;
@@ -17063,19 +13083,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified ScriptTool message, length delimited. Does not implicitly {@link optimization_guide.proto.ScriptTool.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.ScriptTool
-             * @static
-             * @param {optimization_guide.proto.IScriptTool} message ScriptTool message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            ScriptTool.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a ScriptTool message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.ScriptTool
@@ -17117,50 +13124,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a ScriptTool message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.ScriptTool
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.ScriptTool} ScriptTool
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            ScriptTool.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a ScriptTool message.
-             * @function verify
-             * @memberof optimization_guide.proto.ScriptTool
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            ScriptTool.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.name != null && message.hasOwnProperty("name"))
-                    if (!$util.isString(message.name))
-                        return "name: string expected";
-                if (message.description != null && message.hasOwnProperty("description"))
-                    if (!$util.isString(message.description))
-                        return "description: string expected";
-                if (message.inputSchema != null && message.hasOwnProperty("inputSchema"))
-                    if (!$util.isString(message.inputSchema))
-                        return "inputSchema: string expected";
-                if (message.annotations != null && message.hasOwnProperty("annotations")) {
-                    let error = $root.optimization_guide.proto.ScriptToolAnnotations.verify(message.annotations);
-                    if (error)
-                        return "annotations." + error;
-                }
-                return null;
             };
 
             /**
@@ -17230,21 +13193,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
-            /**
-             * Gets the default type url for ScriptTool
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.ScriptTool
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            ScriptTool.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.ScriptTool";
-            };
-
             return ScriptTool;
         })();
 
@@ -17310,19 +13258,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified ScriptToolAnnotations message, length delimited. Does not implicitly {@link optimization_guide.proto.ScriptToolAnnotations.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.ScriptToolAnnotations
-             * @static
-             * @param {optimization_guide.proto.IScriptToolAnnotations} message ScriptToolAnnotations message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            ScriptToolAnnotations.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a ScriptToolAnnotations message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.ScriptToolAnnotations
@@ -17352,39 +13287,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a ScriptToolAnnotations message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.ScriptToolAnnotations
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.ScriptToolAnnotations} ScriptToolAnnotations
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            ScriptToolAnnotations.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a ScriptToolAnnotations message.
-             * @function verify
-             * @memberof optimization_guide.proto.ScriptToolAnnotations
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            ScriptToolAnnotations.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.readOnly != null && message.hasOwnProperty("readOnly"))
-                    if (typeof message.readOnly !== "boolean")
-                        return "readOnly: boolean expected";
-                return null;
             };
 
             /**
@@ -17433,21 +13335,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             ScriptToolAnnotations.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for ScriptToolAnnotations
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.ScriptToolAnnotations
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            ScriptToolAnnotations.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.ScriptToolAnnotations";
             };
 
             return ScriptToolAnnotations;
@@ -17565,19 +13452,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified ScriptToolResult message, length delimited. Does not implicitly {@link optimization_guide.proto.ScriptToolResult.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.ScriptToolResult
-             * @static
-             * @param {optimization_guide.proto.IScriptToolResult} message ScriptToolResult message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            ScriptToolResult.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a ScriptToolResult message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.ScriptToolResult
@@ -17623,53 +13497,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a ScriptToolResult message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.ScriptToolResult
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.ScriptToolResult} ScriptToolResult
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            ScriptToolResult.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a ScriptToolResult message.
-             * @function verify
-             * @memberof optimization_guide.proto.ScriptToolResult
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            ScriptToolResult.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.indexOfScriptToolAction != null && message.hasOwnProperty("indexOfScriptToolAction"))
-                    if (!$util.isInteger(message.indexOfScriptToolAction))
-                        return "indexOfScriptToolAction: integer expected";
-                if (message.result != null && message.hasOwnProperty("result"))
-                    if (!$util.isString(message.result))
-                        return "result: string expected";
-                if (message.toolName != null && message.hasOwnProperty("toolName"))
-                    if (!$util.isString(message.toolName))
-                        return "toolName: string expected";
-                if (message.inputArguments != null && message.hasOwnProperty("inputArguments"))
-                    if (!$util.isString(message.inputArguments))
-                        return "inputArguments: string expected";
-                if (message.tool != null && message.hasOwnProperty("tool")) {
-                    let error = $root.optimization_guide.proto.ScriptTool.verify(message.tool);
-                    if (error)
-                        return "tool." + error;
-                }
-                return null;
             };
 
             /**
@@ -17744,21 +13571,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
-            /**
-             * Gets the default type url for ScriptToolResult
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.ScriptToolResult
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            ScriptToolResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.ScriptToolResult";
-            };
-
             return ScriptToolResult;
         })();
 
@@ -17824,19 +13636,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified TableRowData message, length delimited. Does not implicitly {@link optimization_guide.proto.TableRowData.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.TableRowData
-             * @static
-             * @param {optimization_guide.proto.ITableRowData} message TableRowData message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            TableRowData.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a TableRowData message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.TableRowData
@@ -17866,46 +13665,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a TableRowData message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.TableRowData
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.TableRowData} TableRowData
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            TableRowData.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a TableRowData message.
-             * @function verify
-             * @memberof optimization_guide.proto.TableRowData
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            TableRowData.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.type != null && message.hasOwnProperty("type"))
-                    switch (message.type) {
-                    default:
-                        return "type: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                        break;
-                    }
-                return null;
             };
 
             /**
@@ -17976,21 +13735,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             TableRowData.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for TableRowData
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.TableRowData
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            TableRowData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.TableRowData";
             };
 
             return TableRowData;
@@ -18106,19 +13850,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified PageInteractionInfo message, length delimited. Does not implicitly {@link optimization_guide.proto.PageInteractionInfo.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.PageInteractionInfo
-             * @static
-             * @param {optimization_guide.proto.IPageInteractionInfo} message PageInteractionInfo message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            PageInteractionInfo.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a PageInteractionInfo message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.PageInteractionInfo
@@ -18160,52 +13891,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a PageInteractionInfo message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.PageInteractionInfo
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.PageInteractionInfo} PageInteractionInfo
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            PageInteractionInfo.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a PageInteractionInfo message.
-             * @function verify
-             * @memberof optimization_guide.proto.PageInteractionInfo
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            PageInteractionInfo.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.focusedNodeId != null && message.hasOwnProperty("focusedNodeId"))
-                    if (!$util.isInteger(message.focusedNodeId))
-                        return "focusedNodeId: integer expected";
-                if (message.accessibilityFocusedNodeId != null && message.hasOwnProperty("accessibilityFocusedNodeId"))
-                    if (!$util.isInteger(message.accessibilityFocusedNodeId))
-                        return "accessibilityFocusedNodeId: integer expected";
-                if (message.mousePosition != null && message.hasOwnProperty("mousePosition")) {
-                    let error = $root.optimization_guide.proto.Point.verify(message.mousePosition);
-                    if (error)
-                        return "mousePosition." + error;
-                }
-                if (message.focusedFrame != null && message.hasOwnProperty("focusedFrame")) {
-                    let error = $root.optimization_guide.proto.DocumentIdentifier.verify(message.focusedFrame);
-                    if (error)
-                        return "focusedFrame." + error;
-                }
-                return null;
             };
 
             /**
@@ -18276,21 +13961,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             PageInteractionInfo.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for PageInteractionInfo
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.PageInteractionInfo
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            PageInteractionInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.PageInteractionInfo";
             };
 
             return PageInteractionInfo;
@@ -18369,19 +14039,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified Point message, length delimited. Does not implicitly {@link optimization_guide.proto.Point.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.Point
-             * @static
-             * @param {optimization_guide.proto.IPoint} message Point message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            Point.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a Point message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.Point
@@ -18415,42 +14072,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a Point message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.Point
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.Point} Point
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            Point.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a Point message.
-             * @function verify
-             * @memberof optimization_guide.proto.Point
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            Point.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.x != null && message.hasOwnProperty("x"))
-                    if (!$util.isInteger(message.x))
-                        return "x: integer expected";
-                if (message.y != null && message.hasOwnProperty("y"))
-                    if (!$util.isInteger(message.y))
-                        return "y: integer expected";
-                return null;
             };
 
             /**
@@ -18505,21 +14126,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             Point.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for Point
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.Point
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            Point.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.Point";
             };
 
             return Point;
@@ -18625,19 +14231,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified PopupWindow message, length delimited. Does not implicitly {@link optimization_guide.proto.PopupWindow.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.PopupWindow
-             * @static
-             * @param {optimization_guide.proto.IPopupWindow} message PopupWindow message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            PopupWindow.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a PopupWindow message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.PopupWindow
@@ -18679,54 +14272,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a PopupWindow message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.PopupWindow
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.PopupWindow} PopupWindow
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            PopupWindow.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a PopupWindow message.
-             * @function verify
-             * @memberof optimization_guide.proto.PopupWindow
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            PopupWindow.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.rootNode != null && message.hasOwnProperty("rootNode")) {
-                    let error = $root.optimization_guide.proto.ContentNode.verify(message.rootNode);
-                    if (error)
-                        return "rootNode." + error;
-                }
-                if (message.visibleBoundingBox != null && message.hasOwnProperty("visibleBoundingBox")) {
-                    let error = $root.optimization_guide.proto.BoundingRect.verify(message.visibleBoundingBox);
-                    if (error)
-                        return "visibleBoundingBox." + error;
-                }
-                if (message.openerDocumentId != null && message.hasOwnProperty("openerDocumentId")) {
-                    let error = $root.optimization_guide.proto.DocumentIdentifier.verify(message.openerDocumentId);
-                    if (error)
-                        return "openerDocumentId." + error;
-                }
-                if (message.openerCommonAncestorDomNodeId != null && message.hasOwnProperty("openerCommonAncestorDomNodeId"))
-                    if (!$util.isInteger(message.openerCommonAncestorDomNodeId))
-                        return "openerCommonAncestorDomNodeId: integer expected";
-                return null;
             };
 
             /**
@@ -18802,21 +14347,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
-            /**
-             * Gets the default type url for PopupWindow
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.PopupWindow
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            PopupWindow.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.PopupWindow";
-            };
-
             return PopupWindow;
         })();
 
@@ -18883,19 +14413,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified ProfileInformation message, length delimited. Does not implicitly {@link optimization_guide.proto.ProfileInformation.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.ProfileInformation
-             * @static
-             * @param {optimization_guide.proto.IProfileInformation} message ProfileInformation message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            ProfileInformation.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a ProfileInformation message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.ProfileInformation
@@ -18925,41 +14442,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a ProfileInformation message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.ProfileInformation
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.ProfileInformation} ProfileInformation
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            ProfileInformation.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a ProfileInformation message.
-             * @function verify
-             * @memberof optimization_guide.proto.ProfileInformation
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            ProfileInformation.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.autofillInformation != null && message.hasOwnProperty("autofillInformation")) {
-                    let error = $root.optimization_guide.proto.AutofillInformation.verify(message.autofillInformation);
-                    if (error)
-                        return "autofillInformation." + error;
-                }
-                return null;
             };
 
             /**
@@ -19011,21 +14493,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             ProfileInformation.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for ProfileInformation
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.ProfileInformation
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            ProfileInformation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.ProfileInformation";
             };
 
             return ProfileInformation;
@@ -19099,19 +14566,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified AutofillInformation message, length delimited. Does not implicitly {@link optimization_guide.proto.AutofillInformation.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.AutofillInformation
-             * @static
-             * @param {optimization_guide.proto.IAutofillInformation} message AutofillInformation message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            AutofillInformation.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes an AutofillInformation message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.AutofillInformation
@@ -19148,49 +14602,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes an AutofillInformation message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.AutofillInformation
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.AutofillInformation} AutofillInformation
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            AutofillInformation.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies an AutofillInformation message.
-             * @function verify
-             * @memberof optimization_guide.proto.AutofillInformation
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            AutofillInformation.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.fillableData != null && message.hasOwnProperty("fillableData")) {
-                    if (!Array.isArray(message.fillableData))
-                        return "fillableData: array expected";
-                    for (let i = 0; i < message.fillableData.length; ++i)
-                        switch (message.fillableData[i]) {
-                        default:
-                            return "fillableData: enum value[] expected";
-                        case 0:
-                        case 1:
-                        case 6:
-                            break;
-                        }
-                }
-                return null;
             };
 
             /**
@@ -19265,21 +14676,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             AutofillInformation.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for AutofillInformation
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.AutofillInformation
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            AutofillInformation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.AutofillInformation";
             };
 
             /**
@@ -19368,19 +14764,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified GeminiInChromePageMetadata message, length delimited. Does not implicitly {@link optimization_guide.proto.GeminiInChromePageMetadata.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.GeminiInChromePageMetadata
-             * @static
-             * @param {optimization_guide.proto.IGeminiInChromePageMetadata} message GeminiInChromePageMetadata message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            GeminiInChromePageMetadata.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a GeminiInChromePageMetadata message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.GeminiInChromePageMetadata
@@ -19410,41 +14793,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a GeminiInChromePageMetadata message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.GeminiInChromePageMetadata
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.GeminiInChromePageMetadata} GeminiInChromePageMetadata
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            GeminiInChromePageMetadata.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a GeminiInChromePageMetadata message.
-             * @function verify
-             * @memberof optimization_guide.proto.GeminiInChromePageMetadata
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            GeminiInChromePageMetadata.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.screenshotInfo != null && message.hasOwnProperty("screenshotInfo")) {
-                    let error = $root.optimization_guide.proto.ScreenshotInfo.verify(message.screenshotInfo);
-                    if (error)
-                        return "screenshotInfo." + error;
-                }
-                return null;
             };
 
             /**
@@ -19496,21 +14844,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             GeminiInChromePageMetadata.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for GeminiInChromePageMetadata
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.GeminiInChromePageMetadata
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            GeminiInChromePageMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.GeminiInChromePageMetadata";
             };
 
             return GeminiInChromePageMetadata;
@@ -19581,19 +14914,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified ScreenshotInfo message, length delimited. Does not implicitly {@link optimization_guide.proto.ScreenshotInfo.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.ScreenshotInfo
-             * @static
-             * @param {optimization_guide.proto.IScreenshotInfo} message ScreenshotInfo message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            ScreenshotInfo.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a ScreenshotInfo message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.ScreenshotInfo
@@ -19623,39 +14943,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a ScreenshotInfo message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.ScreenshotInfo
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.ScreenshotInfo} ScreenshotInfo
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            ScreenshotInfo.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a ScreenshotInfo message.
-             * @function verify
-             * @memberof optimization_guide.proto.ScreenshotInfo
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            ScreenshotInfo.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.hasSelectionRegionInScreenshot != null && message.hasOwnProperty("hasSelectionRegionInScreenshot"))
-                    if (typeof message.hasSelectionRegionInScreenshot !== "boolean")
-                        return "hasSelectionRegionInScreenshot: boolean expected";
-                return null;
             };
 
             /**
@@ -19704,21 +14991,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             ScreenshotInfo.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for ScreenshotInfo
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.ScreenshotInfo
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            ScreenshotInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.ScreenshotInfo";
             };
 
             return ScreenshotInfo;
@@ -19797,19 +15069,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified AutofillGlobalId message, length delimited. Does not implicitly {@link optimization_guide.proto.AutofillGlobalId.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.AutofillGlobalId
-             * @static
-             * @param {optimization_guide.proto.IAutofillGlobalId} message AutofillGlobalId message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            AutofillGlobalId.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes an AutofillGlobalId message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.AutofillGlobalId
@@ -19843,42 +15102,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes an AutofillGlobalId message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.AutofillGlobalId
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.AutofillGlobalId} AutofillGlobalId
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            AutofillGlobalId.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies an AutofillGlobalId message.
-             * @function verify
-             * @memberof optimization_guide.proto.AutofillGlobalId
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            AutofillGlobalId.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.frameToken != null && message.hasOwnProperty("frameToken"))
-                    if (!$util.isString(message.frameToken))
-                        return "frameToken: string expected";
-                if (message.rendererId != null && message.hasOwnProperty("rendererId"))
-                    if (!$util.isInteger(message.rendererId) && !(message.rendererId && $util.isInteger(message.rendererId.low) && $util.isInteger(message.rendererId.high)))
-                        return "rendererId: integer|Long expected";
-                return null;
             };
 
             /**
@@ -19947,21 +15170,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             AutofillGlobalId.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for AutofillGlobalId
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.AutofillGlobalId
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            AutofillGlobalId.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.AutofillGlobalId";
             };
 
             return AutofillGlobalId;
@@ -20085,19 +15293,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified FormData message, length delimited. Does not implicitly {@link optimization_guide.proto.FormData.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.FormData
-             * @static
-             * @param {optimization_guide.proto.IFormData} message FormData message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            FormData.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a FormData message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.FormData
@@ -20145,59 +15340,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a FormData message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.FormData
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.FormData} FormData
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            FormData.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a FormData message.
-             * @function verify
-             * @memberof optimization_guide.proto.FormData
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            FormData.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.formName != null && message.hasOwnProperty("formName"))
-                    if (!$util.isString(message.formName))
-                        return "formName: string expected";
-                if (message.fields != null && message.hasOwnProperty("fields")) {
-                    if (!Array.isArray(message.fields))
-                        return "fields: array expected";
-                    for (let i = 0; i < message.fields.length; ++i) {
-                        let error = $root.optimization_guide.proto.FormFieldData.verify(message.fields[i]);
-                        if (error)
-                            return "fields." + error;
-                    }
-                }
-                if (message.globalId != null && message.hasOwnProperty("globalId")) {
-                    let error = $root.optimization_guide.proto.AutofillGlobalId.verify(message.globalId);
-                    if (error)
-                        return "globalId." + error;
-                }
-                if (message.formSignature != null && message.hasOwnProperty("formSignature"))
-                    if (!$util.isInteger(message.formSignature) && !(message.formSignature && $util.isInteger(message.formSignature.low) && $util.isInteger(message.formSignature.high)))
-                        return "formSignature: integer|Long expected";
-                if (message.actionUrl != null && message.hasOwnProperty("actionUrl"))
-                    if (!$util.isString(message.actionUrl))
-                        return "actionUrl: string expected";
-                return null;
             };
 
             /**
@@ -20296,21 +15438,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             FormData.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for FormData
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.FormData
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            FormData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.FormData";
             };
 
             return FormData;
@@ -20537,19 +15664,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified FormFieldData message, length delimited. Does not implicitly {@link optimization_guide.proto.FormFieldData.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.FormFieldData
-             * @static
-             * @param {optimization_guide.proto.IFormFieldData} message FormFieldData message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            FormFieldData.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a FormFieldData message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.FormFieldData
@@ -20633,122 +15747,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a FormFieldData message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.FormFieldData
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.FormFieldData} FormFieldData
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            FormFieldData.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a FormFieldData message.
-             * @function verify
-             * @memberof optimization_guide.proto.FormFieldData
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            FormFieldData.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.fieldName != null && message.hasOwnProperty("fieldName"))
-                    if (!$util.isString(message.fieldName))
-                        return "fieldName: string expected";
-                if (message.fieldLabel != null && message.hasOwnProperty("fieldLabel"))
-                    if (!$util.isString(message.fieldLabel))
-                        return "fieldLabel: string expected";
-                if (message.fieldValue != null && message.hasOwnProperty("fieldValue"))
-                    if (!$util.isString(message.fieldValue))
-                        return "fieldValue: string expected";
-                if (message.isVisible != null && message.hasOwnProperty("isVisible"))
-                    if (typeof message.isVisible !== "boolean")
-                        return "isVisible: boolean expected";
-                if (message.isFocusable != null && message.hasOwnProperty("isFocusable"))
-                    if (typeof message.isFocusable !== "boolean")
-                        return "isFocusable: boolean expected";
-                if (message.formControlType != null && message.hasOwnProperty("formControlType"))
-                    switch (message.formControlType) {
-                    default:
-                        return "formControlType: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7:
-                    case 8:
-                    case 9:
-                    case 10:
-                    case 11:
-                    case 12:
-                    case 13:
-                    case 15:
-                    case 16:
-                    case 17:
-                    case 18:
-                    case 19:
-                    case 20:
-                    case 21:
-                    case 22:
-                    case 23:
-                    case 24:
-                    case 25:
-                    case 26:
-                    case 27:
-                    case 28:
-                    case 29:
-                    case 30:
-                    case 31:
-                    case 32:
-                    case 33:
-                        break;
-                    }
-                if (message.selectOptions != null && message.hasOwnProperty("selectOptions")) {
-                    if (!Array.isArray(message.selectOptions))
-                        return "selectOptions: array expected";
-                    for (let i = 0; i < message.selectOptions.length; ++i) {
-                        let error = $root.optimization_guide.proto.SelectOption.verify(message.selectOptions[i]);
-                        if (error)
-                            return "selectOptions." + error;
-                    }
-                }
-                if (message.placeholder != null && message.hasOwnProperty("placeholder"))
-                    if (!$util.isString(message.placeholder))
-                        return "placeholder: string expected";
-                if (message.formControlAxNodeId != null && message.hasOwnProperty("formControlAxNodeId"))
-                    if (!$util.isInteger(message.formControlAxNodeId))
-                        return "formControlAxNodeId: integer expected";
-                if (message.isEligible != null && message.hasOwnProperty("isEligible"))
-                    if (typeof message.isEligible !== "boolean")
-                        return "isEligible: boolean expected";
-                if (message.globalId != null && message.hasOwnProperty("globalId")) {
-                    let error = $root.optimization_guide.proto.AutofillGlobalId.verify(message.globalId);
-                    if (error)
-                        return "globalId." + error;
-                }
-                if (message.fieldSignature != null && message.hasOwnProperty("fieldSignature"))
-                    if (!$util.isInteger(message.fieldSignature))
-                        return "fieldSignature: integer expected";
-                if (message.ariaLabel != null && message.hasOwnProperty("ariaLabel"))
-                    if (!$util.isString(message.ariaLabel))
-                        return "ariaLabel: string expected";
-                if (message.ariaDescription != null && message.hasOwnProperty("ariaDescription"))
-                    if (!$util.isString(message.ariaDescription))
-                        return "ariaDescription: string expected";
-                return null;
             };
 
             /**
@@ -21018,21 +16016,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
-            /**
-             * Gets the default type url for FormFieldData
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.FormFieldData
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            FormFieldData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.FormFieldData";
-            };
-
             return FormFieldData;
         })();
 
@@ -21100,19 +16083,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified TableRow message, length delimited. Does not implicitly {@link optimization_guide.proto.TableRow.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.TableRow
-             * @static
-             * @param {optimization_guide.proto.ITableRow} message TableRow message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            TableRow.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a TableRow message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.TableRow
@@ -21144,45 +16114,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a TableRow message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.TableRow
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.TableRow} TableRow
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            TableRow.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a TableRow message.
-             * @function verify
-             * @memberof optimization_guide.proto.TableRow
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            TableRow.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.cells != null && message.hasOwnProperty("cells")) {
-                    if (!Array.isArray(message.cells))
-                        return "cells: array expected";
-                    for (let i = 0; i < message.cells.length; ++i) {
-                        let error = $root.optimization_guide.proto.ContentNode.verify(message.cells[i]);
-                        if (error)
-                            return "cells." + error;
-                    }
-                }
-                return null;
             };
 
             /**
@@ -21242,21 +16173,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             TableRow.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for TableRow
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.TableRow
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            TableRow.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.TableRow";
             };
 
             return TableRow;
@@ -21348,19 +16264,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified UserAnnotationsEntry message, length delimited. Does not implicitly {@link optimization_guide.proto.UserAnnotationsEntry.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.UserAnnotationsEntry
-             * @static
-             * @param {optimization_guide.proto.IUserAnnotationsEntry} message UserAnnotationsEntry message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            UserAnnotationsEntry.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a UserAnnotationsEntry message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.UserAnnotationsEntry
@@ -21398,45 +16301,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a UserAnnotationsEntry message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.UserAnnotationsEntry
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.UserAnnotationsEntry} UserAnnotationsEntry
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            UserAnnotationsEntry.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a UserAnnotationsEntry message.
-             * @function verify
-             * @memberof optimization_guide.proto.UserAnnotationsEntry
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            UserAnnotationsEntry.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.entryId != null && message.hasOwnProperty("entryId"))
-                    if (!$util.isInteger(message.entryId) && !(message.entryId && $util.isInteger(message.entryId.low) && $util.isInteger(message.entryId.high)))
-                        return "entryId: integer|Long expected";
-                if (message.key != null && message.hasOwnProperty("key"))
-                    if (!$util.isString(message.key))
-                        return "key: string expected";
-                if (message.value != null && message.hasOwnProperty("value"))
-                    if (!$util.isString(message.value))
-                        return "value: string expected";
-                return null;
             };
 
             /**
@@ -21510,21 +16374,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             UserAnnotationsEntry.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for UserAnnotationsEntry
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.UserAnnotationsEntry
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            UserAnnotationsEntry.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.UserAnnotationsEntry";
             };
 
             return UserAnnotationsEntry;
@@ -21616,19 +16465,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified TabGroup message, length delimited. Does not implicitly {@link optimization_guide.proto.TabGroup.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.TabGroup
-             * @static
-             * @param {optimization_guide.proto.ITabGroup} message TabGroup message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            TabGroup.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a TabGroup message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.TabGroup
@@ -21668,51 +16504,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a TabGroup message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.TabGroup
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.TabGroup} TabGroup
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            TabGroup.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a TabGroup message.
-             * @function verify
-             * @memberof optimization_guide.proto.TabGroup
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            TabGroup.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.label != null && message.hasOwnProperty("label"))
-                    if (!$util.isString(message.label))
-                        return "label: string expected";
-                if (message.tabs != null && message.hasOwnProperty("tabs")) {
-                    if (!Array.isArray(message.tabs))
-                        return "tabs: array expected";
-                    for (let i = 0; i < message.tabs.length; ++i) {
-                        let error = $root.optimization_guide.proto.Tab.verify(message.tabs[i]);
-                        if (error)
-                            return "tabs." + error;
-                    }
-                }
-                if (message.groupId != null && message.hasOwnProperty("groupId"))
-                    if (!$util.isString(message.groupId))
-                        return "groupId: string expected";
-                return null;
             };
 
             /**
@@ -21784,21 +16575,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             TabGroup.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for TabGroup
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.TabGroup
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            TabGroup.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.TabGroup";
             };
 
             return TabGroup;
@@ -21899,19 +16675,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified Tab message, length delimited. Does not implicitly {@link optimization_guide.proto.Tab.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.Tab
-             * @static
-             * @param {optimization_guide.proto.ITab} message Tab message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            Tab.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a Tab message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.Tab
@@ -21953,50 +16716,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a Tab message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.Tab
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.Tab} Tab
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            Tab.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a Tab message.
-             * @function verify
-             * @memberof optimization_guide.proto.Tab
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            Tab.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.tabId != null && message.hasOwnProperty("tabId"))
-                    if (!$util.isInteger(message.tabId) && !(message.tabId && $util.isInteger(message.tabId.low) && $util.isInteger(message.tabId.high)))
-                        return "tabId: integer|Long expected";
-                if (message.title != null && message.hasOwnProperty("title"))
-                    if (!$util.isString(message.title))
-                        return "title: string expected";
-                if (message.url != null && message.hasOwnProperty("url"))
-                    if (!$util.isString(message.url))
-                        return "url: string expected";
-                if (message.pageContext != null && message.hasOwnProperty("pageContext")) {
-                    let error = $root.optimization_guide.proto.PageContext.verify(message.pageContext);
-                    if (error)
-                        return "pageContext." + error;
-                }
-                return null;
             };
 
             /**
@@ -22080,21 +16799,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
-            /**
-             * Gets the default type url for Tab
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.Tab
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            Tab.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.Tab";
-            };
-
             return Tab;
         })();
 
@@ -22171,19 +16875,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified SiteEngagementEntry message, length delimited. Does not implicitly {@link optimization_guide.proto.SiteEngagementEntry.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.SiteEngagementEntry
-             * @static
-             * @param {optimization_guide.proto.ISiteEngagementEntry} message SiteEngagementEntry message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            SiteEngagementEntry.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a SiteEngagementEntry message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.SiteEngagementEntry
@@ -22217,42 +16908,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a SiteEngagementEntry message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.SiteEngagementEntry
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.SiteEngagementEntry} SiteEngagementEntry
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            SiteEngagementEntry.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a SiteEngagementEntry message.
-             * @function verify
-             * @memberof optimization_guide.proto.SiteEngagementEntry
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            SiteEngagementEntry.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.url != null && message.hasOwnProperty("url"))
-                    if (!$util.isString(message.url))
-                        return "url: string expected";
-                if (message.score != null && message.hasOwnProperty("score"))
-                    if (typeof message.score !== "number")
-                        return "score: number expected";
-                return null;
             };
 
             /**
@@ -22307,21 +16962,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             SiteEngagementEntry.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for SiteEngagementEntry
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.SiteEngagementEntry
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            SiteEngagementEntry.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.SiteEngagementEntry";
             };
 
             return SiteEngagementEntry;
@@ -22391,19 +17031,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified SiteEngagement message, length delimited. Does not implicitly {@link optimization_guide.proto.SiteEngagement.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.SiteEngagement
-             * @static
-             * @param {optimization_guide.proto.ISiteEngagement} message SiteEngagement message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            SiteEngagement.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a SiteEngagement message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.SiteEngagement
@@ -22435,45 +17062,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a SiteEngagement message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.SiteEngagement
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.SiteEngagement} SiteEngagement
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            SiteEngagement.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a SiteEngagement message.
-             * @function verify
-             * @memberof optimization_guide.proto.SiteEngagement
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            SiteEngagement.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.entries != null && message.hasOwnProperty("entries")) {
-                    if (!Array.isArray(message.entries))
-                        return "entries: array expected";
-                    for (let i = 0; i < message.entries.length; ++i) {
-                        let error = $root.optimization_guide.proto.SiteEngagementEntry.verify(message.entries[i]);
-                        if (error)
-                            return "entries." + error;
-                    }
-                }
-                return null;
             };
 
             /**
@@ -22533,21 +17121,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             SiteEngagement.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for SiteEngagement
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.SiteEngagement
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            SiteEngagement.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.SiteEngagement";
             };
 
             return SiteEngagement;
@@ -22642,19 +17215,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified Coordinate message, length delimited. Does not implicitly {@link optimization_guide.proto.Coordinate.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.Coordinate
-             * @static
-             * @param {optimization_guide.proto.ICoordinate} message Coordinate message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            Coordinate.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a Coordinate message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.Coordinate
@@ -22692,51 +17252,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a Coordinate message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.Coordinate
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.Coordinate} Coordinate
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            Coordinate.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a Coordinate message.
-             * @function verify
-             * @memberof optimization_guide.proto.Coordinate
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            Coordinate.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.x != null && message.hasOwnProperty("x"))
-                    if (!$util.isInteger(message.x))
-                        return "x: integer expected";
-                if (message.y != null && message.hasOwnProperty("y"))
-                    if (!$util.isInteger(message.y))
-                        return "y: integer expected";
-                if (message.pixelType != null && message.hasOwnProperty("pixelType"))
-                    switch (message.pixelType) {
-                    default:
-                        return "pixelType: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                        break;
-                    }
-                return null;
             };
 
             /**
@@ -22814,21 +17329,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             Coordinate.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for Coordinate
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.Coordinate
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            Coordinate.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.Coordinate";
             };
 
             /**
@@ -22932,19 +17432,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified MetaTag message, length delimited. Does not implicitly {@link optimization_guide.proto.MetaTag.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.MetaTag
-             * @static
-             * @param {optimization_guide.proto.IMetaTag} message MetaTag message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            MetaTag.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a MetaTag message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.MetaTag
@@ -22978,42 +17465,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a MetaTag message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.MetaTag
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.MetaTag} MetaTag
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            MetaTag.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a MetaTag message.
-             * @function verify
-             * @memberof optimization_guide.proto.MetaTag
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            MetaTag.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.name != null && message.hasOwnProperty("name"))
-                    if (!$util.isString(message.name))
-                        return "name: string expected";
-                if (message.content != null && message.hasOwnProperty("content"))
-                    if (!$util.isString(message.content))
-                        return "content: string expected";
-                return null;
             };
 
             /**
@@ -23068,21 +17519,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             MetaTag.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for MetaTag
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.MetaTag
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            MetaTag.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.MetaTag";
             };
 
             return MetaTag;
@@ -23175,19 +17611,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified FrameMetadata message, length delimited. Does not implicitly {@link optimization_guide.proto.FrameMetadata.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.FrameMetadata
-             * @static
-             * @param {optimization_guide.proto.IFrameMetadata} message FrameMetadata message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            FrameMetadata.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a FrameMetadata message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.FrameMetadata
@@ -23227,51 +17650,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a FrameMetadata message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.FrameMetadata
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.FrameMetadata} FrameMetadata
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            FrameMetadata.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a FrameMetadata message.
-             * @function verify
-             * @memberof optimization_guide.proto.FrameMetadata
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            FrameMetadata.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.url != null && message.hasOwnProperty("url"))
-                    if (!$util.isString(message.url))
-                        return "url: string expected";
-                if (message.metaTags != null && message.hasOwnProperty("metaTags")) {
-                    if (!Array.isArray(message.metaTags))
-                        return "metaTags: array expected";
-                    for (let i = 0; i < message.metaTags.length; ++i) {
-                        let error = $root.optimization_guide.proto.MetaTag.verify(message.metaTags[i]);
-                        if (error)
-                            return "metaTags." + error;
-                    }
-                }
-                if (message.hasMediaTranscripts != null && message.hasOwnProperty("hasMediaTranscripts"))
-                    if (typeof message.hasMediaTranscripts !== "boolean")
-                        return "hasMediaTranscripts: boolean expected";
-                return null;
             };
 
             /**
@@ -23345,21 +17723,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
-            /**
-             * Gets the default type url for FrameMetadata
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.FrameMetadata
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            FrameMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.FrameMetadata";
-            };
-
             return FrameMetadata;
         })();
 
@@ -23429,19 +17792,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified PageMetadata message, length delimited. Does not implicitly {@link optimization_guide.proto.PageMetadata.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.PageMetadata
-             * @static
-             * @param {optimization_guide.proto.IPageMetadata} message PageMetadata message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            PageMetadata.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a PageMetadata message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.PageMetadata
@@ -23473,45 +17823,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a PageMetadata message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.PageMetadata
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.PageMetadata} PageMetadata
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            PageMetadata.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a PageMetadata message.
-             * @function verify
-             * @memberof optimization_guide.proto.PageMetadata
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            PageMetadata.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.frameMetadata != null && message.hasOwnProperty("frameMetadata")) {
-                    if (!Array.isArray(message.frameMetadata))
-                        return "frameMetadata: array expected";
-                    for (let i = 0; i < message.frameMetadata.length; ++i) {
-                        let error = $root.optimization_guide.proto.FrameMetadata.verify(message.frameMetadata[i]);
-                        if (error)
-                            return "frameMetadata." + error;
-                    }
-                }
-                return null;
             };
 
             /**
@@ -23571,21 +17882,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             PageMetadata.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for PageMetadata
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.PageMetadata
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            PageMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.PageMetadata";
             };
 
             return PageMetadata;
@@ -23664,19 +17960,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             /**
-             * Encodes the specified DocumentSelection message, length delimited. Does not implicitly {@link optimization_guide.proto.DocumentSelection.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof optimization_guide.proto.DocumentSelection
-             * @static
-             * @param {optimization_guide.proto.IDocumentSelection} message DocumentSelection message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            DocumentSelection.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
              * Decodes a DocumentSelection message from the specified reader or buffer.
              * @function decode
              * @memberof optimization_guide.proto.DocumentSelection
@@ -23710,46 +17993,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     }
                 }
                 return message;
-            };
-
-            /**
-             * Decodes a DocumentSelection message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof optimization_guide.proto.DocumentSelection
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {optimization_guide.proto.DocumentSelection} DocumentSelection
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            DocumentSelection.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a DocumentSelection message.
-             * @function verify
-             * @memberof optimization_guide.proto.DocumentSelection
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            DocumentSelection.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.documentIdentifier != null && message.hasOwnProperty("documentIdentifier")) {
-                    let error = $root.optimization_guide.proto.DocumentIdentifier.verify(message.documentIdentifier);
-                    if (error)
-                        return "documentIdentifier." + error;
-                }
-                if (message.selection != null && message.hasOwnProperty("selection")) {
-                    let error = $root.optimization_guide.proto.Selection.verify(message.selection);
-                    if (error)
-                        return "selection." + error;
-                }
-                return null;
             };
 
             /**
@@ -23810,21 +18053,6 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             DocumentSelection.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for DocumentSelection
-             * @function getTypeUrl
-             * @memberof optimization_guide.proto.DocumentSelection
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            DocumentSelection.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/optimization_guide.proto.DocumentSelection";
             };
 
             return DocumentSelection;
