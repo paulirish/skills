@@ -44,10 +44,13 @@ function recursiveToMarkdown(node: AnyNode, state: {imageIndex: number}): string
       if (attrs.textData.textStyle?.textSize) {
         const size = attrs.textData.textStyle.textSize;
         if (size === TextSize.TEXT_SIZE_XL || size === TextSize.TEXT_SIZE_L) {
-          text = `\n## ${text}\n`;
+          text = `\n\n## ${text}\n\n`;
         }
       }
-      md += text + ' ';
+      md += text;
+      if (!text.endsWith('\n')) {
+        md += ' ';
+      }
     }
   } else if (attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_IMAGE && attrs.imageData) {
     const caption = attrs.imageData.imageCaption || 'image';
