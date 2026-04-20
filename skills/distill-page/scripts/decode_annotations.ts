@@ -38,7 +38,7 @@ function recursiveToMarkdown(node: AnyNode, state: {imageIndex: number, insideHe
     let text = attrs.textData.textContent || '';
     text = text.trim();
     if (text) {
-      if (attrs.textData.textStyle?.hasEmphasis) {
+      if (attrs.textData.textStyle?.hasEmphasis && text !== '`') {
         text = `**${text}**`;
       }
       if (attrs.textData.textStyle?.textSize) {

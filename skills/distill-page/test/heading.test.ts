@@ -159,3 +159,49 @@ test('convertToMarkdown removes spaces inside backticks', () => {
   const expected = '`code-block`';
   assert.strictEqual(md.trim(), expected);
 });
+
+test('convertToMarkdown handles bold backticks correctly', () => {
+  const payload = {
+    rootNode: {
+      childrenNodes: [
+        {
+          contentAttributes: {
+            attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+            textData: {
+              textContent: '`',
+              textStyle: {hasEmphasis: true},
+            },
+          },
+        },
+        {
+          contentAttributes: {
+            attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+            textData: {
+              textContent: 'box-sizing',
+              textStyle: {hasEmphasis: true},
+            },
+          },
+        },
+        {
+          contentAttributes: {
+            attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+            textData: {
+              textContent: '`',
+              textStyle: {hasEmphasis: true},
+            },
+          },
+        },
+      ],
+    },
+  };
+
+  const message = pb.optimization_guide.proto.AnnotatedPageContent.create(payload);
+  const buffer = pb.optimization_guide.proto.AnnotatedPageContent.encode(message).finish();
+  const base64 = Buffer.from(buffer).toString('base64');
+
+  const decoded = decodeAnnotatedPageContent(base64);
+  const md = convertToMarkdown(decoded);
+
+  const expected = '`**box-sizing**`';
+  assert.strictEqual(md.trim(), expected);
+});
