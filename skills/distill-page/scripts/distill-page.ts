@@ -71,8 +71,8 @@ export async function processPage(url: string) {
   return decodeAnnotatedPageContent(base64Content);
 }
 
-function outputResult(decodedProto: any, isMarkdown: boolean) {
-  if (isMarkdown) {
+function outputResult(decodedProto: any, toMarkdown: boolean) {
+  if (toMarkdown) {
     console.log(convertToMarkdown(decodedProto));
   } else {
     console.log(JSON.stringify(decodedProto, null, 2));
@@ -83,7 +83,7 @@ function outputResult(decodedProto: any, isMarkdown: boolean) {
 import {fileURLToPath} from 'node:url';
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
-  const isMarkdown = process.argv.includes('--markdown');
+  const toMarkdown = process.argv.includes('--markdown');
   const isBase64Stdin = process.argv.includes('--base64-stdin');
 
   if (isBase64Stdin) {
@@ -95,7 +95,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
     process.stdin.on('end', () => {
       try {
         const decodedProto = decodeAnnotatedPageContent(base64Data.trim());
-        outputResult(decodedProto, isMarkdown);
+        outputResult(decodedProto, toMarkdown);
       } catch (err) {
         console.error('Error decoding base64:', (err as Error).message);
         process.exit(1);
@@ -116,7 +116,7 @@ Example: ./lib/distiller/distill-page.ts --markdown https://www.debugbear.com/bl
 
     processPage(url)
       .then(decodedProto => {
-        outputResult(decodedProto, isMarkdown);
+        outputResult(decodedProto, toMarkdown);
       })
       .catch(err => {
         console.error('Error:', err.message);
