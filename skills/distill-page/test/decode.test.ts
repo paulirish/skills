@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert';
-import * as pb from '../../lib/distiller/proto/common_quality_data_pbjs.js';
-import {decodeAnnotatedPageContent, convertToMarkdown} from '../../lib/distiller/distill-page.ts';
+import * as pb from '../proto/common_quality_data_pbjs.js';
+import {decodeAnnotatedPageContent, convertToMarkdown} from '../distill-page.ts';
 
 test('Decoding base64 string into AnnotatedPageContent object', () => {
   const payload = {

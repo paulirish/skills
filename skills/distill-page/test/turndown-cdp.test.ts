@@ -1,7 +1,7 @@
 import test from 'node:test';
 import {chromium} from 'playwright';
 import path from 'node:path';
-import {decodeAnnotatedPageContent, convertToMarkdown} from '../../lib/distiller/decode_annotations.ts';
+import {decodeAnnotatedPageContent, convertToMarkdown} from '../decode_annotations.ts';
 
 test('Run Turndown cases against CDP getAnnotatedPageContent', async () => {
   const browser = await chromium.launch({
@@ -18,7 +18,7 @@ test('Run Turndown cases against CDP getAnnotatedPageContent', async () => {
   const context = await browser.newContext();
   const indexPage = await context.newPage();
 
-  const indexPath = path.resolve('./utils/distiller/turndown_tmp/test/index.html');
+  const indexPath = path.resolve('./lib/distiller/turndown_tmp/test/index.html');
   await indexPage.goto('file://' + indexPath);
 
   const testCases = await indexPage.evaluate(() => {
