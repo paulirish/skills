@@ -30,7 +30,7 @@ function findNodeByRoles(node: AnyNode, roles: string[]): AnyNode | null {
   return null;
 }
 
-function recursiveToMarkdown(node: AnyNode, state: {imageIndex: number}): string {
+function recursiveToMarkdown(node: AnyNode, state: {imageIndex: number, insideHeading?: boolean}): string {
   let md = '';
   const attrs = node.contentAttributes || {};
 
@@ -44,7 +44,10 @@ function recursiveToMarkdown(node: AnyNode, state: {imageIndex: number}): string
       if (attrs.textData.textStyle?.textSize) {
         const size = attrs.textData.textStyle.textSize;
         if (size === TextSize.TEXT_SIZE_XL || size === TextSize.TEXT_SIZE_L) {
-          text = `\n\n## ${text}\n\n`;
+          if (!state.insideHeading) {
+            const prefix = size === TextSize.TEXT_SIZE_XL ? '##' : '###';
+            text = `\n\n${prefix} ${text}\n\n`;
+          }
         }
       }
       md += text;
@@ -128,6 +131,36 @@ function recursiveToMarkdown(node: AnyNode, state: {imageIndex: number}): string
       }
     }
     return tableMd + '\n';
+  } else if (attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_HEADING) {
+    let maxTextSize = TextSize.TEXT_SIZE_M_DEFAULT;
+    if (node.childrenNodes) {
+      for (const child of node.childrenNodes) {
+        if (child.contentAttributes?.textData?.textStyle?.textSize) {
+          const size = child.contentAttributes.textData.textStyle.textSize;
+          if (size > maxTextSize) {
+            maxTextSize = size;
+          }
+        }
+      }
+    }
+
+    let headingText = '';
+    if (node.childrenNodes) {
+      for (const child of node.childrenNodes) {
+        headingText += recursiveToMarkdown(child, {...state, insideHeading: true});
+      }
+    }
+    headingText = headingText.replace(/\s+/g, ' ').trim();
+    if (headingText) {
+      let prefix = '## ';
+      if (maxTextSize === TextSize.TEXT_SIZE_L) {
+        prefix = '### ';
+      } else if (maxTextSize === TextSize.TEXT_SIZE_XL) {
+        prefix = '## ';
+      }
+      return `\n\n${prefix}${headingText}\n\n`;
+    }
+    return '';
   }
 
   if (
