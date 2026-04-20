@@ -1,4 +1,5 @@
 import * as pb from './proto/common_quality_data_pbjs.js';
+import { normalizeWhitespace } from '../utils.ts';
 
 const {ContentAttributeType, TextSize, TableRowType, AnnotatedRole} = pb.optimization_guide.proto;
 const {
@@ -20,7 +21,7 @@ export function decodeAnnotatedPageContent(base64String: string): IAnnotatedPage
   const message = pb.optimization_guide.proto.AnnotatedPageContent.decode(buffer);
   return pb.optimization_guide.proto.AnnotatedPageContent.toObject(message, {
     longs: String,
-    defaults: true,
+
     arrays: true,
     objects: true,
   });
@@ -28,8 +29,12 @@ export function decodeAnnotatedPageContent(base64String: string): IAnnotatedPage
 
 function findNodeByRoles(node: AnyNode, roles: string[]): AnyNode | null {
   const attrs = node.contentAttributes || {};
-  if (attrs.annotatedRoles && roles.some(r => (attrs.annotatedRoles || []).includes(r as any))) {
-    return node;
+  if (attrs.annotatedRoles) {
+    for (const r of roles) {
+      if (attrs.annotatedRoles.includes(r as any)) {
+        return node;
+      }
+    }
   }
 
   if (node.childrenNodes) {
@@ -104,7 +109,7 @@ function recursiveToMarkdown(node: AnyNode, state: {imageIndex: number, insideHe
             itemText += recursiveToMarkdown(content, state);
           }
         }
-        itemText = itemText.replace(/\s+/g, ' ').trim();
+        itemText = normalizeWhitespace(itemText);
         if (itemText) {
           const prefix = isOrdered ? `${index}. ` : '* ';
           listMd += `${prefix}${itemText}\n`;
@@ -131,7 +136,7 @@ function recursiveToMarkdown(node: AnyNode, state: {imageIndex: number, insideHe
                 cellText += recursiveToMarkdown(content, state);
               }
             }
-            cellText = cellText.replace(/\s+/g, ' ').trim();
+            cellText = normalizeWhitespace(cellText);
             rowText += ` ${cellText} |`;
             sepText += `---|`;
           }
@@ -161,11 +166,14 @@ function recursiveToMarkdown(node: AnyNode, state: {imageIndex: number, insideHe
 
     let headingText = '';
     if (node.childrenNodes) {
+      const oldInsideHeading = state.insideHeading;
+      state.insideHeading = true;
       for (const child of node.childrenNodes) {
-        headingText += recursiveToMarkdown(child, {...state, insideHeading: true});
+        headingText += recursiveToMarkdown(child, state);
       }
+      state.insideHeading = oldInsideHeading;
     }
-    headingText = headingText.replace(/\s+/g, ' ').trim();
+    headingText = normalizeWhitespace(headingText);
     if (headingText) {
       let prefix = '## ';
       if (maxTextSize === TextSize.TEXT_SIZE_L) {
