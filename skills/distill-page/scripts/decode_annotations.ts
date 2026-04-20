@@ -1,6 +1,17 @@
 import * as pb from './proto/common_quality_data_pbjs.js';
 
 const {ContentAttributeType, TextSize, TableRowType, AnnotatedRole} = pb.optimization_guide.proto;
+const {
+  CONTENT_ATTRIBUTE_TEXT,
+  CONTENT_ATTRIBUTE_IMAGE,
+  CONTENT_ATTRIBUTE_ANCHOR,
+  CONTENT_ATTRIBUTE_ORDERED_LIST,
+  CONTENT_ATTRIBUTE_UNORDERED_LIST,
+  CONTENT_ATTRIBUTE_TABLE,
+  CONTENT_ATTRIBUTE_TABLE_ROW,
+  CONTENT_ATTRIBUTE_HEADING,
+  CONTENT_ATTRIBUTE_CONTAINER
+} = ContentAttributeType;
 type AnyNode = pb.optimization_guide.proto.IContentNode;
 type IAnnotatedPageContent = pb.optimization_guide.proto.IAnnotatedPageContent;
 
@@ -34,7 +45,7 @@ function recursiveToMarkdown(node: AnyNode, state: {imageIndex: number, insideHe
   let md = '';
   const attrs = node.contentAttributes || {};
 
-  if (attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_TEXT && attrs.textData) {
+  if (attrs.attributeType === CONTENT_ATTRIBUTE_TEXT && attrs.textData) {
     let text = attrs.textData.textContent || '';
     text = text.trim();
     if (text) {
@@ -55,11 +66,11 @@ function recursiveToMarkdown(node: AnyNode, state: {imageIndex: number, insideHe
         md += ' ';
       }
     }
-  } else if (attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_IMAGE && attrs.imageData) {
+  } else if (attrs.attributeType === CONTENT_ATTRIBUTE_IMAGE && attrs.imageData) {
     const caption = attrs.imageData.imageCaption || 'image';
     const ref = `image${String(state.imageIndex++).padStart(2, '0')}`;
     md += `\n![${caption}][${ref}]\n`;
-  } else if (attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_ANCHOR && attrs.anchorData) {
+  } else if (attrs.attributeType === CONTENT_ATTRIBUTE_ANCHOR && attrs.anchorData) {
     const url = attrs.anchorData.url || '';
     let resolvedUrl = url;
     if (state.currentUrl && url.startsWith(state.currentUrl + '#')) {
@@ -77,11 +88,11 @@ function recursiveToMarkdown(node: AnyNode, state: {imageIndex: number, insideHe
     }
     return md;
   } else if (
-    attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_ORDERED_LIST ||
-    attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_UNORDERED_LIST
+    attrs.attributeType === CONTENT_ATTRIBUTE_ORDERED_LIST ||
+    attrs.attributeType === CONTENT_ATTRIBUTE_UNORDERED_LIST
   ) {
     let listMd = '\n\n';
-    const isOrdered = attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_ORDERED_LIST;
+    const isOrdered = attrs.attributeType === CONTENT_ATTRIBUTE_ORDERED_LIST;
     let index = 1;
 
     if (node.childrenNodes) {
@@ -102,13 +113,13 @@ function recursiveToMarkdown(node: AnyNode, state: {imageIndex: number, insideHe
       }
     }
     return listMd + '\n';
-  } else if (attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_TABLE) {
+  } else if (attrs.attributeType === CONTENT_ATTRIBUTE_TABLE) {
     let tableMd = '\n\n';
     let isFirstRow = true;
     if (node.childrenNodes) {
       for (const row of node.childrenNodes) {
         const rowAttrs = row.contentAttributes || {};
-        if (rowAttrs.attributeType !== ContentAttributeType.CONTENT_ATTRIBUTE_TABLE_ROW) continue;
+        if (rowAttrs.attributeType !== CONTENT_ATTRIBUTE_TABLE_ROW) continue;
 
         let rowText = '|';
         let sepText = '|';
@@ -135,7 +146,7 @@ function recursiveToMarkdown(node: AnyNode, state: {imageIndex: number, insideHe
       }
     }
     return tableMd + '\n';
-  } else if (attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_HEADING) {
+  } else if (attrs.attributeType === CONTENT_ATTRIBUTE_HEADING) {
     let maxTextSize = TextSize.TEXT_SIZE_M_DEFAULT;
     if (node.childrenNodes) {
       for (const child of node.childrenNodes) {
@@ -180,7 +191,7 @@ function recursiveToMarkdown(node: AnyNode, state: {imageIndex: number, insideHe
     }
   }
 
-  if (attrs.attributeType === ContentAttributeType.CONTENT_ATTRIBUTE_CONTAINER) {
+  if (attrs.attributeType === CONTENT_ATTRIBUTE_CONTAINER) {
     md += '\n\n';
   }
 

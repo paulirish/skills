@@ -3,20 +3,31 @@ import assert from 'node:assert';
 import * as pb from '../proto/common_quality_data_pbjs.js';
 import {decodeAnnotatedPageContent, convertToMarkdown} from '../distill-page.ts';
 
+const {ContentAttributeType} = pb.optimization_guide.proto;
+const {
+  CONTENT_ATTRIBUTE_TEXT,
+  CONTENT_ATTRIBUTE_IMAGE,
+  CONTENT_ATTRIBUTE_ORDERED_LIST,
+  CONTENT_ATTRIBUTE_UNORDERED_LIST,
+  CONTENT_ATTRIBUTE_TABLE,
+  CONTENT_ATTRIBUTE_TABLE_ROW,
+  CONTENT_ATTRIBUTE_CONTAINER
+} = ContentAttributeType;
+
 test('convertToMarkdown handles lists correctly', () => {
   const payload = {
     rootNode: {
       childrenNodes: [
         {
           contentAttributes: {
-            attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_UNORDERED_LIST,
+            attributeType: CONTENT_ATTRIBUTE_UNORDERED_LIST,
           },
           childrenNodes: [
             {
               childrenNodes: [
                 {
                   contentAttributes: {
-                    attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+                    attributeType: CONTENT_ATTRIBUTE_TEXT,
                     textData: {textContent: 'Item 1'},
                   },
                 },
@@ -26,7 +37,7 @@ test('convertToMarkdown handles lists correctly', () => {
               childrenNodes: [
                 {
                   contentAttributes: {
-                    attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+                    attributeType: CONTENT_ATTRIBUTE_TEXT,
                     textData: {textContent: 'Item 2'},
                   },
                 },
@@ -55,19 +66,19 @@ test('convertToMarkdown handles tables correctly', () => {
       childrenNodes: [
         {
           contentAttributes: {
-            attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TABLE,
+            attributeType: CONTENT_ATTRIBUTE_TABLE,
           },
           childrenNodes: [
             {
               contentAttributes: {
-                attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TABLE_ROW,
+                attributeType: CONTENT_ATTRIBUTE_TABLE_ROW,
               },
               childrenNodes: [
                 {
                   childrenNodes: [
                     {
                       contentAttributes: {
-                        attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+                        attributeType: CONTENT_ATTRIBUTE_TEXT,
                         textData: {textContent: 'Header 1'},
                       },
                     },
@@ -77,7 +88,7 @@ test('convertToMarkdown handles tables correctly', () => {
                   childrenNodes: [
                     {
                       contentAttributes: {
-                        attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+                        attributeType: CONTENT_ATTRIBUTE_TEXT,
                         textData: {textContent: 'Header 2'},
                       },
                     },
@@ -87,14 +98,14 @@ test('convertToMarkdown handles tables correctly', () => {
             },
             {
               contentAttributes: {
-                attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TABLE_ROW,
+                attributeType: CONTENT_ATTRIBUTE_TABLE_ROW,
               },
               childrenNodes: [
                 {
                   childrenNodes: [
                     {
                       contentAttributes: {
-                        attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+                        attributeType: CONTENT_ATTRIBUTE_TEXT,
                         textData: {textContent: 'Cell 1'},
                       },
                     },
@@ -104,7 +115,7 @@ test('convertToMarkdown handles tables correctly', () => {
                   childrenNodes: [
                     {
                       contentAttributes: {
-                        attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+                        attributeType: CONTENT_ATTRIBUTE_TEXT,
                         textData: {textContent: 'Cell 2'},
                       },
                     },
@@ -135,19 +146,19 @@ test('convertToMarkdown skips nav and footer roles', () => {
       childrenNodes: [
         {
           contentAttributes: {
-            attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+            attributeType: CONTENT_ATTRIBUTE_TEXT,
             textData: {textContent: 'Main Content'},
           },
         },
         {
           contentAttributes: {
-            attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_CONTAINER,
+            attributeType: CONTENT_ATTRIBUTE_CONTAINER,
             annotatedRoles: [pb.optimization_guide.proto.AnnotatedRole.ANNOTATED_ROLE_NAV],
           },
           childrenNodes: [
             {
               contentAttributes: {
-                attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+                attributeType: CONTENT_ATTRIBUTE_TEXT,
                 textData: {textContent: 'Nav Content'},
               },
             },
@@ -155,7 +166,7 @@ test('convertToMarkdown skips nav and footer roles', () => {
         },
         {
           contentAttributes: {
-            attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+            attributeType: CONTENT_ATTRIBUTE_TEXT,
             textData: {textContent: 'More Main Content'},
           },
         },
@@ -180,7 +191,7 @@ test('convertToMarkdown handles images correctly', () => {
       childrenNodes: [
         {
           contentAttributes: {
-            attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_IMAGE,
+            attributeType: CONTENT_ATTRIBUTE_IMAGE,
             imageData: {
               imageCaption: 'Test Image',
             },

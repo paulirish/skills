@@ -3,6 +3,9 @@ import assert from 'node:assert';
 import * as pb from '../proto/common_quality_data_pbjs.js';
 import {decodeAnnotatedPageContent, convertToMarkdown} from '../distill-page.ts';
 
+const {ContentAttributeType} = pb.optimization_guide.proto;
+const {CONTENT_ATTRIBUTE_TEXT} = ContentAttributeType;
+
 test('Decoding base64 string into AnnotatedPageContent object', () => {
   const payload = {
     version: 1,
@@ -27,13 +30,13 @@ test('convertToMarkdown adds newlines around headlines', () => {
       childrenNodes: [
         {
           contentAttributes: {
-            attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+            attributeType: CONTENT_ATTRIBUTE_TEXT,
             textData: {textContent: 'Before headline'},
           },
         },
         {
           contentAttributes: {
-            attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+            attributeType: CONTENT_ATTRIBUTE_TEXT,
             textData: {
               textContent: 'Headline Text',
               textStyle: {
@@ -44,7 +47,7 @@ test('convertToMarkdown adds newlines around headlines', () => {
         },
         {
           contentAttributes: {
-            attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+            attributeType: CONTENT_ATTRIBUTE_TEXT,
             textData: {textContent: 'After headline'},
           },
         },

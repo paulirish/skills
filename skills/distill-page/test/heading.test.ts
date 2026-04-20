@@ -3,18 +3,25 @@ import assert from 'node:assert';
 import * as pb from '../proto/common_quality_data_pbjs.js';
 import {decodeAnnotatedPageContent, convertToMarkdown} from '../distill-page.ts';
 
+const {ContentAttributeType} = pb.optimization_guide.proto;
+const {
+  CONTENT_ATTRIBUTE_TEXT,
+  CONTENT_ATTRIBUTE_ANCHOR,
+  CONTENT_ATTRIBUTE_HEADING
+} = ContentAttributeType;
+
 test('convertToMarkdown handles HEADING containers correctly', () => {
   const payload = {
     rootNode: {
       childrenNodes: [
         {
           contentAttributes: {
-            attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_HEADING,
+            attributeType: CONTENT_ATTRIBUTE_HEADING,
           },
           childrenNodes: [
             {
               contentAttributes: {
-                attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+                attributeType: CONTENT_ATTRIBUTE_TEXT,
                 textData: {
                   textContent: 'Is ',
                   textStyle: {textSize: pb.optimization_guide.proto.TextSize.TEXT_SIZE_L},
@@ -23,13 +30,13 @@ test('convertToMarkdown handles HEADING containers correctly', () => {
             },
             {
               contentAttributes: {
-                attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+                attributeType: CONTENT_ATTRIBUTE_TEXT,
                 textData: {textContent: 'GetTokens', textStyle: {hasEmphasis: true}},
               },
             },
             {
               contentAttributes: {
-                attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+                attributeType: CONTENT_ATTRIBUTE_TEXT,
                 textData: {textContent: ' billed?'},
               },
             },
@@ -60,13 +67,13 @@ test('convertToMarkdown cleans up spaces before punctuation', () => {
       childrenNodes: [
         {
           contentAttributes: {
-            attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+            attributeType: CONTENT_ATTRIBUTE_TEXT,
             textData: {textContent: 'Text followed by space'},
           },
         },
         {
           contentAttributes: {
-            attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+            attributeType: CONTENT_ATTRIBUTE_TEXT,
             textData: {textContent: '.'},
           },
         },
@@ -94,7 +101,7 @@ test('convertToMarkdown converts same-page links to fragments', () => {
       childrenNodes: [
         {
           contentAttributes: {
-            attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_ANCHOR,
+            attributeType: CONTENT_ATTRIBUTE_ANCHOR,
             anchorData: {
               url: 'https://example.com/page#section',
             },
@@ -102,7 +109,7 @@ test('convertToMarkdown converts same-page links to fragments', () => {
           childrenNodes: [
             {
               contentAttributes: {
-                attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+                attributeType: CONTENT_ATTRIBUTE_TEXT,
                 textData: {textContent: 'Link Text'},
               },
             },
@@ -129,19 +136,19 @@ test('convertToMarkdown removes spaces inside backticks', () => {
       childrenNodes: [
         {
           contentAttributes: {
-            attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+            attributeType: CONTENT_ATTRIBUTE_TEXT,
             textData: {textContent: '`'},
           },
         },
         {
           contentAttributes: {
-            attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+            attributeType: CONTENT_ATTRIBUTE_TEXT,
             textData: {textContent: 'code-block'},
           },
         },
         {
           contentAttributes: {
-            attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+            attributeType: CONTENT_ATTRIBUTE_TEXT,
             textData: {textContent: '`'},
           },
         },
@@ -166,7 +173,7 @@ test('convertToMarkdown handles bold backticks correctly', () => {
       childrenNodes: [
         {
           contentAttributes: {
-            attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+            attributeType: CONTENT_ATTRIBUTE_TEXT,
             textData: {
               textContent: '`',
               textStyle: {hasEmphasis: true},
@@ -175,7 +182,7 @@ test('convertToMarkdown handles bold backticks correctly', () => {
         },
         {
           contentAttributes: {
-            attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+            attributeType: CONTENT_ATTRIBUTE_TEXT,
             textData: {
               textContent: 'box-sizing',
               textStyle: {hasEmphasis: true},
@@ -184,7 +191,7 @@ test('convertToMarkdown handles bold backticks correctly', () => {
         },
         {
           contentAttributes: {
-            attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+            attributeType: CONTENT_ATTRIBUTE_TEXT,
             textData: {
               textContent: '`',
               textStyle: {hasEmphasis: true},
