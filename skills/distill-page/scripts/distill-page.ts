@@ -4,6 +4,26 @@ import {decodeAnnotatedPageContent, convertToMarkdown} from './decode_annotation
 
 export {decodeAnnotatedPageContent, convertToMarkdown};
 
+export async function injectSemanticMarkers(page: any) {
+  await page.evaluate(() => {
+    document.querySelectorAll('code').forEach(el => {
+      if (!el.closest('pre')) {
+        el.insertAdjacentText('afterbegin', '`');
+        el.insertAdjacentText('beforeend', '`');
+      }
+    });
+    document.querySelectorAll('pre').forEach(el => {
+      el.insertAdjacentText('afterbegin', '\n```\n');
+      el.insertAdjacentText('beforeend', '\n```\n');
+    });
+    document.querySelectorAll('blockquote').forEach(el => {
+      const p = document.createElement('span');
+      p.textContent = '> ';
+      el.prepend(p);
+    });
+  });
+}
+
 export async function fetchDistilledBase64(url: string) {
   let browser;
   try {
@@ -32,24 +52,7 @@ export async function fetchDistilledBase64(url: string) {
     }
 
     // Bridge the visual gap: Inject text markers to preserve semantic HTML bounds
-    // that the visual extraction model would otherwise toss out
-    await page.evaluate(() => {
-      document.querySelectorAll('code').forEach(el => {
-        if (!el.closest('pre')) {
-          el.insertAdjacentText('afterbegin', '`');
-          el.insertAdjacentText('beforeend', '`');
-        }
-      });
-      document.querySelectorAll('pre').forEach(el => {
-        el.insertAdjacentText('afterbegin', '\n```\n');
-        el.insertAdjacentText('beforeend', '\n```\n');
-      });
-      document.querySelectorAll('blockquote').forEach(el => {
-        const p = document.createElement('span');
-        p.textContent = '> ';
-        el.prepend(p);
-      });
-    });
+    await injectSemanticMarkers(page);
 
     // Bring to front and wait for potential model processing
     await page.bringToFront();

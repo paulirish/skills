@@ -2,6 +2,7 @@ import test from 'node:test';
 import {chromium} from 'playwright';
 import path from 'node:path';
 import {decodeAnnotatedPageContent, convertToMarkdown} from '../decode_annotations.ts';
+import { injectSemanticMarkers } from '../distill-page.ts';
 
 test('Run Turndown cases against CDP getAnnotatedPageContent', async () => {
   const browser = await chromium.launch({
@@ -61,24 +62,7 @@ test('Run Turndown cases against CDP getAnnotatedPageContent', async () => {
     await page.goto(dataUrl, {waitUntil: 'load'});
     await page.bringToFront();
 
-    // Inject semantic markers
-    await page.evaluate(() => {
-      document.querySelectorAll('code').forEach(el => {
-        if (!el.closest('pre')) {
-          el.insertAdjacentText('afterbegin', '`');
-          el.insertAdjacentText('beforeend', '`');
-        }
-      });
-      document.querySelectorAll('pre').forEach(el => {
-        el.insertAdjacentText('afterbegin', '\n```\n');
-        el.insertAdjacentText('beforeend', '\n```\n');
-      });
-      document.querySelectorAll('blockquote').forEach(el => {
-        const p = document.createElement('span');
-        p.textContent = '> ';
-        el.prepend(p);
-      });
-    });
+    await injectSemanticMarkers(page);
 
     // wait a small bit for CDP to digest
     await page.waitForTimeout(500);
