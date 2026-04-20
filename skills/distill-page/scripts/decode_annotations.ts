@@ -197,6 +197,7 @@ export function convertToMarkdown(decodedProto: IAnnotatedPageContent): string {
   rawMd = rawMd
     .replace(/\n{3,}/g, '\n\n')
     .replace(/ \n/g, '\n')
+    .replace(/ +([.,!?;:)])/g, '$1')
     .replace(/^\s+|\s+$/g, '');
 
   return rawMd;

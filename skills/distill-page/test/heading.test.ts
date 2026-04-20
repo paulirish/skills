@@ -53,3 +53,34 @@ test('convertToMarkdown handles HEADING containers correctly', () => {
   // but we should ideally check them. Let's check trim() first.
   assert.strictEqual(md.trim(), expected);
 });
+
+test('convertToMarkdown cleans up spaces before punctuation', () => {
+  const payload = {
+    rootNode: {
+      childrenNodes: [
+        {
+          contentAttributes: {
+            attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+            textData: {textContent: 'Text followed by space'},
+          },
+        },
+        {
+          contentAttributes: {
+            attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+            textData: {textContent: '.'},
+          },
+        },
+      ],
+    },
+  };
+
+  const message = pb.optimization_guide.proto.AnnotatedPageContent.create(payload);
+  const buffer = pb.optimization_guide.proto.AnnotatedPageContent.encode(message).finish();
+  const base64 = Buffer.from(buffer).toString('base64');
+
+  const decoded = decodeAnnotatedPageContent(base64);
+  const md = convertToMarkdown(decoded);
+
+  const expected = 'Text followed by space.';
+  assert.strictEqual(md.trim(), expected);
+});
