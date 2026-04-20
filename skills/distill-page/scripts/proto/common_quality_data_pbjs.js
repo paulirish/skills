@@ -1,6 +1,6 @@
 // @ts-nocheck
 /*eslint-disable block-scoped-var, id-length, no-control-regex, no-magic-numbers, no-prototype-builtins, no-redeclare, no-shadow, no-var, sort-vars*/
-import $protobuf from "protobufjs/minimal.js";
+import * as $protobuf from "protobufjs/minimal.js";
 
 // Common aliases
 const $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
@@ -3417,6 +3417,7 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     case 1:
                     case 2:
                     case 3:
+                    case 4:
                         break;
                     }
                 }
@@ -4269,6 +4270,10 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 case "AX_SLA_ARIANOTIFICATIONTYPES":
                 case 3:
                     message.stringlistType = 3;
+                    break;
+                case "AX_SLA_TEXTOPERATIONREPLACEMENTSTRINGS":
+                case 4:
+                    message.stringlistType = 4;
                     break;
                 }
                 if (object.htmlAttributeName != null)
@@ -5653,6 +5658,7 @@ export const optimization_guide = $root.optimization_guide = (() => {
              * @property {number|null} [tabId] AnnotatedPageContent tabId
              * @property {optimization_guide.proto.IPopupWindow|null} [popupWindow] AnnotatedPageContent popupWindow
              * @property {optimization_guide.proto.IProfileInformation|null} [profileInformation] AnnotatedPageContent profileInformation
+             * @property {optimization_guide.proto.IGeminiInChromePageMetadata|null} [geminiInChromePageMetadata] AnnotatedPageContent geminiInChromePageMetadata
              */
 
             /**
@@ -5743,6 +5749,14 @@ export const optimization_guide = $root.optimization_guide = (() => {
             AnnotatedPageContent.prototype.profileInformation = null;
 
             /**
+             * AnnotatedPageContent geminiInChromePageMetadata.
+             * @member {optimization_guide.proto.IGeminiInChromePageMetadata|null|undefined} geminiInChromePageMetadata
+             * @memberof optimization_guide.proto.AnnotatedPageContent
+             * @instance
+             */
+            AnnotatedPageContent.prototype.geminiInChromePageMetadata = null;
+
+            /**
              * Creates a new AnnotatedPageContent instance using the specified properties.
              * @function create
              * @memberof optimization_guide.proto.AnnotatedPageContent
@@ -5784,6 +5798,8 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     $root.optimization_guide.proto.PopupWindow.encode(message.popupWindow, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                 if (message.profileInformation != null && Object.hasOwnProperty.call(message, "profileInformation"))
                     $root.optimization_guide.proto.ProfileInformation.encode(message.profileInformation, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                if (message.geminiInChromePageMetadata != null && Object.hasOwnProperty.call(message, "geminiInChromePageMetadata"))
+                    $root.optimization_guide.proto.GeminiInChromePageMetadata.encode(message.geminiInChromePageMetadata, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                 return writer;
             };
 
@@ -5854,6 +5870,10 @@ export const optimization_guide = $root.optimization_guide = (() => {
                         }
                     case 9: {
                             message.profileInformation = $root.optimization_guide.proto.ProfileInformation.decode(reader, reader.uint32());
+                            break;
+                        }
+                    case 10: {
+                            message.geminiInChromePageMetadata = $root.optimization_guide.proto.GeminiInChromePageMetadata.decode(reader, reader.uint32());
                             break;
                         }
                     default:
@@ -5941,6 +5961,11 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     if (error)
                         return "profileInformation." + error;
                 }
+                if (message.geminiInChromePageMetadata != null && message.hasOwnProperty("geminiInChromePageMetadata")) {
+                    let error = $root.optimization_guide.proto.GeminiInChromePageMetadata.verify(message.geminiInChromePageMetadata);
+                    if (error)
+                        return "geminiInChromePageMetadata." + error;
+                }
                 return null;
             };
 
@@ -6024,6 +6049,11 @@ export const optimization_guide = $root.optimization_guide = (() => {
                         throw TypeError(".optimization_guide.proto.AnnotatedPageContent.profileInformation: object expected");
                     message.profileInformation = $root.optimization_guide.proto.ProfileInformation.fromObject(object.profileInformation);
                 }
+                if (object.geminiInChromePageMetadata != null) {
+                    if (typeof object.geminiInChromePageMetadata !== "object")
+                        throw TypeError(".optimization_guide.proto.AnnotatedPageContent.geminiInChromePageMetadata: object expected");
+                    message.geminiInChromePageMetadata = $root.optimization_guide.proto.GeminiInChromePageMetadata.fromObject(object.geminiInChromePageMetadata);
+                }
                 return message;
             };
 
@@ -6050,6 +6080,7 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     object.tabId = 0;
                     object.popupWindow = null;
                     object.profileInformation = null;
+                    object.geminiInChromePageMetadata = null;
                 }
                 if (message.version != null && message.hasOwnProperty("version"))
                     object.version = options.enums === String ? $root.optimization_guide.proto.AnnotatedPageContentVersion[message.version] === undefined ? message.version : $root.optimization_guide.proto.AnnotatedPageContentVersion[message.version] : message.version;
@@ -6069,6 +6100,8 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     object.popupWindow = $root.optimization_guide.proto.PopupWindow.toObject(message.popupWindow, options);
                 if (message.profileInformation != null && message.hasOwnProperty("profileInformation"))
                     object.profileInformation = $root.optimization_guide.proto.ProfileInformation.toObject(message.profileInformation, options);
+                if (message.geminiInChromePageMetadata != null && message.hasOwnProperty("geminiInChromePageMetadata"))
+                    object.geminiInChromePageMetadata = $root.optimization_guide.proto.GeminiInChromePageMetadata.toObject(message.geminiInChromePageMetadata, options);
                 return object;
             };
 
@@ -6382,6 +6415,7 @@ export const optimization_guide = $root.optimization_guide = (() => {
              * @property {number|null} [labelForDomNodeId] ContentAttributes labelForDomNodeId
              * @property {optimization_guide.proto.AXRole|null} [ariaRole] ContentAttributes ariaRole
              * @property {boolean|null} [isAdRelated] ContentAttributes isAdRelated
+             * @property {optimization_guide.proto.RedactionDecision|null} [redactionDecision] ContentAttributes redactionDecision
              */
 
             /**
@@ -6560,6 +6594,14 @@ export const optimization_guide = $root.optimization_guide = (() => {
              */
             ContentAttributes.prototype.isAdRelated = false;
 
+            /**
+             * ContentAttributes redactionDecision.
+             * @member {optimization_guide.proto.RedactionDecision} redactionDecision
+             * @memberof optimization_guide.proto.ContentAttributes
+             * @instance
+             */
+            ContentAttributes.prototype.redactionDecision = 0;
+
             // OneOf field names bound to virtual getters and setters
             let $oneOfFields;
 
@@ -6642,6 +6684,8 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     $root.optimization_guide.proto.VideoData.encode(message.videoData, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
                 if (message.isAdRelated != null && Object.hasOwnProperty.call(message, "isAdRelated"))
                     writer.uint32(/* id 28, wireType 0 =*/224).bool(message.isAdRelated);
+                if (message.redactionDecision != null && Object.hasOwnProperty.call(message, "redactionDecision"))
+                    writer.uint32(/* id 29, wireType 0 =*/232).int32(message.redactionDecision);
                 return writer;
             };
 
@@ -6763,6 +6807,10 @@ export const optimization_guide = $root.optimization_guide = (() => {
                         }
                     case 28: {
                             message.isAdRelated = reader.bool();
+                            break;
+                        }
+                    case 29: {
+                            message.redactionDecision = reader.int32();
                             break;
                         }
                     default:
@@ -7198,6 +7246,22 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 if (message.isAdRelated != null && message.hasOwnProperty("isAdRelated"))
                     if (typeof message.isAdRelated !== "boolean")
                         return "isAdRelated: boolean expected";
+                if (message.redactionDecision != null && message.hasOwnProperty("redactionDecision"))
+                    switch (message.redactionDecision) {
+                    default:
+                        return "redactionDecision: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                        break;
+                    }
                 return null;
             };
 
@@ -8295,6 +8359,54 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 }
                 if (object.isAdRelated != null)
                     message.isAdRelated = Boolean(object.isAdRelated);
+                switch (object.redactionDecision) {
+                default:
+                    if (typeof object.redactionDecision === "number") {
+                        message.redactionDecision = object.redactionDecision;
+                        break;
+                    }
+                    break;
+                case "REDACTION_DECISION_NO_REDACTION_NECESSARY":
+                case 0:
+                    message.redactionDecision = 0;
+                    break;
+                case "REDACTION_DECISION_UNREDACTED_EMPTY_PASSWORD":
+                case 1:
+                    message.redactionDecision = 1;
+                    break;
+                case "REDACTION_DECISION_REDACTED_HAS_BEEN_PASSWORD":
+                case 2:
+                    message.redactionDecision = 2;
+                    break;
+                case "REDACTION_DECISION_UNREDACTED_EMPTY_PAYMENT_FIELD":
+                case 3:
+                    message.redactionDecision = 3;
+                    break;
+                case "REDACTION_DECISION_REDACTED_IS_SENSITIVE_PAYMENT_FIELD":
+                case 4:
+                    message.redactionDecision = 4;
+                    break;
+                case "REDACTION_DECISION_UNREDACTED_EMPTY_CUSTOM_PASSWORD":
+                case 5:
+                    message.redactionDecision = 5;
+                    break;
+                case "REDACTION_DECISION_REDACTED_CUSTOM_PASSWORD_CSS":
+                case 6:
+                    message.redactionDecision = 6;
+                    break;
+                case "REDACTION_DECISION_REDACTED_CUSTOM_PASSWORD_JS":
+                case 7:
+                    message.redactionDecision = 7;
+                    break;
+                case "REDACTION_DECISION_REDACTED_IS_OTP":
+                case 8:
+                    message.redactionDecision = 8;
+                    break;
+                case "REDACTION_DECISION_UNREDACTED_EMPTY_OTP_FIELD":
+                case 9:
+                    message.redactionDecision = 9;
+                    break;
+                }
                 return message;
             };
 
@@ -8322,6 +8434,7 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     object.labelForDomNodeId = 0;
                     object.ariaRole = options.enums === String ? "AX_ROLE_NONE" : 0;
                     object.isAdRelated = false;
+                    object.redactionDecision = options.enums === String ? "REDACTION_DECISION_NO_REDACTION_NECESSARY" : 0;
                 }
                 if (message.commonAncestorDomNodeId != null && message.hasOwnProperty("commonAncestorDomNodeId"))
                     object.commonAncestorDomNodeId = message.commonAncestorDomNodeId;
@@ -8399,6 +8512,8 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 }
                 if (message.isAdRelated != null && message.hasOwnProperty("isAdRelated"))
                     object.isAdRelated = message.isAdRelated;
+                if (message.redactionDecision != null && message.hasOwnProperty("redactionDecision"))
+                    object.redactionDecision = options.enums === String ? $root.optimization_guide.proto.RedactionDecision[message.redactionDecision] === undefined ? message.redactionDecision : $root.optimization_guide.proto.RedactionDecision[message.redactionDecision] : message.redactionDecision;
                 return object;
             };
 
@@ -8439,6 +8554,7 @@ export const optimization_guide = $root.optimization_guide = (() => {
              * @interface IGeometry
              * @property {optimization_guide.proto.IBoundingRect|null} [outerBoundingBox] Geometry outerBoundingBox
              * @property {optimization_guide.proto.IBoundingRect|null} [visibleBoundingBox] Geometry visibleBoundingBox
+             * @property {optimization_guide.proto.IBoundingRect|null} [compositorBoundingBox] Geometry compositorBoundingBox
              * @property {Array.<optimization_guide.proto.IBoundingRect>|null} [fragmentVisibleBoundingBoxes] Geometry fragmentVisibleBoundingBoxes
              * @property {boolean|null} [isFixedOrStickyPosition] Geometry isFixedOrStickyPosition
              */
@@ -8474,6 +8590,14 @@ export const optimization_guide = $root.optimization_guide = (() => {
              * @instance
              */
             Geometry.prototype.visibleBoundingBox = null;
+
+            /**
+             * Geometry compositorBoundingBox.
+             * @member {optimization_guide.proto.IBoundingRect|null|undefined} compositorBoundingBox
+             * @memberof optimization_guide.proto.Geometry
+             * @instance
+             */
+            Geometry.prototype.compositorBoundingBox = null;
 
             /**
              * Geometry fragmentVisibleBoundingBoxes.
@@ -8524,6 +8648,8 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 if (message.fragmentVisibleBoundingBoxes != null && message.fragmentVisibleBoundingBoxes.length)
                     for (let i = 0; i < message.fragmentVisibleBoundingBoxes.length; ++i)
                         $root.optimization_guide.proto.BoundingRect.encode(message.fragmentVisibleBoundingBoxes[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                if (message.compositorBoundingBox != null && Object.hasOwnProperty.call(message, "compositorBoundingBox"))
+                    $root.optimization_guide.proto.BoundingRect.encode(message.compositorBoundingBox, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                 return writer;
             };
 
@@ -8566,6 +8692,10 @@ export const optimization_guide = $root.optimization_guide = (() => {
                         }
                     case 2: {
                             message.visibleBoundingBox = $root.optimization_guide.proto.BoundingRect.decode(reader, reader.uint32());
+                            break;
+                        }
+                    case 7: {
+                            message.compositorBoundingBox = $root.optimization_guide.proto.BoundingRect.decode(reader, reader.uint32());
                             break;
                         }
                     case 6: {
@@ -8623,6 +8753,11 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     if (error)
                         return "visibleBoundingBox." + error;
                 }
+                if (message.compositorBoundingBox != null && message.hasOwnProperty("compositorBoundingBox")) {
+                    let error = $root.optimization_guide.proto.BoundingRect.verify(message.compositorBoundingBox);
+                    if (error)
+                        return "compositorBoundingBox." + error;
+                }
                 if (message.fragmentVisibleBoundingBoxes != null && message.hasOwnProperty("fragmentVisibleBoundingBoxes")) {
                     if (!Array.isArray(message.fragmentVisibleBoundingBoxes))
                         return "fragmentVisibleBoundingBoxes: array expected";
@@ -8660,6 +8795,11 @@ export const optimization_guide = $root.optimization_guide = (() => {
                         throw TypeError(".optimization_guide.proto.Geometry.visibleBoundingBox: object expected");
                     message.visibleBoundingBox = $root.optimization_guide.proto.BoundingRect.fromObject(object.visibleBoundingBox);
                 }
+                if (object.compositorBoundingBox != null) {
+                    if (typeof object.compositorBoundingBox !== "object")
+                        throw TypeError(".optimization_guide.proto.Geometry.compositorBoundingBox: object expected");
+                    message.compositorBoundingBox = $root.optimization_guide.proto.BoundingRect.fromObject(object.compositorBoundingBox);
+                }
                 if (object.fragmentVisibleBoundingBoxes) {
                     if (!Array.isArray(object.fragmentVisibleBoundingBoxes))
                         throw TypeError(".optimization_guide.proto.Geometry.fragmentVisibleBoundingBoxes: array expected");
@@ -8694,6 +8834,7 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     object.outerBoundingBox = null;
                     object.visibleBoundingBox = null;
                     object.isFixedOrStickyPosition = false;
+                    object.compositorBoundingBox = null;
                 }
                 if (message.outerBoundingBox != null && message.hasOwnProperty("outerBoundingBox"))
                     object.outerBoundingBox = $root.optimization_guide.proto.BoundingRect.toObject(message.outerBoundingBox, options);
@@ -8706,6 +8847,8 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     for (let j = 0; j < message.fragmentVisibleBoundingBoxes.length; ++j)
                         object.fragmentVisibleBoundingBoxes[j] = $root.optimization_guide.proto.BoundingRect.toObject(message.fragmentVisibleBoundingBoxes[j], options);
                 }
+                if (message.compositorBoundingBox != null && message.hasOwnProperty("compositorBoundingBox"))
+                    object.compositorBoundingBox = $root.optimization_guide.proto.BoundingRect.toObject(message.compositorBoundingBox, options);
                 return object;
             };
 
@@ -9032,6 +9175,9 @@ export const optimization_guide = $root.optimization_guide = (() => {
              * @property {Array.<optimization_guide.proto.ClickabilityReason>|null} [clickabilityReasons] InteractionInfo clickabilityReasons
              * @property {boolean|null} [isDisabled] InteractionInfo isDisabled
              * @property {Array.<optimization_guide.proto.InteractionDisabledReason>|null} [interactionDisabledReasons] InteractionInfo interactionDisabledReasons
+             * @property {boolean|null} [isTabbable] InteractionInfo isTabbable
+             * @property {boolean|null} [hasAriaActivedescendant] InteractionInfo hasAriaActivedescendant
+             * @property {Array.<number>|null} [ariaActionTargetNodeIds] InteractionInfo ariaActionTargetNodeIds
              */
 
             /**
@@ -9046,6 +9192,7 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 this.debugClickabilityReasons = [];
                 this.clickabilityReasons = [];
                 this.interactionDisabledReasons = [];
+                this.ariaActionTargetNodeIds = [];
                 if (properties)
                     for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                         if (properties[keys[i]] != null)
@@ -9157,6 +9304,30 @@ export const optimization_guide = $root.optimization_guide = (() => {
             InteractionInfo.prototype.interactionDisabledReasons = $util.emptyArray;
 
             /**
+             * InteractionInfo isTabbable.
+             * @member {boolean} isTabbable
+             * @memberof optimization_guide.proto.InteractionInfo
+             * @instance
+             */
+            InteractionInfo.prototype.isTabbable = false;
+
+            /**
+             * InteractionInfo hasAriaActivedescendant.
+             * @member {boolean} hasAriaActivedescendant
+             * @memberof optimization_guide.proto.InteractionInfo
+             * @instance
+             */
+            InteractionInfo.prototype.hasAriaActivedescendant = false;
+
+            /**
+             * InteractionInfo ariaActionTargetNodeIds.
+             * @member {Array.<number>} ariaActionTargetNodeIds
+             * @memberof optimization_guide.proto.InteractionInfo
+             * @instance
+             */
+            InteractionInfo.prototype.ariaActionTargetNodeIds = $util.emptyArray;
+
+            /**
              * Creates a new InteractionInfo instance using the specified properties.
              * @function create
              * @memberof optimization_guide.proto.InteractionInfo
@@ -9216,6 +9387,16 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     writer.uint32(/* id 17, wireType 2 =*/138).fork();
                     for (let i = 0; i < message.interactionDisabledReasons.length; ++i)
                         writer.int32(message.interactionDisabledReasons[i]);
+                    writer.ldelim();
+                }
+                if (message.isTabbable != null && Object.hasOwnProperty.call(message, "isTabbable"))
+                    writer.uint32(/* id 18, wireType 0 =*/144).bool(message.isTabbable);
+                if (message.hasAriaActivedescendant != null && Object.hasOwnProperty.call(message, "hasAriaActivedescendant"))
+                    writer.uint32(/* id 19, wireType 0 =*/152).bool(message.hasAriaActivedescendant);
+                if (message.ariaActionTargetNodeIds != null && message.ariaActionTargetNodeIds.length) {
+                    writer.uint32(/* id 20, wireType 2 =*/162).fork();
+                    for (let i = 0; i < message.ariaActionTargetNodeIds.length; ++i)
+                        writer.int32(message.ariaActionTargetNodeIds[i]);
                     writer.ldelim();
                 }
                 return writer;
@@ -9327,6 +9508,25 @@ export const optimization_guide = $root.optimization_guide = (() => {
                                 message.interactionDisabledReasons.push(reader.int32());
                             break;
                         }
+                    case 18: {
+                            message.isTabbable = reader.bool();
+                            break;
+                        }
+                    case 19: {
+                            message.hasAriaActivedescendant = reader.bool();
+                            break;
+                        }
+                    case 20: {
+                            if (!(message.ariaActionTargetNodeIds && message.ariaActionTargetNodeIds.length))
+                                message.ariaActionTargetNodeIds = [];
+                            if ((tag & 7) === 2) {
+                                let end2 = reader.uint32() + reader.pos;
+                                while (reader.pos < end2)
+                                    message.ariaActionTargetNodeIds.push(reader.int32());
+                            } else
+                                message.ariaActionTargetNodeIds.push(reader.int32());
+                            break;
+                        }
                     default:
                         reader.skipType(tag & 7);
                         break;
@@ -9413,6 +9613,8 @@ export const optimization_guide = $root.optimization_guide = (() => {
                         case 12:
                         case 13:
                         case 14:
+                        case 15:
+                        case 16:
                             break;
                         }
                 }
@@ -9438,6 +9640,8 @@ export const optimization_guide = $root.optimization_guide = (() => {
                         case 12:
                         case 13:
                         case 14:
+                        case 15:
+                        case 16:
                             break;
                         }
                 }
@@ -9455,8 +9659,23 @@ export const optimization_guide = $root.optimization_guide = (() => {
                         case 1:
                         case 2:
                         case 3:
+                        case 4:
+                        case 5:
                             break;
                         }
+                }
+                if (message.isTabbable != null && message.hasOwnProperty("isTabbable"))
+                    if (typeof message.isTabbable !== "boolean")
+                        return "isTabbable: boolean expected";
+                if (message.hasAriaActivedescendant != null && message.hasOwnProperty("hasAriaActivedescendant"))
+                    if (typeof message.hasAriaActivedescendant !== "boolean")
+                        return "hasAriaActivedescendant: boolean expected";
+                if (message.ariaActionTargetNodeIds != null && message.hasOwnProperty("ariaActionTargetNodeIds")) {
+                    if (!Array.isArray(message.ariaActionTargetNodeIds))
+                        return "ariaActionTargetNodeIds: array expected";
+                    for (let i = 0; i < message.ariaActionTargetNodeIds.length; ++i)
+                        if (!$util.isInteger(message.ariaActionTargetNodeIds[i]))
+                            return "ariaActionTargetNodeIds: integer[] expected";
                 }
                 return null;
             };
@@ -9565,6 +9784,14 @@ export const optimization_guide = $root.optimization_guide = (() => {
                         case 14:
                             message.debugClickabilityReasons[i] = 14;
                             break;
+                        case "CLICKABILITY_REASON_ARIA_TOGGLE":
+                        case 15:
+                            message.debugClickabilityReasons[i] = 15;
+                            break;
+                        case "CLICKABILITY_REASON_ARIA_SELECTABLE":
+                        case 16:
+                            message.debugClickabilityReasons[i] = 16;
+                            break;
                         }
                 }
                 if (object.clickabilityReasons) {
@@ -9638,6 +9865,14 @@ export const optimization_guide = $root.optimization_guide = (() => {
                         case 14:
                             message.clickabilityReasons[i] = 14;
                             break;
+                        case "CLICKABILITY_REASON_ARIA_TOGGLE":
+                        case 15:
+                            message.clickabilityReasons[i] = 15;
+                            break;
+                        case "CLICKABILITY_REASON_ARIA_SELECTABLE":
+                        case 16:
+                            message.clickabilityReasons[i] = 16;
+                            break;
                         }
                 }
                 if (object.isDisabled != null)
@@ -9669,7 +9904,26 @@ export const optimization_guide = $root.optimization_guide = (() => {
                         case 3:
                             message.interactionDisabledReasons[i] = 3;
                             break;
+                        case "INTERACTION_DISABLED_REASON_ARIA_HIDDEN":
+                        case 4:
+                            message.interactionDisabledReasons[i] = 4;
+                            break;
+                        case "INTERACTION_DISABLED_REASON_ARIA_ROLE_PRESENTATIONAL":
+                        case 5:
+                            message.interactionDisabledReasons[i] = 5;
+                            break;
                         }
+                }
+                if (object.isTabbable != null)
+                    message.isTabbable = Boolean(object.isTabbable);
+                if (object.hasAriaActivedescendant != null)
+                    message.hasAriaActivedescendant = Boolean(object.hasAriaActivedescendant);
+                if (object.ariaActionTargetNodeIds) {
+                    if (!Array.isArray(object.ariaActionTargetNodeIds))
+                        throw TypeError(".optimization_guide.proto.InteractionInfo.ariaActionTargetNodeIds: array expected");
+                    message.ariaActionTargetNodeIds = [];
+                    for (let i = 0; i < object.ariaActionTargetNodeIds.length; ++i)
+                        message.ariaActionTargetNodeIds[i] = object.ariaActionTargetNodeIds[i] | 0;
                 }
                 return message;
             };
@@ -9691,6 +9945,7 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     object.debugClickabilityReasons = [];
                     object.clickabilityReasons = [];
                     object.interactionDisabledReasons = [];
+                    object.ariaActionTargetNodeIds = [];
                 }
                 if (options.defaults) {
                     object.isSelectable = false;
@@ -9703,6 +9958,8 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     object.scrollerInfo = null;
                     object.documentScopedZOrder = 0;
                     object.isDisabled = false;
+                    object.isTabbable = false;
+                    object.hasAriaActivedescendant = false;
                 }
                 if (message.isSelectable != null && message.hasOwnProperty("isSelectable"))
                     object.isSelectable = message.isSelectable;
@@ -9738,6 +9995,15 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     object.interactionDisabledReasons = [];
                     for (let j = 0; j < message.interactionDisabledReasons.length; ++j)
                         object.interactionDisabledReasons[j] = options.enums === String ? $root.optimization_guide.proto.InteractionDisabledReason[message.interactionDisabledReasons[j]] === undefined ? message.interactionDisabledReasons[j] : $root.optimization_guide.proto.InteractionDisabledReason[message.interactionDisabledReasons[j]] : message.interactionDisabledReasons[j];
+                }
+                if (message.isTabbable != null && message.hasOwnProperty("isTabbable"))
+                    object.isTabbable = message.isTabbable;
+                if (message.hasAriaActivedescendant != null && message.hasOwnProperty("hasAriaActivedescendant"))
+                    object.hasAriaActivedescendant = message.hasAriaActivedescendant;
+                if (message.ariaActionTargetNodeIds && message.ariaActionTargetNodeIds.length) {
+                    object.ariaActionTargetNodeIds = [];
+                    for (let j = 0; j < message.ariaActionTargetNodeIds.length; ++j)
+                        object.ariaActionTargetNodeIds[j] = message.ariaActionTargetNodeIds[j];
                 }
                 return object;
             };
@@ -12473,6 +12739,7 @@ export const optimization_guide = $root.optimization_guide = (() => {
              * @property {optimization_guide.proto.RedactionDecision|null} [redactionDecision] FormControlData redactionDecision
              * @property {Array.<optimization_guide.proto.CoarseAutofillFieldType>|null} [coarseAutofillFieldType] FormControlData coarseAutofillFieldType
              * @property {number|null} [autofillSectionId] FormControlData autofillSectionId
+             * @property {boolean|null} [isReadonly] FormControlData isReadonly
              */
 
             /**
@@ -12573,6 +12840,14 @@ export const optimization_guide = $root.optimization_guide = (() => {
             FormControlData.prototype.autofillSectionId = 0;
 
             /**
+             * FormControlData isReadonly.
+             * @member {boolean} isReadonly
+             * @memberof optimization_guide.proto.FormControlData
+             * @instance
+             */
+            FormControlData.prototype.isReadonly = false;
+
+            /**
              * Creates a new FormControlData instance using the specified properties.
              * @function create
              * @memberof optimization_guide.proto.FormControlData
@@ -12621,6 +12896,8 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 }
                 if (message.autofillSectionId != null && Object.hasOwnProperty.call(message, "autofillSectionId"))
                     writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.autofillSectionId);
+                if (message.isReadonly != null && Object.hasOwnProperty.call(message, "isReadonly"))
+                    writer.uint32(/* id 11, wireType 0 =*/88).bool(message.isReadonly);
                 return writer;
             };
 
@@ -12704,6 +12981,10 @@ export const optimization_guide = $root.optimization_guide = (() => {
                         }
                     case 10: {
                             message.autofillSectionId = reader.uint32();
+                            break;
+                        }
+                    case 11: {
+                            message.isReadonly = reader.bool();
                             break;
                         }
                     default:
@@ -12813,6 +13094,11 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     case 2:
                     case 3:
                     case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
                         break;
                     }
                 if (message.coarseAutofillFieldType != null && message.hasOwnProperty("coarseAutofillFieldType")) {
@@ -12825,12 +13111,16 @@ export const optimization_guide = $root.optimization_guide = (() => {
                         case 0:
                         case 1:
                         case 2:
+                        case 3:
                             break;
                         }
                 }
                 if (message.autofillSectionId != null && message.hasOwnProperty("autofillSectionId"))
                     if (!$util.isInteger(message.autofillSectionId))
                         return "autofillSectionId: integer expected";
+                if (message.isReadonly != null && message.hasOwnProperty("isReadonly"))
+                    if (typeof message.isReadonly !== "boolean")
+                        return "isReadonly: boolean expected";
                 return null;
             };
 
@@ -13033,6 +13323,26 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 case 4:
                     message.redactionDecision = 4;
                     break;
+                case "REDACTION_DECISION_UNREDACTED_EMPTY_CUSTOM_PASSWORD":
+                case 5:
+                    message.redactionDecision = 5;
+                    break;
+                case "REDACTION_DECISION_REDACTED_CUSTOM_PASSWORD_CSS":
+                case 6:
+                    message.redactionDecision = 6;
+                    break;
+                case "REDACTION_DECISION_REDACTED_CUSTOM_PASSWORD_JS":
+                case 7:
+                    message.redactionDecision = 7;
+                    break;
+                case "REDACTION_DECISION_REDACTED_IS_OTP":
+                case 8:
+                    message.redactionDecision = 8;
+                    break;
+                case "REDACTION_DECISION_UNREDACTED_EMPTY_OTP_FIELD":
+                case 9:
+                    message.redactionDecision = 9;
+                    break;
                 }
                 if (object.coarseAutofillFieldType) {
                     if (!Array.isArray(object.coarseAutofillFieldType))
@@ -13057,10 +13367,16 @@ export const optimization_guide = $root.optimization_guide = (() => {
                         case 2:
                             message.coarseAutofillFieldType[i] = 2;
                             break;
+                        case "COARSE_AUTOFILL_FIELD_TYPE_OTP":
+                        case 3:
+                            message.coarseAutofillFieldType[i] = 3;
+                            break;
                         }
                 }
                 if (object.autofillSectionId != null)
                     message.autofillSectionId = object.autofillSectionId >>> 0;
+                if (object.isReadonly != null)
+                    message.isReadonly = Boolean(object.isReadonly);
                 return message;
             };
 
@@ -13090,6 +13406,7 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     object.isRequired = false;
                     object.redactionDecision = options.enums === String ? "REDACTION_DECISION_NO_REDACTION_NECESSARY" : 0;
                     object.autofillSectionId = 0;
+                    object.isReadonly = false;
                 }
                 if (message.fieldName != null && message.hasOwnProperty("fieldName"))
                     object.fieldName = message.fieldName;
@@ -13117,6 +13434,8 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 }
                 if (message.autofillSectionId != null && message.hasOwnProperty("autofillSectionId"))
                     object.autofillSectionId = message.autofillSectionId;
+                if (message.isReadonly != null && message.hasOwnProperty("isReadonly"))
+                    object.isReadonly = message.isReadonly;
                 return object;
             };
 
@@ -14604,6 +14923,8 @@ export const optimization_guide = $root.optimization_guide = (() => {
              * @memberof optimization_guide.proto
              * @interface IFrameInteractionInfo
              * @property {optimization_guide.proto.ISelection|null} [selection] FrameInteractionInfo selection
+             * @property {number|null} [focusedNodeId] FrameInteractionInfo focusedNodeId
+             * @property {number|null} [accessibilityFocusedNodeId] FrameInteractionInfo accessibilityFocusedNodeId
              */
 
             /**
@@ -14628,6 +14949,22 @@ export const optimization_guide = $root.optimization_guide = (() => {
              * @instance
              */
             FrameInteractionInfo.prototype.selection = null;
+
+            /**
+             * FrameInteractionInfo focusedNodeId.
+             * @member {number} focusedNodeId
+             * @memberof optimization_guide.proto.FrameInteractionInfo
+             * @instance
+             */
+            FrameInteractionInfo.prototype.focusedNodeId = 0;
+
+            /**
+             * FrameInteractionInfo accessibilityFocusedNodeId.
+             * @member {number} accessibilityFocusedNodeId
+             * @memberof optimization_guide.proto.FrameInteractionInfo
+             * @instance
+             */
+            FrameInteractionInfo.prototype.accessibilityFocusedNodeId = 0;
 
             /**
              * Creates a new FrameInteractionInfo instance using the specified properties.
@@ -14655,6 +14992,10 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     writer = $Writer.create();
                 if (message.selection != null && Object.hasOwnProperty.call(message, "selection"))
                     $root.optimization_guide.proto.Selection.encode(message.selection, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                if (message.focusedNodeId != null && Object.hasOwnProperty.call(message, "focusedNodeId"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.focusedNodeId);
+                if (message.accessibilityFocusedNodeId != null && Object.hasOwnProperty.call(message, "accessibilityFocusedNodeId"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.accessibilityFocusedNodeId);
                 return writer;
             };
 
@@ -14693,6 +15034,14 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     switch (tag >>> 3) {
                     case 1: {
                             message.selection = $root.optimization_guide.proto.Selection.decode(reader, reader.uint32());
+                            break;
+                        }
+                    case 2: {
+                            message.focusedNodeId = reader.int32();
+                            break;
+                        }
+                    case 3: {
+                            message.accessibilityFocusedNodeId = reader.int32();
                             break;
                         }
                     default:
@@ -14735,6 +15084,12 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     if (error)
                         return "selection." + error;
                 }
+                if (message.focusedNodeId != null && message.hasOwnProperty("focusedNodeId"))
+                    if (!$util.isInteger(message.focusedNodeId))
+                        return "focusedNodeId: integer expected";
+                if (message.accessibilityFocusedNodeId != null && message.hasOwnProperty("accessibilityFocusedNodeId"))
+                    if (!$util.isInteger(message.accessibilityFocusedNodeId))
+                        return "accessibilityFocusedNodeId: integer expected";
                 return null;
             };
 
@@ -14755,6 +15110,10 @@ export const optimization_guide = $root.optimization_guide = (() => {
                         throw TypeError(".optimization_guide.proto.FrameInteractionInfo.selection: object expected");
                     message.selection = $root.optimization_guide.proto.Selection.fromObject(object.selection);
                 }
+                if (object.focusedNodeId != null)
+                    message.focusedNodeId = object.focusedNodeId | 0;
+                if (object.accessibilityFocusedNodeId != null)
+                    message.accessibilityFocusedNodeId = object.accessibilityFocusedNodeId | 0;
                 return message;
             };
 
@@ -14771,10 +15130,17 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 if (!options)
                     options = {};
                 let object = {};
-                if (options.defaults)
+                if (options.defaults) {
                     object.selection = null;
+                    object.focusedNodeId = 0;
+                    object.accessibilityFocusedNodeId = 0;
+                }
                 if (message.selection != null && message.hasOwnProperty("selection"))
                     object.selection = $root.optimization_guide.proto.Selection.toObject(message.selection, options);
+                if (message.focusedNodeId != null && message.hasOwnProperty("focusedNodeId"))
+                    object.focusedNodeId = message.focusedNodeId;
+                if (message.accessibilityFocusedNodeId != null && message.hasOwnProperty("accessibilityFocusedNodeId"))
+                    object.accessibilityFocusedNodeId = message.accessibilityFocusedNodeId;
                 return object;
             };
 
@@ -17230,6 +17596,7 @@ export const optimization_guide = $root.optimization_guide = (() => {
              * @property {number|null} [focusedNodeId] PageInteractionInfo focusedNodeId
              * @property {number|null} [accessibilityFocusedNodeId] PageInteractionInfo accessibilityFocusedNodeId
              * @property {optimization_guide.proto.IPoint|null} [mousePosition] PageInteractionInfo mousePosition
+             * @property {optimization_guide.proto.IDocumentIdentifier|null} [focusedFrame] PageInteractionInfo focusedFrame
              */
 
             /**
@@ -17272,6 +17639,14 @@ export const optimization_guide = $root.optimization_guide = (() => {
             PageInteractionInfo.prototype.mousePosition = null;
 
             /**
+             * PageInteractionInfo focusedFrame.
+             * @member {optimization_guide.proto.IDocumentIdentifier|null|undefined} focusedFrame
+             * @memberof optimization_guide.proto.PageInteractionInfo
+             * @instance
+             */
+            PageInteractionInfo.prototype.focusedFrame = null;
+
+            /**
              * Creates a new PageInteractionInfo instance using the specified properties.
              * @function create
              * @memberof optimization_guide.proto.PageInteractionInfo
@@ -17301,6 +17676,8 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     writer.uint32(/* id 2, wireType 0 =*/16).int32(message.accessibilityFocusedNodeId);
                 if (message.mousePosition != null && Object.hasOwnProperty.call(message, "mousePosition"))
                     $root.optimization_guide.proto.Point.encode(message.mousePosition, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                if (message.focusedFrame != null && Object.hasOwnProperty.call(message, "focusedFrame"))
+                    $root.optimization_guide.proto.DocumentIdentifier.encode(message.focusedFrame, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                 return writer;
             };
 
@@ -17349,6 +17726,10 @@ export const optimization_guide = $root.optimization_guide = (() => {
                             message.mousePosition = $root.optimization_guide.proto.Point.decode(reader, reader.uint32());
                             break;
                         }
+                    case 4: {
+                            message.focusedFrame = $root.optimization_guide.proto.DocumentIdentifier.decode(reader, reader.uint32());
+                            break;
+                        }
                     default:
                         reader.skipType(tag & 7);
                         break;
@@ -17395,6 +17776,11 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     if (error)
                         return "mousePosition." + error;
                 }
+                if (message.focusedFrame != null && message.hasOwnProperty("focusedFrame")) {
+                    let error = $root.optimization_guide.proto.DocumentIdentifier.verify(message.focusedFrame);
+                    if (error)
+                        return "focusedFrame." + error;
+                }
                 return null;
             };
 
@@ -17419,6 +17805,11 @@ export const optimization_guide = $root.optimization_guide = (() => {
                         throw TypeError(".optimization_guide.proto.PageInteractionInfo.mousePosition: object expected");
                     message.mousePosition = $root.optimization_guide.proto.Point.fromObject(object.mousePosition);
                 }
+                if (object.focusedFrame != null) {
+                    if (typeof object.focusedFrame !== "object")
+                        throw TypeError(".optimization_guide.proto.PageInteractionInfo.focusedFrame: object expected");
+                    message.focusedFrame = $root.optimization_guide.proto.DocumentIdentifier.fromObject(object.focusedFrame);
+                }
                 return message;
             };
 
@@ -17439,6 +17830,7 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     object.focusedNodeId = 0;
                     object.accessibilityFocusedNodeId = 0;
                     object.mousePosition = null;
+                    object.focusedFrame = null;
                 }
                 if (message.focusedNodeId != null && message.hasOwnProperty("focusedNodeId"))
                     object.focusedNodeId = message.focusedNodeId;
@@ -17446,6 +17838,8 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     object.accessibilityFocusedNodeId = message.accessibilityFocusedNodeId;
                 if (message.mousePosition != null && message.hasOwnProperty("mousePosition"))
                     object.mousePosition = $root.optimization_guide.proto.Point.toObject(message.mousePosition, options);
+                if (message.focusedFrame != null && message.hasOwnProperty("focusedFrame"))
+                    object.focusedFrame = $root.optimization_guide.proto.DocumentIdentifier.toObject(message.focusedFrame, options);
                 return object;
             };
 
@@ -18474,6 +18868,421 @@ export const optimization_guide = $root.optimization_guide = (() => {
             })();
 
             return AutofillInformation;
+        })();
+
+        proto.GeminiInChromePageMetadata = (function() {
+
+            /**
+             * Properties of a GeminiInChromePageMetadata.
+             * @memberof optimization_guide.proto
+             * @interface IGeminiInChromePageMetadata
+             * @property {optimization_guide.proto.IScreenshotInfo|null} [screenshotInfo] GeminiInChromePageMetadata screenshotInfo
+             */
+
+            /**
+             * Constructs a new GeminiInChromePageMetadata.
+             * @memberof optimization_guide.proto
+             * @classdesc Represents a GeminiInChromePageMetadata.
+             * @implements IGeminiInChromePageMetadata
+             * @constructor
+             * @param {optimization_guide.proto.IGeminiInChromePageMetadata=} [properties] Properties to set
+             */
+            function GeminiInChromePageMetadata(properties) {
+                if (properties)
+                    for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * GeminiInChromePageMetadata screenshotInfo.
+             * @member {optimization_guide.proto.IScreenshotInfo|null|undefined} screenshotInfo
+             * @memberof optimization_guide.proto.GeminiInChromePageMetadata
+             * @instance
+             */
+            GeminiInChromePageMetadata.prototype.screenshotInfo = null;
+
+            /**
+             * Creates a new GeminiInChromePageMetadata instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.GeminiInChromePageMetadata
+             * @static
+             * @param {optimization_guide.proto.IGeminiInChromePageMetadata=} [properties] Properties to set
+             * @returns {optimization_guide.proto.GeminiInChromePageMetadata} GeminiInChromePageMetadata instance
+             */
+            GeminiInChromePageMetadata.create = function create(properties) {
+                return new GeminiInChromePageMetadata(properties);
+            };
+
+            /**
+             * Encodes the specified GeminiInChromePageMetadata message. Does not implicitly {@link optimization_guide.proto.GeminiInChromePageMetadata.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.GeminiInChromePageMetadata
+             * @static
+             * @param {optimization_guide.proto.IGeminiInChromePageMetadata} message GeminiInChromePageMetadata message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            GeminiInChromePageMetadata.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.screenshotInfo != null && Object.hasOwnProperty.call(message, "screenshotInfo"))
+                    $root.optimization_guide.proto.ScreenshotInfo.encode(message.screenshotInfo, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified GeminiInChromePageMetadata message, length delimited. Does not implicitly {@link optimization_guide.proto.GeminiInChromePageMetadata.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.GeminiInChromePageMetadata
+             * @static
+             * @param {optimization_guide.proto.IGeminiInChromePageMetadata} message GeminiInChromePageMetadata message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            GeminiInChromePageMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes a GeminiInChromePageMetadata message from the specified reader or buffer.
+             * @function decode
+             * @memberof optimization_guide.proto.GeminiInChromePageMetadata
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {optimization_guide.proto.GeminiInChromePageMetadata} GeminiInChromePageMetadata
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            GeminiInChromePageMetadata.decode = function decode(reader, length, error) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.optimization_guide.proto.GeminiInChromePageMetadata();
+                while (reader.pos < end) {
+                    let tag = reader.uint32();
+                    if (tag === error)
+                        break;
+                    switch (tag >>> 3) {
+                    case 1: {
+                            message.screenshotInfo = $root.optimization_guide.proto.ScreenshotInfo.decode(reader, reader.uint32());
+                            break;
+                        }
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a GeminiInChromePageMetadata message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.GeminiInChromePageMetadata
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.GeminiInChromePageMetadata} GeminiInChromePageMetadata
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            GeminiInChromePageMetadata.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a GeminiInChromePageMetadata message.
+             * @function verify
+             * @memberof optimization_guide.proto.GeminiInChromePageMetadata
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            GeminiInChromePageMetadata.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.screenshotInfo != null && message.hasOwnProperty("screenshotInfo")) {
+                    let error = $root.optimization_guide.proto.ScreenshotInfo.verify(message.screenshotInfo);
+                    if (error)
+                        return "screenshotInfo." + error;
+                }
+                return null;
+            };
+
+            /**
+             * Creates a GeminiInChromePageMetadata message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.GeminiInChromePageMetadata
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.GeminiInChromePageMetadata} GeminiInChromePageMetadata
+             */
+            GeminiInChromePageMetadata.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.GeminiInChromePageMetadata)
+                    return object;
+                let message = new $root.optimization_guide.proto.GeminiInChromePageMetadata();
+                if (object.screenshotInfo != null) {
+                    if (typeof object.screenshotInfo !== "object")
+                        throw TypeError(".optimization_guide.proto.GeminiInChromePageMetadata.screenshotInfo: object expected");
+                    message.screenshotInfo = $root.optimization_guide.proto.ScreenshotInfo.fromObject(object.screenshotInfo);
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a GeminiInChromePageMetadata message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.GeminiInChromePageMetadata
+             * @static
+             * @param {optimization_guide.proto.GeminiInChromePageMetadata} message GeminiInChromePageMetadata
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            GeminiInChromePageMetadata.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults)
+                    object.screenshotInfo = null;
+                if (message.screenshotInfo != null && message.hasOwnProperty("screenshotInfo"))
+                    object.screenshotInfo = $root.optimization_guide.proto.ScreenshotInfo.toObject(message.screenshotInfo, options);
+                return object;
+            };
+
+            /**
+             * Converts this GeminiInChromePageMetadata to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.GeminiInChromePageMetadata
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            GeminiInChromePageMetadata.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for GeminiInChromePageMetadata
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.GeminiInChromePageMetadata
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            GeminiInChromePageMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.GeminiInChromePageMetadata";
+            };
+
+            return GeminiInChromePageMetadata;
+        })();
+
+        proto.ScreenshotInfo = (function() {
+
+            /**
+             * Properties of a ScreenshotInfo.
+             * @memberof optimization_guide.proto
+             * @interface IScreenshotInfo
+             * @property {boolean|null} [hasSelectionRegionInScreenshot] ScreenshotInfo hasSelectionRegionInScreenshot
+             */
+
+            /**
+             * Constructs a new ScreenshotInfo.
+             * @memberof optimization_guide.proto
+             * @classdesc Represents a ScreenshotInfo.
+             * @implements IScreenshotInfo
+             * @constructor
+             * @param {optimization_guide.proto.IScreenshotInfo=} [properties] Properties to set
+             */
+            function ScreenshotInfo(properties) {
+                if (properties)
+                    for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * ScreenshotInfo hasSelectionRegionInScreenshot.
+             * @member {boolean} hasSelectionRegionInScreenshot
+             * @memberof optimization_guide.proto.ScreenshotInfo
+             * @instance
+             */
+            ScreenshotInfo.prototype.hasSelectionRegionInScreenshot = false;
+
+            /**
+             * Creates a new ScreenshotInfo instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.ScreenshotInfo
+             * @static
+             * @param {optimization_guide.proto.IScreenshotInfo=} [properties] Properties to set
+             * @returns {optimization_guide.proto.ScreenshotInfo} ScreenshotInfo instance
+             */
+            ScreenshotInfo.create = function create(properties) {
+                return new ScreenshotInfo(properties);
+            };
+
+            /**
+             * Encodes the specified ScreenshotInfo message. Does not implicitly {@link optimization_guide.proto.ScreenshotInfo.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.ScreenshotInfo
+             * @static
+             * @param {optimization_guide.proto.IScreenshotInfo} message ScreenshotInfo message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ScreenshotInfo.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.hasSelectionRegionInScreenshot != null && Object.hasOwnProperty.call(message, "hasSelectionRegionInScreenshot"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.hasSelectionRegionInScreenshot);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified ScreenshotInfo message, length delimited. Does not implicitly {@link optimization_guide.proto.ScreenshotInfo.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.ScreenshotInfo
+             * @static
+             * @param {optimization_guide.proto.IScreenshotInfo} message ScreenshotInfo message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ScreenshotInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes a ScreenshotInfo message from the specified reader or buffer.
+             * @function decode
+             * @memberof optimization_guide.proto.ScreenshotInfo
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {optimization_guide.proto.ScreenshotInfo} ScreenshotInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ScreenshotInfo.decode = function decode(reader, length, error) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.optimization_guide.proto.ScreenshotInfo();
+                while (reader.pos < end) {
+                    let tag = reader.uint32();
+                    if (tag === error)
+                        break;
+                    switch (tag >>> 3) {
+                    case 1: {
+                            message.hasSelectionRegionInScreenshot = reader.bool();
+                            break;
+                        }
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a ScreenshotInfo message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.ScreenshotInfo
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.ScreenshotInfo} ScreenshotInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ScreenshotInfo.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a ScreenshotInfo message.
+             * @function verify
+             * @memberof optimization_guide.proto.ScreenshotInfo
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            ScreenshotInfo.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.hasSelectionRegionInScreenshot != null && message.hasOwnProperty("hasSelectionRegionInScreenshot"))
+                    if (typeof message.hasSelectionRegionInScreenshot !== "boolean")
+                        return "hasSelectionRegionInScreenshot: boolean expected";
+                return null;
+            };
+
+            /**
+             * Creates a ScreenshotInfo message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.ScreenshotInfo
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.ScreenshotInfo} ScreenshotInfo
+             */
+            ScreenshotInfo.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.ScreenshotInfo)
+                    return object;
+                let message = new $root.optimization_guide.proto.ScreenshotInfo();
+                if (object.hasSelectionRegionInScreenshot != null)
+                    message.hasSelectionRegionInScreenshot = Boolean(object.hasSelectionRegionInScreenshot);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a ScreenshotInfo message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.ScreenshotInfo
+             * @static
+             * @param {optimization_guide.proto.ScreenshotInfo} message ScreenshotInfo
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            ScreenshotInfo.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults)
+                    object.hasSelectionRegionInScreenshot = false;
+                if (message.hasSelectionRegionInScreenshot != null && message.hasOwnProperty("hasSelectionRegionInScreenshot"))
+                    object.hasSelectionRegionInScreenshot = message.hasSelectionRegionInScreenshot;
+                return object;
+            };
+
+            /**
+             * Converts this ScreenshotInfo to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.ScreenshotInfo
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            ScreenshotInfo.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for ScreenshotInfo
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.ScreenshotInfo
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            ScreenshotInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.ScreenshotInfo";
+            };
+
+            return ScreenshotInfo;
         })();
 
         proto.AutofillGlobalId = (function() {
@@ -21808,6 +22617,7 @@ export const optimization_guide = $root.optimization_guide = (() => {
              * @interface IFrameMetadata
              * @property {string|null} [url] FrameMetadata url
              * @property {Array.<optimization_guide.proto.IMetaTag>|null} [metaTags] FrameMetadata metaTags
+             * @property {boolean|null} [hasMediaTranscripts] FrameMetadata hasMediaTranscripts
              */
 
             /**
@@ -21843,6 +22653,14 @@ export const optimization_guide = $root.optimization_guide = (() => {
             FrameMetadata.prototype.metaTags = $util.emptyArray;
 
             /**
+             * FrameMetadata hasMediaTranscripts.
+             * @member {boolean} hasMediaTranscripts
+             * @memberof optimization_guide.proto.FrameMetadata
+             * @instance
+             */
+            FrameMetadata.prototype.hasMediaTranscripts = false;
+
+            /**
              * Creates a new FrameMetadata instance using the specified properties.
              * @function create
              * @memberof optimization_guide.proto.FrameMetadata
@@ -21871,6 +22689,8 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 if (message.metaTags != null && message.metaTags.length)
                     for (let i = 0; i < message.metaTags.length; ++i)
                         $root.optimization_guide.proto.MetaTag.encode(message.metaTags[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                if (message.hasMediaTranscripts != null && Object.hasOwnProperty.call(message, "hasMediaTranscripts"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.hasMediaTranscripts);
                 return writer;
             };
 
@@ -21915,6 +22735,10 @@ export const optimization_guide = $root.optimization_guide = (() => {
                             if (!(message.metaTags && message.metaTags.length))
                                 message.metaTags = [];
                             message.metaTags.push($root.optimization_guide.proto.MetaTag.decode(reader, reader.uint32()));
+                            break;
+                        }
+                    case 3: {
+                            message.hasMediaTranscripts = reader.bool();
                             break;
                         }
                     default:
@@ -21964,6 +22788,9 @@ export const optimization_guide = $root.optimization_guide = (() => {
                             return "metaTags." + error;
                     }
                 }
+                if (message.hasMediaTranscripts != null && message.hasOwnProperty("hasMediaTranscripts"))
+                    if (typeof message.hasMediaTranscripts !== "boolean")
+                        return "hasMediaTranscripts: boolean expected";
                 return null;
             };
 
@@ -21991,6 +22818,8 @@ export const optimization_guide = $root.optimization_guide = (() => {
                         message.metaTags[i] = $root.optimization_guide.proto.MetaTag.fromObject(object.metaTags[i]);
                     }
                 }
+                if (object.hasMediaTranscripts != null)
+                    message.hasMediaTranscripts = Boolean(object.hasMediaTranscripts);
                 return message;
             };
 
@@ -22009,8 +22838,10 @@ export const optimization_guide = $root.optimization_guide = (() => {
                 let object = {};
                 if (options.arrays || options.defaults)
                     object.metaTags = [];
-                if (options.defaults)
+                if (options.defaults) {
                     object.url = "";
+                    object.hasMediaTranscripts = false;
+                }
                 if (message.url != null && message.hasOwnProperty("url"))
                     object.url = message.url;
                 if (message.metaTags && message.metaTags.length) {
@@ -22018,6 +22849,8 @@ export const optimization_guide = $root.optimization_guide = (() => {
                     for (let j = 0; j < message.metaTags.length; ++j)
                         object.metaTags[j] = $root.optimization_guide.proto.MetaTag.toObject(message.metaTags[j], options);
                 }
+                if (message.hasMediaTranscripts != null && message.hasOwnProperty("hasMediaTranscripts"))
+                    object.hasMediaTranscripts = message.hasMediaTranscripts;
                 return object;
             };
 
@@ -22274,6 +23107,245 @@ export const optimization_guide = $root.optimization_guide = (() => {
             };
 
             return PageMetadata;
+        })();
+
+        proto.DocumentSelection = (function() {
+
+            /**
+             * Properties of a DocumentSelection.
+             * @memberof optimization_guide.proto
+             * @interface IDocumentSelection
+             * @property {optimization_guide.proto.IDocumentIdentifier|null} [documentIdentifier] DocumentSelection documentIdentifier
+             * @property {optimization_guide.proto.ISelection|null} [selection] DocumentSelection selection
+             */
+
+            /**
+             * Constructs a new DocumentSelection.
+             * @memberof optimization_guide.proto
+             * @classdesc Represents a DocumentSelection.
+             * @implements IDocumentSelection
+             * @constructor
+             * @param {optimization_guide.proto.IDocumentSelection=} [properties] Properties to set
+             */
+            function DocumentSelection(properties) {
+                if (properties)
+                    for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * DocumentSelection documentIdentifier.
+             * @member {optimization_guide.proto.IDocumentIdentifier|null|undefined} documentIdentifier
+             * @memberof optimization_guide.proto.DocumentSelection
+             * @instance
+             */
+            DocumentSelection.prototype.documentIdentifier = null;
+
+            /**
+             * DocumentSelection selection.
+             * @member {optimization_guide.proto.ISelection|null|undefined} selection
+             * @memberof optimization_guide.proto.DocumentSelection
+             * @instance
+             */
+            DocumentSelection.prototype.selection = null;
+
+            /**
+             * Creates a new DocumentSelection instance using the specified properties.
+             * @function create
+             * @memberof optimization_guide.proto.DocumentSelection
+             * @static
+             * @param {optimization_guide.proto.IDocumentSelection=} [properties] Properties to set
+             * @returns {optimization_guide.proto.DocumentSelection} DocumentSelection instance
+             */
+            DocumentSelection.create = function create(properties) {
+                return new DocumentSelection(properties);
+            };
+
+            /**
+             * Encodes the specified DocumentSelection message. Does not implicitly {@link optimization_guide.proto.DocumentSelection.verify|verify} messages.
+             * @function encode
+             * @memberof optimization_guide.proto.DocumentSelection
+             * @static
+             * @param {optimization_guide.proto.IDocumentSelection} message DocumentSelection message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            DocumentSelection.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.documentIdentifier != null && Object.hasOwnProperty.call(message, "documentIdentifier"))
+                    $root.optimization_guide.proto.DocumentIdentifier.encode(message.documentIdentifier, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                if (message.selection != null && Object.hasOwnProperty.call(message, "selection"))
+                    $root.optimization_guide.proto.Selection.encode(message.selection, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified DocumentSelection message, length delimited. Does not implicitly {@link optimization_guide.proto.DocumentSelection.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof optimization_guide.proto.DocumentSelection
+             * @static
+             * @param {optimization_guide.proto.IDocumentSelection} message DocumentSelection message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            DocumentSelection.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes a DocumentSelection message from the specified reader or buffer.
+             * @function decode
+             * @memberof optimization_guide.proto.DocumentSelection
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {optimization_guide.proto.DocumentSelection} DocumentSelection
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            DocumentSelection.decode = function decode(reader, length, error) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.optimization_guide.proto.DocumentSelection();
+                while (reader.pos < end) {
+                    let tag = reader.uint32();
+                    if (tag === error)
+                        break;
+                    switch (tag >>> 3) {
+                    case 1: {
+                            message.documentIdentifier = $root.optimization_guide.proto.DocumentIdentifier.decode(reader, reader.uint32());
+                            break;
+                        }
+                    case 2: {
+                            message.selection = $root.optimization_guide.proto.Selection.decode(reader, reader.uint32());
+                            break;
+                        }
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a DocumentSelection message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof optimization_guide.proto.DocumentSelection
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {optimization_guide.proto.DocumentSelection} DocumentSelection
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            DocumentSelection.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a DocumentSelection message.
+             * @function verify
+             * @memberof optimization_guide.proto.DocumentSelection
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            DocumentSelection.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.documentIdentifier != null && message.hasOwnProperty("documentIdentifier")) {
+                    let error = $root.optimization_guide.proto.DocumentIdentifier.verify(message.documentIdentifier);
+                    if (error)
+                        return "documentIdentifier." + error;
+                }
+                if (message.selection != null && message.hasOwnProperty("selection")) {
+                    let error = $root.optimization_guide.proto.Selection.verify(message.selection);
+                    if (error)
+                        return "selection." + error;
+                }
+                return null;
+            };
+
+            /**
+             * Creates a DocumentSelection message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof optimization_guide.proto.DocumentSelection
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {optimization_guide.proto.DocumentSelection} DocumentSelection
+             */
+            DocumentSelection.fromObject = function fromObject(object) {
+                if (object instanceof $root.optimization_guide.proto.DocumentSelection)
+                    return object;
+                let message = new $root.optimization_guide.proto.DocumentSelection();
+                if (object.documentIdentifier != null) {
+                    if (typeof object.documentIdentifier !== "object")
+                        throw TypeError(".optimization_guide.proto.DocumentSelection.documentIdentifier: object expected");
+                    message.documentIdentifier = $root.optimization_guide.proto.DocumentIdentifier.fromObject(object.documentIdentifier);
+                }
+                if (object.selection != null) {
+                    if (typeof object.selection !== "object")
+                        throw TypeError(".optimization_guide.proto.DocumentSelection.selection: object expected");
+                    message.selection = $root.optimization_guide.proto.Selection.fromObject(object.selection);
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a DocumentSelection message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof optimization_guide.proto.DocumentSelection
+             * @static
+             * @param {optimization_guide.proto.DocumentSelection} message DocumentSelection
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            DocumentSelection.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults) {
+                    object.documentIdentifier = null;
+                    object.selection = null;
+                }
+                if (message.documentIdentifier != null && message.hasOwnProperty("documentIdentifier"))
+                    object.documentIdentifier = $root.optimization_guide.proto.DocumentIdentifier.toObject(message.documentIdentifier, options);
+                if (message.selection != null && message.hasOwnProperty("selection"))
+                    object.selection = $root.optimization_guide.proto.Selection.toObject(message.selection, options);
+                return object;
+            };
+
+            /**
+             * Converts this DocumentSelection to JSON.
+             * @function toJSON
+             * @memberof optimization_guide.proto.DocumentSelection
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            DocumentSelection.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for DocumentSelection
+             * @function getTypeUrl
+             * @memberof optimization_guide.proto.DocumentSelection
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            DocumentSelection.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/optimization_guide.proto.DocumentSelection";
+            };
+
+            return DocumentSelection;
         })();
 
         /**
@@ -23144,6 +24216,7 @@ export const optimization_guide = $root.optimization_guide = (() => {
          * @property {number} AX_SLA_CUSTOMACTIONDESCRIPTIONS=1 AX_SLA_CUSTOMACTIONDESCRIPTIONS value
          * @property {number} AX_SLA_ARIANOTIFICATIONANNOUNCEMENTS=2 AX_SLA_ARIANOTIFICATIONANNOUNCEMENTS value
          * @property {number} AX_SLA_ARIANOTIFICATIONTYPES=3 AX_SLA_ARIANOTIFICATIONTYPES value
+         * @property {number} AX_SLA_TEXTOPERATIONREPLACEMENTSTRINGS=4 AX_SLA_TEXTOPERATIONREPLACEMENTSTRINGS value
          */
         proto.AXStringListAttribute = (function() {
             const valuesById = {}, values = Object.create(valuesById);
@@ -23151,6 +24224,7 @@ export const optimization_guide = $root.optimization_guide = (() => {
             values[valuesById[1] = "AX_SLA_CUSTOMACTIONDESCRIPTIONS"] = 1;
             values[valuesById[2] = "AX_SLA_ARIANOTIFICATIONANNOUNCEMENTS"] = 2;
             values[valuesById[3] = "AX_SLA_ARIANOTIFICATIONTYPES"] = 3;
+            values[valuesById[4] = "AX_SLA_TEXTOPERATIONREPLACEMENTSTRINGS"] = 4;
             return values;
         })();
 
@@ -23253,6 +24327,8 @@ export const optimization_guide = $root.optimization_guide = (() => {
          * @property {number} CLICKABILITY_REASON_MOUSE_CLICK=12 CLICKABILITY_REASON_MOUSE_CLICK value
          * @property {number} CLICKABILITY_REASON_MOUSE_HOVER=13 CLICKABILITY_REASON_MOUSE_HOVER value
          * @property {number} CLICKABILITY_REASON_HOVER_PSEUDO_CLASS=14 CLICKABILITY_REASON_HOVER_PSEUDO_CLASS value
+         * @property {number} CLICKABILITY_REASON_ARIA_TOGGLE=15 CLICKABILITY_REASON_ARIA_TOGGLE value
+         * @property {number} CLICKABILITY_REASON_ARIA_SELECTABLE=16 CLICKABILITY_REASON_ARIA_SELECTABLE value
          */
         proto.ClickabilityReason = (function() {
             const valuesById = {}, values = Object.create(valuesById);
@@ -23271,6 +24347,8 @@ export const optimization_guide = $root.optimization_guide = (() => {
             values[valuesById[12] = "CLICKABILITY_REASON_MOUSE_CLICK"] = 12;
             values[valuesById[13] = "CLICKABILITY_REASON_MOUSE_HOVER"] = 13;
             values[valuesById[14] = "CLICKABILITY_REASON_HOVER_PSEUDO_CLASS"] = 14;
+            values[valuesById[15] = "CLICKABILITY_REASON_ARIA_TOGGLE"] = 15;
+            values[valuesById[16] = "CLICKABILITY_REASON_ARIA_SELECTABLE"] = 16;
             return values;
         })();
 
@@ -23282,6 +24360,8 @@ export const optimization_guide = $root.optimization_guide = (() => {
          * @property {number} INTERACTION_DISABLED_REASON_DISABLED=1 INTERACTION_DISABLED_REASON_DISABLED value
          * @property {number} INTERACTION_DISABLED_REASON_ARIA_DISABLED=2 INTERACTION_DISABLED_REASON_ARIA_DISABLED value
          * @property {number} INTERACTION_DISABLED_REASON_CURSOR_NOT_ALLOWED=3 INTERACTION_DISABLED_REASON_CURSOR_NOT_ALLOWED value
+         * @property {number} INTERACTION_DISABLED_REASON_ARIA_HIDDEN=4 INTERACTION_DISABLED_REASON_ARIA_HIDDEN value
+         * @property {number} INTERACTION_DISABLED_REASON_ARIA_ROLE_PRESENTATIONAL=5 INTERACTION_DISABLED_REASON_ARIA_ROLE_PRESENTATIONAL value
          */
         proto.InteractionDisabledReason = (function() {
             const valuesById = {}, values = Object.create(valuesById);
@@ -23289,6 +24369,8 @@ export const optimization_guide = $root.optimization_guide = (() => {
             values[valuesById[1] = "INTERACTION_DISABLED_REASON_DISABLED"] = 1;
             values[valuesById[2] = "INTERACTION_DISABLED_REASON_ARIA_DISABLED"] = 2;
             values[valuesById[3] = "INTERACTION_DISABLED_REASON_CURSOR_NOT_ALLOWED"] = 3;
+            values[valuesById[4] = "INTERACTION_DISABLED_REASON_ARIA_HIDDEN"] = 4;
+            values[valuesById[5] = "INTERACTION_DISABLED_REASON_ARIA_ROLE_PRESENTATIONAL"] = 5;
             return values;
         })();
 
@@ -23419,6 +24501,11 @@ export const optimization_guide = $root.optimization_guide = (() => {
          * @property {number} REDACTION_DECISION_REDACTED_HAS_BEEN_PASSWORD=2 REDACTION_DECISION_REDACTED_HAS_BEEN_PASSWORD value
          * @property {number} REDACTION_DECISION_UNREDACTED_EMPTY_PAYMENT_FIELD=3 REDACTION_DECISION_UNREDACTED_EMPTY_PAYMENT_FIELD value
          * @property {number} REDACTION_DECISION_REDACTED_IS_SENSITIVE_PAYMENT_FIELD=4 REDACTION_DECISION_REDACTED_IS_SENSITIVE_PAYMENT_FIELD value
+         * @property {number} REDACTION_DECISION_UNREDACTED_EMPTY_CUSTOM_PASSWORD=5 REDACTION_DECISION_UNREDACTED_EMPTY_CUSTOM_PASSWORD value
+         * @property {number} REDACTION_DECISION_REDACTED_CUSTOM_PASSWORD_CSS=6 REDACTION_DECISION_REDACTED_CUSTOM_PASSWORD_CSS value
+         * @property {number} REDACTION_DECISION_REDACTED_CUSTOM_PASSWORD_JS=7 REDACTION_DECISION_REDACTED_CUSTOM_PASSWORD_JS value
+         * @property {number} REDACTION_DECISION_REDACTED_IS_OTP=8 REDACTION_DECISION_REDACTED_IS_OTP value
+         * @property {number} REDACTION_DECISION_UNREDACTED_EMPTY_OTP_FIELD=9 REDACTION_DECISION_UNREDACTED_EMPTY_OTP_FIELD value
          */
         proto.RedactionDecision = (function() {
             const valuesById = {}, values = Object.create(valuesById);
@@ -23427,6 +24514,11 @@ export const optimization_guide = $root.optimization_guide = (() => {
             values[valuesById[2] = "REDACTION_DECISION_REDACTED_HAS_BEEN_PASSWORD"] = 2;
             values[valuesById[3] = "REDACTION_DECISION_UNREDACTED_EMPTY_PAYMENT_FIELD"] = 3;
             values[valuesById[4] = "REDACTION_DECISION_REDACTED_IS_SENSITIVE_PAYMENT_FIELD"] = 4;
+            values[valuesById[5] = "REDACTION_DECISION_UNREDACTED_EMPTY_CUSTOM_PASSWORD"] = 5;
+            values[valuesById[6] = "REDACTION_DECISION_REDACTED_CUSTOM_PASSWORD_CSS"] = 6;
+            values[valuesById[7] = "REDACTION_DECISION_REDACTED_CUSTOM_PASSWORD_JS"] = 7;
+            values[valuesById[8] = "REDACTION_DECISION_REDACTED_IS_OTP"] = 8;
+            values[valuesById[9] = "REDACTION_DECISION_UNREDACTED_EMPTY_OTP_FIELD"] = 9;
             return values;
         })();
 
@@ -23437,12 +24529,14 @@ export const optimization_guide = $root.optimization_guide = (() => {
          * @property {number} COARSE_AUTOFILL_FIELD_TYPE_UNSUPPORTED=0 COARSE_AUTOFILL_FIELD_TYPE_UNSUPPORTED value
          * @property {number} COARSE_AUTOFILL_FIELD_TYPE_ADDRESS=1 COARSE_AUTOFILL_FIELD_TYPE_ADDRESS value
          * @property {number} COARSE_AUTOFILL_FIELD_TYPE_CREDIT_CARD=2 COARSE_AUTOFILL_FIELD_TYPE_CREDIT_CARD value
+         * @property {number} COARSE_AUTOFILL_FIELD_TYPE_OTP=3 COARSE_AUTOFILL_FIELD_TYPE_OTP value
          */
         proto.CoarseAutofillFieldType = (function() {
             const valuesById = {}, values = Object.create(valuesById);
             values[valuesById[0] = "COARSE_AUTOFILL_FIELD_TYPE_UNSUPPORTED"] = 0;
             values[valuesById[1] = "COARSE_AUTOFILL_FIELD_TYPE_ADDRESS"] = 1;
             values[valuesById[2] = "COARSE_AUTOFILL_FIELD_TYPE_CREDIT_CARD"] = 2;
+            values[valuesById[3] = "COARSE_AUTOFILL_FIELD_TYPE_OTP"] = 3;
             return values;
         })();
 

@@ -1299,6 +1299,9 @@ export namespace optimization_guide {
 
             /** AnnotatedPageContent profileInformation */
             profileInformation?: (optimization_guide.proto.IProfileInformation|null);
+
+            /** AnnotatedPageContent geminiInChromePageMetadata */
+            geminiInChromePageMetadata?: (optimization_guide.proto.IGeminiInChromePageMetadata|null);
         }
 
         /** Represents an AnnotatedPageContent. */
@@ -1336,6 +1339,9 @@ export namespace optimization_guide {
 
             /** AnnotatedPageContent profileInformation. */
             public profileInformation?: (optimization_guide.proto.IProfileInformation|null);
+
+            /** AnnotatedPageContent geminiInChromePageMetadata. */
+            public geminiInChromePageMetadata?: (optimization_guide.proto.IGeminiInChromePageMetadata|null);
 
             /**
              * Creates a new AnnotatedPageContent instance using the specified properties.
@@ -1580,6 +1586,9 @@ export namespace optimization_guide {
 
             /** ContentAttributes isAdRelated */
             isAdRelated?: (boolean|null);
+
+            /** ContentAttributes redactionDecision */
+            redactionDecision?: (optimization_guide.proto.RedactionDecision|null);
         }
 
         /** Represents a ContentAttributes. */
@@ -1650,6 +1659,9 @@ export namespace optimization_guide {
 
             /** ContentAttributes isAdRelated. */
             public isAdRelated: boolean;
+
+            /** ContentAttributes redactionDecision. */
+            public redactionDecision: optimization_guide.proto.RedactionDecision;
 
             /** ContentAttributes contentData. */
             public contentData?: ("textData"|"imageData"|"svgRootData"|"canvasData"|"videoData"|"anchorData"|"formData"|"formControlData"|"tableData"|"iframeData"|"tableRowData");
@@ -1741,6 +1753,9 @@ export namespace optimization_guide {
             /** Geometry visibleBoundingBox */
             visibleBoundingBox?: (optimization_guide.proto.IBoundingRect|null);
 
+            /** Geometry compositorBoundingBox */
+            compositorBoundingBox?: (optimization_guide.proto.IBoundingRect|null);
+
             /** Geometry fragmentVisibleBoundingBoxes */
             fragmentVisibleBoundingBoxes?: (optimization_guide.proto.IBoundingRect[]|null);
 
@@ -1762,6 +1777,9 @@ export namespace optimization_guide {
 
             /** Geometry visibleBoundingBox. */
             public visibleBoundingBox?: (optimization_guide.proto.IBoundingRect|null);
+
+            /** Geometry compositorBoundingBox. */
+            public compositorBoundingBox?: (optimization_guide.proto.IBoundingRect|null);
 
             /** Geometry fragmentVisibleBoundingBoxes. */
             public fragmentVisibleBoundingBoxes: optimization_guide.proto.IBoundingRect[];
@@ -2003,6 +2021,15 @@ export namespace optimization_guide {
 
             /** InteractionInfo interactionDisabledReasons */
             interactionDisabledReasons?: (optimization_guide.proto.InteractionDisabledReason[]|null);
+
+            /** InteractionInfo isTabbable */
+            isTabbable?: (boolean|null);
+
+            /** InteractionInfo hasAriaActivedescendant */
+            hasAriaActivedescendant?: (boolean|null);
+
+            /** InteractionInfo ariaActionTargetNodeIds */
+            ariaActionTargetNodeIds?: (number[]|null);
         }
 
         /** Represents an InteractionInfo. */
@@ -2052,6 +2079,15 @@ export namespace optimization_guide {
 
             /** InteractionInfo interactionDisabledReasons. */
             public interactionDisabledReasons: optimization_guide.proto.InteractionDisabledReason[];
+
+            /** InteractionInfo isTabbable. */
+            public isTabbable: boolean;
+
+            /** InteractionInfo hasAriaActivedescendant. */
+            public hasAriaActivedescendant: boolean;
+
+            /** InteractionInfo ariaActionTargetNodeIds. */
+            public ariaActionTargetNodeIds: number[];
 
             /**
              * Creates a new InteractionInfo instance using the specified properties.
@@ -3308,6 +3344,9 @@ export namespace optimization_guide {
 
             /** FormControlData autofillSectionId */
             autofillSectionId?: (number|null);
+
+            /** FormControlData isReadonly */
+            isReadonly?: (boolean|null);
         }
 
         /** Represents a FormControlData. */
@@ -3348,6 +3387,9 @@ export namespace optimization_guide {
 
             /** FormControlData autofillSectionId. */
             public autofillSectionId: number;
+
+            /** FormControlData isReadonly. */
+            public isReadonly: boolean;
 
             /**
              * Creates a new FormControlData instance using the specified properties.
@@ -4005,6 +4047,12 @@ export namespace optimization_guide {
 
             /** FrameInteractionInfo selection */
             selection?: (optimization_guide.proto.ISelection|null);
+
+            /** FrameInteractionInfo focusedNodeId */
+            focusedNodeId?: (number|null);
+
+            /** FrameInteractionInfo accessibilityFocusedNodeId */
+            accessibilityFocusedNodeId?: (number|null);
         }
 
         /** Represents a FrameInteractionInfo. */
@@ -4018,6 +4066,12 @@ export namespace optimization_guide {
 
             /** FrameInteractionInfo selection. */
             public selection?: (optimization_guide.proto.ISelection|null);
+
+            /** FrameInteractionInfo focusedNodeId. */
+            public focusedNodeId: number;
+
+            /** FrameInteractionInfo accessibilityFocusedNodeId. */
+            public accessibilityFocusedNodeId: number;
 
             /**
              * Creates a new FrameInteractionInfo instance using the specified properties.
@@ -5095,6 +5149,9 @@ export namespace optimization_guide {
 
             /** PageInteractionInfo mousePosition */
             mousePosition?: (optimization_guide.proto.IPoint|null);
+
+            /** PageInteractionInfo focusedFrame */
+            focusedFrame?: (optimization_guide.proto.IDocumentIdentifier|null);
         }
 
         /** Represents a PageInteractionInfo. */
@@ -5114,6 +5171,9 @@ export namespace optimization_guide {
 
             /** PageInteractionInfo mousePosition. */
             public mousePosition?: (optimization_guide.proto.IPoint|null);
+
+            /** PageInteractionInfo focusedFrame. */
+            public focusedFrame?: (optimization_guide.proto.IDocumentIdentifier|null);
 
             /**
              * Creates a new PageInteractionInfo instance using the specified properties.
@@ -5613,6 +5673,200 @@ export namespace optimization_guide {
                 ADDRESS = 1,
                 CREDIT_CARD = 6
             }
+        }
+
+        /** Properties of a GeminiInChromePageMetadata. */
+        interface IGeminiInChromePageMetadata {
+
+            /** GeminiInChromePageMetadata screenshotInfo */
+            screenshotInfo?: (optimization_guide.proto.IScreenshotInfo|null);
+        }
+
+        /** Represents a GeminiInChromePageMetadata. */
+        class GeminiInChromePageMetadata implements IGeminiInChromePageMetadata {
+
+            /**
+             * Constructs a new GeminiInChromePageMetadata.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: optimization_guide.proto.IGeminiInChromePageMetadata);
+
+            /** GeminiInChromePageMetadata screenshotInfo. */
+            public screenshotInfo?: (optimization_guide.proto.IScreenshotInfo|null);
+
+            /**
+             * Creates a new GeminiInChromePageMetadata instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns GeminiInChromePageMetadata instance
+             */
+            public static create(properties?: optimization_guide.proto.IGeminiInChromePageMetadata): optimization_guide.proto.GeminiInChromePageMetadata;
+
+            /**
+             * Encodes the specified GeminiInChromePageMetadata message. Does not implicitly {@link optimization_guide.proto.GeminiInChromePageMetadata.verify|verify} messages.
+             * @param message GeminiInChromePageMetadata message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IGeminiInChromePageMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified GeminiInChromePageMetadata message, length delimited. Does not implicitly {@link optimization_guide.proto.GeminiInChromePageMetadata.verify|verify} messages.
+             * @param message GeminiInChromePageMetadata message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IGeminiInChromePageMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a GeminiInChromePageMetadata message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns GeminiInChromePageMetadata
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.GeminiInChromePageMetadata;
+
+            /**
+             * Decodes a GeminiInChromePageMetadata message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns GeminiInChromePageMetadata
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.GeminiInChromePageMetadata;
+
+            /**
+             * Verifies a GeminiInChromePageMetadata message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a GeminiInChromePageMetadata message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns GeminiInChromePageMetadata
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.GeminiInChromePageMetadata;
+
+            /**
+             * Creates a plain object from a GeminiInChromePageMetadata message. Also converts values to other types if specified.
+             * @param message GeminiInChromePageMetadata
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.GeminiInChromePageMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this GeminiInChromePageMetadata to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for GeminiInChromePageMetadata
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a ScreenshotInfo. */
+        interface IScreenshotInfo {
+
+            /** ScreenshotInfo hasSelectionRegionInScreenshot */
+            hasSelectionRegionInScreenshot?: (boolean|null);
+        }
+
+        /** Represents a ScreenshotInfo. */
+        class ScreenshotInfo implements IScreenshotInfo {
+
+            /**
+             * Constructs a new ScreenshotInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: optimization_guide.proto.IScreenshotInfo);
+
+            /** ScreenshotInfo hasSelectionRegionInScreenshot. */
+            public hasSelectionRegionInScreenshot: boolean;
+
+            /**
+             * Creates a new ScreenshotInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ScreenshotInfo instance
+             */
+            public static create(properties?: optimization_guide.proto.IScreenshotInfo): optimization_guide.proto.ScreenshotInfo;
+
+            /**
+             * Encodes the specified ScreenshotInfo message. Does not implicitly {@link optimization_guide.proto.ScreenshotInfo.verify|verify} messages.
+             * @param message ScreenshotInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IScreenshotInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ScreenshotInfo message, length delimited. Does not implicitly {@link optimization_guide.proto.ScreenshotInfo.verify|verify} messages.
+             * @param message ScreenshotInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IScreenshotInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ScreenshotInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ScreenshotInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.ScreenshotInfo;
+
+            /**
+             * Decodes a ScreenshotInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ScreenshotInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.ScreenshotInfo;
+
+            /**
+             * Verifies a ScreenshotInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ScreenshotInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ScreenshotInfo
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.ScreenshotInfo;
+
+            /**
+             * Creates a plain object from a ScreenshotInfo message. Also converts values to other types if specified.
+             * @param message ScreenshotInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.ScreenshotInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ScreenshotInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ScreenshotInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an AutofillGlobalId. */
@@ -6874,6 +7128,9 @@ export namespace optimization_guide {
 
             /** FrameMetadata metaTags */
             metaTags?: (optimization_guide.proto.IMetaTag[]|null);
+
+            /** FrameMetadata hasMediaTranscripts */
+            hasMediaTranscripts?: (boolean|null);
         }
 
         /** Represents a FrameMetadata. */
@@ -6890,6 +7147,9 @@ export namespace optimization_guide {
 
             /** FrameMetadata metaTags. */
             public metaTags: optimization_guide.proto.IMetaTag[];
+
+            /** FrameMetadata hasMediaTranscripts. */
+            public hasMediaTranscripts: boolean;
 
             /**
              * Creates a new FrameMetadata instance using the specified properties.
@@ -7060,6 +7320,109 @@ export namespace optimization_guide {
 
             /**
              * Gets the default type url for PageMetadata
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a DocumentSelection. */
+        interface IDocumentSelection {
+
+            /** DocumentSelection documentIdentifier */
+            documentIdentifier?: (optimization_guide.proto.IDocumentIdentifier|null);
+
+            /** DocumentSelection selection */
+            selection?: (optimization_guide.proto.ISelection|null);
+        }
+
+        /** Represents a DocumentSelection. */
+        class DocumentSelection implements IDocumentSelection {
+
+            /**
+             * Constructs a new DocumentSelection.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: optimization_guide.proto.IDocumentSelection);
+
+            /** DocumentSelection documentIdentifier. */
+            public documentIdentifier?: (optimization_guide.proto.IDocumentIdentifier|null);
+
+            /** DocumentSelection selection. */
+            public selection?: (optimization_guide.proto.ISelection|null);
+
+            /**
+             * Creates a new DocumentSelection instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns DocumentSelection instance
+             */
+            public static create(properties?: optimization_guide.proto.IDocumentSelection): optimization_guide.proto.DocumentSelection;
+
+            /**
+             * Encodes the specified DocumentSelection message. Does not implicitly {@link optimization_guide.proto.DocumentSelection.verify|verify} messages.
+             * @param message DocumentSelection message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: optimization_guide.proto.IDocumentSelection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified DocumentSelection message, length delimited. Does not implicitly {@link optimization_guide.proto.DocumentSelection.verify|verify} messages.
+             * @param message DocumentSelection message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: optimization_guide.proto.IDocumentSelection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a DocumentSelection message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns DocumentSelection
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): optimization_guide.proto.DocumentSelection;
+
+            /**
+             * Decodes a DocumentSelection message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns DocumentSelection
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): optimization_guide.proto.DocumentSelection;
+
+            /**
+             * Verifies a DocumentSelection message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a DocumentSelection message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns DocumentSelection
+             */
+            public static fromObject(object: { [k: string]: any }): optimization_guide.proto.DocumentSelection;
+
+            /**
+             * Creates a plain object from a DocumentSelection message. Also converts values to other types if specified.
+             * @param message DocumentSelection
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: optimization_guide.proto.DocumentSelection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this DocumentSelection to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for DocumentSelection
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -7494,7 +7857,8 @@ export namespace optimization_guide {
             AX_SLA_NONE = 0,
             AX_SLA_CUSTOMACTIONDESCRIPTIONS = 1,
             AX_SLA_ARIANOTIFICATIONANNOUNCEMENTS = 2,
-            AX_SLA_ARIANOTIFICATIONTYPES = 3
+            AX_SLA_ARIANOTIFICATIONTYPES = 3,
+            AX_SLA_TEXTOPERATIONREPLACEMENTSTRINGS = 4
         }
 
         /** AnnotatedPageContentVersion enum. */
@@ -7550,7 +7914,9 @@ export namespace optimization_guide {
             CLICKABILITY_REASON_AUTOCOMPLETE = 11,
             CLICKABILITY_REASON_MOUSE_CLICK = 12,
             CLICKABILITY_REASON_MOUSE_HOVER = 13,
-            CLICKABILITY_REASON_HOVER_PSEUDO_CLASS = 14
+            CLICKABILITY_REASON_HOVER_PSEUDO_CLASS = 14,
+            CLICKABILITY_REASON_ARIA_TOGGLE = 15,
+            CLICKABILITY_REASON_ARIA_SELECTABLE = 16
         }
 
         /** InteractionDisabledReason enum. */
@@ -7558,7 +7924,9 @@ export namespace optimization_guide {
             INTERACTION_DISABLED_REASON_UNSPECIFIED = 0,
             INTERACTION_DISABLED_REASON_DISABLED = 1,
             INTERACTION_DISABLED_REASON_ARIA_DISABLED = 2,
-            INTERACTION_DISABLED_REASON_CURSOR_NOT_ALLOWED = 3
+            INTERACTION_DISABLED_REASON_CURSOR_NOT_ALLOWED = 3,
+            INTERACTION_DISABLED_REASON_ARIA_HIDDEN = 4,
+            INTERACTION_DISABLED_REASON_ARIA_ROLE_PRESENTATIONAL = 5
         }
 
         /** TextSize enum. */
@@ -7623,14 +7991,20 @@ export namespace optimization_guide {
             REDACTION_DECISION_UNREDACTED_EMPTY_PASSWORD = 1,
             REDACTION_DECISION_REDACTED_HAS_BEEN_PASSWORD = 2,
             REDACTION_DECISION_UNREDACTED_EMPTY_PAYMENT_FIELD = 3,
-            REDACTION_DECISION_REDACTED_IS_SENSITIVE_PAYMENT_FIELD = 4
+            REDACTION_DECISION_REDACTED_IS_SENSITIVE_PAYMENT_FIELD = 4,
+            REDACTION_DECISION_UNREDACTED_EMPTY_CUSTOM_PASSWORD = 5,
+            REDACTION_DECISION_REDACTED_CUSTOM_PASSWORD_CSS = 6,
+            REDACTION_DECISION_REDACTED_CUSTOM_PASSWORD_JS = 7,
+            REDACTION_DECISION_REDACTED_IS_OTP = 8,
+            REDACTION_DECISION_UNREDACTED_EMPTY_OTP_FIELD = 9
         }
 
         /** CoarseAutofillFieldType enum. */
         enum CoarseAutofillFieldType {
             COARSE_AUTOFILL_FIELD_TYPE_UNSUPPORTED = 0,
             COARSE_AUTOFILL_FIELD_TYPE_ADDRESS = 1,
-            COARSE_AUTOFILL_FIELD_TYPE_CREDIT_CARD = 2
+            COARSE_AUTOFILL_FIELD_TYPE_CREDIT_CARD = 2,
+            COARSE_AUTOFILL_FIELD_TYPE_OTP = 3
         }
 
         /** MediaDataType enum. */
