@@ -202,6 +202,8 @@ export function convertToMarkdown(decodedProto: IAnnotatedPageContent): string {
     .replace(/\n{3,}/g, '\n\n')
     .replace(/ \n/g, '\n')
     .replace(/ +([.,!?;:)])/g, '$1')
+    .replace(/`\s+/g, '`')
+    .replace(/\s+`/g, '`')
     .replace(/^\s+|\s+$/g, '');
 
   return rawMd;

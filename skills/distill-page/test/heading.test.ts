@@ -122,3 +122,40 @@ test('convertToMarkdown converts same-page links to fragments', () => {
   const expected = '[Link Text](#section)';
   assert.strictEqual(md.trim(), expected);
 });
+
+test('convertToMarkdown removes spaces inside backticks', () => {
+  const payload = {
+    rootNode: {
+      childrenNodes: [
+        {
+          contentAttributes: {
+            attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+            textData: {textContent: '`'},
+          },
+        },
+        {
+          contentAttributes: {
+            attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+            textData: {textContent: 'code-block'},
+          },
+        },
+        {
+          contentAttributes: {
+            attributeType: pb.optimization_guide.proto.ContentAttributeType.CONTENT_ATTRIBUTE_TEXT,
+            textData: {textContent: '`'},
+          },
+        },
+      ],
+    },
+  };
+
+  const message = pb.optimization_guide.proto.AnnotatedPageContent.create(payload);
+  const buffer = pb.optimization_guide.proto.AnnotatedPageContent.encode(message).finish();
+  const base64 = Buffer.from(buffer).toString('base64');
+
+  const decoded = decodeAnnotatedPageContent(base64);
+  const md = convertToMarkdown(decoded);
+
+  const expected = '`code-block`';
+  assert.strictEqual(md.trim(), expected);
+});
