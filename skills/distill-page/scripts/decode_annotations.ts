@@ -322,7 +322,7 @@ function parseNode(node: AnyNode, state: ParserState): (ASTBlockNode | ASTInline
 
   if (attrs.contentData.case === 'textData') {
     const textData = attrs.contentData.value;
-    const text = textData.textContent || '';
+    let text = textData.textContent || '';
     const isCodeFence = text.includes('```');
 
     if (isCodeFence) {
@@ -333,6 +333,8 @@ function parseNode(node: AnyNode, state: ParserState): (ASTBlockNode | ASTInline
     if (state.insideCodeBlock) {
       return [];
     }
+
+    text = text.replace(/ +([.,!?;:)])/g, '$1');
 
     const trimmed = text.trim();
     if (!trimmed) {

@@ -46,5 +46,26 @@ test('CDP Page.getAnnotatedPageContent on mock-page.html', async () => {
     md.includes("Hi, I'm Kilian. I make [**Polypane**](https://polypane.app/), the browser for responsive web development and design."),
     'Should not split styled paragraph into heading lines'
   );
+
+  // Schema.org paywall integration check
+  assert.ok(md.includes('> [!IMPORTANT]\n> **Paid Content**: The following section is behind a paywall.\n\nPaid content paragraph that should be identified as paid content by annotations.'), 'Should format paid content with paywall warning block');
+
+
+  // Dynamic headings check
+  assert.ok(md.includes('## Dynamic Size XL Heading'), 'XL heading size should map to H2');
+  assert.ok(md.includes('### Dynamic Size L Heading'), 'L heading size should map to H3');
+  assert.ok(md.includes('#### Dynamic Size M Heading'), 'M heading size should map to H4');
+  assert.ok(md.includes('##### Dynamic Size S Heading'), 'S heading size should map to H5');
+
+  // Punctuation spacing check
+  assert.ok(md.includes('Punctuation spacing test: Hello, world! This is a test.'), 'Should normalize whitespace before punctuation');
+
+  // Code spacing & formatting check
+  assert.ok(md.includes('Code spacing test: `const a = 123;`'), 'Should remove spaces inside code backticks');
+  assert.ok(md.includes('Bold code test: `**const b = 456;**`'), 'Should wrap bold code block correctly');
+
+  // Nav and footer filtering check
+  assert.ok(!md.includes('About Us'), 'Should skip nav block content');
+  assert.ok(!md.includes('Mock Company. All rights reserved.'), 'Should skip footer block content');
 });
 
