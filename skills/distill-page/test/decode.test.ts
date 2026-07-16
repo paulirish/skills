@@ -578,4 +578,73 @@ test('convertToMarkdown splits single text nodes containing code block fences co
   assert.strictEqual(md, expected);
 });
 
+test('convertToMarkdown extracts code content nested inside container elements in code blocks', () => {
+  const payload: JsonValue = {
+    rootNode: {
+      childrenNodes: [
+        {
+          contentAttributes: {
+            attributeType: CONTENT_ATTRIBUTE_TEXT,
+            textData: {textContent: '\n```\n'},
+          },
+        },
+        {
+          contentAttributes: {
+            attributeType: ContentAttributeType.CONTENT_ATTRIBUTE_CONTAINER,
+          },
+          childrenNodes: [
+            {
+              contentAttributes: {
+                attributeType: ContentAttributeType.CONTENT_ATTRIBUTE_CONTAINER,
+              },
+              childrenNodes: [
+                {
+                  contentAttributes: {
+                    attributeType: CONTENT_ATTRIBUTE_TEXT,
+                    textData: {textContent: 'const'},
+                  },
+                },
+              ],
+            },
+            {
+              contentAttributes: {
+                attributeType: CONTENT_ATTRIBUTE_TEXT,
+                textData: {textContent: ' '},
+              },
+            },
+            {
+              contentAttributes: {
+                attributeType: ContentAttributeType.CONTENT_ATTRIBUTE_CONTAINER,
+              },
+              childrenNodes: [
+                {
+                  contentAttributes: {
+                    attributeType: CONTENT_ATTRIBUTE_TEXT,
+                    textData: {textContent: 'x'},
+                  },
+                },
+              ],
+            },
+            {
+              contentAttributes: {
+                attributeType: CONTENT_ATTRIBUTE_TEXT,
+                textData: {textContent: ' = 1;'},
+              },
+            },
+          ],
+        },
+        {
+          contentAttributes: {
+            attributeType: CONTENT_ATTRIBUTE_TEXT,
+            textData: {textContent: '\n```\n'},
+          },
+        },
+      ],
+    },
+  };
+
+  const md = getMarkdown(payload);
+  assert.strictEqual(md, '```\nconst x = 1;\n```');
+});
+
 // TODO: Try to set up a real ad integration test using a live page like https://privacy-sandbox-demos-news.dev/pa-multiple-ad

@@ -88,6 +88,9 @@ test('CDP Page.getAnnotatedPageContent on mock-page.html', async () => {
   ].join('\n');
   assert.ok(md.includes(expectedMergedCode), 'Should parse and format split code block correctly');
 
+  // Nested container code block check (Bug C)
+  assert.ok(md.includes('```\nconst x = 1;\n```'), 'Should extract and join nested code block components');
+
   // Nav and footer filtering check
   assert.ok(!md.includes('About Us'), 'Should skip nav block content');
   assert.ok(!md.includes('Mock Company. All rights reserved.'), 'Should skip footer block content');

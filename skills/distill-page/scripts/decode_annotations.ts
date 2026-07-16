@@ -159,6 +159,20 @@ export const AnnotationParser = {
     return inlines;
   },
 
+  extractAllText(node: ContentNode): string {
+    let text = '';
+    const attrs = node.contentAttributes;
+    if (attrs?.contentData.case === 'textData') {
+      text += attrs.contentData.value.textContent || '';
+    }
+    if (node.childrenNodes) {
+      for (const child of node.childrenNodes) {
+        text += this.extractAllText(child);
+      }
+    }
+    return text;
+  },
+
   parseChildren(nodes: ContentNode[], state: ParserState): ASTBlockNode[] {
     const blocks: ASTBlockNode[] = [];
     let inlineAccumulator: ASTInlineNode[] = [];
@@ -236,10 +250,7 @@ export const AnnotationParser = {
       }
 
       if (state.insideCodeBlock && activeCodeBlock) {
-        if (childAttrs?.contentData.case === 'textData') {
-          const text = childAttrs.contentData.value.textContent || '';
-          activeCodeBlock.code += text;
-        }
+        activeCodeBlock.code += this.extractAllText(child);
         continue;
       }
 

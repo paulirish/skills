@@ -116,3 +116,9 @@ const geist = Geist({
   subsets: ['latin'],
 })
 ```
+
+### Section 10: Nested Container Code Blocks
+
+```
+const x = 1;
+```
