@@ -269,6 +269,13 @@ function hasCodeFenceChild(node: AnyNode): boolean {
   return false;
 }
 
+function isPermalinkText(text: string): boolean {
+  const cleaned = text.trim().toLowerCase();
+  if (!cleaned) return true;
+  if (/^[#¶§🔗\s]+$/.test(cleaned)) return true;
+  return cleaned === 'permalink' || cleaned === 'link';
+}
+
 function parseNode(node: AnyNode, state: ParserState): (ASTBlockNode | ASTInlineNode)[] {
   const attrs = node.contentAttributes;
   if (!attrs) {
@@ -386,6 +393,14 @@ function parseNode(node: AnyNode, state: ParserState): (ASTBlockNode | ASTInline
     const childState = { ...state, insideAnchor: true };
     const inlineChildren = parseInlineChildren(node.childrenNodes || [], childState);
     if (inlineChildren.length > 0 && resolvedUrl) {
+      if (state.insideHeading && resolvedUrl.startsWith('#')) {
+        const combinedText = inlineChildren.map(c => c.type === 'text' ? c.text : '').join('');
+        if (isPermalinkText(combinedText)) {
+          return [];
+        }
+        return inlineChildren;
+      }
+
       const link: ASTLink = {
         type: 'link',
         data: { ...anchorData, url: resolvedUrl },

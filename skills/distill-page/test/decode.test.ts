@@ -448,5 +448,77 @@ test('convertToMarkdown parses nested lists correctly', () => {
   assert.strictEqual(md, '* Parent item\n  * Child item');
 });
 
+test('convertToMarkdown strips heading self-linking permalinks', () => {
+  const payload: JsonValue = {
+    rootNode: {
+      childrenNodes: [
+        {
+          contentAttributes: {
+            attributeType: ContentAttributeType.CONTENT_ATTRIBUTE_HEADING,
+          },
+          childrenNodes: [
+            {
+              contentAttributes: {
+                attributeType: CONTENT_ATTRIBUTE_TEXT,
+                textData: { textContent: 'Section Title' }
+              }
+            },
+            {
+              contentAttributes: {
+                attributeType: ContentAttributeType.CONTENT_ATTRIBUTE_ANCHOR,
+                anchorData: { url: '#section-title' }
+              },
+              childrenNodes: [
+                {
+                  contentAttributes: {
+                    attributeType: CONTENT_ATTRIBUTE_TEXT,
+                    textData: { textContent: ' #' }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  };
+
+  const md = getMarkdown(payload);
+  assert.strictEqual(md, '#### Section Title');
+});
+
+test('convertToMarkdown strips heading link wrapping to plain text', () => {
+  const payload: JsonValue = {
+    rootNode: {
+      childrenNodes: [
+        {
+          contentAttributes: {
+            attributeType: ContentAttributeType.CONTENT_ATTRIBUTE_HEADING,
+          },
+          childrenNodes: [
+            {
+              contentAttributes: {
+                attributeType: ContentAttributeType.CONTENT_ATTRIBUTE_ANCHOR,
+                anchorData: { url: '#section-title' }
+              },
+              childrenNodes: [
+                {
+                  contentAttributes: {
+                    attributeType: CONTENT_ATTRIBUTE_TEXT,
+                    textData: { textContent: 'Linked Title' }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  };
+
+  const md = getMarkdown(payload);
+  assert.strictEqual(md, '#### Linked Title');
+});
+
 // TODO: Try to set up a real ad integration test using a live page like https://privacy-sandbox-demos-news.dev/pa-multiple-ad
 
