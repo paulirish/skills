@@ -372,5 +372,81 @@ test('convertToMarkdown maps TextSize values dynamically to heading levels', () 
   checkHeading(TextSize.XS, '#####');
 });
 
+test('convertToMarkdown increments imageIndex correctly for multiple sibling references', () => {
+  const payload: JsonValue = {
+    rootNode: {
+      childrenNodes: [
+        {
+          contentAttributes: {
+            attributeType: ContentAttributeType.CONTENT_ATTRIBUTE_IMAGE,
+            imageData: { imageCaption: 'First Image' }
+          }
+        },
+        {
+          contentAttributes: {
+            attributeType: ContentAttributeType.CONTENT_ATTRIBUTE_IMAGE,
+            imageData: { imageCaption: 'Second Image' }
+          }
+        }
+      ]
+    }
+  };
+
+  const md = getMarkdown(payload);
+  assert.strictEqual(md, '![First Image][image01]\n\n![Second Image][image02]');
+});
+
+test('convertToMarkdown parses nested lists correctly', () => {
+  const payload: JsonValue = {
+    rootNode: {
+      childrenNodes: [
+        {
+          contentAttributes: {
+            attributeType: ContentAttributeType.CONTENT_ATTRIBUTE_UNORDERED_LIST
+          },
+          childrenNodes: [
+            {
+              contentAttributes: {
+                attributeType: ContentAttributeType.CONTENT_ATTRIBUTE_LIST_ITEM
+              },
+              childrenNodes: [
+                {
+                  contentAttributes: {
+                    attributeType: CONTENT_ATTRIBUTE_TEXT,
+                    textData: { textContent: 'Parent item' }
+                  }
+                },
+                {
+                  contentAttributes: {
+                    attributeType: ContentAttributeType.CONTENT_ATTRIBUTE_UNORDERED_LIST
+                  },
+                  childrenNodes: [
+                    {
+                      contentAttributes: {
+                        attributeType: ContentAttributeType.CONTENT_ATTRIBUTE_LIST_ITEM
+                      },
+                      childrenNodes: [
+                        {
+                          contentAttributes: {
+                            attributeType: CONTENT_ATTRIBUTE_TEXT,
+                            textData: { textContent: 'Child item' }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  };
+
+  const md = getMarkdown(payload);
+  assert.strictEqual(md, '* Parent item\n  * Child item');
+});
+
 // TODO: Try to set up a real ad integration test using a live page like https://privacy-sandbox-demos-news.dev/pa-multiple-ad
 
