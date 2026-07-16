@@ -87,8 +87,9 @@ test('CDP Page.getAnnotatedPageContent on mock-page.html', async () => {
   ].join('\n');
   assert.ok(md.includes(expectedTable), 'Should format aligned and padded table rows');
 
-  // Variable spacing check
   assert.ok(md.includes('Variable spacing test: `sk_test_id` and `payment-intent`.'), 'Should prevent spaces around underscores and hyphens in code variables');
+  assert.ok(md.includes('Sentence dot spacing test. **This should have a space before it.**'), 'Should keep space after sentence-ending period before bold block');
+  assert.ok(md.includes('Dotted variable test: `payment.method.id`.'), 'Should format dotted variable without spaces around dots');
 
   // Merged code block tab layout check (Bug B & C)
   assert.ok(md.includes('app/layout.tsx TypeScript TypeScript'), 'Should extract text before fence as normal block');

@@ -108,6 +108,10 @@ Bold code test: **`const b = 456;`**
 
 Variable spacing test: `sk_test_id` and `payment-intent`.
 
+Sentence dot spacing test. **This should have a space before it.**
+
+Dotted variable test: `payment.method.id`.
+
 ## Section 8: Navigation and Footer (Should be omitted)
 
 ## Section 9: Merged Code Block Tab Layout

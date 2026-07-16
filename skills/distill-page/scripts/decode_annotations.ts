@@ -539,6 +539,11 @@ export const AnnotationParser = {
       return [];
     }
 
+    // Policy decision: We choose not to support blockquotes (AX_ROLE_BLOCKQUOTE = 8)
+    // because the Chromium layout annotator model maps them as AX_ROLE_UNKNOWN (181).
+    // Attempting to inject/track them via raw DOM prefixes (like '> ') is fragile
+    // and breaks on nested block layout lines, so we are choosing not to handle it.
+
     const hasPaid = roles.includes(AnnotatedRole.PAID_CONTENT);
     const hasHidden = roles.includes(AnnotatedRole.CONTENT_HIDDEN);
     const hasAside = roles.includes(AnnotatedRole.ASIDE);
@@ -607,14 +612,12 @@ export const MarkdownSerializer = {
     const lastChar = prevText[prevText.length - 1];
     const firstChar = nextChunk[0];
 
-    // Never insert spaces around underscores, hyphens, or dots (common in code variables/domains)
+    // Never insert spaces around underscores or hyphens (common in code variables/domains)
     if (
       lastChar === '_' ||
       lastChar === '-' ||
-      lastChar === '.' ||
       firstChar === '_' ||
-      firstChar === '-' ||
-      firstChar === '.'
+      firstChar === '-'
     ) {
       return false;
     }

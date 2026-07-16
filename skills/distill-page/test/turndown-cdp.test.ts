@@ -49,14 +49,7 @@ test('Run Turndown cases against CDP getAnnotatedPageContent', async () => {
 
   // To avoid 200s runtime, we can just run the first 5 tests or specific ones
   // that we want to try supporting.
-  const SKIPPED_TESTS = [
-    'multiple ps',
-    'em',
-    'i',
-    'code containing a backtick',
-    'code containing three or more backticks',
-    'code containing one or more backticks',
-  ];
+  const SKIPPED_TESTS: string[] = [];
 
   let passed = 0;
   let failed = 0;
