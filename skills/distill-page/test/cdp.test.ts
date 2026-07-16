@@ -29,6 +29,7 @@ test('CDP Page.getAnnotatedPageContent on mock-page.html', async () => {
   // New assertions
   assert.ok(md.includes('* Item 1\n* Item 2\n  * Nested Item A\n  * Nested Item B'), 'Should format unordered list with nested items');
   assert.ok(md.includes('[**Link Text**](file:///relative-path)'), 'Should format link with resolved path');
+  assert.ok(md.includes('[**same-page fragment link**](#section-10)'), 'Should convert same-page links to relative fragments');
   assert.ok(md.includes('nested `edits[]` array.'), 'Should preserve inline spacing inside paragraph and keep it inline');
   const expectedCodeBlock = [
     '```',
@@ -68,6 +69,10 @@ test('CDP Page.getAnnotatedPageContent on mock-page.html', async () => {
 
   // Punctuation spacing check
   assert.ok(md.includes('Punctuation spacing test: Hello, world! This is a test.'), 'Should normalize whitespace before punctuation');
+
+  // Dialog transparency check
+  assert.ok(md.includes('Dialog transparency test: Before dialog'), 'Should extract text before dialog');
+  assert.ok(md.includes('Inside modal dialog After dialog.'), 'Should extract text inside and after dialog');
 
   // Code spacing & formatting check
   assert.ok(md.includes('Code spacing test: `const a = 123;`'), 'Should remove spaces inside code backticks');

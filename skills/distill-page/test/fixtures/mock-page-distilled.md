@@ -45,7 +45,7 @@ This is hidden content inside a details tag.
   * Nested Item A
   * Nested Item B
 
-Here is a link: [**Link Text**](file:///relative-path).
+Here is a link: [**Link Text**](file:///relative-path) and a [**same-page fragment link**](#section-10).
 
 A very strange [**Pi issue**](https://github.com/earendil-works/pi/issues/6278) sent me down a rabbit hole over the last two days.  The short version is that
 newer Claude models sometimes call Pi’s edit tool with extra, invented fields in
@@ -88,7 +88,7 @@ This ad content must be ignored by the distiller.
 
 ## Dynamic Size XL Heading
 
-### Dynamic Size L Heading
+#### Dynamic Size L Heading
 
 #### Dynamic Size M Heading
 
@@ -97,6 +97,10 @@ This ad content must be ignored by the distiller.
 ### Section 7: Inlines spacing & code formatting
 
 Punctuation spacing test: Hello, world! This is a test.
+
+Dialog transparency test: Before dialog
+
+Inside modal dialog After dialog.
 
 Code spacing test: `const a = 123;`
 
