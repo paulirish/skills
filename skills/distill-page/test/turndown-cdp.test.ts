@@ -1,9 +1,9 @@
 import test from 'node:test';
 import {chromium} from 'playwright';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import {fileURLToPath} from 'node:url';
 import {decodeAnnotatedPageContent, convertToMarkdown} from '../scripts/decode_annotations.ts';
-import { injectSemanticMarkers } from '../scripts/distill-page.ts';
+import {injectSemanticMarkers} from '../scripts/distill-page.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -46,7 +46,7 @@ test('Run Turndown cases against CDP getAnnotatedPageContent', async () => {
     'i',
     'code containing a backtick',
     'code containing three or more backticks',
-    'code containing one or more backticks'
+    'code containing one or more backticks',
   ];
 
   let passed = 0;

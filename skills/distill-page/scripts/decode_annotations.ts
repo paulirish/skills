@@ -1,22 +1,6 @@
-import { fromBinary, create } from "@bufbuild/protobuf";
-import {
-  AnnotatedPageContentSchema,
-  AnnotatedRole,
-  ContentAttributeType,
-  TextSize,
-  TableRowType,
-  TextStyleSchema
-} from './proto/common_quality_data_pb.js';
-import type { 
-  ContentNode, 
-  AnnotatedPageContent, 
-  TextInfo,
-  ImageInfo,
-  AnchorData,
-  TableData
-} from './proto/common_quality_data_pb.js';
-
-
+import {fromBinary, create} from '@bufbuild/protobuf';
+import {AnnotatedPageContentSchema, AnnotatedRole, ContentAttributeType, TextSize, TableRowType, TextStyleSchema} from './proto/common_quality_data_pb.js';
+import type {ContentNode, AnnotatedPageContent, TextInfo, ImageInfo, AnchorData, TableData} from './proto/common_quality_data_pb.js';
 
 const {
   CONTENT_ATTRIBUTE_TEXT,
@@ -28,10 +12,8 @@ const {
   CONTENT_ATTRIBUTE_TABLE_ROW,
   CONTENT_ATTRIBUTE_HEADING,
   CONTENT_ATTRIBUTE_CONTAINER,
-  CONTENT_ATTRIBUTE_PARAGRAPH
+  CONTENT_ATTRIBUTE_PARAGRAPH,
 } = ContentAttributeType;
-
-
 
 // AST Types for Intermediate Representation, bridging with common_quality_data types
 export interface ASTTextRun {
@@ -114,7 +96,7 @@ export interface ASTDocument {
 }
 
 interface ParserState {
-  imageCounter: { value: number };
+  imageCounter: {value: number};
   insideParagraph: boolean;
   insideHeading: boolean;
   insideCodeBlock: boolean;
@@ -205,7 +187,7 @@ export const AnnotationParser = {
         state.insideCodeBlock = !state.insideCodeBlock;
         if (state.insideCodeBlock) {
           flushInlines();
-          activeCodeBlock = { type: 'codeblock', code: '' };
+          activeCodeBlock = {type: 'codeblock', code: ''};
         } else {
           if (activeCodeBlock) {
             blocks.push(activeCodeBlock);
@@ -223,7 +205,7 @@ export const AnnotationParser = {
         continue;
       }
 
-      const nodeState = { ...state };
+      const nodeState = {...state};
       const items = this.parseNode(child, nodeState);
 
       for (const item of items) {
@@ -297,10 +279,10 @@ export const AnnotationParser = {
 
     const size = textData.textStyle?.textSize;
     if ((size === TextSize.XL || size === TextSize.L) && !state.insideHeading && !state.insideParagraph) {
-      const headingTextRun: ASTTextRun = { 
-        type: 'text', 
-        text: trimmed, 
-        style: textData.textStyle ? { ...textData.textStyle, hasEmphasis: bold } : undefined,
+      const headingTextRun: ASTTextRun = {
+        type: 'text',
+        text: trimmed,
+        style: textData.textStyle ? {...textData.textStyle, hasEmphasis: bold} : undefined,
       };
       const level = this.textSizeToHeadingLevel(size);
       const headingBlock: ASTHeading = {
@@ -311,10 +293,10 @@ export const AnnotationParser = {
       return [headingBlock];
     }
 
-    const run: ASTTextRun = { 
-      type: 'text', 
-      text: trimmed, 
-      style: textData.textStyle ? { ...textData.textStyle, hasEmphasis: bold } : undefined 
+    const run: ASTTextRun = {
+      type: 'text',
+      text: trimmed,
+      style: textData.textStyle ? {...textData.textStyle, hasEmphasis: bold} : undefined,
     };
     return [run];
   },
@@ -345,7 +327,7 @@ export const AnnotationParser = {
     const inlineChildren = this.parseInlineChildren(node.childrenNodes || [], state);
     if (inlineChildren.length > 0 && resolvedUrl) {
       if (state.insideHeading && resolvedUrl.startsWith('#')) {
-        const combinedText = inlineChildren.map(c => c.type === 'text' ? c.text : '').join('');
+        const combinedText = inlineChildren.map(c => (c.type === 'text' ? c.text : '')).join('');
         if (this.isPermalinkText(combinedText)) {
           return [];
         }
@@ -354,7 +336,7 @@ export const AnnotationParser = {
 
       const link: ASTLink = {
         type: 'link',
-        data: { ...anchorData, url: resolvedUrl },
+        data: {...anchorData, url: resolvedUrl},
         children: inlineChildren,
       };
       return [link];
@@ -363,7 +345,7 @@ export const AnnotationParser = {
   },
 
   parseParagraphNode(node: ContentNode, state: ParserState): ASTParagraph[] {
-    const childState = { ...state, insideParagraph: true };
+    const childState = {...state, insideParagraph: true};
     const inlineChildren = this.parseInlineChildren(node.childrenNodes || [], childState);
     if (inlineChildren.length > 0) {
       const p: ASTParagraph = {
@@ -376,7 +358,7 @@ export const AnnotationParser = {
   },
 
   parseHeadingNode(node: ContentNode, state: ParserState): ASTHeading[] {
-    const childState = { ...state, insideHeading: true };
+    const childState = {...state, insideHeading: true};
     const inlineChildren = this.parseInlineChildren(node.childrenNodes || [], childState);
     if (inlineChildren.length > 0) {
       let maxTextSize = TextSize.M_DEFAULT;
@@ -406,7 +388,7 @@ export const AnnotationParser = {
     const items: ASTListItem[] = [];
     if (node.childrenNodes) {
       for (const itemNode of node.childrenNodes) {
-        const childState = { ...state, insideParagraph: false };
+        const childState = {...state, insideParagraph: false};
         const itemChildren = this.parseChildren(itemNode.childrenNodes || [itemNode], childState);
         if (itemChildren.length > 0) {
           items.push({
@@ -437,7 +419,7 @@ export const AnnotationParser = {
         const cells: ASTTableCell[] = [];
         if (rowNode.childrenNodes) {
           for (const cellNode of rowNode.childrenNodes) {
-            const childState = { ...state, insideParagraph: true };
+            const childState = {...state, insideParagraph: true};
             const cellInlines = this.parseInlineChildren(cellNode.childrenNodes || [], childState);
             const rowType = rowAttrs.contentData.case === 'tableRowData' ? rowAttrs.contentData.value.type : undefined;
             const header = rowType === TableRowType.HEADER;
@@ -547,13 +529,12 @@ export const AnnotationParser = {
 
   parseProtoToAST(decodedProto: AnnotatedPageContent): ASTDocument {
     const root = decodedProto.rootNode;
-    if (!root) return { children: [] };
+    if (!root) return {children: []};
 
-    const contentRoot =
-      this.findNodeByRoles(root, [AnnotatedRole.ARTICLE, AnnotatedRole.MAIN]) || root;
+    const contentRoot = this.findNodeByRoles(root, [AnnotatedRole.ARTICLE, AnnotatedRole.MAIN]) || root;
 
     const state: ParserState = {
-      imageCounter: { value: 1 },
+      imageCounter: {value: 1},
       insideParagraph: false,
       insideHeading: false,
       insideCodeBlock: false,
@@ -565,7 +546,7 @@ export const AnnotationParser = {
       title: decodedProto.mainFrameData?.title || undefined,
       children,
     };
-  }
+  },
 };
 
 export const MarkdownSerializer = {
@@ -578,14 +559,14 @@ export const MarkdownSerializer = {
 
   mergeGroup(group: ASTInlineNode[], bold: boolean): ASTInlineNode {
     if (group.length === 1) return group[0];
-    
+
     let texts = '';
     for (let i = 0; i < group.length; i++) {
       const node = group[i];
       if (node.type !== 'text') continue;
       const chunk = node.text;
       if (!chunk) continue;
-      
+
       if (this.shouldInsertSpace(texts, chunk)) {
         texts += ' ';
       }
@@ -597,7 +578,7 @@ export const MarkdownSerializer = {
       return {
         type: 'text',
         text: texts,
-        style: first.style ? create(TextStyleSchema, { ...first.style, hasEmphasis: bold }) : (bold ? create(TextStyleSchema, { hasEmphasis: true }) : undefined)
+        style: first.style ? create(TextStyleSchema, {...first.style, hasEmphasis: bold}) : bold ? create(TextStyleSchema, {hasEmphasis: true}) : undefined,
       };
     }
     return first;
@@ -700,21 +681,27 @@ export const MarkdownSerializer = {
       let md = '';
       let index = 1;
       for (const item of node.items) {
-        const content = item.children.map(child => {
-          if (child.type === 'paragraph') {
-            return this.serializeInlineChildren(child.children);
-          }
-          if (child.type === 'text' || child.type === 'link') {
-            return this.serializeInline(child);
-          }
-          return this.serializeBlock(child as ASTBlockNode);
-        }).join('\n').trim();
+        const content = item.children
+          .map(child => {
+            if (child.type === 'paragraph') {
+              return this.serializeInlineChildren(child.children);
+            }
+            if (child.type === 'text' || child.type === 'link') {
+              return this.serializeInline(child);
+            }
+            return this.serializeBlock(child as ASTBlockNode);
+          })
+          .join('\n')
+          .trim();
 
         const prefix = node.ordered ? `${index}. ` : '* ';
-        const indentedContent = content.split('\n').map((line, i) => {
-          if (i === 0) return line;
-          return '  ' + line;
-        }).join('\n');
+        const indentedContent = content
+          .split('\n')
+          .map((line, i) => {
+            if (i === 0) return line;
+            return '  ' + line;
+          })
+          .join('\n');
 
         md += `${prefix}${indentedContent}\n`;
         index++;
@@ -749,7 +736,10 @@ export const MarkdownSerializer = {
     }
 
     if (node.type === 'callout') {
-      const childrenMd = node.children.map(c => this.serializeBlock(c)).join('\n\n').trim();
+      const childrenMd = node.children
+        .map(c => this.serializeBlock(c))
+        .join('\n\n')
+        .trim();
       if (!childrenMd) return '';
 
       if (node.subtype === 'aside') {
@@ -781,7 +771,7 @@ export const MarkdownSerializer = {
       .replace(/`[ \t]*([^`\n]*?)[ \t]*`/g, '`$1`');
 
     return md.trim();
-  }
+  },
 };
 
 export function decodeAnnotatedPageContent(base64String: string): AnnotatedPageContent {

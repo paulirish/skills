@@ -1,12 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert';
-import { fromJson, toBinary } from '@bufbuild/protobuf';
-import type { JsonValue } from '@bufbuild/protobuf';
-import {
-  AnnotatedPageContentSchema,
-  AnnotatedRole,
-  ContentAttributeType
-} from '../scripts/proto/common_quality_data_pb.js';
+import {fromJson, toBinary} from '@bufbuild/protobuf';
+import type {JsonValue} from '@bufbuild/protobuf';
+import {AnnotatedPageContentSchema, AnnotatedRole, ContentAttributeType} from '../scripts/proto/common_quality_data_pb.js';
 import {decodeAnnotatedPageContent, convertToMarkdown} from '../scripts/distill-page.ts';
 
 const {
@@ -15,7 +11,7 @@ const {
   CONTENT_ATTRIBUTE_UNORDERED_LIST,
   CONTENT_ATTRIBUTE_TABLE,
   CONTENT_ATTRIBUTE_TABLE_ROW,
-  CONTENT_ATTRIBUTE_CONTAINER
+  CONTENT_ATTRIBUTE_CONTAINER,
 } = ContentAttributeType;
 
 test('convertToMarkdown handles lists correctly', () => {

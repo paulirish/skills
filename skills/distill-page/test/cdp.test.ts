@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import {fileURLToPath} from 'node:url';
 import fs from 'node:fs';
 import {fetchDistilledBase64, decodeAnnotatedPageContent, convertToMarkdown} from '../scripts/distill-page.ts';
 
@@ -11,7 +11,7 @@ const __dirname = path.dirname(__filename);
 test('CDP Page.getAnnotatedPageContent on mock-page.html', async () => {
   const mockPagePath = path.resolve(__dirname, 'fixtures/mock-page.html');
   const mockPageUrl = `file://${mockPagePath}`;
-  
+
   const content = await fetchDistilledBase64(mockPageUrl);
   assert.ok(content, 'Content should not be empty');
 
@@ -41,7 +41,7 @@ test('CDP Page.getAnnotatedPageContent on mock-page.html', async () => {
     '    }',
     '  ]',
     '}',
-    '```'
+    '```',
   ].join('\n');
   assert.ok(md.includes(expectedCodeBlock), 'Should format highlighted pre block as clean raw code block');
   assert.ok(md.includes('![With URL][image01]'), 'Should format first image as reference image01');
@@ -49,12 +49,16 @@ test('CDP Page.getAnnotatedPageContent on mock-page.html', async () => {
   assert.ok(md.includes('![image][image03]'), 'Should format third image as reference image03');
   assert.ok(
     md.includes("Hi, I'm Kilian. I make [**Polypane**](https://polypane.app/), the browser for responsive web development and design."),
-    'Should not split styled paragraph into heading lines'
+    'Should not split styled paragraph into heading lines',
   );
 
   // Schema.org paywall integration check
-  assert.ok(md.includes('> [!IMPORTANT]\n> **Paid Content**: The following section is behind a paywall.\n\nPaid content paragraph that should be identified as paid content by annotations.'), 'Should format paid content with paywall warning block');
-
+  assert.ok(
+    md.includes(
+      '> [!IMPORTANT]\n> **Paid Content**: The following section is behind a paywall.\n\nPaid content paragraph that should be identified as paid content by annotations.',
+    ),
+    'Should format paid content with paywall warning block',
+  );
 
   // Dynamic headings check
   assert.ok(md.includes('## Dynamic Size XL Heading'), 'XL heading size should map to H2');
@@ -73,4 +77,3 @@ test('CDP Page.getAnnotatedPageContent on mock-page.html', async () => {
   assert.ok(!md.includes('About Us'), 'Should skip nav block content');
   assert.ok(!md.includes('Mock Company. All rights reserved.'), 'Should skip footer block content');
 });
-

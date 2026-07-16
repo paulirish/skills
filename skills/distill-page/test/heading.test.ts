@@ -1,19 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert';
-import { fromJson, toBinary } from '@bufbuild/protobuf';
-import type { JsonValue } from '@bufbuild/protobuf';
-import {
-  AnnotatedPageContentSchema,
-  ContentAttributeType,
-  TextSize
-} from '../scripts/proto/common_quality_data_pb.js';
+import {fromJson, toBinary} from '@bufbuild/protobuf';
+import type {JsonValue} from '@bufbuild/protobuf';
+import {AnnotatedPageContentSchema, ContentAttributeType, TextSize} from '../scripts/proto/common_quality_data_pb.js';
 import {decodeAnnotatedPageContent, convertToMarkdown} from '../scripts/distill-page.ts';
 
-const {
-  CONTENT_ATTRIBUTE_TEXT,
-  CONTENT_ATTRIBUTE_ANCHOR,
-  CONTENT_ATTRIBUTE_HEADING
-} = ContentAttributeType;
+const {CONTENT_ATTRIBUTE_TEXT, CONTENT_ATTRIBUTE_ANCHOR, CONTENT_ATTRIBUTE_HEADING} = ContentAttributeType;
 
 test('convertToMarkdown handles HEADING containers correctly', () => {
   const payload: JsonValue = {
