@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert';
 import { fromJson, toBinary } from '@bufbuild/protobuf';
+import type { JsonValue } from '@bufbuild/protobuf';
 import {
   AnnotatedPageContentSchema,
   ContentAttributeType,
@@ -15,7 +16,7 @@ const {
 } = ContentAttributeType;
 
 test('convertToMarkdown handles HEADING containers correctly', () => {
-  const payload = {
+  const payload: JsonValue = {
     rootNode: {
       childrenNodes: [
         {
@@ -50,7 +51,7 @@ test('convertToMarkdown handles HEADING containers correctly', () => {
     },
   };
 
-  const buffer = toBinary(AnnotatedPageContentSchema, fromJson(AnnotatedPageContentSchema, payload as any));
+  const buffer = toBinary(AnnotatedPageContentSchema, fromJson(AnnotatedPageContentSchema, payload));
   const base64 = Buffer.from(buffer).toString('base64');
 
   const decoded = decodeAnnotatedPageContent(base64);
@@ -65,7 +66,7 @@ test('convertToMarkdown handles HEADING containers correctly', () => {
 });
 
 test('convertToMarkdown cleans up spaces before punctuation', () => {
-  const payload = {
+  const payload: JsonValue = {
     rootNode: {
       childrenNodes: [
         {
@@ -84,7 +85,7 @@ test('convertToMarkdown cleans up spaces before punctuation', () => {
     },
   };
 
-  const buffer = toBinary(AnnotatedPageContentSchema, fromJson(AnnotatedPageContentSchema, payload as any));
+  const buffer = toBinary(AnnotatedPageContentSchema, fromJson(AnnotatedPageContentSchema, payload));
   const base64 = Buffer.from(buffer).toString('base64');
 
   const decoded = decodeAnnotatedPageContent(base64);
@@ -95,7 +96,7 @@ test('convertToMarkdown cleans up spaces before punctuation', () => {
 });
 
 test('convertToMarkdown converts same-page links to fragments', () => {
-  const payload = {
+  const payload: JsonValue = {
     mainFrameData: {
       url: 'https://example.com/page',
     },
@@ -121,7 +122,7 @@ test('convertToMarkdown converts same-page links to fragments', () => {
     },
   };
 
-  const buffer = toBinary(AnnotatedPageContentSchema, fromJson(AnnotatedPageContentSchema, payload as any));
+  const buffer = toBinary(AnnotatedPageContentSchema, fromJson(AnnotatedPageContentSchema, payload));
   const base64 = Buffer.from(buffer).toString('base64');
 
   const decoded = decodeAnnotatedPageContent(base64);
@@ -132,7 +133,7 @@ test('convertToMarkdown converts same-page links to fragments', () => {
 });
 
 test('convertToMarkdown removes spaces inside backticks', () => {
-  const payload = {
+  const payload: JsonValue = {
     rootNode: {
       childrenNodes: [
         {
@@ -157,7 +158,7 @@ test('convertToMarkdown removes spaces inside backticks', () => {
     },
   };
 
-  const buffer = toBinary(AnnotatedPageContentSchema, fromJson(AnnotatedPageContentSchema, payload as any));
+  const buffer = toBinary(AnnotatedPageContentSchema, fromJson(AnnotatedPageContentSchema, payload));
   const base64 = Buffer.from(buffer).toString('base64');
 
   const decoded = decodeAnnotatedPageContent(base64);
@@ -168,7 +169,7 @@ test('convertToMarkdown removes spaces inside backticks', () => {
 });
 
 test('convertToMarkdown handles bold backticks correctly', () => {
-  const payload = {
+  const payload: JsonValue = {
     rootNode: {
       childrenNodes: [
         {
@@ -202,7 +203,7 @@ test('convertToMarkdown handles bold backticks correctly', () => {
     },
   };
 
-  const buffer = toBinary(AnnotatedPageContentSchema, fromJson(AnnotatedPageContentSchema, payload as any));
+  const buffer = toBinary(AnnotatedPageContentSchema, fromJson(AnnotatedPageContentSchema, payload));
   const base64 = Buffer.from(buffer).toString('base64');
 
   const decoded = decodeAnnotatedPageContent(base64);

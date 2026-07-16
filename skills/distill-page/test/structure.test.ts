@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert';
 import { fromJson, toBinary } from '@bufbuild/protobuf';
+import type { JsonValue } from '@bufbuild/protobuf';
 import {
   AnnotatedPageContentSchema,
   AnnotatedRole,
@@ -18,7 +19,7 @@ const {
 } = ContentAttributeType;
 
 test('convertToMarkdown handles lists correctly', () => {
-  const payload = {
+  const payload: JsonValue = {
     rootNode: {
       childrenNodes: [
         {
@@ -52,7 +53,7 @@ test('convertToMarkdown handles lists correctly', () => {
     },
   };
 
-  const buffer = toBinary(AnnotatedPageContentSchema, fromJson(AnnotatedPageContentSchema, payload as any));
+  const buffer = toBinary(AnnotatedPageContentSchema, fromJson(AnnotatedPageContentSchema, payload));
   const base64 = Buffer.from(buffer).toString('base64');
 
   const decoded = decodeAnnotatedPageContent(base64);
@@ -63,7 +64,7 @@ test('convertToMarkdown handles lists correctly', () => {
 });
 
 test('convertToMarkdown handles tables correctly', () => {
-  const payload = {
+  const payload: JsonValue = {
     rootNode: {
       childrenNodes: [
         {
@@ -131,7 +132,7 @@ test('convertToMarkdown handles tables correctly', () => {
     },
   };
 
-  const buffer = toBinary(AnnotatedPageContentSchema, fromJson(AnnotatedPageContentSchema, payload as any));
+  const buffer = toBinary(AnnotatedPageContentSchema, fromJson(AnnotatedPageContentSchema, payload));
   const base64 = Buffer.from(buffer).toString('base64');
 
   const decoded = decodeAnnotatedPageContent(base64);
@@ -142,7 +143,7 @@ test('convertToMarkdown handles tables correctly', () => {
 });
 
 test('convertToMarkdown skips nav and footer roles', () => {
-  const payload = {
+  const payload: JsonValue = {
     rootNode: {
       childrenNodes: [
         {
@@ -175,7 +176,7 @@ test('convertToMarkdown skips nav and footer roles', () => {
     },
   };
 
-  const buffer = toBinary(AnnotatedPageContentSchema, fromJson(AnnotatedPageContentSchema, payload as any));
+  const buffer = toBinary(AnnotatedPageContentSchema, fromJson(AnnotatedPageContentSchema, payload));
   const base64 = Buffer.from(buffer).toString('base64');
 
   const decoded = decodeAnnotatedPageContent(base64);
@@ -186,7 +187,7 @@ test('convertToMarkdown skips nav and footer roles', () => {
 });
 
 test('convertToMarkdown handles images correctly', () => {
-  const payload = {
+  const payload: JsonValue = {
     rootNode: {
       childrenNodes: [
         {
@@ -201,7 +202,7 @@ test('convertToMarkdown handles images correctly', () => {
     },
   };
 
-  const buffer = toBinary(AnnotatedPageContentSchema, fromJson(AnnotatedPageContentSchema, payload as any));
+  const buffer = toBinary(AnnotatedPageContentSchema, fromJson(AnnotatedPageContentSchema, payload));
   const base64 = Buffer.from(buffer).toString('base64');
 
   const decoded = decodeAnnotatedPageContent(base64);

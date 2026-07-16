@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert';
 import { fromJson, toBinary } from '@bufbuild/protobuf';
+import type { JsonValue } from '@bufbuild/protobuf';
 import {
   AnnotatedPageContentSchema,
   AnnotatedRole,
@@ -17,22 +18,20 @@ const {
   CONTENT_ATTRIBUTE_DIALOG_MODELESS,
 } = ContentAttributeType;
 
-function getMarkdown(payload: any): string {
-  const buffer = toBinary(AnnotatedPageContentSchema, fromJson(AnnotatedPageContentSchema, payload as any));
+function getMarkdown(payload: JsonValue): string {
+  const buffer = toBinary(AnnotatedPageContentSchema, fromJson(AnnotatedPageContentSchema, payload));
   const base64 = Buffer.from(buffer).toString('base64');
   const decoded = decodeAnnotatedPageContent(base64);
   return convertToMarkdown(decoded);
 }
 
 test('Decoding base64 string into AnnotatedPageContent object', () => {
-  const payload = {
+  const payload: JsonValue = {
     version: 1,
     rootNode: {},
   };
 
-
-
-  const buffer = toBinary(AnnotatedPageContentSchema, fromJson(AnnotatedPageContentSchema, payload as any));
+  const buffer = toBinary(AnnotatedPageContentSchema, fromJson(AnnotatedPageContentSchema, payload));
   const base64 = Buffer.from(buffer).toString('base64');
 
   const decoded = decodeAnnotatedPageContent(base64);
@@ -42,7 +41,7 @@ test('Decoding base64 string into AnnotatedPageContent object', () => {
 });
 
 test('convertToMarkdown adds newlines around headlines', () => {
-  const payload = {
+  const payload: JsonValue = {
     rootNode: {
       childrenNodes: [
         {
@@ -72,7 +71,7 @@ test('convertToMarkdown adds newlines around headlines', () => {
     },
   };
 
-  const buffer = toBinary(AnnotatedPageContentSchema, fromJson(AnnotatedPageContentSchema, payload as any));
+  const buffer = toBinary(AnnotatedPageContentSchema, fromJson(AnnotatedPageContentSchema, payload));
   const base64 = Buffer.from(buffer).toString('base64');
 
   const decoded = decodeAnnotatedPageContent(base64);
@@ -83,7 +82,7 @@ test('convertToMarkdown adds newlines around headlines', () => {
 });
 
 test('convertToMarkdown renders image with URL', () => {
-  const payload = {
+  const payload: JsonValue = {
     rootNode: {
       childrenNodes: [
         {
@@ -107,7 +106,7 @@ test('convertToMarkdown renders image with URL', () => {
     }
   };
 
-  const buffer = toBinary(AnnotatedPageContentSchema, fromJson(AnnotatedPageContentSchema, payload as any));
+  const buffer = toBinary(AnnotatedPageContentSchema, fromJson(AnnotatedPageContentSchema, payload));
   const base64 = Buffer.from(buffer).toString('base64');
 
   const decoded = decodeAnnotatedPageContent(base64);
@@ -118,7 +117,7 @@ test('convertToMarkdown renders image with URL', () => {
 });
 
 test('convertToMarkdown renders dialog content', () => {
-  const payload = {
+  const payload: JsonValue = {
     rootNode: {
       childrenNodes: [
         {
@@ -163,7 +162,7 @@ test('convertToMarkdown renders dialog content', () => {
     }
   };
 
-  const buffer = toBinary(AnnotatedPageContentSchema, fromJson(AnnotatedPageContentSchema, payload as any));
+  const buffer = toBinary(AnnotatedPageContentSchema, fromJson(AnnotatedPageContentSchema, payload));
   const base64 = Buffer.from(buffer).toString('base64');
 
   const decoded = decodeAnnotatedPageContent(base64);
@@ -174,7 +173,7 @@ test('convertToMarkdown renders dialog content', () => {
 });
 
 test('convertToMarkdown prepends title if mainFrameData.title is present', () => {
-  const payload = {
+  const payload: JsonValue = {
     mainFrameData: {
       title: 'My Document Title',
       url: 'https://example.com',
@@ -195,7 +194,7 @@ test('convertToMarkdown prepends title if mainFrameData.title is present', () =>
 });
 
 test('convertToMarkdown prepends table name before rows if tableData.tableName is present', () => {
-  const payload = {
+  const payload: JsonValue = {
     rootNode: {
       childrenNodes: [
         {
@@ -233,7 +232,7 @@ test('convertToMarkdown prepends table name before rows if tableData.tableName i
 });
 
 test('convertToMarkdown skips nodes and children if isAdRelated is true', () => {
-  const payload = {
+  const payload: JsonValue = {
     rootNode: {
       childrenNodes: [
         {
@@ -264,7 +263,7 @@ test('convertToMarkdown skips nodes and children if isAdRelated is true', () => 
 });
 
 test('convertToMarkdown prepends a warning before paid content', () => {
-  const payload = {
+  const payload: JsonValue = {
     rootNode: {
       childrenNodes: [
         {
@@ -289,7 +288,7 @@ test('convertToMarkdown prepends a warning before paid content', () => {
 });
 
 test('convertToMarkdown wraps ANNOTATED_ROLE_CONTENT_HIDDEN in details element', () => {
-  const payload = {
+  const payload: JsonValue = {
     rootNode: {
       childrenNodes: [
         {
@@ -314,7 +313,7 @@ test('convertToMarkdown wraps ANNOTATED_ROLE_CONTENT_HIDDEN in details element',
 });
 
 test('convertToMarkdown wraps ANNOTATED_ROLE_ASIDE in aside element', () => {
-  const payload = {
+  const payload: JsonValue = {
     rootNode: {
       childrenNodes: [
         {
@@ -340,7 +339,7 @@ test('convertToMarkdown wraps ANNOTATED_ROLE_ASIDE in aside element', () => {
 
 test('convertToMarkdown maps TextSize values dynamically to heading levels', () => {
   const checkHeading = (size: number, expectedPrefix: string) => {
-    const payload = {
+    const payload: JsonValue = {
       rootNode: {
         childrenNodes: [
           {
