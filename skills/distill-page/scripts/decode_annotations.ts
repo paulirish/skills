@@ -102,7 +102,7 @@ function recursiveToMarkdownInternal(node: AnyNode, state: {
       if (textData.textStyle?.textSize) {
         const size = textData.textStyle.textSize;
         if (size === TextSize.XL || size === TextSize.L) {
-          if (!state.insideHeading) {
+          if (!state.insideHeading && !state.insideParagraph && !state.insideCodeBlock) {
             const prefix = size === TextSize.XL ? '##' : '###';
             text = `\n\n${prefix} ${text}\n\n`;
           }

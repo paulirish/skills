@@ -40,5 +40,9 @@ test('CDP Page.getAnnotatedPageContent on mock-page.html', async () => {
   ].join('\n');
   assert.ok(md.includes(expectedCodeBlock), 'Should format highlighted pre block as clean raw code block');
   assert.ok(md.includes('![With URL][image01]'), 'Should format image with reference');
+  assert.ok(
+    md.includes("Hi, I'm Kilian. I make [**Polypane**](https://polypane.app/), the browser for responsive web development and design."),
+    'Should not split styled paragraph into heading lines'
+  );
 });
 

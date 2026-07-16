@@ -27,6 +27,7 @@ export async function injectSemanticMarkers(page: any) {
 export async function fetchDistilledBase64(url: string) {
   let browser;
   try {
+    console.error(`[debug] Launching browser for ${url}...`);
     browser = await chromium.launch({
       headless: false,
       args: [
@@ -41,29 +42,36 @@ export async function fetchDistilledBase64(url: string) {
     const page = await context.newPage();
 
     // Create a CDP session to the page
+    console.error(`[debug] Creating CDP session...`);
     const client = await page.context().newCDPSession(page);
 
     // Enable the Page domain for experimental commands
     await client.send('Page.enable');
 
+    console.error(`[debug] Navigating to ${url}...`);
     const response = await page.goto(url, {waitUntil: 'load'});
     if (!response || !response.ok()) {
       throw new Error(`HTTP error! status: ${response ? response.status() : 'unknown'} when fetching ${url}`);
     }
 
     // Bridge the visual gap: Inject text markers to preserve semantic HTML bounds
+    console.error(`[debug] Injecting semantic markers...`);
     await injectSemanticMarkers(page);
 
     // Bring to front and wait for potential model processing
     await page.bringToFront();
+    console.error(`[debug] Waiting 2 seconds for model processing...`);
     await page.waitForTimeout(2000);
 
     // Page.getAnnotatedPageContent returns distilled/annotated HTML content
+    console.error(`[debug] Calling Page.getAnnotatedPageContent...`);
     const {content} = await client.send('Page.getAnnotatedPageContent');
+    console.error(`[debug] Received content length: ${content ? content.length : 0}`);
 
     await browser.close();
     return content;
   } catch (error) {
+    console.error(`[debug] Error in fetchDistilledBase64:`, error);
     if (browser) await browser.close();
     throw error;
   }
@@ -71,10 +79,19 @@ export async function fetchDistilledBase64(url: string) {
 
 export async function processPage(url: string) {
   const base64Content = await fetchDistilledBase64(url);
+  if (!base64Content) {
+    console.error(`[debug] Warning: fetchDistilledBase64 returned empty/null content`);
+    return null;
+  }
+  console.error(`[debug] Decoding annotated page content...`);
   return decodeAnnotatedPageContent(base64Content);
 }
 
 function outputResult(decodedProto: any, toMarkdown: boolean) {
+  if (!decodedProto) {
+    console.error(`[debug] No decodedProto to output (null)`);
+    return;
+  }
   if (toMarkdown) {
     console.log(convertToMarkdown(decodedProto));
   } else {
