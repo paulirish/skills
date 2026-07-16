@@ -1,24 +1,22 @@
-import { fromBinary } from "@bufbuild/protobuf";
+import { fromBinary, create } from "@bufbuild/protobuf";
 import {
   AnnotatedPageContentSchema,
   AnnotatedRole,
   ContentAttributeType,
   TextSize,
-  TableRowType
+  TableRowType,
+  TextStyleSchema
 } from './proto/common_quality_data_pb.js';
 import type { 
   ContentNode, 
   AnnotatedPageContent, 
-  ContentAttributes,
   TextInfo,
   ImageInfo,
   AnchorData,
   TableData
 } from './proto/common_quality_data_pb.js';
 
-function normalizeWhitespace(text: string): string {
-  return text.replace(/\s+/g, ' ').trim();
-}
+
 
 const {
   CONTENT_ATTRIBUTE_TEXT,
@@ -33,8 +31,7 @@ const {
   CONTENT_ATTRIBUTE_PARAGRAPH
 } = ContentAttributeType;
 
-type AnyNode = ContentNode;
-type IAnnotatedPageContent = AnnotatedPageContent;
+
 
 // AST Types for Intermediate Representation, bridging with common_quality_data types
 export interface ASTTextRun {
@@ -120,17 +117,16 @@ interface ParserState {
   imageCounter: { value: number };
   insideParagraph: boolean;
   insideHeading: boolean;
-  insideAnchor: boolean;
   insideCodeBlock: boolean;
   currentUrl?: string | null;
 }
 
-export function decodeAnnotatedPageContent(base64String: string): IAnnotatedPageContent {
+export function decodeAnnotatedPageContent(base64String: string): AnnotatedPageContent {
   const buffer = Buffer.from(base64String, 'base64');
   return fromBinary(AnnotatedPageContentSchema, buffer);
 }
 
-function findNodeByRoles(node: AnyNode, roles: AnnotatedRole[]): AnyNode | null {
+function findNodeByRoles(node: ContentNode, roles: AnnotatedRole[]): ContentNode | null {
   const attrs = node.contentAttributes;
   if (attrs?.annotatedRoles) {
     for (const r of roles) {
@@ -161,7 +157,7 @@ function isInlineNode(node: ASTBlockNode | ASTInlineNode): node is ASTInlineNode
   return node.type === 'text' || node.type === 'link' || node.type === 'image';
 }
 
-function parseChildrenFlat(nodes: AnyNode[], state: ParserState): (ASTBlockNode | ASTInlineNode)[] {
+function parseChildrenFlat(nodes: ContentNode[], state: ParserState): (ASTBlockNode | ASTInlineNode)[] {
   const result: (ASTBlockNode | ASTInlineNode)[] = [];
   for (const child of nodes) {
     result.push(...parseNode(child, state));
@@ -169,7 +165,7 @@ function parseChildrenFlat(nodes: AnyNode[], state: ParserState): (ASTBlockNode 
   return result;
 }
 
-function parseInlineChildren(nodes: AnyNode[], state: ParserState): ASTInlineNode[] {
+function parseInlineChildren(nodes: ContentNode[], state: ParserState): ASTInlineNode[] {
   const flat = parseChildrenFlat(nodes, state);
   const inlines: ASTInlineNode[] = [];
   for (const item of flat) {
@@ -180,7 +176,7 @@ function parseInlineChildren(nodes: AnyNode[], state: ParserState): ASTInlineNod
   return inlines;
 }
 
-function parseChildren(nodes: AnyNode[], state: ParserState): ASTBlockNode[] {
+function parseChildren(nodes: ContentNode[], state: ParserState): ASTBlockNode[] {
   const blocks: ASTBlockNode[] = [];
   let inlineAccumulator: ASTInlineNode[] = [];
 
@@ -255,7 +251,7 @@ function parseChildren(nodes: AnyNode[], state: ParserState): ASTBlockNode[] {
   return blocks;
 }
 
-function hasCodeFenceChild(node: AnyNode): boolean {
+function hasCodeFenceChild(node: ContentNode): boolean {
   if (!node.childrenNodes) return false;
   for (const child of node.childrenNodes) {
     const attrs = child.contentAttributes;
@@ -276,16 +272,230 @@ function isPermalinkText(text: string): boolean {
   return cleaned === 'permalink' || cleaned === 'link';
 }
 
-function parseNode(node: AnyNode, state: ParserState): (ASTBlockNode | ASTInlineNode)[] {
+function parseTextNode(node: ContentNode, textData: TextInfo, state: ParserState): (ASTBlockNode | ASTInlineNode)[] {
+  let text = textData.textContent || '';
+  const isCodeFence = text.includes('```');
+
+  if (isCodeFence) {
+    state.insideCodeBlock = !state.insideCodeBlock;
+    return [];
+  }
+
+  if (state.insideCodeBlock) {
+    return [];
+  }
+
+  text = text.replace(/ +([.,!?;:)])/g, '$1');
+
+  const trimmed = text.trim();
+  if (!trimmed) {
+    return [];
+  }
+
+  const bold = !!(textData.textStyle?.hasEmphasis && !state.insideHeading);
+
+  const size = textData.textStyle?.textSize;
+  if ((size === TextSize.XL || size === TextSize.L) && !state.insideHeading && !state.insideParagraph) {
+    const headingTextRun: ASTTextRun = { 
+      type: 'text', 
+      text: trimmed, 
+      style: textData.textStyle ? { ...textData.textStyle, hasEmphasis: bold } : undefined,
+    };
+    const level = textSizeToHeadingLevel(size);
+    const headingBlock: ASTHeading = {
+      type: 'heading',
+      level,
+      children: [headingTextRun],
+    };
+    return [headingBlock];
+  }
+
+  const run: ASTTextRun = { 
+    type: 'text', 
+    text: trimmed, 
+    style: textData.textStyle ? { ...textData.textStyle, hasEmphasis: bold } : undefined 
+  };
+  return [run];
+}
+
+function parseImageNode(node: ContentNode, imageData: ImageInfo, state: ParserState): ASTImage[] {
+  let referenceId = undefined;
+  let isReference = false;
+  if (!imageData.url) {
+    referenceId = `image${String(state.imageCounter.value++).padStart(2, '0')}`;
+    isReference = true;
+  }
+  const img: ASTImage = {
+    type: 'image',
+    data: imageData,
+    isReference,
+    referenceId,
+  };
+  return [img];
+}
+
+function parseAnchorNode(node: ContentNode, anchorData: AnchorData, state: ParserState): (ASTLink | ASTInlineNode)[] {
+  const url = anchorData.url || '';
+  let resolvedUrl = url;
+  if (state.currentUrl && url.startsWith(state.currentUrl + '#')) {
+    resolvedUrl = url.substring(state.currentUrl.length);
+  }
+
+  const inlineChildren = parseInlineChildren(node.childrenNodes || [], state);
+  if (inlineChildren.length > 0 && resolvedUrl) {
+    if (state.insideHeading && resolvedUrl.startsWith('#')) {
+      const combinedText = inlineChildren.map(c => c.type === 'text' ? c.text : '').join('');
+      if (isPermalinkText(combinedText)) {
+        return [];
+      }
+      return inlineChildren;
+    }
+
+    const link: ASTLink = {
+      type: 'link',
+      data: { ...anchorData, url: resolvedUrl },
+      children: inlineChildren,
+    };
+    return [link];
+  }
+  return [];
+}
+
+function parseParagraphNode(node: ContentNode, state: ParserState): ASTParagraph[] {
+  const childState = { ...state, insideParagraph: true };
+  const inlineChildren = parseInlineChildren(node.childrenNodes || [], childState);
+  if (inlineChildren.length > 0) {
+    const p: ASTParagraph = {
+      type: 'paragraph',
+      children: inlineChildren,
+    };
+    return [p];
+  }
+  return [];
+}
+
+function parseHeadingNode(node: ContentNode, state: ParserState): ASTHeading[] {
+  const childState = { ...state, insideHeading: true };
+  const inlineChildren = parseInlineChildren(node.childrenNodes || [], childState);
+  if (inlineChildren.length > 0) {
+    let maxTextSize = TextSize.M_DEFAULT;
+    if (node.childrenNodes) {
+      for (const child of node.childrenNodes) {
+        const childAttrs = child.contentAttributes;
+        if (childAttrs?.contentData.case === 'textData') {
+          const sz = childAttrs.contentData.value.textStyle?.textSize;
+          if (sz !== undefined && sz > maxTextSize) {
+            maxTextSize = sz;
+          }
+        }
+      }
+    }
+    const level = textSizeToHeadingLevel(maxTextSize);
+    const h: ASTHeading = {
+      type: 'heading',
+      level,
+      children: inlineChildren,
+    };
+    return [h];
+  }
+  return [];
+}
+
+function parseListNode(node: ContentNode, state: ParserState, ordered: boolean): ASTList[] {
+  const items: ASTListItem[] = [];
+  if (node.childrenNodes) {
+    for (const itemNode of node.childrenNodes) {
+      const childState = { ...state, insideParagraph: false };
+      const itemChildren = parseChildren(itemNode.childrenNodes || [itemNode], childState);
+      if (itemChildren.length > 0) {
+        items.push({
+          type: 'list-item',
+          children: itemChildren,
+        });
+      }
+    }
+  }
+  if (items.length > 0) {
+    const list: ASTList = {
+      type: 'list',
+      ordered,
+      items,
+    };
+    return [list];
+  }
+  return [];
+}
+
+function parseTableNode(node: ContentNode, state: ParserState, tableData?: TableData): ASTTable[] {
+  const rows: ASTTableRow[] = [];
+  if (node.childrenNodes) {
+    for (const rowNode of node.childrenNodes) {
+      const rowAttrs = rowNode.contentAttributes;
+      if (!rowAttrs || rowAttrs.attributeType !== CONTENT_ATTRIBUTE_TABLE_ROW) continue;
+
+      const cells: ASTTableCell[] = [];
+      if (rowNode.childrenNodes) {
+        for (const cellNode of rowNode.childrenNodes) {
+          const childState = { ...state, insideParagraph: true };
+          const cellInlines = parseInlineChildren(cellNode.childrenNodes || [], childState);
+          const rowType = rowAttrs.contentData.case === 'tableRowData' ? rowAttrs.contentData.value.type : undefined;
+          const header = rowType === TableRowType.HEADER;
+          cells.push({
+            type: 'table-cell',
+            header,
+            children: cellInlines,
+          });
+        }
+      }
+      rows.push({
+        type: 'table-row',
+        cells,
+      });
+    }
+  }
+  if (rows.length > 0) {
+    const table: ASTTable = {
+      type: 'table',
+      data: tableData,
+      rows,
+    };
+    return [table];
+  }
+  return [];
+}
+
+function parseCalloutNode(node: ContentNode, subtype: 'paid' | 'hidden' | 'aside', state: ParserState): ASTCallout[] {
+  const childState = {
+    ...state,
+    insideParagraph: false,
+    insideHeading: false,
+  };
+  const blockChildren = parseChildren(node.childrenNodes || [], childState);
+  if (blockChildren.length > 0) {
+    const callout: ASTCallout = {
+      type: 'callout',
+      subtype,
+      children: blockChildren,
+    };
+    return [callout];
+  }
+  return [];
+}
+
+function parseDefaultNode(node: ContentNode, state: ParserState): (ASTBlockNode | ASTInlineNode)[] {
+  if (node.childrenNodes) {
+    if (hasCodeFenceChild(node)) {
+      return parseChildren(node.childrenNodes, state);
+    }
+    return parseChildrenFlat(node.childrenNodes, state);
+  }
+  return [];
+}
+
+function parseNode(node: ContentNode, state: ParserState): (ASTBlockNode | ASTInlineNode)[] {
   const attrs = node.contentAttributes;
   if (!attrs) {
-    if (node.childrenNodes) {
-      if (hasCodeFenceChild(node)) {
-        return parseChildren(node.childrenNodes, state);
-      }
-      return parseChildrenFlat(node.childrenNodes, state);
-    }
-    return [];
+    return parseDefaultNode(node, state);
   }
 
   if (attrs.isAdRelated) {
@@ -303,229 +513,35 @@ function parseNode(node: AnyNode, state: ParserState): (ASTBlockNode | ASTInline
 
   if (hasPaid || hasHidden || hasAside) {
     const subtype = hasPaid ? 'paid' : hasHidden ? 'hidden' : 'aside';
-    const childState = {
-      ...state,
-      insideParagraph: false,
-      insideHeading: false,
-    };
-    const blockChildren = parseChildren(node.childrenNodes || [], childState);
-    if (blockChildren.length > 0) {
-      const callout: ASTCallout = {
-        type: 'callout',
-        subtype,
-        children: blockChildren,
-      };
-      return [callout];
-    }
-    return [];
+    return parseCalloutNode(node, subtype, state);
   }
 
-  if (attrs.contentData.case === 'textData') {
-    const textData = attrs.contentData.value;
-    let text = textData.textContent || '';
-    const isCodeFence = text.includes('```');
-
-    if (isCodeFence) {
-      state.insideCodeBlock = !state.insideCodeBlock;
-      return [];
-    }
-
-    if (state.insideCodeBlock) {
-      return [];
-    }
-
-    text = text.replace(/ +([.,!?;:)])/g, '$1');
-
-    const trimmed = text.trim();
-    if (!trimmed) {
-      return [];
-    }
-
-    const bold = !!(textData.textStyle?.hasEmphasis && !state.insideHeading);
-
-    const size = textData.textStyle?.textSize;
-    if ((size === TextSize.XL || size === TextSize.L) && !state.insideHeading && !state.insideParagraph) {
-      const headingTextRun: ASTTextRun = { 
-        type: 'text', 
-        text: trimmed, 
-        style: textData.textStyle ? { ...textData.textStyle, hasEmphasis: bold } : undefined,
-      };
-      const level = textSizeToHeadingLevel(size);
-      const headingBlock: ASTHeading = {
-        type: 'heading',
-        level,
-        children: [headingTextRun],
-      };
-      return [headingBlock];
-    }
-
-    const run: ASTTextRun = { 
-      type: 'text', 
-      text: trimmed, 
-      style: textData.textStyle ? { ...textData.textStyle, hasEmphasis: bold } : undefined 
-    };
-    return [run];
+  // 1. Dispatch by content data type
+  switch (attrs.contentData.case) {
+    case 'textData':
+      return parseTextNode(node, attrs.contentData.value, state);
+    case 'imageData':
+      return parseImageNode(node, attrs.contentData.value, state);
+    case 'anchorData':
+      return parseAnchorNode(node, attrs.contentData.value, state);
   }
 
-  if (attrs.contentData.case === 'imageData') {
-    const imageData = attrs.contentData.value;
-    let referenceId = undefined;
-    let isReference = false;
-    if (!imageData.url) {
-      referenceId = `image${String(state.imageCounter.value++).padStart(2, '0')}`;
-      isReference = true;
+  // 2. Dispatch by structural attribute type
+  switch (attrs.attributeType) {
+    case CONTENT_ATTRIBUTE_PARAGRAPH:
+      return parseParagraphNode(node, state);
+    case CONTENT_ATTRIBUTE_HEADING:
+      return parseHeadingNode(node, state);
+    case CONTENT_ATTRIBUTE_ORDERED_LIST:
+    case CONTENT_ATTRIBUTE_UNORDERED_LIST:
+      return parseListNode(node, state, attrs.attributeType === CONTENT_ATTRIBUTE_ORDERED_LIST);
+    case CONTENT_ATTRIBUTE_TABLE: {
+      const tableData = attrs.contentData.case === 'tableData' ? attrs.contentData.value : undefined;
+      return parseTableNode(node, state, tableData);
     }
-    const img: ASTImage = {
-      type: 'image',
-      data: imageData,
-      isReference,
-      referenceId,
-    };
-    return [img];
   }
 
-  if (attrs.contentData.case === 'anchorData') {
-    const anchorData = attrs.contentData.value;
-    const url = anchorData.url || '';
-    let resolvedUrl = url;
-    if (state.currentUrl && url.startsWith(state.currentUrl + '#')) {
-      resolvedUrl = url.substring(state.currentUrl.length);
-    }
-
-    const childState = { ...state, insideAnchor: true };
-    const inlineChildren = parseInlineChildren(node.childrenNodes || [], childState);
-    if (inlineChildren.length > 0 && resolvedUrl) {
-      if (state.insideHeading && resolvedUrl.startsWith('#')) {
-        const combinedText = inlineChildren.map(c => c.type === 'text' ? c.text : '').join('');
-        if (isPermalinkText(combinedText)) {
-          return [];
-        }
-        return inlineChildren;
-      }
-
-      const link: ASTLink = {
-        type: 'link',
-        data: { ...anchorData, url: resolvedUrl },
-        children: inlineChildren,
-      };
-      return [link];
-    }
-    return [];
-  }
-
-  if (attrs.attributeType === CONTENT_ATTRIBUTE_PARAGRAPH) {
-    const childState = { ...state, insideParagraph: true };
-    const inlineChildren = parseInlineChildren(node.childrenNodes || [], childState);
-    if (inlineChildren.length > 0) {
-      const p: ASTParagraph = {
-        type: 'paragraph',
-        children: inlineChildren,
-      };
-      return [p];
-    }
-    return [];
-  }
-
-  if (attrs.attributeType === CONTENT_ATTRIBUTE_HEADING) {
-    const childState = { ...state, insideHeading: true };
-    const inlineChildren = parseInlineChildren(node.childrenNodes || [], childState);
-    if (inlineChildren.length > 0) {
-      let maxTextSize = TextSize.M_DEFAULT;
-      if (node.childrenNodes) {
-        for (const child of node.childrenNodes) {
-          const childAttrs = child.contentAttributes;
-          if (childAttrs?.contentData.case === 'textData') {
-            const sz = childAttrs.contentData.value.textStyle?.textSize;
-            if (sz !== undefined && sz > maxTextSize) {
-              maxTextSize = sz;
-            }
-          }
-        }
-      }
-      const level = textSizeToHeadingLevel(maxTextSize);
-      const h: ASTHeading = {
-        type: 'heading',
-        level,
-        children: inlineChildren,
-      };
-      return [h];
-    }
-    return [];
-  }
-
-  if (attrs.attributeType === CONTENT_ATTRIBUTE_ORDERED_LIST || attrs.attributeType === CONTENT_ATTRIBUTE_UNORDERED_LIST) {
-    const ordered = attrs.attributeType === CONTENT_ATTRIBUTE_ORDERED_LIST;
-    const items: ASTListItem[] = [];
-    if (node.childrenNodes) {
-      for (const itemNode of node.childrenNodes) {
-        const childState = { ...state, insideParagraph: false };
-        const itemChildren = parseChildren(itemNode.childrenNodes || [itemNode], childState);
-        if (itemChildren.length > 0) {
-          items.push({
-            type: 'list-item',
-            children: itemChildren,
-          });
-        }
-      }
-    }
-    if (items.length > 0) {
-      const list: ASTList = {
-        type: 'list',
-        ordered,
-        items,
-      };
-      return [list];
-    }
-    return [];
-  }
-
-  if (attrs.attributeType === CONTENT_ATTRIBUTE_TABLE) {
-    const tableData = attrs.contentData.case === 'tableData' ? attrs.contentData.value : undefined;
-    const rows: ASTTableRow[] = [];
-    if (node.childrenNodes) {
-      for (const rowNode of node.childrenNodes) {
-        const rowAttrs = rowNode.contentAttributes;
-        if (!rowAttrs || rowAttrs.attributeType !== CONTENT_ATTRIBUTE_TABLE_ROW) continue;
-
-        const cells: ASTTableCell[] = [];
-        if (rowNode.childrenNodes) {
-          for (const cellNode of rowNode.childrenNodes) {
-            const childState = { ...state, insideParagraph: true };
-            const cellInlines = parseInlineChildren(cellNode.childrenNodes || [], childState);
-            const rowType = rowAttrs.contentData.case === 'tableRowData' ? rowAttrs.contentData.value.type : undefined;
-            const header = rowType === TableRowType.HEADER;
-            cells.push({
-              type: 'table-cell',
-              header,
-              children: cellInlines,
-            });
-          }
-        }
-        rows.push({
-          type: 'table-row',
-          cells,
-        });
-      }
-    }
-    if (rows.length > 0) {
-      const table: ASTTable = {
-        type: 'table',
-        data: tableData,
-        rows,
-      };
-      return [table];
-    }
-    return [];
-  }
-
-  if (node.childrenNodes) {
-    if (hasCodeFenceChild(node)) {
-      return parseChildren(node.childrenNodes, state);
-    }
-    return parseChildrenFlat(node.childrenNodes, state);
-  }
-
-  return [];
+  return parseDefaultNode(node, state);
 }
 
 function serializeImage(node: ASTImage): string {
@@ -557,6 +573,13 @@ function serializeInline(node: ASTInlineNode): string {
   return '';
 }
 
+function shouldInsertSpace(prevText: string, nextChunk: string): boolean {
+  if (!prevText) return false;
+  const startsWithPunc = /^[.,!?;:)]/.test(nextChunk) && !nextChunk.startsWith('![');
+  const endsWithSkip = /[(\s]/.test(prevText[prevText.length - 1]);
+  return !startsWithPunc && !endsWithSkip;
+}
+
 function mergeGroup(group: ASTInlineNode[], bold: boolean): ASTInlineNode {
   if (group.length === 1) return group[0];
   
@@ -567,12 +590,8 @@ function mergeGroup(group: ASTInlineNode[], bold: boolean): ASTInlineNode {
     const chunk = node.text;
     if (!chunk) continue;
     
-    if (texts.length > 0) {
-      const startsWithPunc = /^[.,!?;:)]/.test(chunk) && !chunk.startsWith('![');
-      const endsWithSkip = /[(\s]/.test(texts[texts.length - 1]);
-      if (!startsWithPunc && !endsWithSkip) {
-        texts += ' ';
-      }
+    if (shouldInsertSpace(texts, chunk)) {
+      texts += ' ';
     }
     texts += chunk;
   }
@@ -582,7 +601,7 @@ function mergeGroup(group: ASTInlineNode[], bold: boolean): ASTInlineNode {
     return {
       type: 'text',
       text: texts,
-      style: first.style ? { ...first.style, hasEmphasis: bold } : (bold ? { hasEmphasis: true } : undefined)
+      style: first.style ? create(TextStyleSchema, { ...first.style, hasEmphasis: bold }) : (bold ? create(TextStyleSchema, { hasEmphasis: true }) : undefined)
     };
   }
   return first;
@@ -625,12 +644,8 @@ function serializeInlineChildren(children: ASTInlineNode[]): string {
     const chunk = serializeInline(child);
     if (!chunk) continue;
 
-    if (md.length > 0) {
-      const startsWithPunc = /^[.,!?;:)]/.test(chunk) && !chunk.startsWith('![');
-      const endsWithSkip = /[(\s]/.test(md[md.length - 1]);
-      if (!startsWithPunc && !endsWithSkip) {
-        md += ' ';
-      }
+    if (shouldInsertSpace(md, chunk)) {
+      md += ' ';
     }
     md += chunk;
   }
@@ -743,7 +758,7 @@ export function serializeASTToMarkdown(ast: ASTDocument): string {
   return md.trim();
 }
 
-export function parseProtoToAST(decodedProto: IAnnotatedPageContent): ASTDocument {
+export function parseProtoToAST(decodedProto: AnnotatedPageContent): ASTDocument {
   const root = decodedProto.rootNode;
   if (!root) return { children: [] };
 
@@ -754,7 +769,6 @@ export function parseProtoToAST(decodedProto: IAnnotatedPageContent): ASTDocumen
     imageCounter: { value: 1 },
     insideParagraph: false,
     insideHeading: false,
-    insideAnchor: false,
     insideCodeBlock: false,
     currentUrl: decodedProto.mainFrameData?.url,
   };
@@ -766,7 +780,7 @@ export function parseProtoToAST(decodedProto: IAnnotatedPageContent): ASTDocumen
   };
 }
 
-export function convertToMarkdown(decodedProto: IAnnotatedPageContent): string {
+export function convertToMarkdown(decodedProto: AnnotatedPageContent): string {
   const ast = parseProtoToAST(decodedProto);
   return serializeASTToMarkdown(ast);
 }
