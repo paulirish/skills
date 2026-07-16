@@ -56,7 +56,7 @@ test('Run Turndown cases against CDP getAnnotatedPageContent', async () => {
   const client = await page.context().newCDPSession(page);
   await client.send('Page.enable');
 
-  for (const tc of testCases.slice(0, 10)) {
+  for (const tc of testCases.slice(0, 50)) {
     if (SKIPPED_TESTS.includes(tc.name || '')) {
       console.log(`\n⏭️ Skipped: ${tc.name}`);
       continue;
