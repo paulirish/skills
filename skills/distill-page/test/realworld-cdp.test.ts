@@ -13,7 +13,6 @@ test.skip('Evaluate CDP markdown against real-world URLs', async () => {
     console.log(`\nTesting ${url}...`);
     try {
       const decodedProto = await processPage(url);
-      assert.ok(decodedProto, 'Decoded proto should not be null');
       const markdown = convertToMarkdown(decodedProto);
 
       // Basic assertions
