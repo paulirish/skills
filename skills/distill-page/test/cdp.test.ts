@@ -21,7 +21,7 @@ test('CDP Page.getAnnotatedPageContent on mock-page.html', async () => {
   const snapshotPath = path.resolve(__dirname, 'fixtures/mock-page-distilled.md');
   fs.writeFileSync(snapshotPath, md, 'utf8');
 
-  assert.ok(md.includes('# Mock Page Title'), 'Should prepend title');
+  assert.ok(md.startsWith('Mock Page Title'), 'Should prepend title as standalone line');
   assert.ok(md.includes('**Table: Mock Table Caption**'), 'Should prepend table name/caption');
   assert.ok(md.includes('<aside>'), 'Should wrap aside content in <aside> tag');
   assert.ok(md.includes('<details><summary>Collapsed Content</summary>'), 'Should wrap hidden content in details element');
@@ -62,10 +62,10 @@ test('CDP Page.getAnnotatedPageContent on mock-page.html', async () => {
   );
 
   // Dynamic headings check
-  assert.ok(md.includes('## Dynamic Size XL Heading'), 'XL heading size should map to H2');
-  assert.ok(md.includes('### Dynamic Size L Heading'), 'L heading size should map to H3');
-  assert.ok(md.includes('#### Dynamic Size M Heading'), 'M heading size should map to H4');
-  assert.ok(md.includes('##### Dynamic Size S Heading'), 'S heading size should map to H5');
+  assert.ok(md.includes('# Dynamic Size XL Heading'), 'XL heading size should map to H1');
+  assert.ok(md.includes('## Dynamic Size L Heading'), 'L heading size should map to H2');
+  assert.ok(md.includes('### Dynamic Size M Heading'), 'M heading size should map to H3');
+  assert.ok(md.includes('#### Dynamic Size S Heading'), 'S heading size should map to H4');
 
   // Punctuation spacing check
   assert.ok(md.includes('Punctuation spacing test: Hello, world! This is a test.'), 'Should normalize whitespace before punctuation');

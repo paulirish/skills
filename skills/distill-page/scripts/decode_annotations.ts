@@ -129,10 +129,10 @@ export const AnnotationParser = {
   },
 
   textSizeToHeadingLevel(size: number | undefined): number {
-    if (size === TextSize.XL) return 2;
-    if (size === TextSize.L) return 3;
-    if (size === TextSize.M_DEFAULT) return 4;
-    if (size === TextSize.S || size === TextSize.XS) return 5;
+    if (size === TextSize.XL) return 1;
+    if (size === TextSize.L) return 2;
+    if (size === TextSize.M_DEFAULT) return 3;
+    if (size === TextSize.S || size === TextSize.XS) return 4;
     return 2;
   },
 
@@ -843,7 +843,7 @@ export const MarkdownSerializer = {
   serializeASTToMarkdown(ast: ASTDocument): string {
     let md = '';
     if (ast.title) {
-      md += `# ${ast.title}\n\n`;
+      md += `${ast.title}\n\n`;
     }
 
     const blocksMd = ast.children.map(c => this.serializeBlock(c)).filter(Boolean);

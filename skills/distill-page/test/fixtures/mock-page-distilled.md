@@ -1,10 +1,10 @@
-# Mock Page Title
+Mock Page Title
 
-## Main Page Heading (H1)
+# Main Page Heading (H1)
 
 Some introductory paragraph text here.
 
-### Section 1: Semantic Table
+## Section 1: Semantic Table
 
 **Table: Mock Table Caption**
 
@@ -13,11 +13,11 @@ Some introductory paragraph text here.
 | Value A1 | Value B1 |  |
 | Value A2 | Value B2 |  |
 
-### Section 2: Aside and Paid Content
+## Section 2: Aside and Paid Content
 
 <aside>
 
-### Interesting Aside
+## Interesting Aside
 
 This is content inside an aside tag, which is secondary to the main flow.
 </aside>
@@ -29,7 +29,7 @@ Normal flow text continues here.
 
 Paid content paragraph that should be identified as paid content by annotations.
 
-### Section 3: Hidden / Collapsed Accordions
+## Section 3: Hidden / Collapsed Accordions
 
 Click to reveal more
 
@@ -38,16 +38,16 @@ Click to reveal more
 This is hidden content inside a details tag.
 </details>
 
-### Section 4: Extra Elements for Testing
+## Section 4: Extra Elements for Testing
 
 * Item 1
 * Item 2
   * Nested Item A
   * Nested Item B
 
-Here is a link: [**Link Text**](file:///relative-path) and a [**same-page fragment link**](#section-10).
+Here is a link: [Link Text](file:///relative-path) and a [same-page fragment link](#section-10).
 
-A very strange [**Pi issue**](https://github.com/earendil-works/pi/issues/6278) sent me down a rabbit hole over the last two days.  The short version is that
+A very strange [Pi issue](https://github.com/earendil-works/pi/issues/6278) sent me down a rabbit hole over the last two days.  The short version is that
 newer Claude models sometimes call Pi’s edit tool with extra, invented fields in
 the nested `edits[]` array.  And not Haiku or some small model: Opus 4.8.  The
 edit itself is usually correct but the arguments do not match the schema as
@@ -76,25 +76,25 @@ Second reference image: ![image][image03] Reference Image B
 
 Here is a styled paragraph that should not split into heading tags:
 
-Hi, I'm Kilian. I make [**Polypane**](https://polypane.app/), the browser for responsive web development and design.
+Hi, I'm Kilian. I make [Polypane](https://polypane.app/), the browser for responsive web development and design.
 
-### Section 5: Ad Block (Should be omitted)
+## Section 5: Ad Block (Should be omitted)
 
-### Sponsored Advertisement
+## Sponsored Advertisement
 
 This ad content must be ignored by the distiller.
 
-### Section 6: Dynamic Font Size Headings
+## Section 6: Dynamic Font Size Headings
 
-## Dynamic Size XL Heading
+# Dynamic Size XL Heading
 
-#### Dynamic Size L Heading
+### Dynamic Size L Heading
 
-#### Dynamic Size M Heading
+### Dynamic Size M Heading
 
-##### Dynamic Size S Heading
+#### Dynamic Size S Heading
 
-### Section 7: Inlines spacing & code formatting
+## Section 7: Inlines spacing & code formatting
 
 Punctuation spacing test: Hello, world! This is a test.
 
@@ -108,9 +108,9 @@ Bold code test: **`const b = 456;`**
 
 Variable spacing test: `sk_test_id` and `payment-intent`.
 
-### Section 8: Navigation and Footer (Should be omitted)
+## Section 8: Navigation and Footer (Should be omitted)
 
-### Section 9: Merged Code Block Tab Layout
+## Section 9: Merged Code Block Tab Layout
 
 app/layout.tsx TypeScript TypeScript
 
@@ -121,7 +121,7 @@ const geist = Geist({
 })
 ```
 
-### Section 10: Nested Container Code Blocks
+## Section 10: Nested Container Code Blocks
 
 ```
 const x = 1;
