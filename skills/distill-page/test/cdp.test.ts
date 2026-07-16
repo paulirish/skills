@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import fs from 'node:fs';
 import {fetchDistilledBase64, decodeAnnotatedPageContent, convertToMarkdown} from '../scripts/distill-page.ts';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -16,6 +17,14 @@ test('CDP Page.getAnnotatedPageContent on mock-page.html', async () => {
 
   const decoded = decodeAnnotatedPageContent(content);
   const md = convertToMarkdown(decoded);
+
+  const snapshotPath = path.resolve(__dirname, 'fixtures/mock-page-distilled.md');
+  if (process.env.UPDATE_SNAPSHOT || !fs.existsSync(snapshotPath)) {
+    fs.writeFileSync(snapshotPath, md, 'utf8');
+  }
+  const expectedMd = fs.readFileSync(snapshotPath, 'utf8');
+  assert.strictEqual(md, expectedMd, 'Generated markdown should match mock-page-distilled.md snapshot');
+
   assert.ok(md.includes('# Mock Page Title'), 'Should prepend title');
   assert.ok(md.includes('**Table: Mock Table Caption**'), 'Should prepend table name/caption');
   assert.ok(md.includes('<aside>'), 'Should wrap aside content in <aside> tag');
