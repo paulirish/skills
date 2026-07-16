@@ -59,7 +59,7 @@ test('convertToMarkdown handles HEADING containers correctly', () => {
 
   // We expect a single header with level ### because of TEXT_SIZE_L on one child.
   // And newlines on either side.
-  const expected = '### Is **GetTokens** billed?';
+  const expected = '### Is GetTokens billed?';
   // Using trim() to make it easier to compare without worrying about exact outer newlines for now,
   // but we should ideally check them. Let's check trim() first.
   assert.strictEqual(md.trim(), expected);

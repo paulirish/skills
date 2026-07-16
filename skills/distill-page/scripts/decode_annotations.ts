@@ -59,7 +59,7 @@ function findNodeByRoles(node: AnyNode, roles: AnnotatedRole[]): AnyNode | null 
   return null;
 }
 
-function recursiveToMarkdownInternal(node: AnyNode, state: {imageIndex: number, insideHeading?: boolean, currentUrl?: string | null}): string {
+function recursiveToMarkdownInternal(node: AnyNode, state: {imageIndex: number, insideHeading?: boolean, insideAnchor?: boolean, currentUrl?: string | null}): string {
   let md = '';
   const attrs = node.contentAttributes;
 
@@ -82,7 +82,7 @@ function recursiveToMarkdownInternal(node: AnyNode, state: {imageIndex: number, 
     const isCodeFence = text.includes('```');
     text = text.trim();
     if (text) {
-      if (textData.textStyle?.hasEmphasis && text !== '`') {
+      if (textData.textStyle?.hasEmphasis && text !== '`' && !state.insideHeading && !state.insideAnchor) {
         text = `**${text}**`;
       }
       if (textData.textStyle?.textSize) {
@@ -120,9 +120,12 @@ function recursiveToMarkdownInternal(node: AnyNode, state: {imageIndex: number, 
     }
     let childText = '';
     if (node.childrenNodes) {
+      const oldInsideAnchor = state.insideAnchor;
+      state.insideAnchor = true;
       for (const child of node.childrenNodes) {
         childText += recursiveToMarkdown(child, state);
       }
+      state.insideAnchor = oldInsideAnchor;
     }
     childText = childText.trim();
     if (childText && resolvedUrl) {
@@ -248,7 +251,7 @@ function recursiveToMarkdownInternal(node: AnyNode, state: {imageIndex: number, 
   return md;
 }
 
-function recursiveToMarkdown(node: AnyNode, state: {imageIndex: number, insideHeading?: boolean, currentUrl?: string | null}): string {
+function recursiveToMarkdown(node: AnyNode, state: {imageIndex: number, insideHeading?: boolean, insideAnchor?: boolean, currentUrl?: string | null}): string {
   let md = recursiveToMarkdownInternal(node, state);
 
   const attrs = node.contentAttributes;
@@ -299,8 +302,7 @@ export function convertToMarkdown(decodedProto: IAnnotatedPageContent): string {
     .replace(/\n{3,}/g, '\n\n')
     .replace(/ \n/g, '\n')
     .replace(/ +([.,!?;:)])/g, '$1')
-    .replace(/`[ \t]+/g, '`')
-    .replace(/[ \t]+`/g, '`');
+    .replace(/`[ \t]*([^`\n]*?)[ \t]*`/g, '`$1`');
 
   return (prefix + rawMd).trim();
 }
