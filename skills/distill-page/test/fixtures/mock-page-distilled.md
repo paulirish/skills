@@ -105,3 +105,14 @@ Bold code test: **`const b = 456;`**
 Variable spacing test: `sk`_`test`_`id` and `payment`-`intent`.
 
 ### Section 8: Navigation and Footer (Should be omitted)
+
+### Section 9: Merged Code Block Tab Layout
+
+app/layout.tsx TypeScript TypeScript
+
+```
+import { Geist } from 'next/font/google'
+const geist = Geist({
+  subsets: ['latin'],
+})
+```

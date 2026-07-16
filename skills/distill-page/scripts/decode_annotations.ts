@@ -1,5 +1,5 @@
 import {fromBinary, create} from '@bufbuild/protobuf';
-import {AnnotatedPageContentSchema, AnnotatedRole, ContentAttributeType, TextSize, TableRowType, TextStyleSchema} from './proto/common_quality_data_pb.js';
+import {AnnotatedPageContentSchema, AnnotatedRole, ContentAttributeType, TextSize, TableRowType, TextStyleSchema, ContentNodeSchema} from './proto/common_quality_data_pb.js';
 import type {ContentNode, AnnotatedPageContent, TextInfo, ImageInfo, AnchorData, TableData} from './proto/common_quality_data_pb.js';
 
 const {
@@ -177,24 +177,62 @@ export const AnnotationParser = {
 
     for (const child of nodes) {
       const childAttrs = child.contentAttributes;
-      let isFence = false;
+
       if (childAttrs?.contentData.case === 'textData') {
         const text = childAttrs.contentData.value.textContent || '';
-        isFence = text.includes('```');
-      }
 
-      if (isFence) {
-        state.insideCodeBlock = !state.insideCodeBlock;
-        if (state.insideCodeBlock) {
-          flushInlines();
-          activeCodeBlock = {type: 'codeblock', code: ''};
-        } else {
-          if (activeCodeBlock) {
-            blocks.push(activeCodeBlock);
-            activeCodeBlock = null;
+        if (text.includes('```')) {
+          const parts = text.split('```');
+
+          for (let i = 0; i < parts.length; i++) {
+            const part = parts[i];
+
+            if (i > 0) {
+              state.insideCodeBlock = !state.insideCodeBlock;
+              if (state.insideCodeBlock) {
+                flushInlines();
+                activeCodeBlock = {type: 'codeblock', code: ''};
+              } else {
+                if (activeCodeBlock) {
+                  blocks.push(activeCodeBlock);
+                  activeCodeBlock = null;
+                }
+              }
+            }
+
+            if (part) {
+              if (state.insideCodeBlock && activeCodeBlock) {
+                activeCodeBlock.code += part;
+              } else {
+                const virtualTextNode = create(ContentNodeSchema, {
+                  contentAttributes: {
+                    attributeType: CONTENT_ATTRIBUTE_TEXT,
+                    contentData: {
+                      case: 'textData',
+                      value: {
+                        textContent: part,
+                        textStyle: childAttrs.contentData.value.textStyle,
+                      },
+                    },
+                  },
+                });
+                const nodeState = {...state};
+                const items = this.parseNode(virtualTextNode, nodeState);
+                for (const item of items) {
+                  if (item.type === 'text' || item.type === 'link' || item.type === 'image') {
+                    inlineAccumulator.push(item);
+                  } else if (item.type === 'paragraph') {
+                    inlineAccumulator.push(...item.children);
+                  } else {
+                    flushInlines();
+                    blocks.push(item);
+                  }
+                }
+              }
+            }
           }
+          continue;
         }
-        continue;
       }
 
       if (state.insideCodeBlock && activeCodeBlock) {
@@ -512,6 +550,9 @@ export const AnnotationParser = {
     // 2. Dispatch by structural attribute type
     switch (attrs.attributeType) {
       case CONTENT_ATTRIBUTE_PARAGRAPH:
+        if (this.hasCodeFenceChild(node)) {
+          return this.parseChildren(node.childrenNodes || [], state);
+        }
         return this.parseParagraphNode(node, state);
       case CONTENT_ATTRIBUTE_HEADING:
         return this.parseHeadingNode(node, state);
@@ -685,11 +726,8 @@ export const MarkdownSerializer = {
     }
 
     if (node.type === 'codeblock') {
-      let code = node.code;
-      if (!code.endsWith('\n')) {
-        code += '\n';
-      }
-      return `\`\`\`\n${code}\`\`\``;
+      const code = node.code.replace(/^\n+/, '').replace(/\n+$/, '');
+      return `\`\`\`\n${code}\n\`\`\``;
     }
 
     if (node.type === 'list') {

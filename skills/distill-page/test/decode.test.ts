@@ -557,4 +557,25 @@ test('convertToMarkdown does not insert spaces around underscores or hyphens in 
   assert.strictEqual(md, 'sk_test_id and payment-intent');
 });
 
+test('convertToMarkdown splits single text nodes containing code block fences correctly', () => {
+  const payload: JsonValue = {
+    rootNode: {
+      childrenNodes: [
+        {
+          contentAttributes: {
+            attributeType: CONTENT_ATTRIBUTE_TEXT,
+            textData: {
+              textContent: 'Before code block\n```\nconst x = 1;\nconsole.log(x);\n```\nAfter code block',
+            },
+          },
+        },
+      ],
+    },
+  };
+
+  const md = getMarkdown(payload);
+  const expected = 'Before code block\n\n```\nconst x = 1;\nconsole.log(x);\n```\n\nAfter code block';
+  assert.strictEqual(md, expected);
+});
+
 // TODO: Try to set up a real ad integration test using a live page like https://privacy-sandbox-demos-news.dev/pa-multiple-ad

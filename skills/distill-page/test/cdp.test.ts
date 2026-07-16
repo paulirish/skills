@@ -76,6 +76,18 @@ test('CDP Page.getAnnotatedPageContent on mock-page.html', async () => {
   // Variable spacing check
   assert.ok(md.includes('Variable spacing test: `sk`_`test`_`id` and `payment`-`intent`.'), 'Should prevent spaces around underscores and hyphens in code variables');
 
+  // Merged code block tab layout check (Bug B & C)
+  assert.ok(md.includes('app/layout.tsx TypeScript TypeScript'), 'Should extract text before fence as normal block');
+  const expectedMergedCode = [
+    '```',
+    "import { Geist } from 'next/font/google'",
+    'const geist = Geist({',
+    "  subsets: ['latin'],",
+    '})',
+    '```',
+  ].join('\n');
+  assert.ok(md.includes(expectedMergedCode), 'Should parse and format split code block correctly');
+
   // Nav and footer filtering check
   assert.ok(!md.includes('About Us'), 'Should skip nav block content');
   assert.ok(!md.includes('Mock Company. All rights reserved.'), 'Should skip footer block content');
