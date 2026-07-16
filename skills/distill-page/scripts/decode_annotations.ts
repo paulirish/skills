@@ -341,7 +341,7 @@ function parseNode(node: AnyNode, state: ParserState): (ASTBlockNode | ASTInline
       return [];
     }
 
-    const bold = !!(textData.textStyle?.hasEmphasis && text !== '`' && !state.insideHeading);
+    const bold = !!(textData.textStyle?.hasEmphasis && !state.insideHeading);
 
     const size = textData.textStyle?.textSize;
     if ((size === TextSize.XL || size === TextSize.L) && !state.insideHeading && !state.insideParagraph) {
@@ -557,10 +557,71 @@ function serializeInline(node: ASTInlineNode): string {
   return '';
 }
 
+function mergeGroup(group: ASTInlineNode[], bold: boolean): ASTInlineNode {
+  if (group.length === 1) return group[0];
+  
+  let texts = '';
+  for (let i = 0; i < group.length; i++) {
+    const node = group[i];
+    if (node.type !== 'text') continue;
+    const chunk = node.text;
+    if (!chunk) continue;
+    
+    if (texts.length > 0) {
+      const startsWithPunc = /^[.,!?;:)]/.test(chunk) && !chunk.startsWith('![');
+      const endsWithSkip = /[(\s]/.test(texts[texts.length - 1]);
+      if (!startsWithPunc && !endsWithSkip) {
+        texts += ' ';
+      }
+    }
+    texts += chunk;
+  }
+
+  const first = group[0];
+  if (first.type === 'text') {
+    return {
+      type: 'text',
+      text: texts,
+      style: first.style ? { ...first.style, hasEmphasis: bold } : (bold ? { hasEmphasis: true } : undefined)
+    };
+  }
+  return first;
+}
+
 function serializeInlineChildren(children: ASTInlineNode[]): string {
+  const grouped: ASTInlineNode[] = [];
+  let currentGroup: ASTInlineNode[] = [];
+  let currentBold: boolean | undefined = undefined;
+
+  for (const child of children) {
+    if (child.type === 'text') {
+      const isBold = !!child.style?.hasEmphasis;
+      if (currentBold === undefined) {
+        currentBold = isBold;
+        currentGroup.push(child);
+      } else if (currentBold === isBold) {
+        currentGroup.push(child);
+      } else {
+        grouped.push(mergeGroup(currentGroup, currentBold));
+        currentGroup = [child];
+        currentBold = isBold;
+      }
+    } else {
+      if (currentGroup.length > 0) {
+        grouped.push(mergeGroup(currentGroup, !!currentBold));
+        currentGroup = [];
+        currentBold = undefined;
+      }
+      grouped.push(child);
+    }
+  }
+  if (currentGroup.length > 0) {
+    grouped.push(mergeGroup(currentGroup, !!currentBold));
+  }
+
   let md = '';
-  for (let i = 0; i < children.length; i++) {
-    const child = children[i];
+  for (let i = 0; i < grouped.length; i++) {
+    const child = grouped[i];
     const chunk = serializeInline(child);
     if (!chunk) continue;
 

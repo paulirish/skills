@@ -209,6 +209,6 @@ test('convertToMarkdown handles bold backticks correctly', () => {
   const decoded = decodeAnnotatedPageContent(base64);
   const md = convertToMarkdown(decoded);
 
-  const expected = '`**box-sizing**`';
+  const expected = '**`box-sizing`**';
   assert.strictEqual(md.trim(), expected);
 });

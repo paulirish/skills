@@ -100,6 +100,6 @@ Punctuation spacing test: Hello, world! This is a test.
 
 Code spacing test: `const a = 123;`
 
-Bold code test: `**const b = 456;**`
+Bold code test: **`const b = 456;`**
 
 ### Section 8: Navigation and Footer (Should be omitted)
