@@ -77,7 +77,7 @@ export interface ASTCodeBlock {
 
 export interface ASTListItem {
   type: 'list-item';
-  children: ASTInlineNode[];
+  children: (ASTInlineNode | ASTBlockNode)[];
 }
 
 export interface ASTList {
@@ -117,7 +117,7 @@ export interface ASTDocument {
 }
 
 interface ParserState {
-  imageIndex: number;
+  imageCounter: { value: number };
   insideParagraph: boolean;
   insideHeading: boolean;
   insideAnchor: boolean;
@@ -363,7 +363,7 @@ function parseNode(node: AnyNode, state: ParserState): (ASTBlockNode | ASTInline
     let referenceId = undefined;
     let isReference = false;
     if (!imageData.url) {
-      referenceId = `image${String(state.imageIndex++).padStart(2, '0')}`;
+      referenceId = `image${String(state.imageCounter.value++).padStart(2, '0')}`;
       isReference = true;
     }
     const img: ASTImage = {
@@ -441,12 +441,12 @@ function parseNode(node: AnyNode, state: ParserState): (ASTBlockNode | ASTInline
     const items: ASTListItem[] = [];
     if (node.childrenNodes) {
       for (const itemNode of node.childrenNodes) {
-        const childState = { ...state, insideParagraph: true };
-        const inlineChildren = parseInlineChildren(itemNode.childrenNodes || [itemNode], childState);
-        if (inlineChildren.length > 0) {
+        const childState = { ...state, insideParagraph: false };
+        const itemChildren = parseChildren(itemNode.childrenNodes || [itemNode], childState);
+        if (itemChildren.length > 0) {
           items.push({
             type: 'list-item',
-            children: inlineChildren,
+            children: itemChildren,
           });
         }
       }
@@ -582,9 +582,23 @@ function serializeBlock(node: ASTBlockNode): string {
     let md = '';
     let index = 1;
     for (const item of node.items) {
-      const content = serializeInlineChildren(item.children);
+      const content = item.children.map(child => {
+        if (child.type === 'paragraph') {
+          return serializeInlineChildren(child.children);
+        }
+        if (child.type === 'text' || child.type === 'link') {
+          return serializeInline(child);
+        }
+        return serializeBlock(child as ASTBlockNode);
+      }).join('\n').trim();
+
       const prefix = node.ordered ? `${index}. ` : '* ';
-      md += `${prefix}${content}\n`;
+      const indentedContent = content.split('\n').map((line, i) => {
+        if (i === 0) return line;
+        return '  ' + line;
+      }).join('\n');
+
+      md += `${prefix}${indentedContent}\n`;
       index++;
     }
     return md;
@@ -659,7 +673,7 @@ export function parseProtoToAST(decodedProto: IAnnotatedPageContent): ASTDocumen
     findNodeByRoles(root, [AnnotatedRole.ARTICLE, AnnotatedRole.MAIN]) || root;
 
   const state: ParserState = {
-    imageIndex: 1,
+    imageCounter: { value: 1 },
     insideParagraph: false,
     insideHeading: false,
     insideAnchor: false,
