@@ -651,14 +651,14 @@ export const MarkdownSerializer = {
     return first;
   },
 
-  serializeInlineChildren(children: ASTInlineNode[]): string {
+  serializeInlineChildren(children: ASTInlineNode[], insideLink = false): string {
     const grouped: ASTInlineNode[] = [];
     let currentGroup: ASTInlineNode[] = [];
     let currentBold: boolean | undefined = undefined;
 
     for (const child of children) {
       if (child.type === 'text') {
-        const isBold = !!child.style?.hasEmphasis;
+        const isBold = !!(child.style?.hasEmphasis && !insideLink);
         if (currentBold === undefined) {
           currentBold = isBold;
           currentGroup.push(child);
@@ -685,7 +685,7 @@ export const MarkdownSerializer = {
     let md = '';
     for (let i = 0; i < grouped.length; i++) {
       const child = grouped[i];
-      const chunk = this.serializeInline(child);
+      const chunk = this.serializeInline(child, insideLink);
       if (!chunk) continue;
 
       if (this.shouldInsertSpace(md, chunk)) {
@@ -704,16 +704,20 @@ export const MarkdownSerializer = {
     return `![${caption}](${node.data.url || ''})`;
   },
 
-  serializeInline(node: ASTInlineNode): string {
+  serializeInline(node: ASTInlineNode, insideLink = false): string {
     if (node.type === 'text') {
       let text = node.text;
-      if (node.style?.hasEmphasis) {
+      // Policy decision: Suppress emphasis wrapping (bold) inside link tags.
+      // The Chromium layout annotator model flags all link text runs as having
+      // emphasis due to visual color/styling differences. Bolding every link
+      // creates significant visual clutter.
+      if (node.style?.hasEmphasis && !insideLink) {
         text = `**${text}**`;
       }
       return text;
     }
     if (node.type === 'link') {
-      const linkText = this.serializeInlineChildren(node.children);
+      const linkText = this.serializeInlineChildren(node.children, true);
       if (linkText && node.data.url) {
         return `[${linkText}](${node.data.url})`;
       }
