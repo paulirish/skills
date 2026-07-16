@@ -552,8 +552,23 @@ export const AnnotationParser = {
 export const MarkdownSerializer = {
   shouldInsertSpace(prevText: string, nextChunk: string): boolean {
     if (!prevText) return false;
+    const lastChar = prevText[prevText.length - 1];
+    const firstChar = nextChunk[0];
+
+    // Never insert spaces around underscores, hyphens, or dots (common in code variables/domains)
+    if (
+      lastChar === '_' ||
+      lastChar === '-' ||
+      lastChar === '.' ||
+      firstChar === '_' ||
+      firstChar === '-' ||
+      firstChar === '.'
+    ) {
+      return false;
+    }
+
     const startsWithPunc = /^[.,!?;:)]/.test(nextChunk) && !nextChunk.startsWith('![');
-    const endsWithSkip = /[(\s]/.test(prevText[prevText.length - 1]);
+    const endsWithSkip = /[(\s]/.test(lastChar);
     return !startsWithPunc && !endsWithSkip;
   },
 

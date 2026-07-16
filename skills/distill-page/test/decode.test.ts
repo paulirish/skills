@@ -509,4 +509,52 @@ test('convertToMarkdown strips heading link wrapping to plain text', () => {
   assert.strictEqual(md, '#### Linked Title');
 });
 
+test('convertToMarkdown does not insert spaces around underscores or hyphens in inline code variables', () => {
+  const payload: JsonValue = {
+    rootNode: {
+      childrenNodes: [
+        {
+          contentAttributes: {
+            attributeType: CONTENT_ATTRIBUTE_TEXT,
+            textData: {textContent: 'sk'},
+          },
+        },
+        {
+          contentAttributes: {
+            attributeType: CONTENT_ATTRIBUTE_TEXT,
+            textData: {textContent: '_'},
+          },
+        },
+        {
+          contentAttributes: {
+            attributeType: CONTENT_ATTRIBUTE_TEXT,
+            textData: {textContent: 'test'},
+          },
+        },
+        {
+          contentAttributes: {
+            attributeType: CONTENT_ATTRIBUTE_TEXT,
+            textData: {textContent: '_'},
+          },
+        },
+        {
+          contentAttributes: {
+            attributeType: CONTENT_ATTRIBUTE_TEXT,
+            textData: {textContent: 'id'},
+          },
+        },
+        {
+          contentAttributes: {
+            attributeType: CONTENT_ATTRIBUTE_TEXT,
+            textData: {textContent: ' and payment-intent'},
+          },
+        },
+      ],
+    },
+  };
+
+  const md = getMarkdown(payload);
+  assert.strictEqual(md, 'sk_test_id and payment-intent');
+});
+
 // TODO: Try to set up a real ad integration test using a live page like https://privacy-sandbox-demos-news.dev/pa-multiple-ad
