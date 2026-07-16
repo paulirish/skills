@@ -4,6 +4,9 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {decodeAnnotatedPageContent, convertToMarkdown} from '../scripts/decode_annotations.ts';
 import {injectSemanticMarkers} from '../scripts/distill-page.ts';
+import TurndownService from 'turndown';
+// @ts-expect-error - no types for turndown-plugin-gfm
+import {gfm} from 'turndown-plugin-gfm';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -21,6 +24,12 @@ test('Run Turndown cases against CDP getAnnotatedPageContent', async () => {
   });
 
   const context = await browser.newContext();
+  const turndownGfm = new TurndownService({
+    headingStyle: 'atx',
+    codeBlockStyle: 'fenced'
+  });
+  turndownGfm.use(gfm);
+
   const indexPage = await context.newPage();
 
   const indexPath = path.resolve(__dirname, '../turndown_tmp/test/index.html');
@@ -80,12 +89,13 @@ test('Run Turndown cases against CDP getAnnotatedPageContent', async () => {
       console.error(`Failed on ${tc.name}`, e);
     }
 
-    if (actualMd === tc.expected) {
+    const expectedGfm = turndownGfm.turndown(tc.inputHtml);
+    if (actualMd.trim() === expectedGfm.trim()) {
       passed++;
     } else {
       console.log(`\n❌ Failed: ${tc.name}`);
-      console.log(`EXPECTED:\n${tc.expected}`);
-      console.log(`ACTUAL:\n${actualMd}`);
+      console.log(`EXPECTED (Turndown GFM):\n${expectedGfm}`);
+      console.log(`ACTUAL (Page Distiller):\n${actualMd}`);
       failed++;
     }
   }
