@@ -73,6 +73,9 @@ test('CDP Page.getAnnotatedPageContent on mock-page.html', async () => {
   assert.ok(md.includes('Code spacing test: `const a = 123;`'), 'Should remove spaces inside code backticks');
   assert.ok(md.includes('Bold code test: **`const b = 456;`**'), 'Should wrap bold code block correctly');
 
+  // Variable spacing check
+  assert.ok(md.includes('Variable spacing test: `sk`_`test`_`id` and `payment`-`intent`.'), 'Should prevent spaces around underscores and hyphens in code variables');
+
   // Nav and footer filtering check
   assert.ok(!md.includes('About Us'), 'Should skip nav block content');
   assert.ok(!md.includes('Mock Company. All rights reserved.'), 'Should skip footer block content');
