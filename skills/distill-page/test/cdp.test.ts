@@ -73,6 +73,15 @@ test('CDP Page.getAnnotatedPageContent on mock-page.html', async () => {
   assert.ok(md.includes('Code spacing test: `const a = 123;`'), 'Should remove spaces inside code backticks');
   assert.ok(md.includes('Bold code test: **`const b = 456;`**'), 'Should wrap bold code block correctly');
 
+  // Table column padding check
+  const expectedTable = [
+    '| **Header A** | **Header B** | **Header C** |',
+    '|---|---|---|',
+    '| Value A1 | Value B1 |  |',
+    '| Value A2 | Value B2 |  |',
+  ].join('\n');
+  assert.ok(md.includes(expectedTable), 'Should format aligned and padded table rows');
+
   // Variable spacing check
   assert.ok(md.includes('Variable spacing test: `sk`_`test`_`id` and `payment`-`intent`.'), 'Should prevent spaces around underscores and hyphens in code variables');
 

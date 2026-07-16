@@ -778,17 +778,33 @@ export const MarkdownSerializer = {
       if (node.data?.tableName) {
         md += `**Table: ${node.data.tableName}**\n\n`;
       }
+
+      // Determine maximum column count across all rows
+      let maxCols = 0;
+      for (const row of node.rows) {
+        if (row.cells.length > maxCols) {
+          maxCols = row.cells.length;
+        }
+      }
+
+      if (maxCols === 0) return '';
+
       for (let r = 0; r < node.rows.length; r++) {
         const row = node.rows[r];
         let rowText = '|';
-        let sepText = '|';
-        for (const cell of row.cells) {
-          const cellText = this.serializeInlineChildren(cell.children);
+
+        for (let c = 0; c < maxCols; c++) {
+          const cell = row.cells[c];
+          const cellText = cell ? this.serializeInlineChildren(cell.children) : '';
           rowText += ` ${cellText} |`;
-          sepText += '---|';
         }
         md += rowText + '\n';
+
         if (r === 0) {
+          let sepText = '|';
+          for (let c = 0; c < maxCols; c++) {
+            sepText += '---|';
+          }
           md += sepText + '\n';
         }
       }

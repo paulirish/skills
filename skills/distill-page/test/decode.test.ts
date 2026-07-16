@@ -647,4 +647,94 @@ test('convertToMarkdown extracts code content nested inside container elements i
   assert.strictEqual(md, '```\nconst x = 1;\n```');
 });
 
+test('convertToMarkdown pads table cells to max column count across all rows', () => {
+  const payload: JsonValue = {
+    rootNode: {
+      childrenNodes: [
+        {
+          contentAttributes: {
+            attributeType: ContentAttributeType.CONTENT_ATTRIBUTE_TABLE,
+          },
+          childrenNodes: [
+            {
+              contentAttributes: {
+                attributeType: ContentAttributeType.CONTENT_ATTRIBUTE_TABLE_ROW,
+                tableRowData: {type: TableRowType.HEADER},
+              },
+              childrenNodes: [
+                {
+                  childrenNodes: [
+                    {
+                      contentAttributes: {
+                        attributeType: CONTENT_ATTRIBUTE_TEXT,
+                        textData: {textContent: 'H1'},
+                      },
+                    },
+                  ],
+                },
+                {
+                  childrenNodes: [
+                    {
+                      contentAttributes: {
+                        attributeType: CONTENT_ATTRIBUTE_TEXT,
+                        textData: {textContent: 'H2'},
+                      },
+                    },
+                  ],
+                },
+                {
+                  childrenNodes: [
+                    {
+                      contentAttributes: {
+                        attributeType: CONTENT_ATTRIBUTE_TEXT,
+                        textData: {textContent: 'H3'},
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              contentAttributes: {
+                attributeType: ContentAttributeType.CONTENT_ATTRIBUTE_TABLE_ROW,
+                tableRowData: {type: TableRowType.BODY},
+              },
+              childrenNodes: [
+                {
+                  childrenNodes: [
+                    {
+                      contentAttributes: {
+                        attributeType: CONTENT_ATTRIBUTE_TEXT,
+                        textData: {textContent: 'B1'},
+                      },
+                    },
+                  ],
+                },
+                {
+                  childrenNodes: [
+                    {
+                      contentAttributes: {
+                        attributeType: CONTENT_ATTRIBUTE_TEXT,
+                        textData: {textContent: 'B2'},
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  };
+
+  const md = getMarkdown(payload);
+  const expected = [
+    '| H1 | H2 | H3 |',
+    '|---|---|---|',
+    '| B1 | B2 |  |',
+  ].join('\n');
+  assert.strictEqual(md, expected);
+});
+
 // TODO: Try to set up a real ad integration test using a live page like https://privacy-sandbox-demos-news.dev/pa-multiple-ad

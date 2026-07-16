@@ -8,10 +8,10 @@ Some introductory paragraph text here.
 
 **Table: Mock Table Caption**
 
-| **Header A** | **Header B** |
-|---|---|
-| Value A1 | Value B1 |
-| Value A2 | Value B2 |
+| **Header A** | **Header B** | **Header C** |
+|---|---|---|
+| Value A1 | Value B1 |  |
+| Value A2 | Value B2 |  |
 
 ### Section 2: Aside and Paid Content
 
