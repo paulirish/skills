@@ -22,7 +22,7 @@ test('CDP Page.getAnnotatedPageContent on mock-page.html', async () => {
   assert.ok(md.includes('<details><summary>Collapsed Content</summary>'), 'Should wrap hidden content in details element');
 
   // New assertions
-  assert.ok(md.includes('* Item 1\n* Item 2'), 'Should format unordered list');
+  assert.ok(md.includes('* Item 1\n* Item 2\n  * Nested Item A\n  * Nested Item B'), 'Should format unordered list with nested items');
   assert.ok(md.includes('[**Link Text**](file:///relative-path)'), 'Should format link with resolved path');
   assert.ok(md.includes('nested `edits[]` array.'), 'Should preserve inline spacing inside paragraph and keep it inline');
   const expectedCodeBlock = [
@@ -39,7 +39,9 @@ test('CDP Page.getAnnotatedPageContent on mock-page.html', async () => {
     '```'
   ].join('\n');
   assert.ok(md.includes(expectedCodeBlock), 'Should format highlighted pre block as clean raw code block');
-  assert.ok(md.includes('![With URL][image01]'), 'Should format image with reference');
+  assert.ok(md.includes('![With URL][image01]'), 'Should format first image as reference image01');
+  assert.ok(md.includes('![image][image02]'), 'Should format second image as reference image02');
+  assert.ok(md.includes('![image][image03]'), 'Should format third image as reference image03');
   assert.ok(
     md.includes("Hi, I'm Kilian. I make [**Polypane**](https://polypane.app/), the browser for responsive web development and design."),
     'Should not split styled paragraph into heading lines'
