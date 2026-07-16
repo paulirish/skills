@@ -21,7 +21,8 @@ const {
   CONTENT_ATTRIBUTE_TABLE,
   CONTENT_ATTRIBUTE_TABLE_ROW,
   CONTENT_ATTRIBUTE_HEADING,
-  CONTENT_ATTRIBUTE_CONTAINER
+  CONTENT_ATTRIBUTE_CONTAINER,
+  CONTENT_ATTRIBUTE_PARAGRAPH
 } = ContentAttributeType;
 
 type AnyNode = ContentNode;
@@ -59,7 +60,15 @@ function findNodeByRoles(node: AnyNode, roles: AnnotatedRole[]): AnyNode | null 
   return null;
 }
 
-function recursiveToMarkdownInternal(node: AnyNode, state: {imageIndex: number, insideHeading?: boolean, insideAnchor?: boolean, currentUrl?: string | null}): string {
+function recursiveToMarkdownInternal(node: AnyNode, state: {
+  imageIndex: number,
+  insideHeading?: boolean,
+  insideAnchor?: boolean,
+  insideParagraph?: boolean,
+  insideCodeBlock?: boolean,
+  lastChar?: string,
+  currentUrl?: string | null
+}): string {
   let md = '';
   const attrs = node.contentAttributes;
 
@@ -80,9 +89,14 @@ function recursiveToMarkdownInternal(node: AnyNode, state: {imageIndex: number, 
     const textData = attrs.contentData.value;
     let text = textData.textContent || '';
     const isCodeFence = text.includes('```');
-    text = text.trim();
+    if (isCodeFence) {
+      state.insideCodeBlock = !state.insideCodeBlock;
+    }
+    if (!state.insideCodeBlock && !isCodeFence) {
+      text = text.trim();
+    }
     if (text) {
-      if (textData.textStyle?.hasEmphasis && text !== '`' && !state.insideHeading && !state.insideAnchor) {
+      if (textData.textStyle?.hasEmphasis && text !== '`' && !state.insideHeading && !state.insideCodeBlock) {
         text = `**${text}**`;
       }
       if (textData.textStyle?.textSize) {
@@ -95,10 +109,18 @@ function recursiveToMarkdownInternal(node: AnyNode, state: {imageIndex: number, 
         }
       }
       if (isCodeFence) {
-        text = `\n${text}\n`;
+        if (!text.startsWith('\n')) {
+          text = `\n${text}`;
+        }
+        if (!text.endsWith('\n')) {
+          text = `${text}\n`;
+        }
+        if (text.startsWith('\n') && state.lastChar === '\n') {
+          text = text.substring(1);
+        }
       }
       md += text;
-      if (!text.endsWith('\n')) {
+      if (!text.endsWith('\n') && !state.insideCodeBlock) {
         md += ' ';
       }
     }
@@ -120,12 +142,9 @@ function recursiveToMarkdownInternal(node: AnyNode, state: {imageIndex: number, 
     }
     let childText = '';
     if (node.childrenNodes) {
-      const oldInsideAnchor = state.insideAnchor;
-      state.insideAnchor = true;
       for (const child of node.childrenNodes) {
         childText += recursiveToMarkdown(child, state);
       }
-      state.insideAnchor = oldInsideAnchor;
     }
     childText = childText.trim();
     if (childText && resolvedUrl) {
@@ -226,8 +245,18 @@ function recursiveToMarkdownInternal(node: AnyNode, state: {imageIndex: number, 
     }
     return '';
 
+  } else if (attrs.attributeType === CONTENT_ATTRIBUTE_PARAGRAPH) {
+    let paraMd = '';
+    if (node.childrenNodes) {
+      const oldInsideParagraph = state.insideParagraph;
+      state.insideParagraph = true;
+      for (const child of node.childrenNodes) {
+        paraMd += recursiveToMarkdown(child, state);
+      }
+      state.insideParagraph = oldInsideParagraph;
+    }
+    return `\n\n${paraMd.trim()}\n\n`;
   }
-
   // Policy decision: We skip rendering navigation (NAV) and footer (FOOTER) elements
   // because they contain boilerplate links. However, we keep search elements (ANNOTATED_ROLE_SEARCH)
   // because search input fields or search-related context might be useful for understanding page utility.
@@ -244,14 +273,22 @@ function recursiveToMarkdownInternal(node: AnyNode, state: {imageIndex: number, 
     }
   }
 
-  if (attrs.attributeType === CONTENT_ATTRIBUTE_CONTAINER) {
+  if (attrs.attributeType === CONTENT_ATTRIBUTE_CONTAINER && !state.insideParagraph && !state.insideCodeBlock) {
     md += '\n\n';
   }
 
   return md;
 }
 
-function recursiveToMarkdown(node: AnyNode, state: {imageIndex: number, insideHeading?: boolean, insideAnchor?: boolean, currentUrl?: string | null}): string {
+function recursiveToMarkdown(node: AnyNode, state: {
+  imageIndex: number,
+  insideHeading?: boolean,
+  insideAnchor?: boolean,
+  insideParagraph?: boolean,
+  insideCodeBlock?: boolean,
+  lastChar?: string,
+  currentUrl?: string | null
+}): string {
   let md = recursiveToMarkdownInternal(node, state);
 
   const attrs = node.contentAttributes;
@@ -277,6 +314,10 @@ function recursiveToMarkdown(node: AnyNode, state: {imageIndex: number, insideHe
         md = trimmed;
       }
     }
+  }
+
+  if (md) {
+    state.lastChar = md[md.length - 1];
   }
 
   return md;

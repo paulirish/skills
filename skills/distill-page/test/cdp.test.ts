@@ -23,9 +23,22 @@ test('CDP Page.getAnnotatedPageContent on mock-page.html', async () => {
 
   // New assertions
   assert.ok(md.includes('* Item 1\n* Item 2'), 'Should format unordered list');
-  assert.ok(md.includes('[Link Text](file:///relative-path)'), 'Should format link with resolved path');
-  assert.ok(md.includes('`const x = 1;`'), 'Should format inline code');
-  assert.ok(md.includes('```\nfunction test() {}\n```'), 'Should format code block');
+  assert.ok(md.includes('[**Link Text**](file:///relative-path)'), 'Should format link with resolved path');
+  assert.ok(md.includes('nested `edits[]` array.'), 'Should preserve inline spacing inside paragraph and keep it inline');
+  const expectedCodeBlock = [
+    '```',
+    '{',
+    '  "path": "some/file.py",',
+    '  "edits": [',
+    '    {',
+    '      "oldText": "text to replace",',
+    '      "newText": "replacement text"',
+    '    }',
+    '  ]',
+    '}',
+    '```'
+  ].join('\n');
+  assert.ok(md.includes(expectedCodeBlock), 'Should format highlighted pre block as clean raw code block');
   assert.ok(md.includes('![With URL][image01]'), 'Should format image with reference');
 });
 
