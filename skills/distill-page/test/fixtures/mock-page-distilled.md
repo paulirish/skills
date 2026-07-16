@@ -102,7 +102,7 @@ Code spacing test: `const a = 123;`
 
 Bold code test: **`const b = 456;`**
 
-Variable spacing test: `sk`_`test`_`id` and `payment`-`intent`.
+Variable spacing test: `sk_test_id` and `payment-intent`.
 
 ### Section 8: Navigation and Footer (Should be omitted)
 

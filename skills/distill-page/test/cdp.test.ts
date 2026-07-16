@@ -83,7 +83,7 @@ test('CDP Page.getAnnotatedPageContent on mock-page.html', async () => {
   assert.ok(md.includes(expectedTable), 'Should format aligned and padded table rows');
 
   // Variable spacing check
-  assert.ok(md.includes('Variable spacing test: `sk`_`test`_`id` and `payment`-`intent`.'), 'Should prevent spaces around underscores and hyphens in code variables');
+  assert.ok(md.includes('Variable spacing test: `sk_test_id` and `payment-intent`.'), 'Should prevent spaces around underscores and hyphens in code variables');
 
   // Merged code block tab layout check (Bug B & C)
   assert.ok(md.includes('app/layout.tsx TypeScript TypeScript'), 'Should extract text before fence as normal block');
