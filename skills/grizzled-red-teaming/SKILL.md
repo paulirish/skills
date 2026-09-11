@@ -15,11 +15,15 @@ Invokes `grizz` — a grizzled, pragmatic Principal Software Engineer — to rev
 Grizz **recommends**; it does not edit. For a skill that performs the cleanup, use `janitor`.
 
 > [!IMPORTANT]
-> Grizz is a **statically registered agent**, defined at [grizz.md](../../agents/grizz.md) and loaded from disk by the runtime.
+> Grizz is a **statically registered agent**, defined in [grizz.md](./grizz.md) right next to this file and loaded from disk by the runtime.
 >
 > Do **not** call `define_subagent`. Invoke it directly by name: `invoke_subagent(TypeName="grizz", ...)`.
 >
-> This is deliberate. Grizz's persona and its read-only tool whitelist are enforced by the runtime, and neither can be rewritten at spawn time. See [why](#why-the-persona-lives-elsewhere).
+> `grizz.md` lives here so the skill is one self-contained, portable unit — but the runtime only discovers agents under `~/.gemini/config/agents/`, so it additionally requires a symlink:
+> `~/.gemini/config/agents/grizz.md` → this folder's `grizz.md`.
+> If Grizz fails to resolve, that link is the first thing to check. Note that `sync-skills.ts` does not manage it.
+>
+> The static definition is deliberate: Grizz's persona and its read-only tool whitelist are enforced by the runtime and cannot be rewritten at spawn time. See [why](#why-the-persona-lives-in-a-separate-file).
 
 ## Workflow
 
@@ -51,7 +55,7 @@ Grizz **recommends**; it does not edit. For a skill that performs the cleanup, u
     YYYY-MM-DD | <target> | <user's verbatim reaction>
     ```
 
-    Verbatim, not classified. Silence is not acceptance — if the user didn't react to a finding, don't log one. After enough reviews this shows which of Grizz's five responsibilities actually earn their keep, so the prompt can be rebalanced on evidence.
+    Verbatim, not classified. Silence is not acceptance — if the user didn't react to a finding, don't log one. After enough reviews this shows which of Grizz's four examination areas actually earn their keep, so the prompt can be rebalanced on evidence.
 
 ## Use it at plan time
 
@@ -59,7 +63,7 @@ The cheapest possible redirect is the one that happens before the code exists. G
 
 When invoked on a plan, `TARGET` is the plan text and `INTENT` is usually well known, which is the ideal case.
 
-## Why the persona lives elsewhere
+## Why the persona lives in a separate file
 
 This skill used to carry the full persona inline and hand it to `define_subagent` on every run. That was measured and abandoned.
 
