@@ -72,7 +72,7 @@ test('Run Turndown cases against CDP getAnnotatedPageContent', async (t) => {
 
   const indexPage = await context.newPage();
 
-  const indexPath = path.resolve(__dirname, '../turndown_tmp/test/index.html');
+  const indexPath = path.resolve(__dirname, '../../../submodules/turndown/test/index.html');
   await indexPage.goto('file://' + indexPath);
 
   const testCases = await indexPage.evaluate(() => {

@@ -1,7 +1,7 @@
 {
-  "name": "@paulirish/agents",
+  "name": "@paulirish/agent-skills",
   "version": "0.1.0",
-  "description": "A monorepo for Paul Irish's Gemini skills and CLI agents.",
+  "description": "A collection of agent skills and CLIs by Paul Irish.",
   "type": "module",
   "private": true,
   "bin": {

@@ -19,6 +19,6 @@
   ],
   "exclude": [
     "skills/distill-page/scripts/proto/common_quality_data_pbjs.js",
-    "skills/distill-page/turndown_tmp/**/*"
+    "submodules/**/*"
   ]
 }

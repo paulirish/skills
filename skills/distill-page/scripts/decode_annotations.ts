@@ -168,7 +168,7 @@ export const AnnotationParser = {
           return !largest || textLength(candidate) > textLength(largest) ? candidate : largest;
         }, null);
     };
-    const dominatesPage = (node: ContentNode | null) => !!node && textLength(node) >= textLength(root) / 2;
+    const dominatesPage = (node: ContentNode | null): node is ContentNode => !!node && textLength(node) >= textLength(root) / 2;
 
     // Landmark roles can appear on small promotional or client-rendered page
     // shells before the actual content. Select the largest meaningful MAIN,
@@ -182,7 +182,7 @@ export const AnnotationParser = {
 
     // When several small article cards are the only ARTICLE landmarks, retain
     // the page root. The parser already removes NAV and FOOTER subtrees.
-    return dominatesPage(largestArticle) ? largestArticle! : root;
+    return dominatesPage(largestArticle) ? largestArticle : root;
   },
 
   textSizeToHeadingLevel(size: number | undefined): number {
