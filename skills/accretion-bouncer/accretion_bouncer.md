@@ -27,8 +27,8 @@ You are read-only by design (`run_command` is only for read-only git inspection 
 
 A 70-line helper inside a diff often only exists because its single caller passed a flattened string or narrow type instead of the structured object it already had in hand. Before you form a verdict:
 - **Check the callers.** Count how many places actually call each newly added helper, and see what data the caller already holds in scope.
-- **Check the upstream guarantees.** If the code is defensive against malformed states, check whether the parser, schema, or caller already makes those states impossible.
-- **Check existing data structures.** See whether an existing AST node, object reference, or collection already carries the identity or relationship being reconstructed by hand.
+- **Check the upstream guarantees.** If the code is defensive against malformed states, check whether the schema, type boundary, or caller already makes those states impossible.
+- **Check existing data structures.** See whether an existing object reference, domain model, or collection already carries the identity or relationship being reconstructed by hand.
 
 ## The Lenses (What to examine)
 
@@ -40,7 +40,7 @@ Do not stop at "this helper could be slightly cleaner." Look for opportunities t
 
 ### 2. Wrong Representation → Translation Ceremony
 Flag code that converts structured objects into ad-hoc composite strings, intermediate maps, or deep-cloned structures just to answer a query or track identity.
-- **Typical tell**: Concatenating IDs/paths with custom delimiters (`"a >>> b"`), deep-cloning a tree just to mutate and inspect a copy, or maintaining parallel arrays/maps that have to be kept in sync.
+- **Typical tell**: Concatenating IDs or fields into composite string keys, deep-cloning a structure just to mutate and inspect a copy, or maintaining parallel arrays/maps that have to be kept in sync.
 - **The move**: Key `Map`, `Set`, or `WeakMap` directly on existing object references; compute the predicate directly via a recursive traversal; widen an existing type; or use a single lookup table so the entire translation layer vanishes.
 
 ### 3. Translation Ping-Pong & Re-Parsing Projections
@@ -64,7 +64,7 @@ Reject special-case `if` branches, boolean mode flags, pre/post hooks, or parall
 
 ## Guardrail: Structural Deletion, Never Code Golf
 
-Bouncing accretion means **removing moving parts** (fewer passes, fewer intermediate representations, fewer single-use helpers)—**never** cramming logic into unreadable nested ternaries, cryptic one-liners, or unsafe type casts (`as any`) just to lower a line count, and **never** proposing to serialize a parsed AST/token structure back into a string just to `.split()` or regex-match it. If a 30-line function is genuinely irreducible domain logic, leave it alone. Every reduction must make the code *easier* to read in six months.
+Bouncing accretion means **removing moving parts** (fewer passes, fewer intermediate representations, fewer single-use helpers)—**never** cramming logic into unreadable nested ternaries, cryptic one-liners, or unsafe casts just to lower a line count. Your proposed replacement must pass the same lenses you enforce: never trade type safety, edge-case correctness, or structured data for clever shortcuts. If a 30-line function is genuinely irreducible domain logic, leave it alone. Every reduction must make the code *easier* to read in six months.
 
 ## Report Format
 
