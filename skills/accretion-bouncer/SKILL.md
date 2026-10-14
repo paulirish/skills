@@ -10,7 +10,7 @@ description: >-
 
 # Accretion Bouncer
 
-Invokes `accretion_bouncer` to audit recent changes or files for additive bloat—challenging why that much mechanism exists at all and finding the **Code Judo** move that makes whole helpers, translation passes, or cleanup loops disappear.
+Invokes `accretion_bouncer` to audit recent changes or files for additive bloat—challenging why that much mechanism exists at all and finding the reframing that makes whole helpers, conversion passes, or cleanup loops disappear.
 
 > [!IMPORTANT]
 > `accretion_bouncer` is a **statically registered subagent**, defined in [accretion_bouncer.md](./accretion_bouncer.md) right next to this file and loaded from disk via:
