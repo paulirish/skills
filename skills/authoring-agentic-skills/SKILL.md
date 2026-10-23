@@ -29,6 +29,8 @@ Write code for a step only when at least one of these is true. Otherwise, write 
 
 If a script passes the test, keep it narrow: it computes or verifies and **prints data for the agent to interpret**. It doesn't decide what matters, choose what to include, or orchestrate the workflow.
 
+The test applies to code you **bundle** in `scripts/`, not to code the agent writes at runtime. Throwaway code written against the real data in front of it is often the best tool: the agent fetches a payload, looks at its actual shape, and writes a quick parser for this run. That survives format changes that would break a bundled parser, so the skill should encourage it rather than pre-build it.
+
 ## Smells: code that should be agent work
 
 | You're about to write... | Do this instead |
@@ -36,6 +38,7 @@ If a script passes the test, keep it narrow: it computes or verifies and **print
 | A subprocess wrapper around a CLI the agent already has | List the 2–4 real commands with concrete flags in SKILL.md. |
 | A regex or keyword list to decide "is this relevant / real / finished / substantive" | State the criteria in prose, with the *why*. A subagent applies them and handles the cases your regex would miss. |
 | Similarity thresholds, shingle indexes, fuzzy matching to find related material | Tell the agent to `rg` a few distinctive phrases and read what matches. |
+| A parser hardcoded to an endpoint's JSON or HTML shape | Have the agent fetch a sample, inspect it, and write a throwaway parser. |
 | Percentile sorts or heuristics to "pick representative examples" | Ask the agent to pick N and say why each one is representative. |
 | A file-size, line-count, or existence checker | Inline `wc -c`, `ls \| wc -l`, `test -s` in the workflow. |
 | A driver script that sequences the steps | A numbered workflow in SKILL.md. The agent is the orchestrator. |
@@ -51,6 +54,8 @@ A useful gut check: if the code's correctness depends on whether its heuristics 
 - **`references/`**: material loaded on demand: subagent briefs, long examples, domain detail, case studies. Link each file from SKILL.md with a sentence on when to read it.
 - **Subagents**: fan-out of judgment work (harvesting, classifying, drafting, reviewing). This is usually where the code you were about to write belongs.
 - **`scripts/`**: only what passed the script test. Zero dependencies, runnable directly (`node script.ts`, `python3 script.py`, native `sqlite3`), plain or JSON output, loud failures with actionable messages, no silent fallbacks.
+
+For skills that pull data, **fetch once, then explore the copy**: save the raw response (API payload, export, page) to a scratch file in one step, and do all inspection, parsing, and formatting against that file. This keeps network calls, auth steps, and approval prompts out of the exploration loop.
 
 ## Write a brief instead of code
 
@@ -68,7 +73,13 @@ For a worked example of a 3,000-line skill cut down to 300 lines by applying the
 
 - **The description is the trigger contract.** It's all the agent sees before deciding to load the skill. Start with a third-person capability statement, then `Use when...` with concrete scenarios, then `Don't use for...` to disambiguate from neighboring skills. Stay under 1024 characters, use `>-` rather than bare `>`, and leave out summaries of the body, paths, and flags.
 - **Explain why instead of shouting.** A rule with its reason generalizes to cases the rule doesn't literally cover. Save MUST/NEVER for real safety constraints and irreversible actions.
-- **Signal over noise.** Keep gotchas, exact commands, and the anti-patterns the agent falls into without warning. Cut what the model already knows ("validate your output", explanations of common tools).
+- **Signal over noise.** Keep gotchas the agent can't discover by inspecting the data, exact commands, and the anti-patterns it falls into without warning. Cut:
+  - what the model already knows ("validate your output", tutorials on common tools or formats)
+  - sample JSON or schema trees, internal code-to-meaning mappings, and category lists the data already contains; the agent reads the real payload
+  - large output templates; a checklist of fields to include works better
+  - the history of approaches that failed; explain why current rules exist, not what you tried before
+- **Defaults, and no guessing.** State a sensible default for each parameter (current user, current year, usual date range). When something required has no default, have the agent ask rather than invent a value.
+- **Keep it short.** Aim for a SKILL.md under ~150 lines and move detail into `references/`. Once loaded, every line stays in context for the rest of the session.
 - **Make every step verifiable.** Pair steps with a command, an expected output, or a concrete success criterion.
 - **Generalize from incidents.** When a test run fails, write the general principle with open-ended examples (`e.g.`), not a patch for that one input.
 - **One job per skill.** If the description needs "and" between unrelated capabilities, split it.
