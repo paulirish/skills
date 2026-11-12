@@ -49,14 +49,6 @@ Grizz **recommends**; it does not edit. For a skill that performs the cleanup, u
 
 5.  **Report.** Return the critique as-is. Do not soften it, and do not drop the `Residual Risk` or `Could Not Verify` sections — those are the anti-complacency artifacts, and they're the first thing a summarizer throws away.
 
-6.  **Log the reaction.** Once the user responds, append one line to `~/.gemini/grizz-log.md`:
-
-    ```
-    YYYY-MM-DD | <target> | <user's verbatim reaction>
-    ```
-
-    Verbatim, not classified. Silence is not acceptance — if the user didn't react to a finding, don't log one. After enough reviews this shows which of Grizz's four examination areas actually earn their keep, so the prompt can be rebalanced on evidence.
-
 ## Use it at plan time
 
 The cheapest possible redirect is the one that happens before the code exists. Grizz is at its best reviewing a plan, a design sketch, or a one-paragraph description of an approach — responsibility #1 (interrogate the premise) is worth far more then than it is after the thing is built.
