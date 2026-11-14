@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@bufbuild/protobuf':
-        specifier: 2.12.1
-        version: 2.12.1
       heap-snapshot-toolkit:
         specifier: ^1.1.3
         version: 1.1.3
@@ -24,15 +21,6 @@ importers:
       '@types/node':
         specifier: ^25.9.5
         version: 25.9.5
-      '@types/turndown':
-        specifier: ^5.0.6
-        version: 5.0.6
-      turndown:
-        specifier: ^7.2.4
-        version: 7.2.4
-      turndown-plugin-gfm:
-        specifier: ^1.0.2
-        version: 1.0.2
       typescript:
         specifier: ^5.8.2
         version: 5.9.3
@@ -42,17 +30,11 @@ packages:
   '@bjorn3/browser_wasi_shim@0.4.2':
     resolution: {integrity: sha512-/iHkCVUG3VbcbmEHn5iIUpIrh7a7WPiwZ3sHy4HZKZzBdSadwdddYDZAII2zBvQYV0Lfi8naZngPCN7WPHI/hA==}
 
-  '@bufbuild/protobuf@2.12.1':
-    resolution: {integrity: sha512-BvAMfS6LrgZiryOAZ4pBYucu4wG/Ei/9o9DZ9akbREnMLbPJiom2i8b9C8IsKErQoiKqVhrerzt3kOT/RrzLHg==}
-
   '@mixmark-io/domino@2.2.0':
     resolution: {integrity: sha512-Y28PR25bHXUg88kCV7nivXrP2Nj2RueZ3/l/jdx6J9f8J4nsEGcgX0Qe6lt7Pa+J79+kPiJU3LguR6O/6zrLOw==}
 
   '@types/node@25.9.5':
     resolution: {integrity: sha512-OScDchr2fwuUmWdf4kZ9h7PcJiYDVInhJizG/biAq3cAvqwYktuy/TYGGdZNMtNTFUP7rnb0NU4TUdm82kt4Rg==}
-
-  '@types/turndown@5.0.6':
-    resolution: {integrity: sha512-ru00MoyeeouE5BX4gRL+6m/BsDfbRayOskWqUvh7CLGW+UXxHQItqALa38kKnOiZPqJrtzJUgAC2+F0rL1S4Pg==}
 
   boolbase@2.0.0:
     resolution: {integrity: sha512-DkVaaQHymRhpYEYo9x1oo7Q7B0Y6KJUsjm3c9eTyFDby4MHLBTwZ6ZDWBel5zrYxj1WsZgC5oLpiz+93MluXeA==}
@@ -179,15 +161,11 @@ snapshots:
 
   '@bjorn3/browser_wasi_shim@0.4.2': {}
 
-  '@bufbuild/protobuf@2.12.1': {}
-
   '@mixmark-io/domino@2.2.0': {}
 
   '@types/node@25.9.5':
     dependencies:
       undici-types: 7.24.6
-
-  '@types/turndown@5.0.6': {}
 
   boolbase@2.0.0: {}
 

@@ -13,12 +13,8 @@
     "allowJs": true,
     "checkJs": true
   },
-  "include": [
-    "skills/distill-page/scripts/**/*",
-    "skills/distill-page/test/**/*"
-  ],
+  "include": [],
   "exclude": [
-    "skills/distill-page/scripts/proto/common_quality_data_pbjs.js",
-    "submodules/**/*"
+    "node_modules"
   ]
 }

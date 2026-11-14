@@ -20,10 +20,10 @@ Use when setting up type checking/type safety without a compilation/build step (
 npx skills add paulirish/agent-skills --skill buildless-types
 ```
 
-### 📄 [distill-page](skills/distill-page/SKILL.md)
-Extract high-quality, noise-free Markdown content from a webpage using Chromium's experimental on-device ML page content annotation (`Page.getAnnotatedPageContent`).
+### 📄 [distill-page](https://github.com/paulirish/page-distiller)
+Extract high-quality, noise-free Markdown content from a webpage using Chromium's experimental on-device ML page content annotation (`Page.getAnnotatedPageContent`). Moved to its own repository: [paulirish/page-distiller](https://github.com/paulirish/page-distiller).
 ```bash
-npx skills add paulirish/agent-skills --skill distill-page
+npx skills add paulirish/page-distiller
 ```
 
 ### 🌐 [fetch-as-markdown](skills/fetch-as-markdown/SKILL.md)
@@ -84,20 +84,4 @@ npx skills add paulirish/agent-skills --skill pauls-project-setup
 Enables advanced usage of QMD (Quick Markdown Search) to run multi-query searches, retrieve deep contextual knowledge, and extract high-scoring chunk IDs.
 ```bash
 npx skills add paulirish/agent-skills --skill qmd-expert
-```
-
----
-
-## Submodules
-
-This repository includes the following submodules:
-- `submodules/turndown`: Reference test fixtures for Markdown extraction compatibility.
-
-To clone with submodules:
-```bash
-git clone --recurse-submodules git@github.com:paulirish/agent-skills.git
-```
-Or after cloning:
-```bash
-git submodule update --init
 ```
