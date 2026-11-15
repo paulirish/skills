@@ -26,9 +26,9 @@ Write code for a step only when at least one of these is true. Otherwise, write 
 3. **Observed fragility.** You *watched* agents get a mechanical sequence slightly wrong across runs (a binary format, an auth handshake, an exact API call order). Speculative fragility doesn't count.
 4. **Volume where the per-item decision is mechanical.** Thousands of items, and the decision per item really is a lookup or a transform rather than a judgment call.
 5. **Repetition.** Agents independently wrote the same helper across several runs. Bundle it *after* seeing that, not before.
-6. **Stateful orchestration invariants (`run_workflow`).** Multi-phase loops where prose rules decay as the context window grows—e.g., enforcing *"implement → commit → fresh cross-family reviewer → single fix pass → observer exit gate"*, invalidating downstream artifacts when upstream rules change, or rotating the conductor after N steps/compactions. Judgment stays in the `agent()` briefs; the state machine and hard gates belong in a `run_workflow` script, not `AGENTS.md` prose.
+6. **Stateful orchestration invariants.** Multi-phase loops where prose rules decay as the context window grows—e.g., enforcing *"implement → commit → fresh cross-family reviewer → single fix pass → observer exit gate"*, invalidating downstream artifacts when upstream rules change, or rotating the conductor after N steps/compactions. Judgment stays in the subagent briefs; the state machine and hard gates belong in a small orchestration script, not `AGENTS.md` prose.
 
-If a bundled helper script passes tests 1–5, keep it narrow: it computes or verifies and **prints data for the agent to interpret**. If a multi-agent loop passes test 6, put only the **control-flow invariant and gate checks** in the `run_workflow` script while leaving content and trade-off judgment inside each agent's prompt.
+If a bundled helper script passes tests 1–5, keep it narrow: it computes or verifies and **prints data for the agent to interpret**. If a multi-agent loop passes test 6, put only the **control-flow invariant and gate checks** in the orchestration script while leaving content and trade-off judgment inside each subagent's prompt.
 
 The test applies to code you **bundle** in `scripts/`, not to code the agent writes at runtime. Throwaway code written against the real data in front of it is often the best tool: the agent fetches a payload, looks at its actual shape, and writes a quick parser for this run. That survives format changes that would break a bundled parser, so the skill should encourage it rather than pre-build it.
 
@@ -43,7 +43,7 @@ The test applies to code you **bundle** in `scripts/`, not to code the agent wri
 | Percentile sorts or heuristics to "pick representative examples" | Ask the agent to pick N and say why each one is representative. |
 | A file-size, line-count, or existence checker | Inline `wc -c`, `ls \| wc -l`, `test -s` in the workflow. |
 | A driver script that sequences a simple linear task | A numbered workflow in SKILL.md. The agent is the orchestrator. |
-| All-caps `MUST`/`NEVER` prose trying to force a long-running orchestrator to spawn reviewers, wait for gates, or re-run downstream steps | A small `run_workflow` script that enforces the state machine and hard gates in code while passing judgment briefs to `agent()`. |
+| All-caps `MUST`/`NEVER` prose trying to force a long-running orchestrator to spawn reviewers, wait for gates, or re-run downstream steps | A small orchestration script that enforces the state machine and hard gates in code while passing judgment briefs to subagents. |
 | Tuned constants (`0.12`, `2.2x`, `>= 40 chars`) | They're judgment pretending to be precision. Describe the intent instead. |
 | Flags and modes for every variation | One default path and one escape hatch. |
 | A shared `common.py` for scripts that barely exist | Delete it. Rule of three applies to skills too. |

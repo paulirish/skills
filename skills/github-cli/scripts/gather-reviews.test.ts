@@ -66,7 +66,7 @@ test('convertToMarkdown separates open and resolved discussions and includes gen
     { user: 'u3', body: 'c3', created_at: 't3' }
   ];
 
-  const output = convertToMarkdown(mockThreads, mockGeneralComments, 123);
+  const output = convertToMarkdown(mockThreads, mockGeneralComments, [], 123);
 
   assert.match(output, /# PR #123 Comments/);
   assert.match(output, /## General Comments \(1\)/);
@@ -77,7 +77,7 @@ test('convertToMarkdown separates open and resolved discussions and includes gen
 });
 
 test('convertToMarkdown omits headers when count is zero', () => {
-  const output = convertToMarkdown([], [], 123);
+  const output = convertToMarkdown([], [], [], 123);
 
   assert.strictEqual(output.includes('## General Comments'), false);
   assert.strictEqual(output.includes('## Resolved Discussions'), false);
@@ -105,16 +105,22 @@ test('parseReviews handles missing author with ghost fallback', () => {
             nodes: [
               { author: null, body: 'c2', createdAt: 't2' }
             ]
+          },
+          reviews: {
+            nodes: [
+              { author: null, body: 'r1', state: 'COMMENTED', createdAt: 't3' }
+            ]
           }
         }
       }
     }
   };
 
-  const { results, parsedGeneralComments } = parseReviews(mockData);
+  const { results, parsedGeneralComments, parsedReviews } = parseReviews(mockData);
 
   assert.strictEqual(results[0].comments[0].user, 'ghost');
   assert.strictEqual(parsedGeneralComments[0].user, 'ghost');
+  assert.strictEqual(parsedReviews[0].user, 'ghost');
 });
 
 test('convertToMarkdown handles CRLF newlines', () => {
@@ -122,7 +128,7 @@ test('convertToMarkdown handles CRLF newlines', () => {
     { user: 'u1', body: 'line1\r\nline2', created_at: 't1' }
   ];
 
-  const output = convertToMarkdown([], mockGeneralComments, 123);
+  const output = convertToMarkdown([], mockGeneralComments, [], 123);
 
   assert.match(output, /> line1\n> line2/);
 });

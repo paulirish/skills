@@ -1,87 +1,34 @@
-# @paulirish/skills
+# paulirish/skills
 
-A collection of expert agent skills and CLIs.
-
-## Installing Skills
-
-Skills can be installed directly into your coding agent using the `skills` CLI (note: `paulirish/skills` is currently a private repository):
+Agent skills and CLI helpers for coding agents.
 
 ```bash
 npx skills add paulirish/skills --skill <skill-name>
 ```
 
-## Available Skills
+## Code Review, Architecture & Skills
 
-Here is the list of available skills that you can add to your agent configuration:
+- **[grizzled-red-teaming](skills/grizzled-red-teaming/SKILL.md)** (`grizz.md`). Adversarial principal-engineer review of code, diffs, or plans. Interrogates the premise first, requires concrete failure scenarios for blockers, and checks for vacuous tests/validators.
+- **[accretion-bouncer](skills/accretion-bouncer/SKILL.md)** (`accretion_bouncer.md`). Challenges additive complexity (single-caller helpers, string round-trips, multi-pass cleanup loops, test-only shims) and proposes structural deletions.
+- **[lexicon](skills/lexicon/SKILL.md)**. Defines and audits a project's domain vocabulary across code and docs to catch terminology drift and synonym sprawl.
+- **[authoring-agentic-skills](skills/authoring-agentic-skills/SKILL.md)**. How to write and trim `SKILL.md` skills so judgment stays with the agent and bundled scripts are kept to narrow, deterministic jobs.
 
-### 🛠️ [buildless-types](skills/buildless-types/SKILL.md)
-Use when setting up type checking/type safety without a compilation/build step (e.g., using JSDoc for browsers or erasable syntax for Node.js).
-```bash
-npx skills add paulirish/skills --skill buildless-types
-```
+## Web, Chrome & Performance
 
-### 📄 [chromium-clean-markdown](https://github.com/paulirish/chromium-clean-markdown)
-Extract high-quality, noise-free Markdown content from a webpage using Chromium's experimental on-device ML page content annotation (`Page.getAnnotatedPageContent`). Moved to its own repository: [paulirish/chromium-clean-markdown](https://github.com/paulirish/chromium-clean-markdown).
-```bash
-npx skills add paulirish/chromium-clean-markdown
-```
+- **[modern-css](skills/modern-css/SKILL.md)**. Modern CSS patterns (View Transitions, Container Queries, scroll-driven animations, anchor positioning, `:has()`, `light-dark()`) and legacy style refactors.
+- **[buildless-types](skills/buildless-types/SKILL.md)**. Type safety without a build step: JSDoc + `tsc --noEmit` in the browser and native TypeScript (erasable syntax) in Node.js.
+- **[heap-snapshot-inspection](skills/heap-snapshot-inspection/SKILL.md)**. Inspecting V8 `.heapsnapshot` files and tracking down retainers/memory leaks with `heap-snapshot-toolkit`.
+- **[hot-reload-chrome-ext](skills/hot-reload-chrome-ext/SKILL.md)**. Zero-dependency SSE hot-reload server + client snippet for Manifest V3 Chrome extensions.
+- **[fetch-as-markdown](skills/fetch-as-markdown/SKILL.md)**. Renders a URL in headless Playwright and extracts clean Markdown via [`chromium-clean-markdown`](https://github.com/paulirish/chromium-clean-markdown).
+- **[google-ai-search](skills/google-ai-search/SKILL.md)**. Runs a Google Search over CDP and extracts the AI Overview response + citations as Markdown.
 
-### 🌐 [fetch-as-markdown](skills/fetch-as-markdown/SKILL.md)
-Fetch a URL using Playwright and convert rendered DOM content into clean Markdown using chromium-clean-markdown.
-```bash
-npx skills add paulirish/skills --skill fetch-as-markdown
-```
+## Dev Workflow & Tooling
 
-### 💬 [github-pr-comments](skills/github-pr-comments/SKILL.md)
-Easily query for open discussions, review feedback, and comments on a GitHub pull request to resolve them directly from your agent workflow.
-```bash
-npx skills add paulirish/skills --skill github-pr-comments
-```
+- **[github-cli](skills/github-cli/SKILL.md)**. Non-obvious `gh` workflows, low-noise Actions watching (`--interval 60`), GraphQL PR review thread extraction ([gather-reviews.ts](skills/github-cli/scripts/gather-reviews.ts)), and `gh stack`.
+- **[npm-trusted-publishing](skills/npm-trusted-publishing/SKILL.md)**. Setting up and validating passwordless npm Trusted Publishing (OIDC + provenance) from GitHub Actions.
+- **[pauls-project-setup](skills/pauls-project-setup/SKILL.md)**. Stack defaults for new Node/TS projects (`pnpm`, native `node --test`, Node >= 24 native TS execution, `tsdown`/`esbuild`).
+- **[qmd-expert](skills/qmd-expert/SKILL.md)**. Multi-query searches (`lex` + `vec`) and chunk retrieval against local markdown knowledge bases with `qmd`.
 
-### 🔍 [google-ai-search](skills/google-ai-search/SKILL.md)
-Run a Google Search query and capture the AI Overview response via CDP connection to Chrome.
-```bash
-npx skills add paulirish/skills --skill google-ai-search
-```
+## Standalone Skill Repos
 
-### 🔬 [heap-snapshot-inspection](skills/heap-snapshot-inspection/SKILL.md)
-Provides expert guidance and step-by-step workflows for inspecting heap snapshots and resolving memory leaks in Chromium, Node.js, and Electron.
-```bash
-npx skills add paulirish/skills --skill heap-snapshot-inspection
-```
-
-### ⚡ [hot-reload-chrome-ext](skills/hot-reload-chrome-ext/SKILL.md)
-Sets up a zero-dependency hot-reloading system for Manifest V3 Chrome extensions to automatically refresh open pages and reload the extension when source files change.
-```bash
-npx skills add paulirish/skills --skill hot-reload-chrome-ext
-```
-
-### 📖 [lexicon](skills/lexicon/SKILL.md)
-Define, review, and audit a project's domain vocabulary across code and documentation to prevent terminology drift and conceptual confusion.
-```bash
-npx skills add paulirish/skills --skill lexicon
-```
-
-### 🎨 [modern-css](skills/modern-css/SKILL.md)
-Brings specialized knowledge for writing high-quality modern CSS (including View Transitions, Container Queries, Scroll-driven animations, Masonry, `:has()`, and more) and refactoring legacy styles.
-```bash
-npx skills add paulirish/skills --skill modern-css
-```
-
-### 🔑 [npm-trusted-publishing](skills/npm-trusted-publishing/SKILL.md)
-Expert walkthrough for setting up or debugging npm Trusted Publishing (OIDC) from GitHub Actions, handling secure credential-less publishing, provenance, and metadata validation.
-```bash
-npx skills add paulirish/skills --skill npm-trusted-publishing
-```
-
-### 🏗️ [pauls-project-setup](skills/pauls-project-setup/SKILL.md)
-Applies Paul's modern project stack conventions for new repos (pnpm, native node test runner, esbuild, buildless JSDoc type checking, etc.).
-```bash
-npx skills add paulirish/skills --skill pauls-project-setup
-```
-
-### 🔎 [qmd-expert](skills/qmd-expert/SKILL.md)
-Enables advanced usage of QMD (Quick Markdown Search) to run multi-query searches, retrieve deep contextual knowledge, and extract high-scoring chunk IDs.
-```bash
-npx skills add paulirish/skills --skill qmd-expert
-```
+- **[paulirish/chromium-clean-markdown](https://github.com/paulirish/chromium-clean-markdown)**. Extracts noise-free reader Markdown using Chromium's on-device ML `Page.getAnnotatedPageContent` (`npx skills add paulirish/chromium-clean-markdown`).
