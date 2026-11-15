@@ -20,10 +20,10 @@ Use when setting up type checking/type safety without a compilation/build step (
 npx skills add paulirish/agent-skills --skill buildless-types
 ```
 
-### 📄 [distill-page](https://github.com/paulirish/page-distiller)
-Extract high-quality, noise-free Markdown content from a webpage using Chromium's experimental on-device ML page content annotation (`Page.getAnnotatedPageContent`). Moved to its own repository: [paulirish/page-distiller](https://github.com/paulirish/page-distiller).
+### 📄 [chromium-clean-markdown](https://github.com/paulirish/chromium-clean-markdown)
+Extract high-quality, noise-free Markdown content from a webpage using Chromium's experimental on-device ML page content annotation (`Page.getAnnotatedPageContent`). Moved to its own repository: [paulirish/chromium-clean-markdown](https://github.com/paulirish/chromium-clean-markdown).
 ```bash
-npx skills add paulirish/page-distiller
+npx skills add paulirish/chromium-clean-markdown
 ```
 
 ### 🌐 [fetch-as-markdown](skills/fetch-as-markdown/SKILL.md)
