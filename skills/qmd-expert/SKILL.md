@@ -1,6 +1,7 @@
 ---
 name: qmd-expert
 description: How to effectively use QMD (Quick Markdown Search) to pull in extra relevant context, run multi-query searches, extract high-scoring chunk IDs, and fetch their contents. Use this skill when asked to search across a large markdown knowledge base, run QMD queries, or retrieve deep context using the qmd CLI.
+disable-model-invocation: true
 ---
 
 # QMD Expert Workflow
