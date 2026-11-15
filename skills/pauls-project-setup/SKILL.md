@@ -1,6 +1,6 @@
 ---
 name: pauls-project-setup
-description: Paul's modern stack conventions for new projects (pnpm, native node test, esbuild, buildless-types). Consult when starting a new project or repository.
+description: Paul's modern stack conventions for new projects (pnpm, native node test, esbuild, buildless-types, hardened GitHub Actions with zizmor). Consult when starting a new project, repository, or CI workflow.
 ---
 
 # Paul's Project Setup
@@ -88,3 +88,32 @@ Ensure the project is an ES Module and defines standard scripts inspired by Paul
   }
 }
 ```
+
+### 6. GitHub Actions & CI Hardening
+When adding `.github/workflows/*.yml`, harden them for [Zizmor](https://docs.zizmor.sh/):
+
+- **Pin every `uses:` to a full 40-char commit SHA** with the version tag as a trailing comment (tags are mutable; SHAs are not):
+  ```yaml
+  - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+    with:
+      persist-credentials: false
+  ```
+- **Least-privilege permissions**: set `permissions: contents: read` at the workflow level (or `permissions: {}` at workflow level and grant write scopes per-job only where needed).
+- **Avoid persisted credentials (`artipacked`)**: set `persist-credentials: false` on `actions/checkout` unless a subsequent step explicitly needs to push commits or tags.
+- **Named jobs, concurrency, Node 24 actions**: give every job a `name:`, cancel superseded PR runs with `concurrency`, and set `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true`.
+- **Audit locally with `zizmor`** before committing workflow changes (`--fix=all` auto-pins bare tags and adds `persist-credentials: false`, though always review its diff):
+  ```sh
+  uvx zizmor@1.25.2 --persona=pedantic --gh-token="$(gh auth token)" .github/
+  ```
+- **Keep pinned SHAs updated with Dependabot** in `.github/dependabot.yml` (monthly schedule + cooldown avoids noise and supply-chain churn):
+  ```yaml
+  version: 2
+  updates:
+    - package-ecosystem: "github-actions"
+      directory: "/"
+      schedule:
+        interval: "monthly"
+      open-pull-requests-limit: 1
+      cooldown:
+        default-days: 14
+  ```
