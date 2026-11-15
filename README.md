@@ -17,17 +17,14 @@ npx skills add paulirish/skills --skill <skill-name>
 
 - **[modern-css](skills/modern-css/SKILL.md)**. Modern CSS patterns (View Transitions, Container Queries, scroll-driven animations, anchor positioning, `:has()`, `light-dark()`) and legacy style refactors.
 - **[buildless-types](skills/buildless-types/SKILL.md)**. Type safety without a build step: JSDoc + `tsc --noEmit` in the browser and native TypeScript (erasable syntax) in Node.js.
-- **[heap-snapshot-inspection](skills/heap-snapshot-inspection/SKILL.md)**. Inspecting V8 `.heapsnapshot` files and tracking down retainers/memory leaks with `heap-snapshot-toolkit`.
 - **[hot-reload-chrome-ext](skills/hot-reload-chrome-ext/SKILL.md)**. Zero-dependency SSE hot-reload server + client snippet for Manifest V3 Chrome extensions.
 - **[fetch-as-markdown](skills/fetch-as-markdown/SKILL.md)**. Renders a URL in headless Playwright and extracts clean Markdown via [`chromium-clean-markdown`](https://github.com/paulirish/chromium-clean-markdown).
-- **[google-ai-search](skills/google-ai-search/SKILL.md)**. Runs a Google Search over CDP and extracts the AI Overview response + citations as Markdown.
 
 ## Dev Workflow & Tooling
 
 - **[github-cli](skills/github-cli/SKILL.md)**. Non-obvious `gh` workflows, low-noise Actions watching (`--interval 60`), GraphQL PR review thread extraction ([gather-reviews.ts](skills/github-cli/scripts/gather-reviews.ts)), and `gh stack`.
 - **[npm-trusted-publishing](skills/npm-trusted-publishing/SKILL.md)**. Setting up and validating passwordless npm Trusted Publishing (OIDC + provenance) from GitHub Actions.
 - **[pauls-project-setup](skills/pauls-project-setup/SKILL.md)**. Stack defaults for new Node/TS projects (`pnpm`, native `node --test`, Node >= 24 native TS execution, `tsdown`/`esbuild`).
-- **[qmd-expert](skills/qmd-expert/SKILL.md)**. Multi-query searches (`lex` + `vec`) and chunk retrieval against local markdown knowledge bases with `qmd`.
 
 ## Standalone Skill Repos
 
